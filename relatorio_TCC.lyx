@@ -1,0 +1,3133 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+\usepackage{lscape}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+minimalistic
+\end_modules
+\language brazilian
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\float_placement h
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language swedish
+\papercolumns 1
+\papersides 1
+\paperpagestyle headings
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Relatório de TCC I
+\end_layout
+
+\begin_layout Author
+Wagner de Melo Reck
+\end_layout
+
+\begin_layout Abstract
+Este relatório tem como objetivo apresentar o andamento atual do trabalho
+ de conclusão do curso (TCC) para o curso de Ciência da Computação da Universida
+de Federal do Pampa (UNIPAMPA) campus Alegrete.
+ Será apresentando o andamento das atividades propostas no projeto de TCC
+ e resultados obtidos até agora.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introdução
+\end_layout
+
+\begin_layout Standard
+Esse projeto está sendo desenvolvido como parte de um projeto maior em desenvolv
+imento pelo grupo GESEP para aplicação para distribuição dos atendimentos
+ dentro dos municípios de atendimento de modo otimizado em uma concessionária
+ de distribuição de energia elétrica do Rio Grande do Sul.
+\end_layout
+
+\begin_layout Standard
+No capítulo 2 apresentamos o problema de despacho de ordens de serviço (PDOS)
+ e problemas relacionados além de métodos para resolver tais problemas.
+ No capítulo 3 temos a apresentação dos códigos implementados bem como alguns
+ resultados já obtidos.
+ No capítulo 4 apresentamos as próximas etapas do projeto.
+\end_layout
+
+\begin_layout Chapter
+Problema de despacho de ordens de serviço (PDOS)
+\end_layout
+
+\begin_layout Standard
+Para algumas empresas, principalmente quando necessitam atender a um grande
+ número de clientes em um grande centro onde é necessário o deslocamento
+ de uma equipe da empresa até um determinado cliente, é uma atividade que
+ se não for bem planejada pode levar a um acúmulo de atendimentos não executados
+ e posteriormente ao não atendimento de alguma solicitação.
+ Como tendencia natural das empresas, as mesmas tendem a aumentar a carta
+ de clientes e com isso necessitam atender a mais solicitações no mesmo
+ tempo que atendiam as anteriores.
+\end_layout
+
+\begin_layout Standard
+Para resolver isso, tendo em vista que executar uma atividade não pode ser
+ diminuído com o passar do tempo mantendo-se em uma média para cada tipo
+ de atividade, a empresa ou deve contratar mais mais equipes ou organizar
+ as solicitações em grupos para minimizando o tempo de deslocamento entre
+ uma atividade e outra.
+ A primeira é uma solução que traz custos para empresa e necessidade de
+ pessoal para gerenciamento das equipes extras, as quais pode ter de ser
+ inseridas apenas em períodos onde houve demanda de atendimento, mas no
+ restando do tempo passa as ser sub-utilizada por as equipes anteriores
+ atenderem todas as demandas dos clientes.
+\end_layout
+
+\begin_layout Standard
+A solução de agrupar as ordens de serviço de modo a minimizar o deslocamento
+ de um atendimento até um outro dentro do mesmo grupo atendido pela mesma
+ equipe, torna-se melhor que a anterior pois não há a necessidade de contratar
+ uma equipe nova para dar conta de alguns poucos atendimentos.
+ Essa solução não evita o contratamento de novas equipes, mas diminui o
+ número total de novas contratações.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+explicar melhor pq não precisa contratar todas equipes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problema de Agrupamento Capacitado
+\end_layout
+
+\begin_layout Standard
+O problema de agrupamento capacitado consiste em dado um conjunto 
+\begin_inset Formula $I$
+\end_inset
+
+ de 
+\begin_inset Formula $n$
+\end_inset
+
+ indivíduos com suas respectivas demandas 
+\begin_inset Formula $d_{i}\: i\in I$
+\end_inset
+
+, é desejado agrupar os 
+\begin_inset Formula $n$
+\end_inset
+
+ pontos em 
+\begin_inset Formula $p$
+\end_inset
+
+ agrupamentos, onde a soma das demandas em cada agrupamento deve ser menor
+ que a capacidade total do agrupamento 
+\begin_inset Formula $Q_{j},\:\forall j\in P$
+\end_inset
+
+, sendo 
+\begin_inset Formula $P$
+\end_inset
+
+ o conjunto de agrupamentos.
+ Dos pontos pertencentes a cada agrupamento, é escolhida uma mediana de
+ modo a minimizar a distância de todos os pontos até ela.
+ O problema possuí a seguinte formulação matemática 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ahmadi2004density"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+Min\;\sum_{i\in P}\sum_{j\in I}c_{ij}x_{ij}\label{eq:obj_CCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sujeito à:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{j\in p}x_{ij}=1,\;\forall i\in I\label{eq:1Cluster_CCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{j\in P}y_{j}=p\label{eq:numClusters_CCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+x_{ij}\leq y_{j,\;}\forall i\in I,\:\forall j\in P\label{eq:mustAssign_CCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P\label{eq:capacity_CCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+x_{ij},\: y_{j}\in\{0,1\},\;\forall i\in I,\;\forall j\in P\label{eq:sets_CCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Em (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:obj_CCP"
+
+\end_inset
+
+), temos a função objetivo que minimiza a dissimilaridades entre os componentes
+ de cada agrupamento.
+ Utilizamos a distância como medida da similaridade entre dois pontos, tendo
+ assim a medida 
+\begin_inset Formula $c_{ij}$
+\end_inset
+
+ do ponto 
+\begin_inset Formula $i$
+\end_inset
+
+ até o ponto 
+\begin_inset Formula $j$
+\end_inset
+
+ (mediana do agrupamento), considerando que o ponto 
+\begin_inset Formula $i$
+\end_inset
+
+ está associado ao agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+ pela variável binária 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+, sendo 
+\begin_inset Formula $x_{ij}=1$
+\end_inset
+
+ caso o ponto 
+\begin_inset Formula $i$
+\end_inset
+
+ esteja associado ao agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+ e 
+\begin_inset Formula $0$
+\end_inset
+
+ caso contrário.
+ A restrição (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1Cluster_CCP"
+
+\end_inset
+
+) indica que cada ponto deve estar associado a um único agrupamento e (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mustAssign_CCP"
+
+\end_inset
+
+) impõe que todos os pontos deve ser atribuídos a um agrupamento.
+ Já (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numClusters_CCP"
+
+\end_inset
+
+) indica que devem existir 
+\begin_inset Formula $p$
+\end_inset
+
+ agrupamentos.
+ Para garantir que a capacidade 
+\begin_inset Formula $Q$
+\end_inset
+
+ de um agrupamento não será ultrapassado, é inserida a restrição (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:capacity_CCP"
+
+\end_inset
+
+).
+ A última restrição, (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sets_CCP"
+
+\end_inset
+
+), especifica as variáveis inteiras de decisão.
+ I é o conjunto de indivíduos.
+\end_layout
+
+\begin_layout Standard
+Na figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Exemplo-CCP"
+
+\end_inset
+
+ é apresentado uma possível solução para o CCP.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagens/cluster_Density_SJC3a.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Exemplo-CCP"
+
+\end_inset
+
+Exemplo de uma solução do CCP
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quando temos o valor de capacidade dos agrupamentos homogêneo, ou seja,
+ o valor de 
+\begin_inset Formula $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$
+\end_inset
+
+, podemos dizer que esse é um problema das 
+\begin_inset Formula $p-medianas$
+\end_inset
+
+ capacitado.
+ 
+\end_layout
+
+\begin_layout Standard
+Um outro problema de agrupamento foi pro posto por Negreiro e Palhano
+\begin_inset CommandInset citation
+LatexCommand cite
+key "negreiros2006capacitated"
+
+\end_inset
+
+ é o CCCP (Capacitated Centred Clustrering Problem - Problema de agrupamento
+ centrado capacitado) onde os agrupamentos passam a ter seu centro não necessari
+amente em um ponto (mediana), mas no centroide calculado entre os pontos
+ pertencentes a cada agrupamento.
+\end_layout
+
+\begin_layout Standard
+são propostas 2 variações do problema, 
+\begin_inset Formula $p-CCCP$
+\end_inset
+
+, onde é dado o número de agrupamentos que se deseja encontrar, e 
+\begin_inset Formula $g-CCCP$
+\end_inset
+
+ (generic - CCCP) que se deseja encontrar o menor número de agrupamentos
+ para atender a todas demandas, sendo a função objetivo em ambas a minimização
+ das dissimilaridades entre os componentes de cada agrupamento.
+ 
+\end_layout
+
+\begin_layout Standard
+Na figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CCCP"
+
+\end_inset
+
+ é apresentada a visualização de uma solução para o problema 
+\begin_inset Formula $CCCP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagens/CCCP.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CCCP"
+
+\end_inset
+
+Uma solução para CCCP 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "negreiros2006capacitated"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A primeira, 
+\begin_inset Formula $p-CCCP$
+\end_inset
+
+, possui o número fixo de agrupamentos que se deseja encontrar e a segunda
+ variação, 
+\begin_inset Formula $g-CCCP$
+\end_inset
+
+, assume que para cada novo agrupamento adicionado, é acrescentado um valor
+ de penalização na função objetivo, levando a minimização de agrupamentos.
+ A definição para o 
+\begin_inset Formula $p-CCCP$
+\end_inset
+
+ é:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+min\sum_{i\in I}\sum_{j\in P}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\label{eq:obj_CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sujeito à,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{i\in I}x_{ij}=n_{j},\;\forall j\in P,\label{eq:nPerCluster_CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{i\in I}a_{i}x_{ij}=n_{j}\overline{g_{j}},\;\forall j\in P,\label{eq:centroid_CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P,\label{eq:capacity_CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+a_{i}\in\Re^{l},\;\overline{g_{j}}\in\Re^{l},\; n_{j}\in N,\; x_{ij}\in\{0,1\},\;\;\forall i\in I,\;\forall j\in P,\label{eq:sets_CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+onde, 
+\begin_inset Formula $\overline{g_{j}}$
+\end_inset
+
+ é o centroide do agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+, 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+o número de indivíduos associados ao agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+, 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+a posição do indivíduo 
+\begin_inset Formula $i$
+\end_inset
+
+ no espaço 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $\Re^{l}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+a demanda do indivíduo 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{j}$
+\end_inset
+
+ a capacidade de cada agrupamento, 
+\begin_inset Formula $I$
+\end_inset
+
+ o conjunto de indivíduos e 
+\begin_inset Formula $P$
+\end_inset
+
+ o conjunto de agrupamentos.
+\end_layout
+
+\begin_layout Standard
+A função objetivo (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:obj_CCCP"
+
+\end_inset
+
+) tem como diferencial em relação ao problema clássico 
+\begin_inset Formula $CCP$
+\end_inset
+
+, o fato das similaridades serem medidas em relação a todos pontos do agrupament
+o até seu centroide, o qual não é necessariamente um indivíduo.
+ A eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1Cluster_CCCP"
+
+\end_inset
+
+) indica que um indivíduo somente pode estar associado a um agrupamento,
+ e a restrição (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nPerCluster_CCCP"
+
+\end_inset
+
+) associa a 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+o número de indivíduos no agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Em (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centroid_CCCP"
+
+\end_inset
+
+) é definido todos os centroides dos respectivos agrupamentos e em (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:capacity_CCCP"
+
+\end_inset
+
+) é colocado que cada agrupamento não pode maior demanda dos indivíduos
+ que sua própria capacidade.
+ A ultima restrição (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sets_CCCP"
+
+\end_inset
+
+) indica o domínio das variáveis do problema.
+\end_layout
+
+\begin_layout Standard
+No 
+\begin_inset Formula $g-CCCP$
+\end_inset
+
+ o número de agrupamentos não é definido a priori, mas tem um limitante
+ inferior dado por 
+\begin_inset Formula $\lceil\sum_{i\in I}q_{i}/\sum_{j\in P}Q_{j}\rceil$
+\end_inset
+
+.
+ Esse problema a seguinte formulação:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+min\;\left(F\sum_{j\in P}z_{j}\right)+\sum_{j\in P}\left(\sum_{i\in I}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\right)\label{eq:obj_g-CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sujeito à,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_g-CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{i\in I}a_{i}x_{ij}=\overline{g_{j}}\left(\sum_{i\in I}x_{ij}\right),\;\forall j\in P,\label{eq:centroid_g-CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\sum_{i\in I}q_{i}x_{ij}\leq Q_{j}z_{j},\;\forall j\in P,\label{eq:capacity_g-CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\overline{g_{j}}\in\Re^{l},\: z_{j},\: x_{ij}\in\{0,1\},\;\forall i\in I,\forall j\in P,\label{eq:sets_g-CCCP}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+onde, 
+\begin_inset Formula $z_{j}=1$
+\end_inset
+
+ se o agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+ está aberto (em uso), 
+\begin_inset Formula $0$
+\end_inset
+
+ caso contrário, 
+\begin_inset Formula $Q_{j}$
+\end_inset
+
+ a capacidade do agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+, 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+a demanda o indivíduo 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{g_{j}}$
+\end_inset
+
+ o centroide do agrupamento 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ 
+\begin_inset Formula $F$
+\end_inset
+
+ é o custo fixo para abrir um novo agrupamento.
+\end_layout
+
+\begin_layout Standard
+A função objetivo (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:obj_g-CCCP"
+
+\end_inset
+
+) minimiza as dissimilaridades entre os integrantes de um mesmo agrupamento
+ além do número total de agrupamentos abertos.
+ A eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1Cluster_g-CCCP"
+
+\end_inset
+
+) define que um indivíduo somente pode estar associado a um agrupamento,
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:centroid_g-CCCP"
+
+\end_inset
+
+) encontra o centroide de cada agrupamento e (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:capacity_g-CCCP"
+
+\end_inset
+
+) garante que a capacidade dos agrupamentos não sejam ultrapassados.
+ As ultimas restrições (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sets_g-CCCP"
+
+\end_inset
+
+) especificam as variáveis de decisão.
+\end_layout
+
+\begin_layout Section
+Resolução do problema de agrupamento
+\end_layout
+
+\begin_layout Standard
+O CCP, é descrito na literatura como um problema 
+\begin_inset Formula $\mathcal{NP}-completo$
+\end_inset
+
+, não existindo algoritmos em tempo polinomial para resolver o problema.
+ Para os métodos exatos, que apresentam melhores soluções, eles somente
+ podem ser utilizados para instância pequenas, uma vez que é um problema
+ de programação inteira e o numéro de variaveis de decisão é da ordem de
+ 
+\begin_inset Formula $n^{2}$
+\end_inset
+
+ onde n é o número pontos de demanda do problema.
+ Para instâncias muito grandes, o uso de heurísticas traz soluções muito
+ boas, algumas vezes muito próximas aos métodos exatos.
+ Serão apresentadas algumas heurísticas para construção de uma solução inicial
+ do problema de agrupamento, a qual poderá ser evoluida com algumas técnicas:
+ 
+\end_layout
+
+\begin_layout Description
+CCP 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Farthest: Proposta por Osman e Christofides em 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "osman1994capacitated"
+
+\end_inset
+
+, tem como base escolher os pontos mais afastados para serem os primeiros
+ centros 
+\end_layout
+
+\begin_layout Description
+Density: Proposta por Ahmadi e Osman em 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ahmadi2004density"
+
+\end_inset
+
+, visa construir uma solução inicial usando a densidade de pontos para construir
+ a solução inicial.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Description
+CCCP 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Balanced q-trees: que utiliza de arvores q-trees e métodos como k-means,
+ Forgy, entre outros 
+\end_layout
+
+\begin_layout Description
+Unconstrained to Constrained: inicia como uma solução infactível alterando-a
+ até conseguir uma solução factível.
+ Ambos métodos para CCCP propostos por Negreiros e Palhano 
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+CCP
+\end_layout
+
+\begin_layout Standard
+Para o problema de agrupamento capacitado (CCP), apresentamos 2 heurísticas:
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Farthest
+\end_layout
+
+\begin_layout Standard
+Osman e Christofides apresentaram a heuristica construtiva com base no afastamen
+to inicial dos primeiros centros (mais afastados entre sí) e após um recálculo
+ dos centros de cada agrupamento.
+ Essa é uma heuristica muito rápida mas que pode não encontrar soluções
+ factíves para o caso de a soma de todas demandas seja muito próxima das
+ capacidades de todos agrupamentos.
+ A heurística pode ser apresentada da seguinte forma: 
+\end_layout
+
+\begin_layout Itemize
+Passo 1 - encontre os pontos 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ mais afastados entre sí, então 
+\begin_inset Formula $C={i,j}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se número desejado de agrupamentos (p) = 2, vá para o passo 3.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Passo 2 - enquanto |C| < número desejado de agrupamento, faça
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Encontre um cento 
+\begin_inset Formula $k\in O-C$
+\end_inset
+
+, de modo que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\prod_{j\in C}d_{kj}=\max_{_{k\in O-C}}\;\;\prod_{j\in C}d_{kj}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Então faça 
+\begin_inset Formula $C=C\cup k$
+\end_inset
+
+;
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Passo 3 - Para cada consumidor, encontre a distância até o centro mais próximo.
+ Organize estas distâncias em ordem crescentedo.
+ Atribua os consumidores na ordem dessas distâncias aos centros correspondentes,
+ se a capacidade permitir, caso contrário, atribua para o centro mais próximo
+ disponível.
+ 
+\end_layout
+
+\begin_layout Itemize
+Passo 4 - Recalcule os centros dos agrupamentos de modo a minimizar as distância
+ entre os pontos e o novo centro.
+\end_layout
+
+\begin_layout Standard
+Essa heuristica tem como objetivo a construção rápida de uma solução e para
+ se obter melhores soluções deve-se empregar heuristicas de busca na visinhança
+ da solução obtida com essa heuristica construtiva.
+ Em 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "osman1994capacitated"
+
+\end_inset
+
+ é apresentado um metodo hibido que combina Busca tabu e simulated annealing.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Density
+\end_layout
+
+\begin_layout Standard
+Para resolver um problema de agrupamento uma abordagem possível para escolha
+ dos centros iniciais é a escolha dos centros que possuam uma maior densidade
+ de pontos, assim a distância entre esse centro candidato e os possíveis
+ pontos componentes será minimizada.
+ Essa abordagem tem carater guloso e é miope por escoher os pontos candidatos
+ a centros vendo apenas sua densidade sem prever o rumo que essa solução
+ está tomando.
+ Para corrigir isso, é apresentado um método baseado na idéia de densidade
+ dos pontos, mas que utiliza de aspectos computação adaptativa com uma contrução
+-desconstrução periódica.
+ Essa meta-heuristica construtiva apresenta solucçoes muito boas em uma
+ iteração, sendo as melhoras sobre a solução dada por uma procura no espaço
+ do problema através de alterações nas distâncias e e geração de novas soluções.
+ 
+\end_layout
+
+\begin_layout Standard
+Para a etapa construtiva da solução, existem os seguintes métodos: 
+\end_layout
+
+\begin_layout Itemize
+EncontraVizinhos: Encontra os 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+vizinhos mais próximos de ponto 
+\begin_inset Formula $i$
+\end_inset
+
+, sendo que 
+\begin_inset Formula $m_{i}\leq\frac{n}{p}$
+\end_inset
+
+ e todos os pontos 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ (conjunto de pontos vizinhos do centro 
+\begin_inset Formula $i$
+\end_inset
+
+) tem a soma de suas demandas inferior ou igual a capacidade do agrupamento
+ 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+CalculaDensidade: Com o conjunto de pontos vizinhos do centro 
+\begin_inset Formula $i$
+\end_inset
+
+, conseguimos calcular a densidade do centro através de
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+D_{i}=\frac{m_{i}}{T(a_{i},Y_{i})}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sendo 
+\begin_inset Formula $T(a_{i},Y_{k})$
+\end_inset
+
+ a função que devolve a distância total de do ponto 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ até todos os pontos de 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+CalculaArrependimento: Após encontrados os pontos candidatos a centros,
+ é necessário definir os pontos que serão atribuidos a cada um dos agrupamentos.
+ Para essa inserção, é utilizada essa função para calcular o arrependimento
+ de associar um nó com um centro que não seja o mais próximo.
+ Para um ponto 
+\begin_inset Formula $i$
+\end_inset
+
+, tendo os pontos 
+\begin_inset Formula $j_{1}\; e\; j_{2}$
+\end_inset
+
+ como o centro mais próximo a 
+\begin_inset Formula $i$
+\end_inset
+
+ e segundo mais próximo, respectivamente, calculamos o arrependimento de
+ associar 
+\begin_inset Formula $i$
+\end_inset
+
+ com um centro que não seja 
+\begin_inset Formula $j_{1}$
+\end_inset
+
+ como sendo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+R_{i}=d_{ij_{2}}-\; d_{ij_{1}}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+EncontreOsMelhoresAgrupamentos (C, A): tendo A como um conjunto de pontos
+ e C o conjunto de centros.
+ Essa função tenta associar os pontos em A com os agrupamentos em C e está
+ descrita em 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:;EncontreOsMelhoresAgrupamentos"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{EncontreOsMelhoresAgrupamentos(C,A)}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:;EncontreOsMelhoresAgrupamentos"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $t=1$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Minor 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+ Máximo de iterações;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $alterado\leftarrow Verdadeiro$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Enquanto (
+\begin_inset Formula $alterado=Verdadeiro$
+\end_inset
+
+ E 
+\begin_inset Formula $t<Minor$
+\end_inset
+
+) 
+\begin_inset Newline newline
+\end_inset
+
+Faça:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $alterado\leftarrow False$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+1: Atribua todos os centros aos seus agrupamentos;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+2: Calcule o arrependimento de todos os pontos em 
+\begin_inset Formula $A$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+3: Encontre o maior 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ não atribuido;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+4: Atribua 
+\begin_inset Formula $i$
+\end_inset
+
+ para o agrupamento mais próximo disponível;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+5: Atualiza 
+\begin_inset Formula $A$
+\end_inset
+
+ com os pontos atribuidos;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+6: Se 
+\begin_inset Formula $A\neq\emptyset$
+\end_inset
+
+, vá para 2;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Para cada 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+ e seu centro 
+\begin_inset Formula $c_{j}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+para cada 
+\begin_inset Formula $a_{i}\in C_{j}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Se (
+\begin_inset Formula $T(a_{i},C_{j})$
+\end_inset
+
+
+\begin_inset Formula $<T(c_{j},C_{j})$
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Atualize o novo centro de 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+ como 
+\begin_inset Formula $a{}_{i}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $alterado\leftarrow Verdadeiro$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+FimSe;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+FimPara;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+FimPara;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $t\leftarrow t+1$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+FimFunção.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Com as funções definidas, um procedimento principal é chamado e apresenta
+ ao final o conjunto dos agrupamentos 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ Em 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:ProcedimentoDensidade"
+
+\end_inset
+
+ é apresentado tal procedimento o qual implementa a computação adaptativa.
+ De modo iterativo, esse método vai construindo um agrupamento por vez e
+ recalculando a densidade (
+\begin_inset Formula $D)$
+\end_inset
+
+ e arrependimento (
+\begin_inset Formula $R$
+\end_inset
+
+) do conjunto.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{ProcedimentoPrincipal}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:ProcedimentoDensidade"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+I: conjunto de 
+\begin_inset Formula $n$
+\end_inset
+
+ pontos
+\begin_inset Newline newline
+\end_inset
+
+C: conjunto de centros
+\begin_inset Newline newline
+\end_inset
+
+X: conjunto de pontos não atribuidos em A
+\begin_inset Newline newline
+\end_inset
+
+Z: conjunto de pontos atribuidos até iteração 
+\begin_inset Formula $k$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+: conjunto dos 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ pontos próximos a 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+, dado pela função 
+\begin_inset Formula $EncontraVizinhos$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Passo 1:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $k=0;$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $X=A,\, C=\emptyset,\, Z=\emptyset$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Passo 2:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $k\leftarrow k+1;$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Para cada 
+\begin_inset Formula $a_{i}\in X$
+\end_inset
+
+, encontre o conjunto 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $Y_{i}\subseteq X$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Calcule a densidade (
+\begin_inset Formula $D_{i}$
+\end_inset
+
+) para cada 
+\begin_inset Formula $a_{i}\in X$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Selecione o maior 
+\begin_inset Formula $D_{i}$
+\end_inset
+
+ e atribua 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ como centro do centro do 
+\begin_inset Formula $k$
+\end_inset
+
+-ésimo agrupamento, 
+\begin_inset Formula $C_{k}=C_{k}\cup a_{i}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Elimine os pontos selecionados das próximas seleções: 
+\begin_inset Formula $X=X\setminus Y_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $Y=Y\cup Y_{i}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Se 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+ então chame 
+\begin_inset Formula $EncontreOsMelhoresAgrupamentos(C,Y)$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Se 
+\begin_inset Formula $k<p$
+\end_inset
+
+ então volte ao passo 2;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $EncontreOsMelhoresAgrupamentos(C,A)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+CCCP
+\end_layout
+
+\begin_layout Standard
+É proposto como heurísticas de solução para esse problema 2 métodos contrutivos
+ para gerar uma primeira solução e a aplicação de uma VNS (variable neightbourho
+od search) para melhoria dessa solução.
+ Será apresentado as duas heurísticas da fase contrutiva, sendo a segunda
+ fase de melhorias apenas alterações na solução efetuando troca ou movimento
+ aleatório de pontos de um agrupamento para outro por um periodo de tempo.
+\end_layout
+
+\begin_layout Subsubsection
+q-Trees Balanceadas
+\end_layout
+
+\begin_layout Standard
+Dado o conjunto de pontos no um espaço 
+\begin_inset Formula $\Re^{2}$
+\end_inset
+
+, eles são inseridos em um estrutura q-tree (Quadrant-Tree), a qual se ajusta,
+ através de rotações semelhantes as árvores AVL, de modo que as raízes das
+ sub árvores são a mediana dos pontos pertencentes a elas.
+ Essa primeira parte define as partições para servirem como entrada para
+ os métodos Forgy/H-Means+, referenciado por Forgy no decorrer do relatório,
+ e JMeans.
+\end_layout
+
+\begin_layout Standard
+Para definição das partições apartir da q-tree, são usados duas estratégias:
+ Next Fit, onde o nó raíz da arvore é ínserido no agrupamento atual ou,
+ se não isso ultrapassar a capacidade do agrupamento, é inserido em um novo
+ agrupamento, e Best Fit que insere o nó raiz da q-tree no cluster que possui
+ o centroide mais próximo ou se não é possível inserir em nenhum agrupamento
+ existente, é criado um novo.
+ Toda vez que o nó raiz é inserido em algum agrupamento, ele é retirado
+ da q-tree a qual se ajusta passando outro nó para raiz.
+\end_layout
+
+\begin_layout Standard
+Os métodos Forgy e JMeans são apresentados em 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Forgy"
+
+\end_inset
+
+ e 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:JMeans"
+
+\end_inset
+
+ respectivamente.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Forgy}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Forgy"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $k\leftarrow0;$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Passo 1:
+\begin_inset Newline newline
+\end_inset
+
+Se 
+\begin_inset Formula $k=0$
+\end_inset
+
+ então construa 
+\begin_inset Formula $C_{1}^{0},\ldots,C_{p}^{0}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+senão construa novos 
+\begin_inset Formula $C_{1}^{k},\ldots,C_{p}^{k}$
+\end_inset
+
+, atribuindo os indivíduos ao centro disponível mais próximo.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $k\leftarrow k+1$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Calcule os centroides de 
+\begin_inset Formula $C_{1}^{k},\ldots,C_{p}^{k}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+Se 
+\begin_inset Formula $NAC\leq p$
+\end_inset
+
+ então 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Ordene os pontos pela ordem decrescente dos centroides de seus agrupamentos;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Selecione os primeiros 
+\begin_inset Formula $p-NAC$
+\end_inset
+
+ pontos e transforme em novos centroides;
+\begin_inset Newline newline
+\end_inset
+
+Reduza de 
+\begin_inset Formula $f(C_{m}^{k})$
+\end_inset
+
+ as distancias selecionadas;
+\begin_inset Newline newline
+\end_inset
+
+FimSe
+\begin_inset Newline newline
+\end_inset
+
+Se 
+\begin_inset Formula $f(C_{m}^{k})=f(C_{m}^{k})$
+\end_inset
+
+ então pare;
+\begin_inset Newline newline
+\end_inset
+
+senão, volte ao Passo 1;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{JMeans}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:JMeans"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $k\leftarrow0;$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Se 
+\begin_inset Formula $k=0$
+\end_inset
+
+ então construa 
+\begin_inset Formula $C_{1}^{0},\ldots,C_{p}^{0}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Passo 1:
+\begin_inset Newline newline
+\end_inset
+
+Atribua pontos de 
+\begin_inset Formula $C_{i}$
+\end_inset
+
+ para um outro centro 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+ (
+\begin_inset Formula $j\neq i$
+\end_inset
+
+).
+ Esses pontos devem ser afastados dos centroides por uma tolerância 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, marque eles como não ocupados.
+\begin_inset Newline newline
+\end_inset
+
+Para todo 
+\begin_inset Formula $j\in I$
+\end_inset
+
+ faça
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Adicione um novo agrupamento com centroid 
+\begin_inset Formula $\bar{g}_{M+1}$
+\end_inset
+
+em alguma entidade não ocupada 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ e o indice 
+\begin_inset Formula $i$
+\end_inset
+
+ do melhor centro removido; 
+\begin_inset Formula $v_{il}$
+\end_inset
+
+ indicam a alteração na função objetivo;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Mantenha o par de indices 
+\begin_inset Formula $i^{\prime}$
+\end_inset
+
+e 
+\begin_inset Formula $j^{\prime}$
+\end_inset
+
+, onde 
+\begin_inset Formula $v_{ij}$
+\end_inset
+
+é mínimo;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Troque o centroide 
+\begin_inset Formula $g_{i^{\prime}}$
+\end_inset
+
+por 
+\begin_inset Formula $g_{j\prime}$
+\end_inset
+
+e atualize as atribuições de modo a ter uma nova partição 
+\begin_inset Formula $P_{M}^{\prime}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $f^{\prime}\leftarrow f_{opt}+v_{i^{\prime}j^{\prime}}$
+\end_inset
+
+;
+\begin_inset Newline newline
+\end_inset
+
+FimPara
+\begin_inset Newline newline
+\end_inset
+
+Se Não houve melhora, temine.
+\begin_inset Newline newline
+\end_inset
+
+Caso contrário, implemente a maior partição, retorne ao passo 1;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+O valor 
+\begin_inset Formula $v_{ij}$
+\end_inset
+
+ utilizado no método JMeans representa a melhora na função objetivo pela
+ realocação do indivíduo 
+\begin_inset Formula $i$
+\end_inset
+
+ e é dado pela fórmula em 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:JMeansVij"
+
+\end_inset
+
+, tendo que 
+\begin_inset Formula $\bar{g}_{i}$
+\end_inset
+
+ é o centroide do agrupamento 
+\begin_inset Formula $C_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $a_{j}\in I$
+\end_inset
+
+ e 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ é o valor da caridinalidade do agrupamento 
+\begin_inset Formula $C_{i}$
+\end_inset
+
+.
+ O Valor de 
+\begin_inset Formula $NAC$
+\end_inset
+
+ no método Forgy, é o número atual de agrupamentos em uso.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+v_{ij}\leftarrow\frac{n_{i}}{n_{i}+1}\Vert\overline{g_{i}}-a_{j}\Vert^{2}-\frac{n_{l}}{n_{l}+1}\Vert\overline{g_{l}}-a_{j}\Vert^{2},\;\; a_{j}\in C_{l},\;\;\overline{g_{i}}\notin C_{l}\label{eq:JMeansVij}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Unscontrained to Constrained
+\end_layout
+
+\begin_layout Standard
+A segunda heurística apresentada resolve o problema não levando em consideração
+ a capacidade de cada agrupamento para gerar uma solução inicial a qual
+ pode ser uma solução para o CCCP infactível.
+ 
+\end_layout
+
+\begin_layout Standard
+A partir da solução inicial, o próximo passo é vericar se ela é factível
+ e caso não seja, localizar o indivíduo que sobrecarrega algum agrupamento,
+ e move-lo para outro que suporte ele.
+ Caso não exista nenhum agrupamento que suporte a sua inserção, então é
+ aberto um novo agrupamento.
+ Para gerar uma solução inicial, é utilizado a mesma função forgy apresentada
+ acima, mas não levando em consideração capacidade dos agrupamentos.
+ Após a execução dessa função, todos os agrupamentos são percorridos e para
+ os que tem maior demanda que a sua capacidade, tem um indivíduo que o sobrecarr
+ega movido para outro agrupamento que o suporte e que seja o mais próximo
+ de si.
+\end_layout
+
+\begin_layout Section
+PDOS visto como um problema de agrupamento
+\end_layout
+
+\begin_layout Standard
+Para atender um conjunto de solicitações dos clientes de forma mais rápida,
+ as equipes devem diminuir ao máximo o tempo de deslocamento entre cada
+ atendimento, uma vez que o tempo do atendimento não pode ser reduzido sem
+ comprometer a qualidade do serviço prestado.
+ Diminuir o tempo de deslocamento entre os atendimentos pode ser obtido
+ pela designação das tarefas para as equipes de modo que as tarefas degnadas
+ a uma dada equipe fiquem próximas entre si, diminuidno assim a distância
+ entre elas.
+ 
+\end_layout
+
+\begin_layout Standard
+Com tais caracteristicas, o PDOS pode ser modelado como um problema de agrupamen
+to capacitado, onde a capacidade provêm da disponibilidade de tempo que
+ uma equpe dispôem por dia, normalmente 8 horas, e as demandas o tempo necessári
+o para resolver os serviços.
+ Para representação mais fiel a realidade, deve-se considerar as rotas e
+ tambem o tempo necessário para se deslocar de um atendimento até outro.
+ As rotas são calculadas dentre os atendimentos de cada equipe como um tour,
+ passando por todos os atendimentos, não sendo necessário retornar ao ponto
+ de origem da rota e o tempo de deslocamento é calculado normalmente pelo
+ cálculo 
+\begin_inset Formula $d_{ij}*K$
+\end_inset
+
+, onde 
+\begin_inset Formula $d_{ij}$
+\end_inset
+
+ é a distância do atendimento 
+\begin_inset Formula $i$
+\end_inset
+
+ até o atendimento 
+\begin_inset Formula $j$
+\end_inset
+
+ e 
+\begin_inset Formula $K$
+\end_inset
+
+ é uma constante de quanto tempo(minutos por exemplo) é necessário para
+ percorer uma unidade de medida (Km por exemplo).
+ 
+\end_layout
+
+\begin_layout Standard
+A representação de tempo de deslocamento e o cálculo das rotas, não foram
+ abordadas nessa primeira parte do trabalho, bem como também o tratamento
+ das prioridades de atendimento ficaram para a segunda parte do projeto.
+\end_layout
+
+\begin_layout Standard
+Para a solução de problemas PDOS, dado os dois modelos de problema de agrupament
+o estudados, vimos que seria mais representativo o modelo 
+\begin_inset Formula $CCP$
+\end_inset
+
+, mas a heuristica apresentada em 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "negreiros2006capacitated"
+
+\end_inset
+
+, que faz uso das q-trees, pode ser utilizada como forma de resolver problemas
+ do tipo 
+\begin_inset Formula $CCP$
+\end_inset
+
+ sendo isso citado no próprio artigo que foram testados em instâncias de
+ problemas 
+\begin_inset Formula $CCP$
+\end_inset
+
+, mas não é indicado os valores de tal heurística aplicada ao 
+\begin_inset Formula $CCP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Chapter
+Algoritmos Implementados
+\end_layout
+
+\begin_layout Standard
+Foram implementados os métodos contrutivos propostos por 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ahmadi2004density,osman1994capacitated"
+
+\end_inset
+
+ mas não as etapas de refinamento prostas por ele.
+ Foi escolhido o paradigma de programação orientado a objetos pela facilidade
+ de manutenção e modularidade dos códigos além da facilidade escrever casos
+ de testes de modo a perceber regreções de forma mais fácil.
+ O diagrama de classes UML, bem como a associação entre bibliotecas do sistema,
+ se encontran na secção de anexos ao final do relatório.
+\end_layout
+
+\begin_layout Standard
+Foi utilizada a linguagemde programação C++ com o compilador do GNU (g++),
+ o CMake como gerador de arquivos Makefile (arquivos que contém informações
+ de como compilar e testar o programa), a biblioteca Qt para parte de testes
+ e algumas funções dísponíveis nela tais como leitura de arquivos, estruturas
+ de dados e parte gráfica para mostrar de forma bem simples o resultado
+ final.
+\end_layout
+
+\begin_layout Standard
+Como gerenciamento de versão do projeto foi utilizado o Git, que é um SCV
+ distribuido e assim permite o seu uso mesmo quando não se possuí acesso
+ ao servidor.
+ Para servidor, foi utilizado o servidor github, e os códigos podem ser
+ acessados pelo endereço www.github.com/wiglot/CCP.
+\end_layout
+
+\begin_layout Chapter
+Próximas etapas
+\end_layout
+
+\begin_layout Standard
+Para a segunda parte deste trabalho, será dada continuidade nos estudos
+ de formas de resolver o problema, procurando por artigos que tenham alguma
+ solução próxima desse trabalho para darmos continuidade no desenvolvimento
+ de heurísticas para solução do problema.
+\end_layout
+
+\begin_layout Standard
+Para essa etapa também temos em vista o uso de caracteristicas que ainda
+ não foram aboradas tais como prioridades de atendimento, onde será desejado
+ que os atendimentos com maior prioridade fiquem em agrupamentos distintos,
+ de modo a serem atendidos por diferentes equipes, evitando que uma equipe
+ assuma todos atendimentos de urgência em uma localidade por exemplo.
+ Como o deslocamento também deve ser levado em consideração, iremos calcular
+ as rotas dentro de cada agrupamento para as equipes e de posse dessa rota,
+ iremos calcular o tempo necessário para a equipe efetuar todo deslocamento,
+ o qual será adicionado aos tempos de atendimentos associados com essa equipe.
+ Esse cálculo de tempo de deslocamento, traz um problema que é a necessidade
+ de se calcular a rota para cada ponto inserido em um agrupamento, leva
+ a necessidade de reestruturar a rota de tal equipe.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/wagner/Documentos/bibitex/bibliography_CCP"
+options "bibtotoc,ieeetr"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+\start_of_appendix
+Anexos
+\end_layout
+
+\begin_layout Chapter*
+Diagramas UML
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Instance.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Classes que representam uma Instância e as soluções 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Algorthms.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Classes dos algoritmos das heurísticas de construção
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Associação dos Módulos
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand input
+filename "dependencyCCP.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Bibliotecas que fazem parte do sistema.
+ Arestas apontam dependencias diretas de um módulo por outro.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
