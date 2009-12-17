@@ -7,12 +7,13 @@
 \usepackage{tikz}
 \usetikzlibrary{snakes,arrows,shapes}
 \usepackage{lscape}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \end_preamble
 \use_default_options true
 \begin_modules
 theorems-ams
 eqs-within-sections
-figs-within-sections
 minimalistic
 \end_modules
 \language brazilian
@@ -54,12 +55,14 @@ minimalistic
 
 \begin_body
 
-\begin_layout Title
-Relatório de TCC I
-\end_layout
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "unipampaTitle.tex"
 
-\begin_layout Author
-Wagner de Melo Reck
+\end_inset
+
+
 \end_layout
 
 \begin_layout Abstract
@@ -1194,17 +1197,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-{EncontreOsMelhoresAgrupamentos(C,A)}
-\end_layout
-
-\end_inset
-
-
+EncontreOsMelhoresAgrupamentos(C,A)
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:;EncontreOsMelhoresAgrupamentos"
@@ -1216,29 +1209,36 @@ name "alg:;EncontreOsMelhoresAgrupamentos"
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Formula $t=1$
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Minor 
 \begin_inset Formula $\leftarrow$
 \end_inset
 
  Máximo de iterações;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Formula $alterado\leftarrow Verdadeiro$
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Enquanto (
 \begin_inset Formula $alterado=Verdadeiro$
 \end_inset
@@ -1248,14 +1248,13 @@ Enquanto (
 \end_inset
 
 ) 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Faça:
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1284,10 +1283,9 @@ Faça:
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1312,10 +1310,9 @@ Faça:
 \end_inset
 
 1: Atribua todos os centros aos seus agrupamentos;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1344,10 +1341,9 @@ Faça:
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1376,10 +1372,9 @@ Faça:
 \end_inset
 
  não atribuido;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1408,10 +1403,9 @@ Faça:
 \end_inset
 
  para o agrupamento mais próximo disponível;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1440,10 +1434,9 @@ Faça:
 \end_inset
 
  com os pontos atribuidos;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1472,14 +1465,9 @@ Faça:
 \end_inset
 
 , vá para 2;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1512,10 +1500,9 @@ Para cada
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1564,10 +1551,9 @@ para cada
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1640,10 +1626,9 @@ Se (
 \end_inset
 
 )
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1732,10 +1717,9 @@ Atualize o novo centro de
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1820,10 +1804,9 @@ Atualize o novo centro de
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1888,10 +1871,9 @@ Atualize o novo centro de
 \end_inset
 
 FimSe;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1932,10 +1914,9 @@ FimSe;
 \end_inset
 
 FimPara;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1960,10 +1941,9 @@ FimPara;
 \end_inset
 
 FimPara;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -1992,15 +1972,10 @@ FimPara;
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
-
-FimFunção.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Plain Layout
+FimFunção.
 \end_layout
 
 \end_inset
@@ -2067,31 +2042,39 @@ name "alg:ProcedimentoDensidade"
 \begin_inset Newline newline
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 I: conjunto de 
 \begin_inset Formula $n$
 \end_inset
 
  pontos
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 C: conjunto de centros
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 X: conjunto de pontos não atribuidos em A
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Z: conjunto de pontos atribuidos até iteração 
 \begin_inset Formula $k$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Formula $Y_{i}$
 \end_inset
 
@@ -2108,45 +2091,38 @@ Z: conjunto de pontos atribuidos até iteração
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Passo 1:
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Formula $k=0;$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Formula $X=A,\, C=\emptyset,\, Z=\emptyset$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
+\begin_layout Plain Layout
 Passo 2:
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Formula $k\leftarrow k+1;$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Para cada 
 \begin_inset Formula $a_{i}\in X$
 \end_inset
@@ -2160,9 +2136,9 @@ Para cada
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Calcule a densidade (
 \begin_inset Formula $D_{i}$
 \end_inset
@@ -2172,9 +2148,9 @@ Calcule a densidade (
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Selecione o maior 
 \begin_inset Formula $D_{i}$
 \end_inset
@@ -2192,9 +2168,9 @@ Selecione o maior
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Elimine os pontos selecionados das próximas seleções: 
 \begin_inset Formula $X=X\setminus Y_{i}$
 \end_inset
@@ -2204,9 +2180,9 @@ Elimine os pontos selecionados das próximas seleções:
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Se 
 \begin_inset Formula $k\geq2$
 \end_inset
@@ -2216,24 +2192,18 @@ Se
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Se 
 \begin_inset Formula $k<p$
 \end_inset
 
  então volte ao passo 2;
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $EncontreOsMelhoresAgrupamentos(C,A)$
-\end_inset
-
-
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Formula $EncontreOsMelhoresAgrupamentos(C,A)$
 \end_inset
 
 
@@ -2382,17 +2352,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-{Forgy}
-\end_layout
-
-\end_inset
-
-
+Forgy
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:Forgy"
@@ -2400,25 +2360,25 @@ name "alg:Forgy"
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Formula $k\leftarrow0;$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
+\begin_layout Plain Layout
 Passo 1:
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Se 
 \begin_inset Formula $k=0$
 \end_inset
@@ -2428,42 +2388,40 @@ Se
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 senão construa novos 
 \begin_inset Formula $C_{1}^{k},\ldots,C_{p}^{k}$
 \end_inset
 
 , atribuindo os indivíduos ao centro disponível mais próximo.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Formula $k\leftarrow k+1$
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Calcule os centroides de 
 \begin_inset Formula $C_{1}^{k},\ldots,C_{p}^{k}$
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Se 
 \begin_inset Formula $NAC\leq p$
 \end_inset
 
  então 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -2480,10 +2438,9 @@ Se
 \end_inset
 
 Ordene os pontos pela ordem decrescente dos centroides de seus agrupamentos;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -2504,7 +2461,22 @@ Selecione os primeiros
 \end_inset
 
  pontos e transforme em novos centroides;
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
 \end_inset
 
 Reduza de 
@@ -2512,27 +2484,22 @@ Reduza de
 \end_inset
 
  as distancias selecionadas;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 FimSe
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Se 
 \begin_inset Formula $f(C_{m}^{k})=f(C_{m}^{k})$
 \end_inset
 
  então pare;
-\begin_inset Newline newline
-\end_inset
-
-senão, volte ao Passo 1;
 \end_layout
 
-\end_inset
-
-
+\begin_layout Plain Layout
+senão, volte ao Passo 1;
 \end_layout
 
 \end_inset
@@ -2550,17 +2517,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-{JMeans}
-\end_layout
-
-\end_inset
-
-
+JMeans
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:JMeans"
@@ -2568,17 +2525,21 @@ name "alg:JMeans"
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Formula $k\leftarrow0;$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Se 
 \begin_inset Formula $k=0$
 \end_inset
@@ -2588,17 +2549,13 @@ Se
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
-\begin_inset Newline newline
-\end_inset
-
+\begin_layout Plain Layout
 Passo 1:
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Atribua pontos de 
 \begin_inset Formula $C_{i}$
 \end_inset
@@ -2617,18 +2574,17 @@ Atribua pontos de
 \end_inset
 
 , marque eles como não ocupados.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 Para todo 
 \begin_inset Formula $j\in I$
 \end_inset
 
  faça
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -2669,10 +2625,9 @@ em alguma entidade não ocupada
 \end_inset
 
  indicam a alteração na função objetivo;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -2709,10 +2664,9 @@ e
 \end_inset
 
 é mínimo;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -2749,10 +2703,9 @@ e atualize as atribuições de modo a ter uma nova partição
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset space ~
 \end_inset
 
@@ -2781,23 +2734,18 @@ e atualize as atribuições de modo a ter uma nova partição
 \end_inset
 
 ;
-\begin_inset Newline newline
-\end_inset
-
-FimPara
-\begin_inset Newline newline
-\end_inset
-
-Se Não houve melhora, temine.
-\begin_inset Newline newline
-\end_inset
-
-Caso contrário, implemente a maior partição, retorne ao passo 1;
 \end_layout
 
-\end_inset
+\begin_layout Plain Layout
+FimPara
+\end_layout
 
+\begin_layout Plain Layout
+Se Não houve melhora, temine.
+\end_layout
 
+\begin_layout Plain Layout
+Caso contrário, implemente a maior partição, retorne ao passo 1;
 \end_layout
 
 \end_inset
