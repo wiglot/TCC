@@ -372,7 +372,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagens/cluster_Density_SJC3a.png
+	filename imagens/cluster_Density_SJC4a.png
 	scale 50
 
 \end_inset
@@ -2244,6 +2244,75 @@ Se
 
 \end_layout
 
+\begin_layout Standard
+Uma comparação entre as soluções geradas pelas heurísticas pode ser visto
+ na figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CCP-comparação"
+
+\end_inset
+
+.
+ A Instância é a mesma aplicada em ambos casos.
+ Como podemos ver, a heurística de densidade apresenta um solução melhor,
+ apesar do tempo de processamento ser muito alto pela complexidade do algoritmo.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagens/cluster_Density_SJC4a.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename imagens/cluster_Farthest_SJC4a.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CCP-comparação"
+
+\end_inset
+
+A solução gerada pela heurística density (esquerda) possui os agrupamentos
+ bem mais compactos que na solução pela heurística farthest (direita).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 CCCP
 \end_layout
@@ -2993,7 +3062,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Instance.png
+	filename imagens/Instance.png
 	scale 50
 
 \end_inset
@@ -3030,7 +3099,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Algorthms.png
+	filename imagens/Algorthms.png
 	scale 60
 
 \end_inset
