@@ -107,7 +107,7 @@ Problema de despacho de ordens de serviço (PDOS)
 
 \begin_layout Standard
 Para algumas empresas, principalmente quando necessitam atender a um grande
- número de clientes em um grande centro onde é necessário o deslocamento
+ número de clientes em um centro urbano onde é necessário o deslocamento
  de uma equipe da empresa até um determinado cliente, é uma atividade que
  se não for bem planejada pode levar a um acúmulo de atendimentos não executados
  e posteriormente ao não atendimento de alguma solicitação.
@@ -117,15 +117,15 @@ Para algumas empresas, principalmente quando necessitam atender a um grande
 \end_layout
 
 \begin_layout Standard
-Para resolver isso, tendo em vista que executar uma atividade não pode ser
- diminuído com o passar do tempo mantendo-se em uma média para cada tipo
- de atividade, a empresa ou deve contratar mais mais equipes ou organizar
- as solicitações em grupos para minimizando o tempo de deslocamento entre
- uma atividade e outra.
+Para resolver isso, tendo em vista que o tempo de executar uma atividade
+ não pode ser diminuído com o passar do tempo mantendo-se em uma média para
+ cada tipo de atividade, a empresa ou deve contratar mais mais equipes ou
+ organizar as solicitações em grupos para minimizando o tempo de deslocamento
+ entre uma atividade e outra.
  A primeira é uma solução que traz custos para empresa e necessidade de
- pessoal para gerenciamento das equipes extras, as quais pode ter de ser
- inseridas apenas em períodos onde houve demanda de atendimento, mas no
- restando do tempo passa as ser sub-utilizada por as equipes anteriores
+ pessoal para gerenciamento das equipes extras, as quais podem ter de ser
+ utilizadas apenas em períodos onde houve demanda de atendimento, mas no
+ restando do tempo passam as ser sub-utilizada por as equipes anteriores
  atenderem todas as demandas dos clientes.
 \end_layout
 
@@ -134,18 +134,16 @@ A solução de agrupar as ordens de serviço de modo a minimizar o deslocamento
  de um atendimento até um outro dentro do mesmo grupo atendido pela mesma
  equipe, torna-se melhor que a anterior pois não há a necessidade de contratar
  uma equipe nova para dar conta de alguns poucos atendimentos.
- Essa solução não evita o contratamento de novas equipes, mas diminui o
- número total de novas contratações.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-explicar melhor pq não precisa contratar todas equipes.
+ Essa solução não evita o contratamento de novas equipes no caso de um aumento
+ muito grande na demanda de serviços, mas diminui o número total de novas
+ contratações uma vez que o os número total de atendimento atendidos por
+ cada equipe aumenta pela diminuição do tempo perdido no deslocamento entre
+ os atendimentos.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+Na próxima secção, será apresentado o problema de agrupamento o qual é proposto
+ para representar o PDOS e será explicado mais a frente.
 \end_layout
 
 \begin_layout Section
@@ -882,15 +880,33 @@ O CCP, é descrito na literatura como um problema
 \begin_inset Formula $\mathcal{NP}-completo$
 \end_inset
 
-, não existindo algoritmos em tempo polinomial para resolver o problema.
- Para os métodos exatos, que apresentam melhores soluções, eles somente
- podem ser utilizados para instância pequenas, uma vez que é um problema
- de programação inteira e o numéro de variaveis de decisão é da ordem de
- 
-\begin_inset Formula $n^{2}$
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "osman1994capacitated"
+
 \end_inset
 
- onde n é o número pontos de demanda do problema.
+, não existindo algoritmos em tempo polinomial para resolver o problema.
+ Para os métodos exatos, que apresentam melhores soluções, eles somente
+ podem ser utilizados para instância pequenas (<100 indivíduos), uma vez
+ que é um problema de programação inteira e o numéro de variaveis de decisão
+ é da ordem de 
+\begin_inset Formula $n^{2}+n$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RePEc:eee:ejores:v:18:y:1984:i:3:p:339-348"
+
+\end_inset
+
+, onde 
+\begin_inset Formula $n$
+\end_inset
+
+ é o número pontos de demanda do problema.
  Para instâncias muito grandes, o uso de heurísticas traz soluções muito
  boas, algumas vezes muito próximas aos métodos exatos.
  Serão apresentadas algumas heurísticas para construção de uma solução inicial
@@ -942,7 +958,14 @@ Balanced q-trees: que utiliza de arvores q-trees e métodos como k-means,
 \begin_layout Description
 Unconstrained to Constrained: inicia como uma solução infactível alterando-a
  até conseguir uma solução factível.
- Ambos métodos para CCCP propostos por Negreiros e Palhano 
+ Ambos métodos para CCCP apresentados em 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "negreiros2006capacitated"
+
+\end_inset
+
+; 
 \end_layout
 
 \end_deeper
@@ -2608,7 +2631,7 @@ Para todo
 \begin_inset space ~
 \end_inset
 
-Adicione um novo agrupamento com centroid 
+Adicione um novo agrupamento com centroide 
 \begin_inset Formula $\bar{g}_{M+1}$
 \end_inset
 
@@ -2616,7 +2639,7 @@ em alguma entidade não ocupada
 \begin_inset Formula $a_{j}$
 \end_inset
 
- e o indice 
+ e o índice 
 \begin_inset Formula $i$
 \end_inset
 
@@ -2651,7 +2674,7 @@ em alguma entidade não ocupada
 \begin_inset space ~
 \end_inset
 
-Mantenha o par de indices 
+Mantenha o par de índices 
 \begin_inset Formula $i^{\prime}$
 \end_inset
 
@@ -2741,7 +2764,7 @@ FimPara
 \end_layout
 
 \begin_layout Plain Layout
-Se Não houve melhora, temine.
+Se Não houve melhora, termine.
 \end_layout
 
 \begin_layout Plain Layout
@@ -2786,7 +2809,7 @@ reference "eq:JMeansVij"
 \begin_inset Formula $n_{i}$
 \end_inset
 
- é o valor da caridinalidade do agrupamento 
+ é o valor da cardinalidade do agrupamento 
 \begin_inset Formula $C_{i}$
 \end_inset
 
@@ -2808,7 +2831,7 @@ v_{ij}\leftarrow\frac{n_{i}}{n_{i}+1}\Vert\overline{g_{i}}-a_{j}\Vert^{2}-\frac{
 \end_layout
 
 \begin_layout Subsubsection
-Unscontrained to Constrained
+Unconstrained to Constrained
 \end_layout
 
 \begin_layout Standard
@@ -2819,7 +2842,7 @@ A segunda heurística apresentada resolve o problema não levando em consideraç
 \end_layout
 
 \begin_layout Standard
-A partir da solução inicial, o próximo passo é vericar se ela é factível
+A partir da solução inicial, o próximo passo é verificar se ela é factível
  e caso não seja, localizar o indivíduo que sobrecarrega algum agrupamento,
  e move-lo para outro que suporte ele.
  Caso não exista nenhum agrupamento que suporte a sua inserção, então é
@@ -2842,19 +2865,19 @@ Para atender um conjunto de solicitações dos clientes de forma mais rápida,
  atendimento, uma vez que o tempo do atendimento não pode ser reduzido sem
  comprometer a qualidade do serviço prestado.
  Diminuir o tempo de deslocamento entre os atendimentos pode ser obtido
- pela designação das tarefas para as equipes de modo que as tarefas degnadas
- a uma dada equipe fiquem próximas entre si, diminuidno assim a distância
+ pela designação das tarefas para as equipes de modo que as tarefas designadas
+ a uma dada equipe fiquem próximas entre si, diminuindo assim a distância
  entre elas.
  
 \end_layout
 
 \begin_layout Standard
-Com tais caracteristicas, o PDOS pode ser modelado como um problema de agrupamen
+Com tais características, o PDOS pode ser modelado como um problema de agrupamen
 to capacitado, onde a capacidade provêm da disponibilidade de tempo que
- uma equpe dispôem por dia, normalmente 8 horas, e as demandas o tempo necessári
-o para resolver os serviços.
+ uma equipe dispõem por dia, normalmente 8 horas, e as demandas o tempo
+ necessário para resolver os serviços.
  Para representação mais fiel a realidade, deve-se considerar as rotas e
- tambem o tempo necessário para se deslocar de um atendimento até outro.
+ também o tempo necessário para se deslocar de um atendimento até outro.
  As rotas são calculadas dentre os atendimentos de cada equipe como um tour,
  passando por todos os atendimentos, não sendo necessário retornar ao ponto
  de origem da rota e o tempo de deslocamento é calculado normalmente pelo
@@ -2879,7 +2902,7 @@ o para resolver os serviços.
 \end_inset
 
  é uma constante de quanto tempo(minutos por exemplo) é necessário para
- percorer uma unidade de medida (Km por exemplo).
+ percorrer uma unidade de medida (Km por exemplo).
  
 \end_layout
 
@@ -2895,7 +2918,7 @@ o estudados, vimos que seria mais representativo o modelo
 \begin_inset Formula $CCP$
 \end_inset
 
-, mas a heuristica apresentada em 
+, mas a heurística apresentada em 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "negreiros2006capacitated"
@@ -2924,33 +2947,33 @@ Algoritmos Implementados
 \end_layout
 
 \begin_layout Standard
-Foram implementados os métodos contrutivos propostos por 
+Foram implementados os métodos construtivos propostos por 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ahmadi2004density,osman1994capacitated"
 
 \end_inset
 
- mas não as etapas de refinamento prostas por ele.
+ mas não as etapas de refinamento propostas por ele.
  Foi escolhido o paradigma de programação orientado a objetos pela facilidade
  de manutenção e modularidade dos códigos além da facilidade escrever casos
- de testes de modo a perceber regreções de forma mais fácil.
+ de testes de modo a perceber regressões de forma mais fácil.
  O diagrama de classes UML, bem como a associação entre bibliotecas do sistema,
- se encontran na secção de anexos ao final do relatório.
+ se encontram na secção de anexos ao final do relatório.
 \end_layout
 
 \begin_layout Standard
-Foi utilizada a linguagemde programação C++ com o compilador do GNU (g++),
+Foi utilizada a linguagem de programação C++ com o compilador do GNU (g++),
  o CMake como gerador de arquivos Makefile (arquivos que contém informações
  de como compilar e testar o programa), a biblioteca Qt para parte de testes
- e algumas funções dísponíveis nela tais como leitura de arquivos, estruturas
+ e algumas funções disponíveis nela tais como leitura de arquivos, estruturas
  de dados e parte gráfica para mostrar de forma bem simples o resultado
  final.
 \end_layout
 
 \begin_layout Standard
 Como gerenciamento de versão do projeto foi utilizado o Git, que é um SCV
- distribuido e assim permite o seu uso mesmo quando não se possuí acesso
+ distribuído e assim permite o seu uso mesmo quando não se possuí acesso
  ao servidor.
  Para servidor, foi utilizado o servidor github, e os códigos podem ser
  acessados pelo endereço www.github.com/wiglot/CCP.
@@ -2968,8 +2991,8 @@ Para a segunda parte deste trabalho, será dada continuidade nos estudos
 \end_layout
 
 \begin_layout Standard
-Para essa etapa também temos em vista o uso de caracteristicas que ainda
- não foram aboradas tais como prioridades de atendimento, onde será desejado
+Para essa etapa também temos em vista o uso de características que ainda
+ não foram abordadas tais como prioridades de atendimento, onde será desejado
  que os atendimentos com maior prioridade fiquem em agrupamentos distintos,
  de modo a serem atendidos por diferentes equipes, evitando que uma equipe
  assuma todos atendimentos de urgência em uma localidade por exemplo.
@@ -3117,7 +3140,7 @@ filename "dependencyCCP.tex"
 
 \begin_layout Plain Layout
 Bibliotecas que fazem parte do sistema.
- Arestas apontam dependencias diretas de um módulo por outro.
+ Arestas apontam dependências diretas de um módulo por outro.
 \end_layout
 
 \end_inset
