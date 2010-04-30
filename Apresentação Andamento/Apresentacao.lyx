@@ -616,6 +616,32 @@ Modelo Matemático
 \end_layout
 
 \begin_layout BeginFrame
+Variáveis
+\end_layout
+
+\begin_layout Standard
+Sendo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+x_{ij} &  & igual\, a\,1\, se\, o\, ponto\, i\, está\, no\, agrupamento\, j,\,0\, caso\, contrário;\\
+c_{ij} &  & distância\, entre\, os\, pontos\, i\, e\, j;\\
+p &  & número\, de\, agrupamentos;\\
+y_{j} &  & igual\, a\,1\, se\, o\, agrupamento\, i\, está\, sendo\, utilizado,\,0\, caso\, contrário;\\
+q_{i} &  & Demanda\, do\, ponto\, i;\\
+Q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
 Modelo matemático 
 \end_layout
 
@@ -655,12 +681,27 @@ Ferramenta desenvolvida.
  
 \end_layout
 
-\begin_layout Standard
-Ferramenta desenvolvida
+\begin_layout Itemize
+Visualizar as soluções geradas pelos algoritmos;
+\end_layout
+
+\begin_layout Itemize
+Apresentar valores da função objetivo, tempos e número de iterações
+\end_layout
+
+\begin_layout Itemize
+Comparar diferentes soluções
 \end_layout
 
 \begin_layout Standard
-Exemplos de uso
+\begin_inset Graphics
+	filename TelaFerramenta.png
+	scale 40
+	clip
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout BeginFrame
@@ -866,7 +907,7 @@ Algoritmo simples;
 \end_layout
 
 \begin_layout Block
-Soluções iniciais rápidas;
+Tempo constande de processamento
 \end_layout
 
 \end_deeper
@@ -886,7 +927,8 @@ Aloca pontos com maior valor de arrependimento primeiro
 \begin_inset Graphics
 	filename Densidade-SJC4a.png
 	scale 50
-	BoundingBox -90bp -50bp 648bp 569bp
+	BoundingBox 0bp 0bp 648bp 569bp
+	clip
 
 \end_inset
 
@@ -944,6 +986,10 @@ status open
 
 \begin_layout Block
 Soluções muito boas;
+\end_layout
+
+\begin_layout Block
+Tempo constande de processamento
 \end_layout
 
 \end_deeper
@@ -1345,6 +1391,10 @@ status open
 Tempo muito alto para instâncias maiores;
 \end_layout
 
+\begin_layout Block
+Tempo de processamento pode variar
+\end_layout
+
 \begin_layout Column
 5cm
 \end_layout
@@ -1373,7 +1423,57 @@ Comparativo entre os resultados
 \end_layout
 
 \begin_layout BeginFrame
-Resultados obtidos
+SJC4a
+\end_layout
+
+\begin_layout Standard
+Instância SJC4a
+\end_layout
+
+\begin_layout Itemize
+Folga: 57,66%
+\end_layout
+
+\begin_layout Itemize
+Diferença Maior e menor elementos: 654
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ResultadosSJC4a.png
+	width 65page%
+	height 50pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+SJC1
+\end_layout
+
+\begin_layout Standard
+Instância SJC1
+\end_layout
+
+\begin_layout Itemize
+Folga: 23,99%
+\end_layout
+
+\begin_layout Itemize
+Diferença Maior e menor elementos: 654
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ResultadosSJC1.png
+	width 65page%
+	height 60pheight%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1386,10 +1486,6 @@ Tabelas comparativa com valores
 
 \begin_layout Standard
 Tabelas comparativa com tempos
-\end_layout
-
-\begin_layout BeginFrame
-Gráfico
 \end_layout
 
 \begin_layout BeginFrame
@@ -1413,7 +1509,24 @@ Comparação com Resultados da Literatura
 \end_layout
 
 \begin_layout Standard
-Apresentar resultados do Lorena e Negreiros
+\begin_inset Graphics
+	filename ComparacaoResultados.png
+	lyxscale 30
+	width 60pheight%
+	height 50page%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ComparacaoResultados_Tempos.png
+	lyxscale 30
+	width 60pheight%
+	height 50page%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
