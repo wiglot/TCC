@@ -1,0 +1,519 @@
+%% LyX 1.6.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{beamer}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{accents}
+\usepackage{graphicx}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\newcommand{\docedilla}[2]{\underaccent{#1\mathchar'30}{#2}}
+\newcommand{\cedilla}[1]{\mathpalette\docedilla{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ % this default might be overridden by plain title style
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+ \AtBeginDocument{
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+ \makeatletter
+ \long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
+ \def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
+ \def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
+ \def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
+ \def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
+ \long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
+   \frame<#1>[#2][#3]{\frametitle{#4}#5}}
+ \makeatother
+ \newenvironment{centercolumns}{\begin{columns}[c]}{\end{columns}}
+ \def\lyxframeend{} % In case there is a superfluous frame end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usetheme{Boadilla}
+% or ...
+
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+\usepackage{pstricks-add}
+
+\usepackage{pstricks-add}
+\begin{filecontents}{plot17.dat}
+493, 424, 1743, 142, 165, 143, 351, 108, 186, 239, 241, 154, 141,221, 856, 154, 261, 17, 108, 1743, 6088, 817.5, 2415.59, 49.14,11.92, 2273.50, 47.68, 11.56
+\end{filecontents}
+
+\def\xText{Astra,Bego RI,Bego S,Cylindr,Screw,Line,Plus,Narrow,TE ,
+Voll,Wide,Wide Ne,Re Sel,Level,Plus,SLActi,SLAcPl,Anzahl,Minimum,Maximum,
+Summe,Mittel,Varianz (n-1),Standardabweichung (n-1),Standardfehler (n-1),
+Varianz (n),Standardabweichung (n),Standardfehler (n)}
+\newcounter{Text}
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+
+
+
+
+
+\title{Apresentação de Andamento}
+
+
+\subtitle{Algoritmos de agrupamento capacitado aplicado ao problema de despacho
+de ordens de serviço }
+
+
+\author[Wagner Reck]{Wagner~de~Melo~Reck\inst{1} }
+
+
+\institute{\inst{1}UNIPAMPA}
+
+
+\date[Universidade Federal do Pampa]{Universidade Federal do Pampa}
+
+
+\date[TCC
+
+]{Apresentação de Andamento, 2010/1}
+
+\makebeamertitle
+
+
+%\pgfdeclareimage[height=0.5cm]{institution-logo}{institution-logo-filename}
+
+%\logo{\pgfuseimage{institution-logo}}
+
+
+
+\AtBeginSubsection[]{
+
+  \frame<beamer>{ 
+
+    \frametitle{Outline}   
+
+    \tableofcontents[currentsection,currentsubsection] 
+
+  }
+
+}
+
+
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\lyxframeend{}\lyxframe{Outline}
+
+\tableofcontents{}
+
+
+
+
+\lyxframeend{}\section{PDOS - Problema de despaço de Ordens de serviço}
+
+
+\lyxframeend{}\lyxframe{PDOS - Problema de despaço de Ordens de serviço.}
+
+
+\framesubtitle{Definição do problema.}
+\begin{itemize}
+\item Explicar problema.
+
+
+\pause{}
+
+\item Aplicação prática do problema.
+\end{itemize}
+
+\lyxframeend{}\subsection{CCP - Capacitated Clustering Problem}
+
+
+\lyxframeend{}\lyxframe{Problema de Agrupamento Capacitado. }
+\begin{itemize}
+\item Também visto como Problema das P-Medianas
+\end{itemize}
+
+\pause{}
+\begin{itemize}
+\item Agrupar $I$ pontos com demandas $\mathfrak{\mathcal{D_{\mathfrak{i}}},\; i\in\mathcal{I}}$
+em $\mathcal{P}$ agrupamentos com capacidade $\mathfrak{q}$, minimizando
+as dissimilariedades entre os pontos dos agrupamentos.
+\end{itemize}
+
+\lyxframeend{}\subsection{Aplicação do CCP}
+
+
+\lyxframeend{}\lyxframe{Casos de Uso do CCP}
+\begin{itemize}
+\item Escolha da localização de novas facilidades
+\item Redução de cores (eliminando uma restrição)
+\item Definição de equipes de coleta de lixo
+\item Alocação de tarefas a máquinas (?)
+\end{itemize}
+
+\lyxframeend{}\subsection{Modelo Matemático}
+
+
+\lyxframeend{}\lyxframe{Variáveis}
+
+Sendo:
+
+\begin{eqnarray*}
+x_{ij} &  & igual\, a\,1\, se\, o\, ponto\, i\, est\acute{a}\, no\, agrupamento\, j,\,0\, caso\, contr\acute{a}rio;\\
+c_{ij} &  & dist\hat{a}ncia\, entre\, os\, pontos\, i\, e\, j;\\
+p &  & n\acute{u}mero\, de\, agrupamentos;\\
+y_{j} &  & igual\, a\,1\, se\, o\, agrupamento\, i\, est\acute{a}\, sendo\, utilizado,\,0\, caso\, contr\acute{a}rio;\\
+q_{i} &  & Demanda\, do\, ponto\, i;\\
+Q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
+~
+
+
+\lyxframeend{}\lyxframe{Modelo matemático }
+\begin{block}
+~\begin{eqnarray}
+Min &  & \sum_{i\in P}\;\sum_{j\in I}c_{ij}x_{ij}\\
+Sujeito\;\grave{a}:\;\;\nonumber \\
+\sum_{j\in p}x_{ij} & = & 1,\;\forall i\in I\\
+\sum_{j\in P}y_{j} & = & p\\
+x_{ij} & \leq & y_{j,\;}\forall i\in I,\:\forall j\in P\\
+\sum_{i\in I}q_{i}x_{ij} & \leq & Q_{j},\;\forall j\in P\end{eqnarray}
+
+
+\begin{equation}
+Onde:\;\; x_{ij},\: y_{j}\in\{0,1\},\;\forall i\in I,\;\forall j\in P\end{equation}
+
+\end{block}
+
+\lyxframeend{}\section{Ferramenta de Visualização}
+
+
+\lyxframeend{}\lyxframe{Ferramenta desenvolvida. }
+\begin{itemize}
+\item Visualizar as soluções geradas pelos algoritmos;
+\item Apresentar valores da função objetivo, tempos e número de iterações
+\item Comparar diferentes soluções
+\end{itemize}
+\includegraphics[clip,scale=0.4]{TelaFerramenta}
+
+
+\lyxframeend{}\lyxframe{(mostrar rodando?)}
+\begin{block}
+{Ferramenta}$Demonstra\cedilla{c}\tilde{a}o$
+\end{block}
+
+\lyxframeend{}\section{Algoritmos Implementados}
+
+
+\lyxframeend{}\subsection{Algoritmos escolhidos}
+
+
+\lyxframeend{}\lyxframe{Algoritmos escolhidos}
+
+Quatro algoritmos construtivos da Literatura:
+
+
+\pause{}
+\begin{itemize}
+\item <2->Farthest - Osman and Christofides\cite{osman1994capacitated}
+\item <2->Density - Ahmadi and Osman\cite{ahmadi2004density}
+\item <2->HMeans - Negreiros and Palhano.\cite{negreiros2006capacitated}
+\item <2->JMeans - Hansen and Mladenovic.\cite{Hansen_j-means:a}
+\end{itemize}
+
+\lyxframeend{}\lyxframe{Farthest}
+\begin{itemize}
+\item Escolhe Pontos mais afastados como centros iniciais;
+\item Aloque os pontos na ordem de proximidade com os centros;
+\end{itemize}
+
+\lyxframeend{}\lyxframe{Pros/Contras}
+\begin{centercolumns}%{}
+
+
+\column{5cm}
+\begin{block}
+{Contras}
+
+Soluções muito altas;
+\end{block}
+
+\column{5cm}
+\begin{block}
+{Prós}
+
+Algoritmo simples;
+
+Tempo constande de processamento
+\end{block}
+\end{centercolumns}%{}
+
+\lyxframeend{}\lyxframe{Density}
+\begin{itemize}
+\item Usa densidade de pontos para selecionar os pontos
+\item Aloca pontos com maior valor de arrependimento primeiro
+\end{itemize}
+\includegraphics[bb=0bp 0bp 648bp 569bp,clip,scale=0.5]{Densidade-SJC4a}
+
+
+\lyxframeend{}\lyxframe{Pros/Contras}
+\begin{centercolumns}%{}
+
+
+\column{5cm}
+\begin{block}
+{Contras}
+
+Algoritmo complexo;
+\end{block}
+
+\column{5cm}
+\begin{block}
+{Prós}
+
+Soluções muito boas;
+
+Tempo constande de processamento
+\end{block}
+\end{centercolumns}%{}
+
+\lyxframeend{}\lyxframe{HMeans}
+
+\begin{block}
+{Passo 1}Selecione $\mathcal{P}$ pontos como centros iniciais;
+
+\end{block}
+\begin{block}
+{Passo 2}
+
+Aloque cada ponto restante ao centro mais próximo;
+
+\end{block}
+\begin{block}
+{Passo 3}
+
+Caso não tenha ocorrido alteração de associações Pare.
+
+\end{block}
+\begin{block}
+{Passo 4}
+
+Encontre o melhor centro para cada agrupamento e volte ao passo 2;
+
+\end{block}
+
+
+\lyxframeend{}\lyxframe{Pros/Contras}
+\begin{centercolumns}%{}
+
+
+\column{5cm}
+\begin{block}
+{Contras}
+
+Não é garantido uma solução boa;
+
+Tempo de processamento pode variar
+\end{block}
+
+\column{5cm}
+\begin{block}
+{Prós}
+
+Algoritmo simples;
+
+Soluções Boas;
+\end{block}
+\end{centercolumns}%{}
+
+\lyxframeend{}\lyxframe{JMeans}
+
+\begin{block}
+{Passo 1}selecione $\mathcal{P}$ partições dos pontos que serão os agrupamentos
+($\mathcal{C}$)
+
+\end{block}
+\begin{block}
+{Passo 2}
+
+Encontre os pontos não ocupados (afastados do centro do agrupamento
+por um $\varepsilon$)
+
+\end{block}
+\begin{block}
+{Passo 3}
+
+Para cada ponto não ocupado, tente substituir um centro existente
+por ele. Mantenha o que apresentar maior redução na função objetivo
+
+\end{block}
+\begin{block}
+{Passo 4}
+
+Se valor da função objetivo da solução nova ($\mathcal{C}'$)é menor
+que $\mathcal{C}$, $\mathcal{C=C}'$e volte ao passo 2. Caso contrario
+Pare.
+
+\end{block}
+
+
+\lyxframeend{}\lyxframe{Pros/Contras}
+\begin{centercolumns}%{}
+
+
+\column{5cm}
+\begin{block}
+{Contras}
+
+Tempo muito alto para instâncias maiores;
+
+Tempo de processamento pode variar
+\end{block}
+
+\column{5cm}
+\begin{block}
+{Prós}
+
+Soluções boas;
+\end{block}
+\end{centercolumns}%{}
+
+\lyxframeend{}\subsection{Comparativo entre os resultados}
+
+
+\lyxframeend{}\lyxframe{SJC4a}
+
+Instância SJC4a
+\begin{itemize}
+\item Folga: 57,66\%
+\item Diferença Maior e menor elementos: 654
+\end{itemize}
+\includegraphics[width=0.65\paperwidth,height=0.5\paperheight]{ResultadosSJC4a}
+
+
+\lyxframeend{}\lyxframe{SJC1}
+
+Instância SJC1
+\begin{itemize}
+\item Folga: 23,99\%
+\item Diferença Maior e menor elementos: 654
+\end{itemize}
+\includegraphics[width=0.65\paperwidth,height=0.6\paperheight]{ResultadosSJC1}
+
+Algumas imagens
+
+Tabelas comparativa com valores
+
+Tabelas comparativa com tempos
+
+
+\lyxframeend{}\lyxframe{Algoritmos de melhoramento}
+
+Como eles funcionam
+
+Exemplos de melhorias (imagens e tabelas)
+
+
+\lyxframeend{}\subsection{Resultados da Literaturas}
+
+
+\lyxframeend{}\lyxframe{Comparação com Resultados da Literatura}
+
+\includegraphics[width=0.6\paperheight,height=0.5\paperwidth]{ComparacaoResultados}\includegraphics[width=0.6\paperheight,height=0.5\paperwidth]{ComparacaoResultados_Tempos}
+
+
+\lyxframeend{}\section{Próximas etapas}
+
+
+\lyxframeend{}\subsection{Algoritmos de Melhoramento}
+
+
+\lyxframeend{}\lyxframe{Uso de estatísticas}
+
+Quantas vezes um ponto foi escolhido para ser centro
+
+Quantas vezes um ponto foi atribuido a um agrupamento
+
+...
+
+
+\lyxframeend{}\lyxframe{Método Construtivo com Melhoramento}
+
+Uso de aletoriedade + Estatisticas
+
+Solução final fornece dados para gerar um próxima solução.
+
+Uso de metodos combinados (densidade+Hmeans)
+
+
+\lyxframeend{}\subsection{Cálculo de rotas}
+
+
+\lyxframeend{}\lyxframe{Calculo de Rotas como Função Objetivo}
+
+Ou como parte dela, senão caimos num subconjunto do TSP 
+
+
+\lyxframeend{}\subsection{CCP Heterogêneo}
+
+
+\lyxframeend{}\lyxframe{Cada Agrupamento Possui uma Capacidade}
+
+Capacidade por agrupamento, não por ponto
+
+
+\lyxframeend{}\section*{Summary}
+
+
+\lyxframeend{}\lyxframe{Summary}
+\begin{itemize}
+\item The \textcolor{red}{first main message} of your talk in one or two
+lines.
+\item The \textcolor{red}{second main message} of your talk in one or two
+lines.
+\item Perhaps a \textcolor{red}{third message}, but not more than that.
+\end{itemize}
+
+
+\vskip0pt plus.5fill
+\begin{itemize}
+\item Outlook
+
+\begin{itemize}
+\item What we have not done yet.
+\item Even more stuff.
+\end{itemize}
+\end{itemize}
+
+\lyxframeend{}
+
+\appendix
+
+\lyxframeend{}\section*{Appendix}
+
+
+\lyxframeend{}\subsection*{For Further Reading}
+
+
+\lyxframeend{}\lyxframe{[allowframebreaks]Referências Bibliográficas}
+
+\beamertemplatebookbibitems
+
+\beamertemplatearticlebibitems
+
+\bibliographystyle{plain}
+\bibliography{/home/wagner/Documentos/TCC/bibitex/bibliography_CCP}
+
+
+
+\lyxframeend{}
+\end{document}
