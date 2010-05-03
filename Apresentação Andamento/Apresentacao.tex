@@ -4,7 +4,6 @@
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
-\usepackage{color}
 \usepackage{textcomp}
 \usepackage{amsmath}
 \usepackage{accents}
@@ -131,7 +130,7 @@ de ordens de serviço }
 \begin{itemize}
 \item Dado um conjunto de ordens de serviço $I$, cada qual com um tempo
 ($t_{i},i\in I$) necessário serem resolvidas, é necessário associar
-tocas as $I$ tarefas para $E$ equipes, onde as equipes possuem um
+todas as $I$ tarefas para $E$ equipes, onde as equipes possuem um
 carga horária $c$ de trabalho.
 
 
@@ -142,7 +141,7 @@ carga horária $c$ de trabalho.
 {Aplicação prática}
 
 Concessionárias de energia elétrica possuem um grande volume de ordens
-a serem atendidas e um número limitado de equipes.
+de serviço a serem atendidas e um número limitado de equipes.
 
 Uma alocação que distribua as ordens de modo a não sobrecarregar equipes
 e minimizar os deslocamentos é desejado.
@@ -194,7 +193,7 @@ Q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
 \lyxframeend{}\lyxframe{Modelo matemático }
 \begin{block}
 ~\begin{eqnarray}
-Min &  & \sum_{i\in P}\;\sum_{j\in I}c_{ij}x_{ij}\\
+Min &  & \sum_{j\in P}\;\sum_{i\in I}c_{ij}x_{ij}\\
 Sujeito\;\grave{a}:\;\;\nonumber \\
 \sum_{j\in p}x_{ij} & = & 1,\;\forall i\in I\\
 \sum_{j\in I}y_{j} & = & p\\
@@ -606,13 +605,13 @@ Usando como base resultados de Lorena e Senne \cite{lorena2003local}
 
 \lyxframeend{}\lyxframe{Uso de estatísticas}
 \begin{itemize}
-\item Construção de um histórico de associações
-\item com conseguimos saber
+\item Construção de um histórico de associações,
+\item Com o qual conseguiremos saber:
 
 \begin{itemize}
 \item Quantas vezes um ponto foi escolhido para ser centro;
 \item Quantas vezes um ponto foi atribuido a um agrupamento;
-\item Quais foram os centro inciaias de um algoritmo
+\item Quais foram os centros inciais de um algoritmo
 \end{itemize}
 \end{itemize}
 
@@ -634,15 +633,17 @@ Usando como base resultados de Lorena e Senne \cite{lorena2003local}
 
 \lyxframeend{}\lyxframe{Método Construtivo com Melhoramento}
 \begin{itemize}
-\item Uso de aletoriedade + Estatisticas com metodo construtivo
+\item Uso de aletoriedade + Estatisticas com um método construtivo
 
+
+\pause{}
 \begin{itemize}
-\item Metodo contrutivo deve ser o genérico mais genérico possível
+\item Método contrutivo deve ser o mais genérico possível
 \end{itemize}
 
 \pause{}
 \begin{itemize}
-\item Uso de metodos combinados (densidade+Hmeans)
+\item Uso de métodos combinados (densidade+Hmeans)
 \end{itemize}
 
 \pause{}
@@ -650,27 +651,19 @@ Usando como base resultados de Lorena e Senne \cite{lorena2003local}
 \item Solução final fornece dados para gerar um próxima solução.
 \end{itemize}
 
-\lyxframeend{}\section*{Summary}
+\lyxframeend{}\section*{Sumário}
 
 
-\lyxframeend{}\lyxframe{Summary}
+\lyxframeend{}\lyxframe{Sumário}
 \begin{itemize}
-\item The \textcolor{red}{first main message} of your talk in one or two
-lines.
-\item The \textcolor{red}{second main message} of your talk in one or two
-lines.
-\item Perhaps a \textcolor{red}{third message}, but not more than that.
+\item Foram estudado 4 algoritmos da literatura.
+
+\begin{itemize}
+\item Com 2 algoritmos de melhoramento.
+\item Farthest não será considerado para futuros estudos
 \end{itemize}
-
-
-\vskip0pt plus.5fill
-\begin{itemize}
-\item Outlook
-
-\begin{itemize}
-\item What we have not done yet.
-\item Even more stuff.
-\end{itemize}
+\item Como estudo futuro, serão definidos quais características promevem
+melhores soluções para cada algoritmo
 \end{itemize}
 
 \lyxframeend{}

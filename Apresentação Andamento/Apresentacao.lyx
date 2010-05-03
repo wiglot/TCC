@@ -545,7 +545,7 @@ Dado um conjunto de ordens de serviço
 \begin_inset Formula $t_{i},i\in I$
 \end_inset
 
-) necessário serem resolvidas, é necessário associar tocas as 
+) necessário serem resolvidas, é necessário associar todas as 
 \begin_inset Formula $I$
 \end_inset
 
@@ -581,8 +581,8 @@ status open
 \end_layout
 
 \begin_layout ExampleBlock
-Concessionárias de energia elétrica possuem um grande volume de ordens a
- serem atendidas e um número limitado de equipes.
+Concessionárias de energia elétrica possuem um grande volume de ordens de
+ serviço a serem atendidas e um número limitado de equipes.
 \end_layout
 
 \begin_layout ExampleBlock
@@ -691,7 +691,7 @@ Modelo matemático
 
 
 \begin_inset Formula \begin{eqnarray}
-Min &  & \sum_{i\in P}\;\sum_{j\in I}c_{ij}x_{ij}\\
+Min &  & \sum_{j\in P}\;\sum_{i\in I}c_{ij}x_{ij}\\
 Sujeito\;à:\;\;\nonumber \\
 \sum_{j\in p}x_{ij} & = & 1,\;\forall i\in I\\
 \sum_{j\in I}y_{j} & = & p\\
@@ -2042,11 +2042,11 @@ Uso de estatísticas
 \end_layout
 
 \begin_layout Itemize
-Construção de um histórico de associações
+Construção de um histórico de associações,
 \end_layout
 
 \begin_layout Itemize
-com conseguimos saber
+Com o qual conseguiremos saber:
 \end_layout
 
 \begin_deeper
@@ -2059,7 +2059,7 @@ Quantas vezes um ponto foi atribuido a um agrupamento;
 \end_layout
 
 \begin_layout Itemize
-Quais foram os centro inciaias de um algoritmo
+Quais foram os centros inciais de um algoritmo
 \end_layout
 
 \end_deeper
@@ -2098,12 +2098,16 @@ Método Construtivo com Melhoramento
 \end_layout
 
 \begin_layout Itemize
-Uso de aletoriedade + Estatisticas com metodo construtivo
+Uso de aletoriedade + Estatisticas com um método construtivo
 \end_layout
 
 \begin_deeper
+\begin_layout Pause
+
+\end_layout
+
 \begin_layout Itemize
-Metodo contrutivo deve ser o genérico mais genérico possível
+Método contrutivo deve ser o mais genérico possível
 \end_layout
 
 \begin_layout Pause
@@ -2111,7 +2115,7 @@ Metodo contrutivo deve ser o genérico mais genérico possível
 \end_layout
 
 \begin_layout Itemize
-Uso de metodos combinados (densidade+Hmeans)
+Uso de métodos combinados (densidade+Hmeans)
 \end_layout
 
 \begin_layout Pause
@@ -2124,86 +2128,36 @@ Solução final fornece dados para gerar um próxima solução.
 \end_layout
 
 \begin_layout Section*
-Summary
+Sumário
 \end_layout
 
 \begin_layout BeginFrame
-Summary
+Sumário
 \end_layout
 
 \begin_layout Itemize
-The
+Foram estudado 4 algoritmos da literatura
 \color none
- 
-\color red
-first main message
-\color none
- of your talk in one or two lines.
-\end_layout
-
-\begin_layout Itemize
-The
-\color none
- 
-\color red
-second main message
-\color none
- of your talk in one or two lines.
-\end_layout
-
-\begin_layout Itemize
-Perhaps a
-\color none
- 
-\color red
-third message
-\color none
-, but not more than that.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-An outlook is always optional.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-vskip0pt plus.5fill
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Outlook
+.
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-What we have not done yet.
+Com 2 algoritmos de melhoramento
+\color none
+.
 \end_layout
 
 \begin_layout Itemize
-Even more stuff.
+Farthest não será considerado para futuros estudos
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+Como estudo futuro, serão definidos quais características promevem melhores
+ soluções para cada algoritmo
+\end_layout
+
 \begin_layout EndFrame
 
 \end_layout
