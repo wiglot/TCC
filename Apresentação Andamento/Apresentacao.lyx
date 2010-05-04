@@ -541,23 +541,23 @@ Dado um conjunto de ordens de serviço
 \begin_inset Formula $I$
 \end_inset
 
-, cada qual com um tempo (
-\begin_inset Formula $t_{i},i\in I$
+, cada qual com um tempo 
+\begin_inset Formula $D_{i},i\in I$
 \end_inset
 
-) necessário serem resolvidas, é necessário associar todas as 
+ necessário para serem resolvidas, é necessário associar todas as 
 \begin_inset Formula $I$
 \end_inset
 
  tarefas para 
-\begin_inset Formula $E$
+\begin_inset Formula $P$
 \end_inset
 
- equipes, onde as equipes possuem um carga horária 
-\begin_inset Formula $c$
+ equipes respeitando sua carga horária 
+\begin_inset Formula $q$
 \end_inset
 
- de trabalho.
+, minimizando a distância entre uma ordem e outra por equipe.
 \end_layout
 
 \begin_deeper
@@ -669,8 +669,8 @@ x_{ij} &  & igual\, a\,1\, se\, o\, ponto\, i\, está\, no\, agrupamento\, j,\,0
 c_{ij} &  & distância\, entre\, os\, pontos\, i\, e\, j;\\
 p &  & número\, de\, agrupamentos;\\
 y_{i} &  & igual\, a\,1\, se\, o\, ponto\, i\,é\, a\, mediana\, de\, um\, agrupamento,\,0\, caso\, contrário;\\
-q_{i} &  & Demanda\, do\, ponto\, i;\\
-Q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
+D_{i} &  & Demanda\, do\, ponto\, i;\\
+q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
 
 \end_inset
 
@@ -696,7 +696,7 @@ Sujeito\;à:\;\;\nonumber \\
 \sum_{j\in p}x_{ij} & = & 1,\;\forall i\in I\\
 \sum_{j\in I}y_{j} & = & p\\
 x_{ij} & \leq & y_{j,\;}\forall i\in I,\:\forall j\in P\\
-\sum_{i\in I}q_{i}x_{ij} & \leq & Q_{j},\;\forall j\in P\end{eqnarray}
+\sum_{i\in I}D_{i}x_{ij} & \leq & q_{j},\;\forall j\in P\end{eqnarray}
 
 \end_inset
 
@@ -739,7 +739,7 @@ Comparar diferentes soluções
 
 \begin_deeper
 \begin_layout Column
-5cm
+7cm
 \end_layout
 
 \begin_layout Standard
@@ -825,7 +825,7 @@ key "osman1994capacitated"
 
 \end_inset
 
-
+;
 \end_layout
 
 \begin_layout Itemize
@@ -846,7 +846,7 @@ key "ahmadi2004density"
 
 \end_inset
 
-
+;
 \end_layout
 
 \begin_layout Itemize
@@ -860,14 +860,14 @@ status open
 
 \end_inset
 
-HMeans - Forgy.
+HMeans - Forgy
 \begin_inset CommandInset citation
 LatexCommand citet
 key "forgy1965cluster,negreiros2006capacitated"
 
 \end_inset
 
-
+;
 \end_layout
 
 \begin_layout Itemize
@@ -888,7 +888,7 @@ key "Hansen_j-means:a,negreiros2006capacitated"
 
 \end_inset
 
-
+;
 \end_layout
 
 \begin_layout BeginFrame
@@ -998,8 +998,7 @@ Density
 \end_layout
 
 \begin_layout Itemize
-Organize os pontos não alocados em ordem crescente de densidade, calculada
- por
+Selecione como mediana o ponto com maior densidade, calculada por
 \begin_inset Formula \[
 D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in I-C\]
 
@@ -1018,13 +1017,31 @@ D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in I-C\]
 \end_inset
 
 , respeitando 
-\begin_inset Formula $\sum_{s\in Y_{k}}D_{s}\leq q,\;|Y_{k}|<\frac{n}{p},\; s\in I-C$
+\begin_inset Formula \[
+\sum_{s\in Y_{k}}D_{s}\leq q,\;|Y_{k}|<\frac{n}{p},\; s\in I-C\]
+
 \end_inset
 
-.
+
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+Remova os pontos em 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+ de futuras seleções (
+\begin_inset Formula $C_{k}=I_{k}+Y_{k}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+Usa de construção-desconstrução periódica.
+\end_layout
+
 \begin_layout Itemize
 Aloca pontos com maior valor de arrependimento primeiro, calculado por 
 \begin_inset Formula $R(I_{k})=d(I_{k},C_{n2})-d(I_{k},C_{n1})$
@@ -1038,15 +1055,11 @@ Aloca pontos com maior valor de arrependimento primeiro, calculado por
 \begin_inset Formula $n2$
 \end_inset
 
- os agrupamentos mais próximos de 
-\begin_inset Formula $I{}_{k}$
+ as medianas mais próximas de 
+\begin_inset Formula $I_{k}$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Itemize
-Usa de construção-desconstrução periódica.
 \end_layout
 
 \begin_layout BeginFrame

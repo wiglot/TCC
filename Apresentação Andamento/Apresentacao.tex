@@ -129,9 +129,9 @@ de ordens de serviço }
 \framesubtitle{Definição do problema.}
 \begin{itemize}
 \item Dado um conjunto de ordens de serviço $I$, cada qual com um tempo
-($t_{i},i\in I$) necessário serem resolvidas, é necessário associar
-todas as $I$ tarefas para $E$ equipes, onde as equipes possuem um
-carga horária $c$ de trabalho.
+$D_{i},i\in I$ necessário para serem resolvidas, é necessário associar
+todas as $I$ tarefas para $P$ equipes respeitando sua carga horária
+$q$, minimizando a distância entre uma ordem e outra por equipe.
 
 
 \pause{}
@@ -185,8 +185,8 @@ x_{ij} &  & igual\, a\,1\, se\, o\, ponto\, i\, est\acute{a}\, no\, agrupamento\
 c_{ij} &  & dist\hat{a}ncia\, entre\, os\, pontos\, i\, e\, j;\\
 p &  & n\acute{u}mero\, de\, agrupamentos;\\
 y_{i} &  & igual\, a\,1\, se\, o\, ponto\, i\,\acute{e}\, a\, mediana\, de\, um\, agrupamento,\,0\, caso\, contr\acute{a}rio;\\
-q_{i} &  & Demanda\, do\, ponto\, i;\\
-Q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
+D_{i} &  & Demanda\, do\, ponto\, i;\\
+q_{j} &  & Capacidade\, do\, agrupamento\, j;\end{eqnarray*}
 ~
 
 
@@ -198,7 +198,7 @@ Sujeito\;\grave{a}:\;\;\nonumber \\
 \sum_{j\in p}x_{ij} & = & 1,\;\forall i\in I\\
 \sum_{j\in I}y_{j} & = & p\\
 x_{ij} & \leq & y_{j,\;}\forall i\in I,\:\forall j\in P\\
-\sum_{i\in I}q_{i}x_{ij} & \leq & Q_{j},\;\forall j\in P\end{eqnarray}
+\sum_{i\in I}D_{i}x_{ij} & \leq & q_{j},\;\forall j\in P\end{eqnarray}
 
 
 \begin{equation}
@@ -217,7 +217,7 @@ Onde:\;\; x_{ij},\: y_{j}\in\{0,1\},\;\forall i\in I,\;\forall j\in P\end{equati
 \begin{centercolumns}%{}
 
 
-\column{5cm}
+\column{7cm}
 
 \includegraphics[clip,scale=0.4]{TelaFerramenta}
 
@@ -241,10 +241,10 @@ Quatro algoritmos construtivos da Literatura:
 
 \pause{}
 \begin{itemize}
-\item <2->Farthest - Osman and Christofides\cite{osman1994capacitated}
-\item <2->Density - Ahmadi and Osman\cite{ahmadi2004density}
-\item <2->HMeans - Forgy.\cite{forgy1965cluster,negreiros2006capacitated}
-\item <2->JMeans - Hansen and Mladenovic.\cite{Hansen_j-means:a,negreiros2006capacitated}
+\item <2->Farthest - Osman and Christofides\cite{osman1994capacitated};
+\item <2->Density - Ahmadi and Osman\cite{ahmadi2004density};
+\item <2->HMeans - Forgy\cite{forgy1965cluster,negreiros2006capacitated};
+\item <2->JMeans - Hansen and Mladenovic.\cite{Hansen_j-means:a,negreiros2006capacitated};
 \end{itemize}
 
 \lyxframeend{}\lyxframe{Farthest}
@@ -282,19 +282,21 @@ Tempo constande de processamento.
 
 \lyxframeend{}\lyxframe{Density}
 \begin{itemize}
-\item Organize os pontos não alocados em ordem crescente de densidade, calculada
-por\[
+\item Selecione como mediana o ponto com maior densidade, calculada por\[
 D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in I-C\]
 
 
 \begin{itemize}
 \item $Y_{k}$ é o conjunto dos pontos mais próximos ao ponto $I_{k}$,
-respeitando $\sum_{s\in Y_{k}}D_{s}\leq q,\;|Y_{k}|<\frac{n}{p},\; s\in I-C$.
+respeitando \[
+\sum_{s\in Y_{k}}D_{s}\leq q,\;|Y_{k}|<\frac{n}{p},\; s\in I-C\]
+
 \end{itemize}
+\item Remova os pontos em $Y_{k}$ de futuras seleções ($C_{k}=I_{k}+Y_{k}$)
+\item Usa de construção-desconstrução periódica.
 \item Aloca pontos com maior valor de arrependimento primeiro, calculado
 por $R(I_{k})=d(I_{k},C_{n2})-d(I_{k},C_{n1})$, sendo $n1$ e $n2$
-os agrupamentos mais próximos de $I{}_{k}$.
-\item Usa de construção-desconstrução periódica.
+as medianas mais próximas de $I_{k}$.
 \end{itemize}
 
 \lyxframeend{}\lyxframe{Vantagens/Desvantagens - Density}
