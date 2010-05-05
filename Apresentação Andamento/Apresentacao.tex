@@ -286,14 +286,28 @@ Tempo constande de processamento.
 D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in I-C\]
 
 
+
+\pause{}
 \begin{itemize}
 \item $Y_{k}$ é o conjunto dos pontos mais próximos ao ponto $I_{k}$,
 respeitando \[
 \sum_{s\in Y_{k}}D_{s}\leq q,\;|Y_{k}|<\frac{n}{p},\; s\in I-C\]
 
 \end{itemize}
+\end{itemize}
+
+\pause{}
+\begin{itemize}
 \item Remova os pontos em $Y_{k}$ de futuras seleções ($C_{k}=I_{k}+Y_{k}$)
+\end{itemize}
+
+\pause{}
+\begin{itemize}
 \item Usa de construção-desconstrução periódica.
+\end{itemize}
+
+\pause{}
+\begin{itemize}
 \item Aloca pontos com maior valor de arrependimento primeiro, calculado
 por $R(I_{k})=d(I_{k},C_{n2})-d(I_{k},C_{n1})$, sendo $n1$ e $n2$
 as medianas mais próximas de $I_{k}$.
@@ -355,8 +369,6 @@ Encontre o melhor centro para cada agrupamento e volte ao passo 2;
 {Desvantagens}
 
 Não é garantido uma solução boa;
-
-Tempo de processamento pode variar
 \end{block}
 
 \column{5cm}
@@ -365,7 +377,9 @@ Tempo de processamento pode variar
 
 Algoritmo simples;
 
-Soluções Boas;
+Soluções na média são boas;
+
+Baixo tempo de processamento.
 \end{block}
 \end{centercolumns}%{}
 
@@ -408,14 +422,14 @@ $C=C'$e volte ao passo 2. Caso contrario Pare.
 
 Tempo muito alto para instâncias maiores;
 
-Tempo de processamento pode variar
+Tempo de processamento pode variar;
 \end{block}
 
 \column{5cm}
 \begin{block}
 {Vantagens}
 
-Soluções boas;
+Soluções médias;
 \end{block}
 \end{centercolumns}%{}
 
@@ -443,17 +457,50 @@ Instância SJC1
 \end{itemize}
 \includegraphics[width=0.65\paperwidth,height=0.6\paperheight]{ResultadosSJC1}
 
-Algumas imagens
 
-Tabelas comparativa com valores
+\lyxframeend{}\lyxframe{Instâncias SJC}
+\begin{centercolumns}%{}
 
-Tabelas comparativa com tempos
+
+\column{6cm }
+
+\includegraphics[width=1\columnwidth]{ResultadosComparadadosDensity}
+
+
+\column{6cm }
+
+\includegraphics[width=1\columnwidth]{TemposComparadadosDensity1}
+
+\end{centercolumns}%{}
+
+\lyxframeend{}\subsection{Resultados da Literaturas}
+
+
+\lyxframeend{}\lyxframe{Comparação com Resultados da Literatura}
+\begin{topcolumns}%{}
+
+
+\column{5cm}
+
+Valores da função objetivo
+
+\includegraphics[width=0.6\paperheight,height=0.5\paperwidth]{ComparacaoResultados}
+
+
+\column{5cm}
+
+Tempo de processamento
+
+\includegraphics[width=0.6\paperheight,height=0.5\paperwidth]{ComparacaoResultados_Tempos}
+
+\end{topcolumns}%{}
+Usando como base resultados de Lorena e Senne \cite{lorena2003local}
 
 
 \lyxframeend{}\subsection{Algoritmos de melhoramento}
 
 
-\lyxframeend{}\lyxframe{Algoritmos de melhoramento}
+\lyxframeend{}\lyxframe{Algoritmos de Melhoramento}
 \begin{itemize}
 \item Visam melhorar soluções existentes através de movimentos dos pontos
 entre agrupamentos e troca dos centros dos mesmos.
@@ -487,9 +534,10 @@ do ponto i.\end{definition}%{}
 
 \lyxframeend{}\lyxframe{Interchange}
 \begin{definition}%{}
-Para dois pontos, $i$ e $i'$, pertencentes aos agrupamentos $j$
-e $j'$ respectivamente, são trocados de agrupamentos em um único
-movimento, ficando ao final $i'\in j$ e $i\in j'$.\end{definition}%{}
+Para dois pontos, $i$ e $i',\, sendo\; i\neq i'$, pertencentes aos
+agrupamentos $j$ e $j',\, j\neq j'$, respectivamente, são trocados
+de agrupamentos em um único movimento, ficando ao final $i'\in j$
+e $i\in j'$.\end{definition}%{}
 \begin{centercolumns}%{}
 
 
@@ -511,7 +559,8 @@ movimento, ficando ao final $i'\in j$ e $i\in j'$.\end{definition}%{}
 \column{4cm}
 
 Farthest:\\
-25905,00 (100\%)
+25905,00 (100\%)\\
+0,029s.
 
 \includegraphics[width=1\columnwidth]{Farthest_beforeBetter}
 
@@ -519,7 +568,8 @@ Farthest:\\
 \column{4cm}
 
 Shift:\\
-25815,4 (99,6\%)
+25815,4 (99,6\%)\\
+0,105s.
 
 \includegraphics[width=1\columnwidth]{Farthest_afterShift}
 
@@ -527,7 +577,8 @@ Shift:\\
 \column{4cm}
 
 Interchange:\\
-22279,6 (86,0\%)
+22279,6 (86,0\%)\\
+0,087s
 
 \includegraphics[width=1\columnwidth]{Farthest_afterInterchange}
 
@@ -540,7 +591,8 @@ Interchange:\\
 \column{4cm}
 
 HMeans:\\
-19520,30 (100\%)
+19520,30 (100\%)\\
+0,021s
 
 \includegraphics[width=1\columnwidth]{HMeans_beforeBetter}
 
@@ -548,7 +600,8 @@ HMeans:\\
 \column{4cm}
 
 Interchange:\\
-18098,1 (92,71\%)
+18098,1 (92,71\%)\\
+0,060s
 
 \includegraphics[width=1\columnwidth]{HMeans_afterInterchange}
 
@@ -561,7 +614,8 @@ Interchange:\\
 \column{4cm}
 
 HMeans:\\
-69156,6 (100\%)
+69156,6 (100\%)\\
+2,832s
 
 \includegraphics[width=1\columnwidth]{HMeans_beforeBetter-SJC4a}
 
@@ -569,40 +623,32 @@ HMeans:\\
 \column{4cm}
 
 Interchange:\\
-68455,9 (98,9\%)
+68455,9 (98,9\%)\\
+1,131s
 
 \includegraphics[width=1\columnwidth]{HMeans_afterInterchange-SJC4a}
 
 \end{centercolumns}%{}
 
-\lyxframeend{}\subsection{Resultados da Literaturas}
+\lyxframeend{}\lyxframe{Comparativo instâncias SJC}
+\begin{centercolumns}%{}
 
 
-\lyxframeend{}\lyxframe{Comparação com Resultados da Literatura}
-\begin{topcolumns}%{}
+\column{6cm}
+
+\includegraphics[width=1\columnwidth]{GanhosMelhoramento}
 
 
-\column{5cm}
+\column{6cm}
 
-Valores da função objetivo
+\includegraphics[width=1\columnwidth]{TemposMelhoramento}
 
-\includegraphics[width=0.6\paperheight,height=0.5\paperwidth]{ComparacaoResultados}
-
-
-\column{5cm}
-
-Tempo de processamento
-
-\includegraphics[width=0.6\paperheight,height=0.5\paperwidth]{ComparacaoResultados_Tempos}
-
-\end{topcolumns}%{}
-Usando como base resultados de Lorena e Senne \cite{lorena2003local}
-
+\end{centercolumns}%{}
 
 \lyxframeend{}\section{Próximas etapas}
 
 
-\lyxframeend{}\subsection{Algoritmos de Melhoramento}
+\lyxframeend{}\subsection{O que ainda será feito}
 
 
 \lyxframeend{}\lyxframe{Uso de estatísticas}
@@ -658,7 +704,7 @@ Usando como base resultados de Lorena e Senne \cite{lorena2003local}
 
 \lyxframeend{}\lyxframe{Sumário}
 \begin{itemize}
-\item Foram estudado 4 algoritmos da literatura.
+\item Foram estudados 4 algoritmos da literatura:
 
 \begin{itemize}
 \item Com 2 algoritmos de melhoramento.
