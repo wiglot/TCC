@@ -1008,6 +1008,10 @@ D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in I-C\]
 \end_layout
 
 \begin_deeper
+\begin_layout Pause
+
+\end_layout
+
 \begin_layout Itemize
 \begin_inset Formula $Y_{k}$
 \end_inset
@@ -1026,6 +1030,10 @@ D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in I-C\]
 \end_layout
 
 \end_deeper
+\begin_layout Pause
+
+\end_layout
+
 \begin_layout Itemize
 Remova os pontos em 
 \begin_inset Formula $Y_{k}$
@@ -1038,8 +1046,16 @@ Remova os pontos em
 )
 \end_layout
 
+\begin_layout Pause
+
+\end_layout
+
 \begin_layout Itemize
 Usa de construção-desconstrução periódica.
+\end_layout
+
+\begin_layout Pause
+
 \end_layout
 
 \begin_layout Itemize
@@ -1292,10 +1308,6 @@ status open
 Não é garantido uma solução boa;
 \end_layout
 
-\begin_layout Block
-Tempo de processamento pode variar
-\end_layout
-
 \begin_layout Column
 5cm
 \end_layout
@@ -1319,7 +1331,11 @@ Algoritmo simples;
 \end_layout
 
 \begin_layout Block
-Soluções Boas;
+Soluções na média são boas;
+\end_layout
+
+\begin_layout Block
+Baixo tempo de processamento.
 \end_layout
 
 \end_deeper
@@ -1519,7 +1535,7 @@ Tempo muito alto para instâncias maiores;
 \end_layout
 
 \begin_layout Block
-Tempo de processamento pode variar
+Tempo de processamento pode variar;
 \end_layout
 
 \begin_layout Column
@@ -1541,7 +1557,7 @@ status open
 \end_layout
 
 \begin_layout Block
-Soluções boas;
+Soluções médias;
 \end_layout
 
 \end_deeper
@@ -1611,16 +1627,111 @@ Capacidade / Nº de Agrupamentos: 720 / 10
 
 \end_layout
 
-\begin_layout Standard
-Algumas imagens
+\begin_layout BeginFrame
+Instâncias SJC
+\end_layout
+
+\begin_layout ColumnsCenterAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+6cm 
 \end_layout
 
 \begin_layout Standard
-Tabelas comparativa com valores
+\begin_inset Graphics
+	filename ResultadosComparadadosDensity.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Column
+6cm 
 \end_layout
 
 \begin_layout Standard
-Tabelas comparativa com tempos
+\begin_inset Graphics
+	filename TemposComparadadosDensity1.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Resultados da Literaturas
+\end_layout
+
+\begin_layout BeginFrame
+Comparação com Resultados da Literatura
+\end_layout
+
+\begin_layout ColumnsTopAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\end_deeper
+\begin_layout ColumnsTopAligned
+Valores da função objetivo
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename ComparacaoResultados.png
+	lyxscale 30
+	width 60pheight%
+	height 50page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Column
+5cm
+\end_layout
+
+\end_deeper
+\begin_layout ColumnsTopAligned
+Tempo de processamento
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename ComparacaoResultados_Tempos.png
+	lyxscale 30
+	width 60pheight%
+	height 50page%
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Usando como base resultados de Lorena e Senne 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lorena2003local"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1628,7 +1739,7 @@ Algoritmos de melhoramento
 \end_layout
 
 \begin_layout BeginFrame
-Algoritmos de melhoramento
+Algoritmos de Melhoramento
 \end_layout
 
 \begin_layout Itemize
@@ -1729,7 +1840,7 @@ Para dois pontos,
 \end_inset
 
  e 
-\begin_inset Formula $i'$
+\begin_inset Formula $i',\, sendo\; i\neq i'$
 \end_inset
 
 , pertencentes aos agrupamentos 
@@ -1737,10 +1848,10 @@ Para dois pontos,
 \end_inset
 
  e 
-\begin_inset Formula $j'$
+\begin_inset Formula $j',\, j\neq j'$
 \end_inset
 
- respectivamente, são trocados de agrupamentos em um único movimento, ficando
+, respectivamente, são trocados de agrupamentos em um único movimento, ficando
  ao final 
 \begin_inset Formula $i'\in j$
 \end_inset
@@ -1805,12 +1916,15 @@ Farthest:
 \end_inset
 
 25905,00 (100%)
+\begin_inset Newline newline
+\end_inset
+
+0,029s.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Graphics
 	filename Farthest_beforeBetter.png
-	lyxscale 30
 	width 100col%
 
 \end_inset
@@ -1828,12 +1942,15 @@ Shift:
 \end_inset
 
 25815,4 (99,6%)
+\begin_inset Newline newline
+\end_inset
+
+0,105s.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Graphics
 	filename Farthest_afterShift.png
-	lyxscale 30
 	width 100col%
 
 \end_inset
@@ -1851,12 +1968,15 @@ Interchange:
 \end_inset
 
 22279,6 (86,0%)
+\begin_inset Newline newline
+\end_inset
+
+0,087s
 \end_layout
 
 \begin_layout Standard
 \begin_inset Graphics
 	filename Farthest_afterInterchange.png
-	lyxscale 30
 	width 100col%
 
 \end_inset
@@ -1884,6 +2004,10 @@ HMeans:
 \end_inset
 
 19520,30 (100%)
+\begin_inset Newline newline
+\end_inset
+
+0,021s
 \end_layout
 
 \begin_layout Standard
@@ -1906,6 +2030,10 @@ Interchange:
 \end_inset
 
 18098,1 (92,71%)
+\begin_inset Newline newline
+\end_inset
+
+0,060s
 \end_layout
 
 \begin_layout Standard
@@ -1938,6 +2066,10 @@ HMeans:
 \end_inset
 
 69156,6 (100%)
+\begin_inset Newline newline
+\end_inset
+
+2,832s
 \end_layout
 
 \begin_layout Standard
@@ -1960,6 +2092,10 @@ Interchange:
 \end_inset
 
 68455,9 (98,9%)
+\begin_inset Newline newline
+\end_inset
+
+1,131s
 \end_layout
 
 \begin_layout Standard
@@ -1973,35 +2109,23 @@ Interchange:
 \end_layout
 
 \end_deeper
-\begin_layout Subsection
-Resultados da Literaturas
-\end_layout
-
 \begin_layout BeginFrame
-Comparação com Resultados da Literatura
+Comparativo instâncias SJC
 \end_layout
 
-\begin_layout ColumnsTopAligned
+\begin_layout ColumnsCenterAligned
 
 \end_layout
 
 \begin_deeper
 \begin_layout Column
-5cm
+6cm
 \end_layout
 
-\end_deeper
-\begin_layout ColumnsTopAligned
-Valores da função objetivo
-\end_layout
-
-\begin_deeper
 \begin_layout Standard
 \begin_inset Graphics
-	filename ComparacaoResultados.png
-	lyxscale 30
-	width 60pheight%
-	height 50page%
+	filename GanhosMelhoramento.png
+	width 100col%
 
 \end_inset
 
@@ -2009,21 +2133,13 @@ Valores da função objetivo
 \end_layout
 
 \begin_layout Column
-5cm
+6cm
 \end_layout
 
-\end_deeper
-\begin_layout ColumnsTopAligned
-Tempo de processamento
-\end_layout
-
-\begin_deeper
 \begin_layout Standard
 \begin_inset Graphics
-	filename ComparacaoResultados_Tempos.png
-	lyxscale 30
-	width 60pheight%
-	height 50page%
+	filename TemposMelhoramento.png
+	width 100col%
 
 \end_inset
 
@@ -2031,23 +2147,12 @@ Tempo de processamento
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-Usando como base resultados de Lorena e Senne 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "lorena2003local"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Próximas etapas
 \end_layout
 
 \begin_layout Subsection
-Algoritmos de Melhoramento
+O que ainda será feito
 \end_layout
 
 \begin_layout BeginFrame
@@ -2149,9 +2254,7 @@ Sumário
 \end_layout
 
 \begin_layout Itemize
-Foram estudado 4 algoritmos da literatura
-\color none
-.
+Foram estudados 4 algoritmos da literatura:
 \end_layout
 
 \begin_deeper
