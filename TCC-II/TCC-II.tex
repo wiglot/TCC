@@ -1,0 +1,157 @@
+
+
+
+\documentclass{abnt}			%Numeração de acordo com UFPR
+
+% Utilize a opção normalfigtabnum para numerar as figuras e tabelas por capítulo
+
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{abnt-alf}
+\usepackage{graphicx}														%Package para figuras
+
+\makeatletter	%Para que ele entenda o @
+
+% \documentclass{abnt}
+% \usepackage[latin1]{inputenc}
+% \usepackage[brazil]{babel}
+% testando se os pacotes para uso com bibTeX sÃ£o lidos
+% \usepackage[num]{abntcite}
+
+% Define o comando que monta a lista de siglas
+\newcommand{\listadesiglas}{\pretextualchapter{Lista de Siglas}\@starttoc{lsg}}
+\newcommand{\sigla}[2]{{\addcontentsline{lsg}{sigla}{\numberline{#1}{#2}}}#1}
+\newcommand{\l@sigla}[2]{
+	\vspace{-0.75cm}
+	\leftskip 0em
+	\parindent 0em
+	\@tempdima 5em
+	\advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+	{\normalfont #1}\hfil\nobreak\par}
+
+
+\begin{document}
+\autor{DIGITE SEU NOME}
+
+\titulo{DIGITE O TÍTULO}
+
+\orientador{Nome do Orientador}
+
+\comentario{Dissertação/Tese apresentada como requisito parcial à obtenção do grau de Mestre/Doutor em Minha Área, pelo Programa de Pós-Graduação, Setor, Universidade Federal do Paraná.}
+
+\local{CURITIBA}
+
+\data{MÊS 20??}
+
+
+\capa
+
+
+% ******** FOLHA DE ROSTO *********
+\folhaderosto
+
+% ******* TERMO DE APROVAÇÃO ******
+\begin{titlepage}
+\espaco{1.1}
+
+\begin{center}
+	\Large\textbf{{Termo de Aprovação}}
+\end{center}
+
+\vspace{0.75cm}
+
+\begin{center}
+	\large\ABNTautordata
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+	\large\ABNTtitulodata
+\end{center}
+
+\vspace{1cm}
+
+\noindent Dissertação aprovada como requisito parcial para obtenção do grau de Mestre/Doutor em Minha Área, pelo Programa de Pós-Graduação, Setor, Universidade Federal do Paraná, pela seguinte banca examinadora:
+
+\setlength{\ABNTsignthickness}{0.4pt}
+\setlength{\ABNTsignskip}{2cm}
+
+\vspace{-0.5cm}
+\assinatura{Prof. Dr. Meu Orientador\\Universidade Federal do Paraná}
+
+\vspace{-0.5cm}
+\assinatura{Prof. Dr. Meu Co-orientador\\Universidade Federal do Paraná}
+
+\vspace{-0.5cm}
+\assinatura{Prof. Dr. Convidado\\Universidade} 
+
+\vspace{-0.5cm}
+\assinatura{Prof. Dr. Convidado \\Universidade}
+
+\vfill
+
+\begin{center}
+	Curitiba, xx de mês de 20??
+\end{center}
+
+\end{titlepage}
+
+% Deve ser adicionado ao contador de páginas um, referente a folha de rosto.
+% Obs.: A folha de aprovação não recebe número, nem é contada.
+\addtocounter{page}{1}
+
+% ********** DEDICATÓRIA **********
+% *********** OPCIONAL ************
+\include {dedicatoria}
+
+
+% ************ SUMÁRIO ************
+\sumario
+
+% ************ LISTAS *************
+% ** Condicionadas à necessidade **
+
+% 1 - Lista de Figuras
+\listadefiguras
+
+% 2 - Lista de Tabelas
+\listadetabelas
+
+% 3 - Lista de Siglas
+% Forma de uso: \sigla{sigla}{Descrição}
+\listadesiglas
+% \include {siglas}%
+
+% 4 - Lista de Símbolos
+% Forma de uso: \simbolo{símbolo}{Descrição}
+% \listadesimbolos
+
+% ************ RESUMO *************
+\include {resumo}
+
+\include {intro}
+
+\include {cap1}
+
+\include {cap2}
+
+\include {cap3}
+
+\include {conclusao}
+  \bibliography{../bibitex/bibliography_CCP}
+\include {apendice}
+% ************* TEXTO *************
+% A parte textual deve conter:
+% 1 - Introdução
+% 2 - Revisão de Literatura
+% 3 - Material e Métodos
+% 4 - Análise dos Resultados
+% 5 - Discussão
+% 6 - Conclusão
+
+
+\end{document}
+
+
+
