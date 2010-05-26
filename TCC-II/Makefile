@@ -9,7 +9,7 @@ TCC-II.dvi : TCC-II.tex
 	latex TCC-II
 	
 TCC-II.ps: TCC-II.dvi
-	dvips -t a4 -o TCC-II.ps tese
+	dvips -t a4 -o TCC-II.ps TCC-II
 	
 TCC-II.pdf: TCC-II.dvi
 	pdflatex TCC-II
