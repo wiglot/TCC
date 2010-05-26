@@ -1,1 +1,81 @@
+\renewcommand{\folhaderosto}%
+{%
+\begin{titlepage}
+\espaco{1.1}
+\ABNTifnotempty{\ABNTautordata}%
+  {%
+  \begin{center}
+    \autorformat\ABNTautordata
+  \end{center}
+  }
+\vfill\vfill\vfill
+\ABNTifnotempty{\ABNTtitulodata}%
+  {%
+   \begin{center}
+     {\tituloformat\ABNTtitulodata\par}
+   \end{center}
+  }%
+\ABNTifnotempty{\ABNTcomentariodata}%
+  {%
+   \vspace{.8cm}
+   \hspace{8cm}
+     \begin{minipage}{8cm}
+       \begin{espacosimples}
+         {\comentarioformat\ABNTcomentariodata}\par
+       \end{espacosimples}
+     \end{minipage}
+   }
+% \begin{center}
+\ABNTifnotempty{\ABNTorientadordata}%
+  {%
+    \vspace{.7cm}
+%  \par $\phantom{linha em branco}$
+  \hspace{8cm}
+     \begin{minipage}{8cm}
+       \begin{espacosimples}
+% % % % % % % % % % 	     Orientador!  %%%%%%%%
+	    Orientador: {\orientadorformat\ABNTorientadordata}\protect\\
+	    \vspace{0.7cm}
+       \end{espacosimples}
+     \end{minipage}
+
+  }
+\ABNTifnotempty{\ABNTcoorientadordata}
+  {%
+%     \vspace{.7cm}
+%  \par $\phantom{linha em branco}$
+  \hspace{8cm}
+     \begin{minipage}{8cm}
+       \begin{espacosimples}
+% % % % % % % % % % 	     Orientador!  %%%%%%%%
+	    Co-orientador: {\coorientadorformat\ABNTcoorientadordata}\protect\\
+	    \vspace{0.7cm}
+       \end{espacosimples}
+     \end{minipage}
+
+  }
+% \end{center}
+\vfill
+\begin{center}
+\begin{espacosimples}
+  \setlength{\parskip}{.3cm}
+  \ABNTifnotempty{\ABNTinstituicaodata}%
+    {%
+     \setlength{\parskip}{0cm}
+     {\instituicaoformat\ABNTinstituicaodata\par}
+     \setlength{\parskip}{.3cm}\par
+
+    }
+\end{espacosimples}
+\end{center}
+\vfill\vfill
+\begin{center}
+  \ABNTifnotempty{\ABNTlocaldata}
+      {{\localformat\ABNTlocaldata}\par}
+    \ABNTifnotempty{\ABNTdatadata}
+      {{\dataformat\ABNTdatadata}}
+
+\end{center}
+\end{titlepage}
+}% end of \folhaderosto
 \folhaderosto

@@ -2,7 +2,7 @@
 
 all: TCC-II.ps TCC-II.pdf
 
-TCC-II.dvi : TCC-II.tex
+TCC-II.dvi : clean TCC-II.tex
 	latex TCC-II
 	bibtex TCC-II
 	latex TCC-II
