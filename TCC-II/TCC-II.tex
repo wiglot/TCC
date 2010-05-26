@@ -1,7 +1,7 @@
 
 
 
-\documentclass{abnt}			%Numeração de acordo com UFPR
+\documentclass[pnumromarab,normaltoc]{abnt}			%Numeração de acordo com UFPR
 
 % Utilize a opção normalfigtabnum para numerar as figuras e tabelas por capítulo
 
@@ -18,17 +18,9 @@
 % testando se os pacotes para uso com bibTeX sÃ£o lidos
 % \usepackage[num]{abntcite}
 
-% Define o comando que monta a lista de siglas
-\newcommand{\listadesiglas}{\pretextualchapter{Lista de Siglas}\@starttoc{lsg}}
-\newcommand{\sigla}[2]{{\addcontentsline{lsg}{sigla}{\numberline{#1}{#2}}}#1}
-\newcommand{\l@sigla}[2]{
-	\vspace{-0.75cm}
-	\leftskip 0em
-	\parindent 0em
-	\@tempdima 5em
-	\advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-	{\normalfont #1}\hfil\nobreak\par}
-
+% \renewcommand{\folhadeaprovacao}{
+% 
+% }
 
 \begin{document}
 \autor{DIGITE SEU NOME}
@@ -37,118 +29,58 @@
 
 \orientador{Nome do Orientador}
 
-\comentario{Dissertação/Tese apresentada como requisito parcial à obtenção do grau de Mestre/Doutor em Minha Área, pelo Programa de Pós-Graduação, Setor, Universidade Federal do Paraná.}
+\comentario{Dissertação apresentada como requisito parcial à obtenção do grau de bacharel em Ciência da Computação, pelo Programa de Graduação, Setor, Universidade Federal do Pampa.}
 
-\local{CURITIBA}
+\local{Alegrete}
 
-\data{MÊS 20??}
+\data{Junho 2010}
 
 
+% ELEMENTOS PRÉ-TEXTUAIS
+% Capa - Obrg
 \capa
-
-
-% ******** FOLHA DE ROSTO *********
-\folhaderosto
-
-% ******* TERMO DE APROVAÇÃO ******
-\begin{titlepage}
-\espaco{1.1}
-
-\begin{center}
-	\Large\textbf{{Termo de Aprovação}}
-\end{center}
-
-\vspace{0.75cm}
-
-\begin{center}
-	\large\ABNTautordata
-\end{center}
-
-\vspace{1cm}
-
-\begin{center}
-	\large\ABNTtitulodata
-\end{center}
-
-\vspace{1cm}
-
-\noindent Dissertação aprovada como requisito parcial para obtenção do grau de Mestre/Doutor em Minha Área, pelo Programa de Pós-Graduação, Setor, Universidade Federal do Paraná, pela seguinte banca examinadora:
-
-\setlength{\ABNTsignthickness}{0.4pt}
-\setlength{\ABNTsignskip}{2cm}
-
-\vspace{-0.5cm}
-\assinatura{Prof. Dr. Meu Orientador\\Universidade Federal do Paraná}
-
-\vspace{-0.5cm}
-\assinatura{Prof. Dr. Meu Co-orientador\\Universidade Federal do Paraná}
-
-\vspace{-0.5cm}
-\assinatura{Prof. Dr. Convidado\\Universidade} 
-
-\vspace{-0.5cm}
-\assinatura{Prof. Dr. Convidado \\Universidade}
-
-\vfill
-
-\begin{center}
-	Curitiba, xx de mês de 20??
-\end{center}
-
-\end{titlepage}
-
-% Deve ser adicionado ao contador de páginas um, referente a folha de rosto.
-% Obs.: A folha de aprovação não recebe número, nem é contada.
-\addtocounter{page}{1}
-
-% ********** DEDICATÓRIA **********
-% *********** OPCIONAL ************
+% Lombada
+% Folha de rosto - Obrg
+\include{folhaderosto}
+\addtocounter{page}{1} %Começa a contar aqui :)
+% Errata
+% Folha de aprovação - Obrg
+\include {termodeaprovacao}
+% Dedicatória(s)
 \include {dedicatoria}
-
-
-% ************ SUMÁRIO ************
-\sumario
-
-% ************ LISTAS *************
-% ** Condicionadas à necessidade **
-
-% 1 - Lista de Figuras
+% Agradecimentos
+% Epígrafe
+% Resumo em língua vernácula - Obrg
+% Resumo em língua estrangeira - Obrg
+% Lista de ilustrações
 \listadefiguras
-
-% 2 - Lista de Tabelas
+% Lista de tabelas
 \listadetabelas
+% Lista de abreviaturas e siglas
+% Lista de símbolos
+% Sumário - Obrg
+\sumario
+ 
+% ELEMENTOS TEXTUAIS
+% Introdução Obrg
+\include{introducao} %Inclui arquivo introducao.tex
+% Desenvolvimento - Obrg
+\include{cap1}
+\include{cap2}
+\include{cap3} 
+% Conclusão - Obrg
+\include{conclusao} %Inclui arquivo conclusao.tex
 
-% 3 - Lista de Siglas
-% Forma de uso: \sigla{sigla}{Descrição}
-\listadesiglas
-% \include {siglas}%
+% ELEMENTOS PÓS-TEXTUAIS
+% Referências - Obrg
+\bibliography{../bibitex/bibliography_CCP} %Seu arquivo Bibitex
 
-% 4 - Lista de Símbolos
-% Forma de uso: \simbolo{símbolo}{Descrição}
-% \listadesimbolos
+% Glossário
+% Apêndice(s)
 
-% ************ RESUMO *************
-\include {resumo}
+% Anexo(s)
+\include {anexo}
 
-\include {intro}
-
-\include {cap1}
-
-\include {cap2}
-
-\include {cap3}
-
-\include {conclusao}
-  \bibliography{../bibitex/bibliography_CCP}
-\include {apendice}
-% ************* TEXTO *************
-% A parte textual deve conter:
-% 1 - Introdução
-% 2 - Revisão de Literatura
-% 3 - Material e Métodos
-% 4 - Análise dos Resultados
-% 5 - Discussão
-% 6 - Conclusão
 
 
 \end{document}
