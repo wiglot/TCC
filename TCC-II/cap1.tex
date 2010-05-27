@@ -1,1 +1,652 @@
-\chapter{Revisão Bibliográfica}
+\chapter{Problema de despacho de ordens de serviço (PDOS)}
+
+Para algumas empresas, principalmente quando necessitam atender a
+um grande número de clientes em um centro urbano onde é necessário
+o deslocamento de uma equipe da empresa até um determinado cliente,
+é uma atividade que se não for bem planejada pode levar a um acúmulo
+de atendimentos não executados e posteriormente ao não atendimento
+de alguma solicitação. Como tendencia natural das empresas, as mesmas
+tendem a aumentar a carta de clientes e com isso necessitam atender
+a mais solicitações no mesmo tempo que atendiam as anteriores.
+
+Para resolver isso, tendo em vista que o tempo de executar uma atividade
+não pode ser diminuído com o passar do tempo mantendo-se em uma média
+para cada tipo de atividade, a empresa ou deve contratar mais mais
+equipes ou organizar as solicitações em grupos para minimizando o
+tempo de deslocamento entre uma atividade e outra. A primeira é uma
+solução que traz custos para empresa e necessidade de pessoal para
+gerenciamento das equipes extras, as quais podem ter de ser utilizadas
+apenas em períodos onde houve demanda de atendimento, mas no restando
+do tempo passam as ser sub-utilizada por as equipes anteriores atenderem
+todas as demandas dos clientes.
+
+A solução de agrupar as ordens de serviço de modo a minimizar o deslocamento
+de um atendimento até um outro dentro do mesmo grupo atendido pela
+mesma equipe, torna-se melhor que a anterior pois não há a necessidade
+de contratar uma equipe nova para dar conta de alguns poucos atendimentos.
+Essa solução não evita o contratamento de novas equipes no caso de
+um aumento muito grande na demanda de serviços, mas diminui o número
+total de novas contratações uma vez que o os número total de atendimento
+atendidos por cada equipe aumenta pela diminuição do tempo perdido
+no deslocamento entre os atendimentos.
+
+Na próxima secção, será apresentado o problema de agrupamento o qual
+é proposto para representar o PDOS e será explicado mais a frente.
+
+
+\section{Problema de Agrupamento Capacitado}
+
+O problema de agrupamento capacitado consiste em dado um conjunto
+$I$ de $n$ indivíduos com suas respectivas demandas $d_{i}\: i\in I$,
+é desejado agrupar os $n$ pontos em $p$ agrupamentos, onde a soma
+das demandas em cada agrupamento deve ser menor que a capacidade total
+do agrupamento $Q_{j},\:\forall j\in P$, sendo $P$ o conjunto de
+agrupamentos. Dos pontos pertencentes a cada agrupamento, é escolhida
+uma mediana de modo a minimizar a distância de todos os pontos até
+ela. O problema possuí a seguinte formulação matemática \cite{ahmadi2004density}:
+
+\begin{equation}
+Min\;\sum_{i\in P}\sum_{j\in I}c_{ij}x_{ij}\label{eq:obj_CCP}\end{equation}
+
+
+Sujeito à:
+
+\begin{equation}
+\sum_{j\in p}x_{ij}=1,\;\forall i\in I\label{eq:1Cluster_CCP}\end{equation}
+
+
+\begin{equation}
+\sum_{j\in P}y_{j}=p\label{eq:numClusters_CCP}\end{equation}
+
+
+\begin{equation}
+x_{ij}\leq y_{j,\;}\forall i\in I,\:\forall j\in P\label{eq:mustAssign_CCP}\end{equation}
+
+
+\begin{equation}
+\sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P\label{eq:capacity_CCP}\end{equation}
+
+
+\begin{equation}
+x_{ij},\: y_{j}\in\{0,1\},\;\forall i\in I,\;\forall j\in P\label{eq:sets_CCP}\end{equation}
+
+
+Em (\ref{eq:obj_CCP}), temos a função objetivo que minimiza a dissimilaridades
+entre os componentes de cada agrupamento. Utilizamos a distância como
+medida da similaridade entre dois pontos, tendo assim a medida $c_{ij}$
+do ponto $i$ até o ponto $j$ (mediana do agrupamento), considerando
+que o ponto $i$ está associado ao agrupamento $j$ pela variável
+binária $x_{ij}$, sendo $x_{ij}=1$ caso o ponto $i$ esteja associado
+ao agrupamento $j$ e $0$ caso contrário. A restrição (\ref{eq:1Cluster_CCP})
+indica que cada ponto deve estar associado a um único agrupamento
+e (\ref{eq:mustAssign_CCP}) impõe que todos os pontos deve ser atribuídos
+a um agrupamento. Já (\ref{eq:numClusters_CCP}) indica que devem
+existir $p$ agrupamentos. Para garantir que a capacidade $Q$ de
+um agrupamento não será ultrapassado, é inserida a restrição (\ref{eq:capacity_CCP}).
+A última restrição, (\ref{eq:sets_CCP}), especifica as variáveis
+inteiras de decisão. I é o conjunto de indivíduos.
+
+Na figura \ref{fig:Exemplo-CCP} é apresentado uma possível solução
+para o CCP.
+
+%
+% \begin{figure}[h]
+% \begin{centering}
+% \includegraphics[scale=0.5]{imagens/cluster_Density_SJC4a}
+% \par\end{centering}
+% 
+% \caption{\label{fig:Exemplo-CCP}Exemplo de uma solução do CCP}
+% 
+% \end{figure}
+
+
+Quando temos o valor de capacidade dos agrupamentos homogêneo, ou
+seja, o valor de $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$, podemos
+dizer que esse é um problema das $p-medianas$ capacitado.
+
+Um outro problema de agrupamento foi pro posto por Negreiro e Palhano\cite{negreiros2006capacitated}
+é o CCCP (Capacitated Centred Clustrering Problem - Problema de agrupamento
+centrado capacitado) onde os agrupamentos passam a ter seu centro
+não necessariamente em um ponto (mediana), mas no centroide calculado
+entre os pontos pertencentes a cada agrupamento.
+
+são propostas 2 variações do problema, $p-CCCP$, onde é dado o número
+de agrupamentos que se deseja encontrar, e $g-CCCP$ (generic - CCCP)
+que se deseja encontrar o menor número de agrupamentos para atender
+a todas demandas, sendo a função objetivo em ambas a minimização das
+dissimilaridades entre os componentes de cada agrupamento.
+
+Na figura \ref{fig:CCCP} é apresentada a visualização de uma solução
+para o problema $CCCP$.
+
+%
+% \begin{figure}[h]
+% \begin{centering}
+% \includegraphics{imagens/CCCP}
+% \par\end{centering}
+% 
+% \caption{\label{fig:CCCP}Uma solução para CCCP \cite{negreiros2006capacitated}}
+% 
+% \end{figure}
+
+
+A primeira, $p-CCCP$, possui o número fixo de agrupamentos que se
+deseja encontrar e a segunda variação, $g-CCCP$, assume que para
+cada novo agrupamento adicionado, é acrescentado um valor de penalização
+na função objetivo, levando a minimização de agrupamentos. A definição
+para o $p-CCCP$ é:
+
+\begin{equation}
+min\sum_{i\in I}\sum_{j\in P}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\label{eq:obj_CCCP}\end{equation}
+
+
+Sujeito à,
+
+\begin{equation}
+\sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_CCCP}\end{equation}
+
+
+\begin{equation}
+\sum_{i\in I}x_{ij}=n_{j},\;\forall j\in P,\label{eq:nPerCluster_CCCP}\end{equation}
+
+
+\begin{equation}
+\sum_{i\in I}a_{i}x_{ij}=n_{j}\overline{g_{j}},\;\forall j\in P,\label{eq:centroid_CCCP}\end{equation}
+
+
+\begin{equation}
+\sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P,\label{eq:capacity_CCCP}\end{equation}
+
+
+\begin{equation}
+a_{i}\in\Re^{l},\;\overline{g_{j}}\in\Re^{l},\; n_{j}\in N,\; x_{ij}\in\{0,1\},\;\;\forall i\in I,\;\forall j\in P,\label{eq:sets_CCCP}\end{equation}
+
+
+onde, $\overline{g_{j}}$ é o centroide do agrupamento $j$, $n_{j}$o
+número de indivíduos associados ao agrupamento $j$, $a_{i}$a posição
+do indivíduo $i$ no espaço $\Re^{l}$, $q_{i}$a demanda do indivíduo
+$i$, $Q_{j}$ a capacidade de cada agrupamento, $I$ o conjunto de
+indivíduos e $P$ o conjunto de agrupamentos.
+
+A função objetivo (\ref{eq:obj_CCCP}) tem como diferencial em relação
+ao problema clássico $CCP$, o fato das similaridades serem medidas
+em relação a todos pontos do agrupamento até seu centroide, o qual
+não é necessariamente um indivíduo. A eq. (\ref{eq:1Cluster_CCCP})
+indica que um indivíduo somente pode estar associado a um agrupamento,
+e a restrição (\ref{eq:nPerCluster_CCCP}) associa a $n_{j}$o número
+de indivíduos no agrupamento $j$. Em (\ref{eq:centroid_CCCP}) é
+definido todos os centroides dos respectivos agrupamentos e em (\ref{eq:capacity_CCCP})
+é colocado que cada agrupamento não pode maior demanda dos indivíduos
+que sua própria capacidade. A ultima restrição (\ref{eq:sets_CCCP})
+indica o domínio das variáveis do problema.
+
+No $g-CCCP$ o número de agrupamentos não é definido a priori, mas
+tem um limitante inferior dado por $\lceil\sum_{i\in I}q_{i}/\sum_{j\in P}Q_{j}\rceil$.
+Esse problema a seguinte formulação:
+
+\begin{equation}
+min\;\left(F\sum_{j\in P}z_{j}\right)+\sum_{j\in P}\left(\sum_{i\in I}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\right)\label{eq:obj_g-CCCP}\end{equation}
+
+
+Sujeito à,
+
+\begin{equation}
+\sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_g-CCCP}\end{equation}
+
+
+\begin{equation}
+\sum_{i\in I}a_{i}x_{ij}=\overline{g_{j}}\left(\sum_{i\in I}x_{ij}\right),\;\forall j\in P,\label{eq:centroid_g-CCCP}\end{equation}
+
+
+\begin{equation}
+\sum_{i\in I}q_{i}x_{ij}\leq Q_{j}z_{j},\;\forall j\in P,\label{eq:capacity_g-CCCP}\end{equation}
+
+
+\begin{equation}
+\overline{g_{j}}\in\Re^{l},\: z_{j},\: x_{ij}\in\{0,1\},\;\forall i\in I,\forall j\in P,\label{eq:sets_g-CCCP}\end{equation}
+
+
+onde, $z_{j}=1$ se o agrupamento $j$ está aberto (em uso), $0$
+caso contrário, $Q_{j}$ a capacidade do agrupamento $j$, $q_{i}$a
+demanda o indivíduo $i$, $\overline{g_{j}}$ o centroide do agrupamento
+$j$. $F$ é o custo fixo para abrir um novo agrupamento.
+
+A função objetivo (\ref{eq:obj_g-CCCP}) minimiza as dissimilaridades
+entre os integrantes de um mesmo agrupamento além do número total
+de agrupamentos abertos. A eq. (\ref{eq:1Cluster_g-CCCP}) define
+que um indivíduo somente pode estar associado a um agrupamento, (\ref{eq:centroid_g-CCCP})
+encontra o centroide de cada agrupamento e (\ref{eq:capacity_g-CCCP})
+garante que a capacidade dos agrupamentos não sejam ultrapassados.
+As ultimas restrições (\ref{eq:sets_g-CCCP}) especificam as variáveis
+de decisão.
+
+
+\section{Resolução do problema de agrupamento}
+
+O CCP, é descrito na literatura como um problema $\mathcal{NP}-completo$\cite{osman1994capacitated},
+não existindo algoritmos em tempo polinomial para resolver o problema.
+Para os métodos exatos, que apresentam melhores soluções, eles somente
+podem ser utilizados para instância pequenas (<100 indivíduos), uma
+vez que é um problema de programação inteira e o numéro de variaveis
+de decisão é da ordem de $n^{2}+n$\cite{RePEc:eee:ejores:v:18:y:1984:i:3:p:339-348},
+onde $n$ é o número pontos de demanda do problema. Para instâncias
+muito grandes, o uso de heurísticas traz soluções muito boas, algumas
+vezes muito próximas aos métodos exatos. Serão apresentadas algumas
+heurísticas para construção de uma solução inicial do problema de
+agrupamento, a qual poderá ser evoluida com algumas técnicas:
+\begin{description}
+\item [{CCP}]~
+
+\begin{description}
+\item [{Farthest:}] Proposta por Osman e Christofides em \cite{osman1994capacitated},
+tem como base escolher os pontos mais afastados para serem os primeiros
+centros
+\item [{Density:}] Proposta por Ahmadi e Osman em \cite{ahmadi2004density},
+visa construir uma solução inicial usando a densidade de pontos para
+construir a solução inicial.
+\end{description}
+\item [{CCCP}]~
+
+\begin{description}
+\item [{Balanced}] q-trees: que utiliza de arvores q-trees e métodos como
+k-means, Forgy, entre outros
+\item [{Unconstrained}] to Constrained: inicia como uma solução infactível
+alterando-a até conseguir uma solução factível. Ambos métodos para
+CCCP apresentados em \cite{negreiros2006capacitated};
+\end{description}
+\end{description}
+
+\subsection{CCP}
+
+Para o problema de agrupamento capacitado (CCP), apresentamos 2 heurísticas:
+
+
+\subsubsection{Farthest}
+
+Osman e Christofides apresentaram a heuristica construtiva com base
+no afastamento inicial dos primeiros centros (mais afastados entre
+sí) e após um recálculo dos centros de cada agrupamento. Essa é uma
+heuristica muito rápida mas que pode não encontrar soluções factíves
+para o caso de a soma de todas demandas seja muito próxima das capacidades
+de todos agrupamentos. A heurística pode ser apresentada da seguinte
+forma:
+\begin{itemize}
+\item Passo 1 - encontre os pontos $(i,j)$ mais afastados entre sí, então
+$C={i,j}$
+
+\begin{itemize}
+\item Se número desejado de agrupamentos (p) = 2, vá para o passo 3.
+\end{itemize}
+\item Passo 2 - enquanto |C| < número desejado de agrupamento, faça
+
+\begin{itemize}
+\item Encontre um cento $k\in O-C$, de modo que:
+\end{itemize}
+\[
+\prod_{j\in C}d_{kj}=\max_{_{k\in O-C}}\;\;\prod_{j\in C}d_{kj}\]
+
+\begin{itemize}
+\item Então faça $C=C\cup k$;
+\end{itemize}
+\item Passo 3 - Para cada consumidor, encontre a distância até o centro
+mais próximo. Organize estas distâncias em ordem crescentedo. Atribua
+os consumidores na ordem dessas distâncias aos centros correspondentes,
+se a capacidade permitir, caso contrário, atribua para o centro mais
+próximo disponível.
+\item Passo 4 - Recalcule os centros dos agrupamentos de modo a minimizar
+as distância entre os pontos e o novo centro.
+\end{itemize}
+Essa heuristica tem como objetivo a construção rápida de uma solução
+e para se obter melhores soluções deve-se empregar heuristicas de
+busca na visinhança da solução obtida com essa heuristica construtiva.
+Em \cite{osman1994capacitated} é apresentado um metodo hibido que
+combina Busca tabu e simulated annealing.
+
+
+\subsubsection{Density}
+
+Para resolver um problema de agrupamento uma abordagem possível para
+escolha dos centros iniciais é a escolha dos centros que possuam uma
+maior densidade de pontos, assim a distância entre esse centro candidato
+e os possíveis pontos componentes será minimizada. Essa abordagem
+tem carater guloso e é miope por escoher os pontos candidatos a centros
+vendo apenas sua densidade sem prever o rumo que essa solução está
+tomando. Para corrigir isso, é apresentado um método baseado na idéia
+de densidade dos pontos, mas que utiliza de aspectos computação adaptativa
+com uma contrução-desconstrução periódica. Essa meta-heuristica construtiva
+apresenta solucçoes muito boas em uma iteração, sendo as melhoras
+sobre a solução dada por uma procura no espaço do problema através
+de alterações nas distâncias e e geração de novas soluções.
+
+Para a etapa construtiva da solução, existem os seguintes métodos:
+\begin{itemize}
+\item EncontraVizinhos: Encontra os $m_{i}$vizinhos mais próximos de ponto
+$i$, sendo que $m_{i}\leq\frac{n}{p}$ e todos os pontos $Y_{i}$
+(conjunto de pontos vizinhos do centro $i$) tem a soma de suas demandas
+inferior ou igual a capacidade do agrupamento $i$.
+\item CalculaDensidade: Com o conjunto de pontos vizinhos do centro $i$,
+conseguimos calcular a densidade do centro através de
+\end{itemize}
+\[
+D_{i}=\frac{m_{i}}{T(a_{i},Y_{i})}\]
+
+
+sendo $T(a_{i},Y_{k})$ a função que devolve a distância total de
+do ponto $a_{i}$ até todos os pontos de $Y_{k}$.
+\begin{itemize}
+\item CalculaArrependimento: Após encontrados os pontos candidatos a centros,
+é necessário definir os pontos que serão atribuidos a cada um dos
+agrupamentos. Para essa inserção, é utilizada essa função para calcular
+o arrependimento de associar um nó com um centro que não seja o mais
+próximo. Para um ponto $i$, tendo os pontos $j_{1}\; e\; j_{2}$
+como o centro mais próximo a $i$ e segundo mais próximo, respectivamente,
+calculamos o arrependimento de associar $i$ com um centro que não
+seja $j_{1}$ como sendo:
+\end{itemize}
+\[
+R_{i}=d_{ij_{2}}-\; d_{ij_{1}}\]
+
+\begin{itemize}
+\item EncontreOsMelhoresAgrupamentos (C, A): tendo A como um conjunto de
+pontos e C o conjunto de centros. Essa função tenta associar os pontos
+em A com os agrupamentos em C e está descrita em \ref{alg:;EncontreOsMelhoresAgrupamentos}.
+\end{itemize}
+%
+\begin{algorithm}[h]
+\caption{EncontreOsMelhoresAgrupamentos(C,A)\label{alg:;EncontreOsMelhoresAgrupamentos}\protect \\
+}
+
+
+$t=1$;
+
+Minor $\leftarrow$ Máximo de iterações;
+
+$alterado\leftarrow Verdadeiro$;
+
+Enquanto ($alterado=Verdadeiro$ E $t<Minor$)
+
+Faça:
+
+~~~~~~$alterado\leftarrow False$;
+
+~~~~~~1: Atribua todos os centros aos seus agrupamentos;
+
+~~~~~~2: Calcule o arrependimento de todos os pontos em $A$;
+
+~~~~~~3: Encontre o maior $R_{i}$ não atribuido;
+
+~~~~~~4: Atribua $i$ para o agrupamento mais próximo disponível;
+
+~~~~~~5: Atualiza $A$ com os pontos atribuidos;
+
+~~~~~~6: Se $A\neq\emptyset$, vá para 2;
+
+~~~~~~Para cada $C_{j}$ e seu centro $c_{j}$
+
+~~~~~~~~~~~para cada $a_{i}\in C_{j}$
+
+~~~~~~~~~~~~~~~~Se ($T(a_{i},C_{j})$$<T(c_{j},C_{j})$)
+
+~~~~~~~~~~~~~~~~~~~~Atualize o novo centro de
+$C_{j}$ como $a{}_{i}$;
+
+~~~~~~~~~~~~~~~~~~~~$alterado\leftarrow Verdadeiro$;
+
+~~~~~~~~~~~~~~~~FimSe;
+
+~~~~~~~~~~FimPara;
+
+~~~~~~FimPara;
+
+~~~~~~$t\leftarrow t+1$;
+
+FimFunção.
+\end{algorithm}
+
+
+Com as funções definidas, um procedimento principal é chamado e apresenta
+ao final o conjunto dos agrupamentos $C$. Em \ref{alg:ProcedimentoDensidade}
+é apresentado tal procedimento o qual implementa a computação adaptativa.
+De modo iterativo, esse método vai construindo um agrupamento por
+vez e recalculando a densidade ($D)$ e arrependimento ($R$) do conjunto.
+
+%
+\begin{algorithm}[h]
+\caption{{ProcedimentoPrincipal}\label{alg:ProcedimentoDensidade}\protect \\
+}
+
+
+I: conjunto de $n$ pontos
+
+C: conjunto de centros
+
+X: conjunto de pontos não atribuidos em A
+
+Z: conjunto de pontos atribuidos até iteração $k$
+
+$Y_{i}$: conjunto dos $m_{i}$ pontos próximos a $a_{i}$, dado pela
+função $EncontraVizinhos$
+
+Passo 1:
+
+$k=0;$
+
+$X=A,\, C=\emptyset,\, Z=\emptyset$
+
+Passo 2:
+
+$k\leftarrow k+1;$
+
+Para cada $a_{i}\in X$, encontre o conjunto $m_{i}$, $Y_{i}\subseteq X$;
+
+Calcule a densidade ($D_{i}$) para cada $a_{i}\in X$;
+
+Selecione o maior $D_{i}$ e atribua $a_{i}$ como centro do centro
+do $k$-ésimo agrupamento, $C_{k}=C_{k}\cup a_{i}$;
+
+Elimine os pontos selecionados das próximas seleções: $X=X\setminus Y_{i}$,
+$Y=Y\cup Y_{i}$;
+
+Se $k\geq2$ então chame $EncontreOsMelhoresAgrupamentos(C,Y)$;
+
+Se $k<p$ então volte ao passo 2;
+
+$EncontreOsMelhoresAgrupamentos(C,A)$
+\end{algorithm}
+
+
+Uma comparação entre as soluções geradas pelas heurísticas pode ser
+visto na figura \ref{fig:CCP-compara=0000E7=0000E3o}. A Instância
+é a mesma aplicada em ambos casos. Como podemos ver, a heurística
+de densidade apresenta um solução melhor, apesar do tempo de processamento
+ser muito alto pela complexidade do algoritmo.
+
+% %
+% \begin{figure}[h]
+% \begin{centering}
+% \includegraphics[scale=0.5]{imagens/cluster_Density_SJC4a}\includegraphics[scale=0.5]{imagens/cluster_Farthest_SJC4a}
+% \par\end{centering}
+% 
+% \caption{\label{fig:CCP-compara=0000E7=0000E3o}A solução gerada pela heurística
+% density (esquerda) possui os agrupamentos bem mais compactos que na
+% solução pela heurística farthest (direita).}
+% 
+% 
+% 
+% \end{figure}
+
+
+
+\subsection{CCCP}
+
+É proposto como heurísticas de solução para esse problema 2 métodos
+contrutivos para gerar uma primeira solução e a aplicação de uma VNS
+(variable neightbourhood search) para melhoria dessa solução. Será
+apresentado as duas heurísticas da fase contrutiva, sendo a segunda
+fase de melhorias apenas alterações na solução efetuando troca ou
+movimento aleatório de pontos de um agrupamento para outro por um
+periodo de tempo.
+
+
+\subsubsection{q-Trees Balanceadas}
+
+Dado o conjunto de pontos no um espaço $\Re^{2}$, eles são inseridos
+em um estrutura q-tree (Quadrant-Tree), a qual se ajusta, através
+de rotações semelhantes as árvores AVL, de modo que as raízes das
+sub árvores são a mediana dos pontos pertencentes a elas. Essa primeira
+parte define as partições para servirem como entrada para os métodos
+Forgy/H-Means+, referenciado por Forgy no decorrer do relatório, e
+JMeans.
+
+Para definição das partições apartir da q-tree, são usados duas estratégias:
+Next Fit, onde o nó raíz da arvore é ínserido no agrupamento atual
+ou, se não isso ultrapassar a capacidade do agrupamento, é inserido
+em um novo agrupamento, e Best Fit que insere o nó raiz da q-tree
+no cluster que possui o centroide mais próximo ou se não é possível
+inserir em nenhum agrupamento existente, é criado um novo. Toda vez
+que o nó raiz é inserido em algum agrupamento, ele é retirado da q-tree
+a qual se ajusta passando outro nó para raiz.
+
+Os métodos Forgy e JMeans são apresentados em \ref{alg:Forgy} e \ref{alg:JMeans}
+respectivamente.
+
+%
+\begin{algorithm}[h]
+\caption{Forgy\label{alg:Forgy}}
+
+
+$k\leftarrow0;$
+
+Passo 1:
+
+Se $k=0$ então construa $C_{1}^{0},\ldots,C_{p}^{0}$
+
+senão construa novos $C_{1}^{k},\ldots,C_{p}^{k}$, atribuindo os
+indivíduos ao centro disponível mais próximo.
+
+$k\leftarrow k+1$;
+
+Calcule os centroides de $C_{1}^{k},\ldots,C_{p}^{k}$;
+
+Se $NAC\leq p$ então
+
+~~~~Ordene os pontos pela ordem decrescente dos centroides de
+seus agrupamentos;
+
+~~~~Selecione os primeiros $p-NAC$ pontos e transforme em novos
+centroides;
+
+~~~~Reduza de $f(C_{m}^{k})$ as distancias selecionadas;
+
+FimSe
+
+Se $f(C_{m}^{k})=f(C_{m}^{k})$ então pare;
+
+senão, volte ao Passo 1;
+\end{algorithm}
+
+
+%
+\begin{algorithm}[h]
+\caption{JMeans\label{alg:JMeans}}
+
+
+$k\leftarrow0;$
+
+Se $k=0$ então construa $C_{1}^{0},\ldots,C_{p}^{0}$;
+
+Passo 1:
+
+Atribua pontos de $C_{i}$ para um outro centro $C_{j}$ ($j\neq i$).
+Esses pontos devem ser afastados dos centroides por uma tolerância
+$\varepsilon$, marque eles como não ocupados.
+
+Para todo $j\in I$ faça
+
+~~~~~~Adicione um novo agrupamento com centroide $\bar{g}_{M+1}$em
+alguma entidade não ocupada $a_{j}$ e o índice $i$ do melhor centro
+removido; $v_{il}$ indicam a alteração na função objetivo;
+
+~~~~~~Mantenha o par de índices $i^{\prime}$e $j^{\prime}$,
+onde $v_{ij}$é mínimo;
+
+~~~~~~Troque o centroide $g_{i^{\prime}}$por $g_{j\prime}$e
+atualize as atribuições de modo a ter uma nova partição $P_{M}^{\prime}$;
+
+~~~~~~$f^{\prime}\leftarrow f_{opt}+v_{i^{\prime}j^{\prime}}$;
+
+FimPara
+
+Se Não houve melhora, termine.
+
+Caso contrário, implemente a maior partição, retorne ao passo 1;
+\end{algorithm}
+
+
+O valor $v_{ij}$ utilizado no método JMeans representa a melhora
+na função objetivo pela realocação do indivíduo $i$ e é dado pela
+fórmula em \eqref{eq:JMeansVij}, tendo que $\bar{g}_{i}$ é o centroide
+do agrupamento $C_{i}$, $a_{j}\in I$ e $n_{i}$ é o valor da cardinalidade
+do agrupamento $C_{i}$. O Valor de $NAC$ no método Forgy, é o número
+atual de agrupamentos em uso.
+
+\begin{equation}
+v_{ij}\leftarrow\frac{n_{i}}{n_{i}+1}\Vert\overline{g_{i}}-a_{j}\Vert^{2}-\frac{n_{l}}{n_{l}+1}\Vert\overline{g_{l}}-a_{j}\Vert^{2},\;\; a_{j}\in C_{l},\;\;\overline{g_{i}}\notin C_{l}\label{eq:JMeansVij}\end{equation}
+
+
+
+\subsubsection{Unconstrained to Constrained}
+
+A segunda heurística apresentada resolve o problema não levando em
+consideração a capacidade de cada agrupamento para gerar uma solução
+inicial a qual pode ser uma solução para o CCCP infactível.
+
+A partir da solução inicial, o próximo passo é verificar se ela é
+factível e caso não seja, localizar o indivíduo que sobrecarrega algum
+agrupamento, e move-lo para outro que suporte ele. Caso não exista
+nenhum agrupamento que suporte a sua inserção, então é aberto um novo
+agrupamento. Para gerar uma solução inicial, é utilizado a mesma função
+forgy apresentada acima, mas não levando em consideração capacidade
+dos agrupamentos. Após a execução dessa função, todos os agrupamentos
+são percorridos e para os que tem maior demanda que a sua capacidade,
+tem um indivíduo que o sobrecarrega movido para outro agrupamento
+que o suporte e que seja o mais próximo de si.
+
+
+\section{PDOS visto como um problema de agrupamento}
+
+Para atender um conjunto de solicitações dos clientes de forma mais
+rápida, as equipes devem diminuir ao máximo o tempo de deslocamento
+entre cada atendimento, uma vez que o tempo do atendimento não pode
+ser reduzido sem comprometer a qualidade do serviço prestado. Diminuir
+o tempo de deslocamento entre os atendimentos pode ser obtido pela
+designação das tarefas para as equipes de modo que as tarefas designadas
+a uma dada equipe fiquem próximas entre si, diminuindo assim a distância
+entre elas.
+
+Com tais características, o PDOS pode ser modelado como um problema
+de agrupamento capacitado, onde a capacidade provêm da disponibilidade
+de tempo que uma equipe dispõem por dia, normalmente 8 horas, e as
+demandas o tempo necessário para resolver os serviços. Para representação
+mais fiel a realidade, deve-se considerar as rotas e também o tempo
+necessário para se deslocar de um atendimento até outro. As rotas
+são calculadas dentre os atendimentos de cada equipe como um tour,
+passando por todos os atendimentos, não sendo necessário retornar
+ao ponto de origem da rota e o tempo de deslocamento é calculado normalmente
+pelo cálculo $d_{ij}*K$, onde $d_{ij}$ é a distância do atendimento
+$i$ até o atendimento $j$ e $K$ é uma constante de quanto tempo(minutos
+por exemplo) é necessário para percorrer uma unidade de medida (Km
+por exemplo).
+
+A representação de tempo de deslocamento e o cálculo das rotas, não
+foram abordadas nessa primeira parte do trabalho, bem como também
+o tratamento das prioridades de atendimento ficaram para a segunda
+parte do projeto.
+
+Para a solução de problemas PDOS, dado os dois modelos de problema
+de agrupamento estudados, vimos que seria mais representativo o modelo
+$CCP$, mas a heurística apresentada em \cite{negreiros2006capacitated},
+que faz uso das q-trees, pode ser utilizada como forma de resolver
+problemas do tipo $CCP$ sendo isso citado no próprio artigo que foram
+testados em instâncias de problemas $CCP$, mas não é indicado os
+valores de tal heurística aplicada ao $CCP$.

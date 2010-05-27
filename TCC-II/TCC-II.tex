@@ -10,17 +10,26 @@
 \usepackage{abnt-alf}
 \usepackage{graphicx}														%Package para figuras
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{setspace}
+
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}[chapter]
+\floatname{algorithm}{Algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+\usepackage{lscape}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
 \makeatletter	%Para que ele entenda o @
 
-% \documentclass{abnt}
-% \usepackage[latin1]{inputenc}
-% \usepackage[brazil]{babel}
-% testando se os pacotes para uso com bibTeX são lidos
-% \usepackage[num]{abntcite}
 
-% \renewcommand{\folhadeaprovacao}{
-% 
-% }
 
 \begin{document}
 \autor{DIGITE SEU NOME}
