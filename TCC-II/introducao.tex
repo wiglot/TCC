@@ -1,17 +1,30 @@
 \chapter*{Introdução}
 Em alguns setores de empresas, para atender um cliente, elas devem deslocar um funcionário até a casa do cliente para executar o serviço.
-Isso ocorre principalmente em empresas que prestam algum tipo de serviço de atendimento domiciliar aos clientes, como por exemplo empresas de entrega de correspondência, provedores de internet no que diz suporte aos clientes e companias de distribuição de energia elétrica.
+Isso ocorre principalmente em empresas que prestam algum tipo de serviço de atendimento domiciliar aos clientes, como por exemplo empresas de entrega de correspondência, provedores de internet no que diz suporte aos clientes e companhias de distribuição de energia elétrica.
+Esse ultimo cenário que esse trabalho toma emprestado para os estudos de caso .
 
 Esses tipos de atendimentos aos clientes são chamados de ordens de serviço (OS), podendo ter outros nomes conforme a área de atuação da empresa, mas sempre com o intuito de registrar que a empresa deve fazer um atendimento a um determinado cliente.
 Em nosso cenário tomaremos algumas premissas como válidas, como por exemplo:
-Uma OS deve ser atendida por um funcionário (ou uma equipe de funcionários).
-Não levamos em consideração agendamentos de horários, apenas que todas as OS devem ser executas.
-Uma equipe consegue executar todas as OS atribuidas a ela no tempo estimado e predefinido de cada uma delas.
-O tempo de atendimento de todas as ordens atribuidas a uma equipe não deve ultrapassarem sua jornada de trabalho que é préviamente estipulada.
+\begin{itemize}
+ \item Uma OS deve ser atendida por um funcionário (ou uma equipe de funcionários).
+ \item Não levamos em consideração agendamentos de horários, apenas que todas as OS devem ser executas.
+ \item Uma equipe consegue executar todas as OS atribuidas a ela no tempo estimado e predefinido de cada uma delas.
+ \item O tempo de atendimento de todas as ordens atribuidas a uma equipe não deve ultrapassarem sua jornada de trabalho que é préviamente estipulada.
+\end{itemize}
 
--*-Esse ultimo cenário que esse trabalho toma emprestado para o estudo.
+Designar um conjunto de OS deve levar em consideração a carga horária de cada equipe e a demanda de tempo que cada OS já não é algo trivial.  ?Problema da mochila?
 
-Designar um conjunto dessas OS para execução por um funcionário , de modo que ele não precise se deslocar tanto entre cada atendimento, é algo não trivial quando nos deparamos um cenário com dezenas de equipes e centenas de OS.
+Ao tribuir as OS levando em consideração apenas a carga horária e tempo demandado pelas OS pode nos levar a soluções como as apresentadas na figura \ref{FigDemandaCapacidade} onde temos 3 equipes atendendo um total de 14 atendimentos.
+\begin{figure}
+ \begin{center}
+  \includegraphics{./images/DemandasCapacidade.png}
+ % DemandasCapacidade.png: 455x299 pixel, 96dpi, 12.04x7.91 cm, bb=0 0 341 224
+  \end{center}
+
+\caption{\label{FigDemandaCapacidade}Alocação de OS apenas pelas Demandas e Capacidades }
+\end{figure}
+É possível perceber que os atendimentos se encontram dispersos
+% Designar um conjunto dessas OS para execução por uma equipe, de modo que ela o delocamento entre os atendimentos não precise se deslocar tanto entre cada atendimento, é algo não trivial quando nos deparamos um cenário com dezenas de equipes e centenas de OS.
 
 -Contextualizar: Pq esse problema? O que a empresas perdem com ele? Que beneficios a solução dele tráz?
 
