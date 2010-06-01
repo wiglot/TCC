@@ -25,7 +25,7 @@
 \usetikzlibrary{snakes,arrows,shapes}
 \usepackage{lscape}
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 \makeatletter	%Para que ele entenda o @
 
@@ -34,7 +34,7 @@
 \begin{document}
 \autor{Wagner de Melo Reck}
 
-\titulo{Problema de dispacho de ordens de serviços visto como problema de agrupamento}
+\titulo{Problema de despacho de ordens de serviços visto como problema de agrupamento}
 
 \orientador{Vinícius Jacques Garcia}
 
@@ -60,6 +60,7 @@
 % Agradecimentos
 % Epígrafe
 % Resumo em língua vernácula - Obrg
+\include {resumo}
 % Resumo em língua estrangeira - Obrg
 % Lista de ilustrações
 \listadefiguras
@@ -69,14 +70,15 @@
 % Lista de símbolos
 % Sumário - Obrg
 \sumario
- 
+
 % ELEMENTOS TEXTUAIS
 % Introdução Obrg
 \include{introducao} %Inclui arquivo introducao.tex
 % Desenvolvimento - Obrg
-\include{cap1}
-\include{cap2}
-\include{cap3} 
+\include{ProblemaDeAgrupamento}
+\include{MetodosHeuristicosCCP}
+\include{EstudoInstancias}
+\include {ResultadosComputacionais}
 % Conclusão - Obrg
 \include{conclusao} %Inclui arquivo conclusao.tex
 
