@@ -14,7 +14,6 @@ heurísticas para construção de uma solução inicial do problema de
 agrupamento, a qual poderá ser evoluida com algumas técnicas:
 \begin{description}
 \item [{CCP}]~
-
 \begin{description}
 \item [{Farthest:}] Proposta por Osman e Christofides em \cite{osman1994capacitated},
 tem como base escolher os pontos mais afastados para serem os primeiros
@@ -130,9 +129,8 @@ pontos e C o conjunto de centros. Essa função tenta associar os pontos
 em A com os agrupamentos em C e está descrita em \ref{alg:;EncontreOsMelhoresAgrupamentos}.
 \end{itemize}
 %
-\begin{algorithm}[h]
-\caption{EncontreOsMelhoresAgrupamentos(C,A)\label{alg:;EncontreOsMelhoresAgrupamentos}\protect \\
-}
+\begin{algorithm}[ht]
+\caption{\label{alg:;EncontreOsMelhoresAgrupamentos}EncontreOsMelhoresAgrupamentos(C,A)} %\protect \\}
 
 
 $t=1$;
@@ -189,9 +187,8 @@ De modo iterativo, esse método vai construindo um agrupamento por
 vez e recalculando a densidade ($D)$ e arrependimento ($R$) do conjunto.
 
 %
-\begin{algorithm}[h]
-\caption{{ProcedimentoPrincipal}\label{alg:ProcedimentoDensidade}\protect \\
-}
+\begin{algorithm}[ht]
+\caption{{ProcedimentoPrincipal}\label{alg:ProcedimentoDensidade}}
 
 
 I: conjunto de $n$ pontos
@@ -240,15 +237,20 @@ de densidade apresenta um solução melhor, apesar do tempo de processamento
 ser muito alto pela complexidade do algoritmo.
 
 % %
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{centering}
-\includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Density_SJC4a.png}\includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Farthest_SJC4a.png}
+  \subfloat[]{
+    \includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Density_SJC4a.png}\label{a}
+  }
+  \subfloat[]{
+    \includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Farthest_SJC4a.png}\label{b}
+  }
 \par
 \end{centering}
 
-\caption{\label{fig:CCP-compara=0000E7=0000E3o}A solução gerada pela heurística
-density (esquerda) possui os agrupamentos bem mais compactos que na
-solução pela heurística farthest (direita).}
+\caption[Comparação heurísticas Density-Farthest]{\label{fig:CCP-compara=0000E7=0000E3o}A solução gerada pela heurística
+Density \subref{a} possui os agrupamentos bem mais compactos que na
+solução pela heurística Farthest \subref{b}.}
 
 \end{figure}
 \subsection{Busca Local}

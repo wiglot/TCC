@@ -1,7 +1,7 @@
 
 
 
-\documentclass[pnumromarab,normaltoc]{abnt}			%Numeração de acordo com UFPR
+\documentclass{abnt}			% [pnumromarab,normaltoc] Numeração de acordo com UFPR
 
 % Utilize a opção normalfigtabnum para numerar as figuras e tabelas por capítulo
 
@@ -9,7 +9,10 @@
 \usepackage[latin1]{inputenc}
 \usepackage{abnt-alf}
 \usepackage{tabela-simbolos}
-\usepackage{graphicx}														%Package para figuras
+
+%Package para figuras
+\usepackage{graphicx}
+\usepackage{subfig}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \usepackage{float}
@@ -23,7 +26,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \usepackage{tikz}
-\usetikzlibrary{snakes,arrows,shapes}
+\usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,arrows}
 \usepackage{lscape}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
