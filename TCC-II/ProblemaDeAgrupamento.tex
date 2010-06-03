@@ -1,38 +1,104 @@
 \chapter{Problema de agrupamento}
-o que é? onde é aplicado? quais tipos?\\
-agrupamento: reunir dados por semelhança.
-Agrupamento é o ato de reunir objetos(dados) com certas caracteristicas semelhantes em um mesmo grupo,
- minimizando a variação de tal característica dos objetos dentro dos grupos.
-Esse é um problema muito encontrado quando desejamos sumarizar os dados para uma melhor análise global. Dentre a aplicação encontram-se:
-Redução de cores de imagens, localização de facilidades, reconhecimento de padrões, alocação de tarefas a máquinas
 
-Muitas vezes temos um volume muito grande de dados para analisar sendo uma tarefa complexa, se não até impossível, analisar um a um todos os dados.
-Uma forma de sumarizar tais dados seria a redução dos dados para apenas os dados mais representativos, agrupando os demais dados em volta desses dados.
-Muitos problemas podem ser reduzidos a um problema de agrupamento como por exemplo:
-\begin{itemize}
- \item
-\end{itemize}
+Agrupamento não apenas expressa o ato de separar dados em grupos, mas que os
+elementos dos grupos resultantes tenham alguma, ou mais de uma,
+característica em comum entre si.
+ Segundo Lorena e Furtado \cite{lorena2001constructive} ``problemas de
+ agrupamento
+ geralmente aparecem em classificação de dados para algum propósito como armazenar e
+ recuperar ou análisar dados. Todo algoritmo de agrupamento tentará determinar algum
+ agrupamento inerente ou natural nos dados, usando medidas de distância ou similaridade entre os dados.''.
 
+Um exemplo bem simples de agrupamento seria o ato de separar poucas frutas de aparência boa das de
+ aparência não tão boa dado uma medida de aparência.
+ Para esse exemplo, um ser humano conseguiria executar a tarefa de forma
+competitiva com um algoritmo, mas quando incluimos um grande de dados de entrada
+e desejamos que sejam levadas em consideração outras medidas ou outrras
+restrições (ex. dividir em 10 grupos sendo 5 de frutas melhores além dos objetos
+de cada grupo sejam de cores e tamanhos semelhantes), os algoritmos de
+agrupamento podem chegar a uma solução muito melhor em menor tempo.
 
-Quando falamos em organizar ou analisar grandes volumes de dados de modo a procurar
+Os problemas de particionamento podem ser organizados segundo a taxonomia
+mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
+\begin{figure}
+ \begin{center}
+\begin{tikzpicture}[mindmap]
+\begin{scope}[mindmap, concept color=orange, text=white]
+\node [concept] {Agrupamentos} [clockwise from=-45]
+  child{node [concept]{Hierárquico}
+    child{node [concept]{Link Simples}}
+    child{node [concept]{Link Completo}}
+  }
+  child{node [concept]{Particionado}
+    child{node [concept]{Erro dos Quadrados}[clockwise from=-45]
+          child{node [concept]{K-Means}}
+    }
+    child{node [concept]{Grafo teórico}}
+    child{node [concept]{Solução de Mistura} [clockwise from=-135]
+        child{node [concept]{Expectativa de Maximização}}
+    }
+    child{node [concept]{!Procura de Modo!}}
+  }
+;
+\end{scope}
+\end{tikzpicture}
+\caption[Taxonomia dos problemas de agrupamento]
+   {\label{clusterTaxonomy}Taxonomia para os problemas de agrupamento}
+\end{center}
+\end{figure}
+Os problemas de particionamento, que serão aprofundados nesse trabalho, são
+problemas onde é desejado descobrir partições nos conjuntos de dados de modo que
+cada partição contenha apenas elementos similares entre si mesmos.
 
-Quanto existem dados que é desejado agrupar os mesmos por semelhança, por exemplo pixels de uma imagem agrupados por semelhança de cor
-, desejamos que os grupos sejam os mais concissos quanto possível, evitando a generalização dos mesmos.
-A escala do problema de agrupamento é dado pela expressão de distintas partições $p$ em $n$ pontos,$N(n,p)$,  definida por \cite{liu1968cl}:
+A escala de dificuldade de resolver do problema de agrupamento pode ser vista
+pela expressão de distintas partições $p$ existente em $n$ pontos,$N(n,p)$,
+definida por \cite{liu1968cl}:
 \begin{equation}
  N(p,n) = \frac{1}{p!}\sum_{i=0}^{p}(-1)^{p-1}\binom{p}{i}i^{n}
 \end{equation}
-Ahmadi e Osmam apresentam em \cite{ahmadi2004density} um exemplo do resultado da computação dessa expressão para uma instância com 50 pontos, o resultado pode ser visto na imagem \ref{ahmadiCalc}.
+
+Ahmadi e Osmam apresentam em \cite{ahmadi2004density} um exemplo do resultado da
+computação dessa expressão para uma instância com 50 pontos, o resultado pode
+ser visto na imagem \ref{ahmadiCalc}.
 \begin{figure}
  \begin{center}
  \includegraphics[scale=0.3]{./images/Ahmadi_Values_N_n_p.png}
  % Ahmadi_Values_N_n_p.png: 880x606 pixel, 96dpi, 23.28x16.03 cm, bb=0 0 660 454
 \end{center}
-\caption[Valores para N(n,p)]{\label{ahmadiCalc}Valores para N(n, p). No topo p = 1 e na base p = 50.}
+\caption[Valores para N(n,p)]{\label{ahmadiCalc}Valores para N(n, p). No topo p
+= 1 e na base p = 50.}
 \end{figure}
 
-Como pode ser visto que mesmo para instâncias pequenas, o espaço de busca é imenso. || e o que mais?? ||
+Como pode ser visto que mesmo para instâncias não tão grandes, o espaço
+de busca é gigante. Quando consideramos instâncias maiores, como por exemplo
+as resolvidas por Taillard \cite{taillard2003heuristic}, onde são tratados 2863
+pontos, o espaço de busca cresce ainda mais. O uso de métodos exatos é
+proibitivo pelo tempo computacional que seria necessário para essas instâncias
+maiores, e sendo esses problema da classe NP-Completo \cite{garey1979computers}
+não existe um algoritmo que resolva de forma exata em tempo polinomial, o que
+resta é o uso de métodos heurísticos e hybridos
 
+
+Quando temos um conjunto de pontos no espaco ($\Re^{2}$ por exemplo) e
+desejamos agrupar os pontos pela sua  localização, podemos utilizar como
+medidada de dispersão dos grupos a distância dos pontos em relação a mediana do
+agrupamento. Esse é também conhecido como Problema das P-Medianas
+
+O problema das P-Medianas é uma variação do problema do erro dos quadrados, com
+a diferença de utilizar uma mediana (um dos pontos) como referência para medição
+das similaridades dos pontos de cada um dos agrupamentos.
+
+% Muitas vezes temos um volume muito grande de dados para analisar sendo uma
+% tarefa complexa, se não até impossível, analisar um a um todos os dados.
+% Uma forma de sumarizar tais dados seria a redução dos dados para apenas os
+% dados mais representativos, agrupando os demais dados em volta desses dados.
+% Muitos problemas podem ser reduzidos a um problema de agrupamento como por
+% exemplo:
+Dentre as aplicações práticas podemos destacar o uso de agrupamentos para data
+mining,
+ processamento de imagens, procura por padrões,
+Redução de cores de imagens, localização de facilidades, reconhecimento de
+padrões, alocação de tarefas a máquinas
 
 \section{CCP - Problema de Agrupamento Capacitado}
 
