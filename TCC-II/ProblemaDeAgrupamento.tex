@@ -18,14 +18,20 @@ restrições (ex. dividir em 10 grupos sendo 5 de frutas melhores além dos objetos
 de cada grupo sejam de cores e tamanhos semelhantes), os algoritmos de
 agrupamento podem chegar a uma solução muito melhor em menor tempo.
 
+Dentre as aplicações práticas podemos destacar o uso de agrupamentos para data
+mining,
+ processamento de imagens, procura por padrões,
+Redução de cores de imagens, localização de facilidades, reconhecimento de
+padrões, alocação de tarefas a máquinas
+
 Os problemas de particionamento podem ser organizados segundo a taxonomia
 mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
 \begin{figure}
  \begin{center}
-\begin{tikzpicture}[mindmap]
+\begin{tikzpicture}[mindmap, scale=0.9]
 \begin{scope}[mindmap, concept color=orange, text=white]
 \node [concept] {Agrupamentos} [clockwise from=-45]
-  child{node [concept]{Hierárquico}
+  child{node [concept]{Hierárquico} [clockwise from=0]
     child{node [concept]{Link Simples}}
     child{node [concept]{Link Completo}}
   }
@@ -37,7 +43,7 @@ mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
     child{node [concept]{Solução de Mistura} [clockwise from=-135]
         child{node [concept]{Expectativa de Maximização}}
     }
-    child{node [concept]{!Procura de Modo!}}
+    child{node [concept]{Método de Busca}}
   }
 ;
 \end{scope}
@@ -48,10 +54,11 @@ mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
 \end{figure}
 Os problemas de particionamento, que serão aprofundados nesse trabalho, são
 problemas onde é desejado descobrir partições nos conjuntos de dados de modo que
-cada partição contenha apenas elementos similares entre si mesmos.
+cada partição contenha apenas elementos similares entre si.
 
-A escala de dificuldade de resolver do problema de agrupamento pode ser vista
-pela expressão de distintas partições $p$ existente em $n$ pontos,$N(n,p)$,
+A escala de dificuldade de resolver do problema de agrupamento por
+particionapodemento ser vista pela expressão de distintas partições $p$
+existente em $n$ pontos,$N(n,p)$,
 definida por \cite{liu1968cl}:
 \begin{equation}
  N(p,n) = \frac{1}{p!}\sum_{i=0}^{p}(-1)^{p-1}\binom{p}{i}i^{n}
@@ -69,47 +76,50 @@ ser visto na imagem \ref{ahmadiCalc}.
 = 1 e na base p = 50.}
 \end{figure}
 
-Como pode ser visto que mesmo para instâncias não tão grandes, o espaço
-de busca é gigante. Quando consideramos instâncias maiores, como por exemplo
-as resolvidas por Taillard \cite{taillard2003heuristic}, onde são tratados 2863
+Pode ser observado que mesmo para instâncias não tão grandes, o espaço
+de busca é gigante. Quando consideramos instâncias maiores, como as resolvidas
+por Taillard \cite{taillard2003heuristic}, onde são tratados 2863
 pontos, o espaço de busca cresce ainda mais. O uso de métodos exatos é
 proibitivo pelo tempo computacional que seria necessário para essas instâncias
 maiores, e sendo esses problema da classe NP-Completo \cite{garey1979computers}
 não existe um algoritmo que resolva de forma exata em tempo polinomial, o que
-resta é o uso de métodos heurísticos e hybridos
+resta é o uso de métodos heurísticos e hybridos.
+Outro fato sobre esses dados é que a ocorrência de mais agrupamentos possíveis,
+ocorra com $p=16$, o que vem a mostrar que o problema é assimétrico em relação
+a p.
 
+Os problemas de agrupamentos por particionamento estão, do ponto de vista de
+complexidade, entre os problemas combinatoriais mais difícies de serem
+resolvidos \cite{ahmadi2004density}
 
 Quando temos um conjunto de pontos no espaco ($\Re^{2}$ por exemplo) e
 desejamos agrupar os pontos pela sua  localização, podemos utilizar como
-medidada de dispersão dos grupos a distância dos pontos em relação a mediana do
-agrupamento. Esse é também conhecido como Problema das P-Medianas
+medida de dispersão dos grupos a distância dos pontos em relação ao centróide
+calculado pelos pontos do agrupamento. Esse é também conhecido como Problema das
+K-Médias (K-Means) apresentado por \cite{macqueen1966some}
 
-O problema das P-Medianas é uma variação do problema do erro dos quadrados, com
-a diferença de utilizar uma mediana (um dos pontos) como referência para medição
+O problema das P-Medianas é uma variação do problema das k-médias, pelo fato
+de utilizar uma mediana (um dos pontos) como referência para medição
 das similaridades dos pontos de cada um dos agrupamentos.
+%Esse problema é
+%utilizado quenso é desejado, por exemplo, intalar um depósito em uma das loja
+%de uma cidade por exemplo, desejando min
 
-% Muitas vezes temos um volume muito grande de dados para analisar sendo uma
-% tarefa complexa, se não até impossível, analisar um a um todos os dados.
-% Uma forma de sumarizar tais dados seria a redução dos dados para apenas os
-% dados mais representativos, agrupando os demais dados em volta desses dados.
-% Muitos problemas podem ser reduzidos a um problema de agrupamento como por
-% exemplo:
-Dentre as aplicações práticas podemos destacar o uso de agrupamentos para data
-mining,
- processamento de imagens, procura por padrões,
-Redução de cores de imagens, localização de facilidades, reconhecimento de
-padrões, alocação de tarefas a máquinas
+Acrescentando a restrição de capacidade aos agrupamentos, temos o problemas da
+P-Medianas Capacitado ou também tratado na literatura pelo nome de Problema de
+Agrupamento Capacitado (CCP)
+
 
 \section{CCP - Problema de Agrupamento Capacitado}
 
-O problema de agrupamento capacitado consiste em dado um conjunto
+O problema de agrupamento capacitado consiste em: dado um conjunto
 $I$ de $n$ indivíduos com suas respectivas demandas $d_{i}\: i\in I$,
 é desejado agrupar os $n$ pontos em $p$ agrupamentos, onde a soma
 das demandas em cada agrupamento deve ser menor que a capacidade total
 do agrupamento $Q_{j},\:\forall j\in P$, sendo $P$ o conjunto de
-agrupamentos. Dos pontos pertencentes a cada agrupamento, é escolhida
-uma mediana de modo a minimizar a distância de todos os pontos até
-ela. O problema possuí a seguinte formulação matemática \cite{ahmadi2004density}:
+agrupamentos, e é desejado minimizar as dissimilaridades entre uma mediana do
+agrupamento. O problema pode ser representado pela seguinte formulação
+matemática \cite{ahmadi2004density}:
 
 \begin{equation}
 Min\;\sum_{i\in P}\sum_{j\in I}c_{ij}x_{ij}\label{eq:obj_CCP}\end{equation}
@@ -126,7 +136,8 @@ x_{ij}\leq y_{j,\;}\forall i\in I,\:\forall j\in P\label{eq:mustAssign_CCP}\end{
 x_{ij},\: y_{j}\in\{0,1\},\;\forall i\in I,\;\forall j\in P\label{eq:sets_CCP}\end{equation}
 
 Em (\ref{eq:obj_CCP}), temos a função objetivo que minimiza a dissimilaridades
-entre os componentes de cada agrupamento. Utilizamos a distância como
+entre os componentes de cada agrupamento. Para o $\Re^{2}$, utilizamos a
+distância como
 medida da similaridade entre dois pontos, tendo assim a medida $c_{ij}$
 do ponto $i$ até o ponto $j$ (mediana do agrupamento), considerando
 que o ponto $i$ está associado ao agrupamento $j$ pela variável
