@@ -1,8 +1,6 @@
 \chapter{Problema de agrupamento}
 
-Agrupamento não apenas expressa o ato de separar dados em grupos, mas que os
-elementos dos grupos resultantes tenham alguma, ou mais de uma,
-característica em comum entre si.
+Agrupamento não apenas expressa o ato de separar dados em grupos, mas separa-los de modo que os elementos dos grupos resultantes tenham alguma, ou mais de uma, característica em comum entre si.
  Segundo Lorena e Furtado \cite{lorena2001constructive} ``problemas de
  agrupamento
  geralmente aparecem em classificação de dados para algum propósito como armazenar e
@@ -56,9 +54,7 @@ Os problemas de particionamento, que serão aprofundados nesse trabalho, são
 problemas onde é desejado descobrir partições nos conjuntos de dados de modo que
 cada partição contenha apenas elementos similares entre si.
 
-A escala de dificuldade de resolver do problema de agrupamento por
-particionapodemento ser vista pela expressão de distintas partições $p$
-existente em $n$ pontos,$N(n,p)$,
+A escala de dificuldade de resolver do problema de particionamento, ser vista pela expressão de distintas partições $p$ existente em $n$ pontos,$N(n,p)$,
 definida por \cite{liu1968cl}:
 \begin{equation}
  N(p,n) = \frac{1}{p!}\sum_{i=0}^{p}(-1)^{p-1}\binom{p}{i}i^{n}
@@ -111,6 +107,14 @@ Agrupamento Capacitado (CCP)
 
 
 \section{CCP - Problema de Agrupamento Capacitado}
+Como citado anteriormente, o CCP tem por objectivo agrupar os pontos de modo a minimizar a distância entre entre todos pontos de um agrupamento e sua mediana. Na Fig. \ref{fig:Exemplo-CCP} é apresentado um exemplo de uma possível solução do CCP dado um conjunto de pontos.
+
+\begin{figure}[h]
+\begin{centering}
+\includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Density_SJC4a.png}
+\par\end{centering}
+\caption{\label{fig:Exemplo-CCP}Exemplo de uma solução do CCP}
+\end{figure}
 
 O problema de agrupamento capacitado consiste em: dado um conjunto
 $I$ de $n$ indivíduos com suas respectivas demandas $d_{i}\: i\in I$,
@@ -151,23 +155,11 @@ um agrupamento não será ultrapassado, é inserida a restrição (\ref{eq:capacity_C
 A última restrição, (\ref{eq:sets_CCP}), especifica as variáveis
 inteiras de decisão. I é o conjunto de indivíduos.
 
-Na figura \ref{fig:Exemplo-CCP} é apresentado uma possível solução
-para o CCP.
-
-%
-\begin{figure}[h]
-\begin{centering}
-\includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Density_SJC4a}
-\par\end{centering}
-\caption{\label{fig:Exemplo-CCP}Exemplo de uma solução do CCP}
-\end{figure}
-
-
 Quando temos o valor de capacidade dos agrupamentos homogêneo, ou
 seja, o valor de $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$, podemos
 dizer que esse é um problema das $p-medianas$ capacitado.
 
-\section{CCCP}
+\subsection{CCCP}
 Um outro problema de agrupamento foi proposto por Negreiro e Palhano\cite{negreiros2006capacitated}
 é o CCCP (Capacitated Centred Clustrering Problem - Problema de agrupamento
 centrado capacitado) onde os agrupamentos passam a ter seu centro
@@ -258,8 +250,20 @@ encontra o centroide de cada agrupamento e (\ref{eq:capacity_g-CCCP})
 garante que a capacidade dos agrupamentos não sejam ultrapassados.
 As ultimas restrições (\ref{eq:sets_g-CCCP}) especificam as variáveis
 de decisão.
-\section{Referências na literatura}
+
+
 \section{Métodos de resolução}
-Métodos exatos para instâncias pequenas (quanto pequenas?) para maiores uso de heurísticas.
+Devido a características como o tamanho de espaço de busca, a resolução de problemas de particionamento utilizando métodos exatos ou de otimização como \emph{branch and bound} são inefetivos em intâncias maiores \cite{osman1994capacitated}. Para o CCP, temos $n^{2}+n$ variáveis inteiras \cite{RePEc:eee:ejores:v:18:y:1984:i:3:p:339-348}.
+
+Para obter soluções em tempos computacionais viáveis (por exemplo no caso do PDSO, uma solução não poderia levar mais que 8 horas para ser processada), é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
+
+podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
+\begin{itemize}
+ \item Construtivas: Algoritmos desenvolvidos especificamente para uma determinada classe de problemas. Normalmente as soluções estão em um ótimo local ou muito próximo de um;
+ \item Iterativas: A partir de uma solução inicial válida, e busca na vizinhança iterativamente por outras soluções melhores. A busca na vizinha normalmente conduz a um vale/pico, chegando a um ótimo local ao final das iterações.
+\end{itemize}
+
+
+
 
 
