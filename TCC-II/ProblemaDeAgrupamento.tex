@@ -94,36 +94,27 @@ medida de dispersão dos grupos a distância dos pontos em relação ao centróide
 calculado pelos pontos do agrupamento. Esse é também conhecido como Problema das
 K-Médias (K-Means) apresentado por \cite{macqueen1966some}
 
-O problema das P-Medianas é uma variação do problema das k-médias, pelo fato
-de utilizar uma mediana (um dos pontos) como referência para medição
-das similaridades dos pontos de cada um dos agrupamentos.
-%Esse problema é
-%utilizado quenso é desejado, por exemplo, intalar um depósito em uma das loja
-%de uma cidade por exemplo, desejando min
+O problema das P-Medianas é uma variação do problema das K-Médias, com a difereça de utilizar uma mediana (um dos indivíduos) como referência para medição das similaridades dos pontos de cada um dos agrupamentos.
 
-Acrescentando a restrição de capacidade aos agrupamentos, temos o problemas da
-P-Medianas Capacitado ou também tratado na literatura pelo nome de Problema de
-Agrupamento Capacitado (CCP)
-
+Acrescentando a restrição de capacidade aos agrupamentos, temos o problemas das P-Medianas Capacitado ou também tratado na literatura por CCP.
 
 \section{CCP - Problema de Agrupamento Capacitado}
-Como citado anteriormente, o CCP tem por objectivo agrupar os pontos de modo a minimizar a distância entre entre todos pontos de um agrupamento e sua mediana. Na Fig. \ref{fig:Exemplo-CCP} é apresentado um exemplo de uma possível solução do CCP dado um conjunto de pontos.
+Como já apresentado anteriormente, o CCP tem por objectivo agrupar indivíduos de modo a maximizar as similaridades entre entre todos indivíduos de um agrupamento e a mediana do próprio agrupamento. Para o caso dos indivíduos serem representados por pontos no $\Re^{2}$, temos como similaridade o posicionamento dos mesmos no plano, a qual é medida pela distância entre eles. Na Fig. \ref{fig:Exemplo-CCP} é apresentado um exemplo de uma possível solução do CCP dado um conjunto de pontos.
 
-\begin{figure}[h]
+\begin{figure}
 \begin{centering}
 \includegraphics[scale=0.5]{../TCC-I/imagens/cluster_Density_SJC4a.png}
 \par\end{centering}
 \caption{\label{fig:Exemplo-CCP}Exemplo de uma solução do CCP}
 \end{figure}
 
-O problema de agrupamento capacitado consiste em: dado um conjunto
+O problema de agrupamento capacitado pode ser visto como: dado um conjunto
 $I$ de $n$ indivíduos com suas respectivas demandas $d_{i}\: i\in I$,
 é desejado agrupar os $n$ pontos em $p$ agrupamentos, onde a soma
 das demandas em cada agrupamento deve ser menor que a capacidade total
-do agrupamento $Q_{j},\:\forall j\in P$, sendo $P$ o conjunto de
+do agrupamento, $Q_{j},\:\forall j\in P$, sendo $P$ o conjunto de
 agrupamentos, e é desejado minimizar as dissimilaridades entre uma mediana do
-agrupamento. O problema pode ser representado pela seguinte formulação
-matemática \cite{ahmadi2004density}:
+agrupamento, para isso possuimos uma matriz $c_{IxI}$ com as distâncias entre todos os pontos. O problema pode ser representado pela seguinte formulação matemática \cite{ahmadi2004density}:
 
 \begin{equation}
 Min\;\sum_{i\in P}\sum_{j\in I}c_{ij}x_{ij}\label{eq:obj_CCP}\end{equation}
@@ -139,27 +130,15 @@ x_{ij}\leq y_{j,\;}\forall i\in I,\:\forall j\in P\label{eq:mustAssign_CCP}\end{
 \begin{equation}
 x_{ij},\: y_{j}\in\{0,1\},\;\forall i\in I,\;\forall j\in P\label{eq:sets_CCP}\end{equation}
 
-Em (\ref{eq:obj_CCP}), temos a função objetivo que minimiza a dissimilaridades
-entre os componentes de cada agrupamento. Para o $\Re^{2}$, utilizamos a
-distância como
-medida da similaridade entre dois pontos, tendo assim a medida $c_{ij}$
-do ponto $i$ até o ponto $j$ (mediana do agrupamento), considerando
-que o ponto $i$ está associado ao agrupamento $j$ pela variável
-binária $x_{ij}$, sendo $x_{ij}=1$ caso o ponto $i$ esteja associado
-ao agrupamento $j$ e $0$ caso contrário. A restrição (\ref{eq:1Cluster_CCP})
-indica que cada ponto deve estar associado a um único agrupamento
-e (\ref{eq:mustAssign_CCP}) impõe que todos os pontos deve ser atribuídos
-a um agrupamento. Já (\ref{eq:numClusters_CCP}) indica que devem
-existir $p$ agrupamentos. Para garantir que a capacidade $Q$ de
-um agrupamento não será ultrapassado, é inserida a restrição (\ref{eq:capacity_CCP}).
-A última restrição, (\ref{eq:sets_CCP}), especifica as variáveis
-inteiras de decisão. I é o conjunto de indivíduos.
+Em (\ref{eq:obj_CCP}), temos a função objetivo que minimiza a distância
+entre os componentes de cada agrupamento com a mediana do agrupamento. A medida $c_{ij}$, do ponto $i$ até o ponto $j$ (mediana do agrupamento), somente é considerada
+se o ponto $i$ está associado ao agrupamento $j$ pela variável binária $x_{ij}$, sendo $x_{ij}=1$ caso o ponto $i$ esteja associado ao agrupamento $j$ e $0$ caso contrário. A restrição (\ref{eq:1Cluster_CCP}) indica que cada ponto deve estar associado a um agrupamento. Já (\ref{eq:numClusters_CCP}) indica que devem existir $p$ agrupamentos. Os indivíduos somente devem ser associados a agrupamentos existentes (\ref{eq:mustAssign_CCP}), sendo $y_{j}$ o conjunto de pontos escolhidos como medianas, sendo $y_{j}$ igual a 1 se $j$ for uma mediana e 0 caso contrário. Para garantir que a capacidade $Q_{j}$ de um agrupamento $j$ não será ultrapassado, é colocada a restrição (\ref{eq:capacity_CCP}). A última restrição, (\ref{eq:sets_CCP}), especifica as variáveis inteiras de decisão.
 
 Quando temos o valor de capacidade dos agrupamentos homogêneo, ou
 seja, o valor de $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$, podemos
 dizer que esse é um problema das $p-medianas$ capacitado.
 
-\subsection{CCCP}
+\subsection{CCCP}\sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem}
 Um outro problema de agrupamento foi proposto por Negreiro e Palhano\cite{negreiros2006capacitated}
 é o CCCP (Capacitated Centred Clustrering Problem - Problema de agrupamento
 centrado capacitado) onde os agrupamentos passam a ter seu centro
@@ -176,7 +155,7 @@ Na figura \ref{fig:CCCP} é apresentada a visualização de uma solução
 para o problema $CCCP$.
 
 %
-\begin{figure}[h]
+\begin{figure}
 \begin{centering}
 \includegraphics{../TCC-I/imagens/CCCP}
 \par\end{centering}
@@ -253,17 +232,12 @@ de decisão.
 
 
 \section{Métodos de resolução}
-Devido a características como o tamanho de espaço de busca, a resolução de problemas de particionamento utilizando métodos exatos ou de otimização como \emph{branch and bound} são inefetivos em intâncias maiores \cite{osman1994capacitated}. Para o CCP, temos $n^{2}+n$ variáveis inteiras \cite{RePEc:eee:ejores:v:18:y:1984:i:3:p:339-348}.
+Devido a características como o tamanho de espaço de busca, a resolução de problemas de particionamento utilizando métodos exatos ou de otimização como \emph{branch and bound} são inefetivos em intâncias maiores \cite{osman1994capacitated}.
 
 Para obter soluções em tempos computacionais viáveis (por exemplo no caso do PDSO, uma solução não poderia levar mais que 8 horas para ser processada), é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
 
-podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
+Podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
 \begin{itemize}
  \item Construtivas: Algoritmos desenvolvidos especificamente para uma determinada classe de problemas. Normalmente as soluções estão em um ótimo local ou muito próximo de um;
  \item Iterativas: A partir de uma solução inicial válida, e busca na vizinhança iterativamente por outras soluções melhores. A busca na vizinha normalmente conduz a um vale/pico, chegando a um ótimo local ao final das iterações.
 \end{itemize}
-
-
-
-
-

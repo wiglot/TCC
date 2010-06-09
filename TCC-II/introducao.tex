@@ -9,7 +9,7 @@ clientes e companhias de distribuição de energia elétrica também referente aos
 suporte a clientes.
 % Esse ultimo cenário que esse trabalho toma emprestado para os estudos de caso.
 
-Esses tipos de atendimentos aos clientes são chamados de ordens de serviço (OS),
+Esses tipos de atendimentos aos clientes são chamados de ordens de serviço (OS)\sigla{OS} {Ordem de serviço},
  podendo ter outros nomes conforme a área de atuação da empresa, mas sempre com
  o intuito de registrar que a empresa deve fazer um atendimento a um determinado
 cliente.
@@ -33,7 +33,7 @@ Nesse cenário de estudo tomamos algumas premissas como válidas:
  \item Não será considerado o tempo de deslocamento entre os atendimentos das OS.
 \end{itemize}
 
-Essas premissas definem o PDOS (Problema de Despacho de Ordens de Serviço), onde
+Essas premissas definem o PDOS \sigla{PDOS} {Problema de Despacho de Ordens de Serviço}, onde
 devemos associar todas OS as equipes de modo que uma OS seja atendida por uma, e não mais que uma, equipe.
 Minimizar o deslocamento entre os atendimentos é algo desejável para as empresas, pois diminui os custos e o tempo de deslocamento entre os atendimentos pela menor distância percorrida.
 
@@ -49,11 +49,12 @@ Ao atribuir as OS levando em consideração apenas a carga horária da equipe e o t
 \caption{\label{FigDemandaCapacidade}Alocação de OS apenas pelas Demandas e
 Capacidades }
 \end{figure}
+
 É possível perceber que os atendimentos de cada equipe encontram-se
 dispersos, necessitando um maior deslcomento das equipes de um atendimento a
 outro do que se os atendimentos estivessem agrupados mais próximos.
 
-Um problema que engloba essas características apresentadas é o Problema de Agrupamento Capacitado (CCP - Capacitated Clustering Problem), clássico na literatura e também conhecido como Problema das P-Medianas Capacitado (CPMP).
+Um problema que engloba essas características apresentadas é o  CCP \sigla{CCP} {Problema de Agrupamento Capacitado - Capacitated Clustering Problem}, clássico na literatura e também conhecido como (CPMP) \sigla {CPMP}{Problema das P-Medianas Capacitado - Capacitated P-Medians Problem}.
  Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderiam estar associadas às equipes.
 
 É possível perceber que ainda assim não foi possível atribuir as OS de modo que todas OS de de uma equipe fique próximas de uma OS escolhida como centro.
@@ -70,12 +71,12 @@ Um problema que engloba essas características apresentadas é o Problema de Agrup
 As instâncias inéditas desse problema foram retiradas de ordens de atendimento
 de um concessionária de distribuição de energia elétrica e tiveram que ter a
 capacidade de atendimento normalisadas para ser possível gerar soluções válidas
-do problema. Esse fato ocorre pois para se encontrar uma solução é necessário
+do problema. Esse fato ocorre pelo fato de encontrar uma solução é necessário
 existir uma folga entre das demandas e a capacidade. À frente neste trabalho será
 apresentado um estudo sobre essas folgas.
 
 Nesse trabalho não trataremos da geração de rotas entre os atendimentos, mas
-esse problema já foi tratado na literatura como o problema do caixeiro viajante
-agrupado, onde desejamos entrar os menor ciclo Hamiltoniano, sendo que os pontos
+esse problema já foi tratado na literatura como o CTSP \sigla{CTSP} {Problema do Caixeiro Viajante
+Agrupado - Clustered Travel Salesman Problem}, onde desejamos entrar os menor ciclo Hamiltoniano nos pontos, sendo que os pontos
 dos agrupamentos devem ser visitados em sequência \cite{jeanCTSP-Genetic}.
 

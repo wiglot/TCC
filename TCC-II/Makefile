@@ -3,10 +3,12 @@
 all: TCC-II.ps TCC-II.pdf
 
 TCC-II.dvi : clean TCC-II.tex
-	latex TCC-II
+	latex -interaction=nonstopmode TCC-II 
+#	geratss TCC-II
+#	latex -interaction=nonstopmode TCC-II 
 	bibtex TCC-II
-	latex TCC-II
-	latex TCC-II
+	latex -interaction=nonstopmode TCC-II 
+	latex -interaction=nonstopmode TCC-II
 	
 TCC-II.ps: TCC-II.dvi
 	dvips -t a4 -o TCC-II.ps TCC-II
