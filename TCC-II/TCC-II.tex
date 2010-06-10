@@ -5,28 +5,30 @@
 
 % Utilize a opção normalfigtabnum para numerar as figuras e tabelas por capítulo
 
+\usepackage{ccaption}
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage{abnt-alf}
 \usepackage{tabela-simbolos}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
 
 %Package para figuras
-\usepackage{graphicx}
+% \usepackage{graphicx}
 \usepackage{subfig}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-\usepackage{float}
-\usepackage{amsthm}
+% \usepackage{float}
+% \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{setspace}
 
-\floatstyle{ruled}
-\newfloat{algorithm}{tbp}{loa}[chapter]
-\floatname{algorithm}{Algorithm}
+\makeatletter   %Para que ele entenda o @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tikz commands.
 \usepackage{tikz}
-\usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,arrows}
+% \usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,arrows}
 \usetikzlibrary{mindmap}
 \usepackage{lscape}
 
@@ -42,7 +44,16 @@
 %    /Keywords (PO, CCP)
 % }
 
-\makeatletter	%Para que ele entenda o @
+% % % % % % % % % % % % % % Renomeia
+\renewcommand{\ALG@name}{ALGORITMO}
+\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+% % %  Deveria funcionar ¬¬
+%  \captionnamefont{\bfseries}
+%   \captiontitlefont{\small\sffamily}
+%   \captiondelim{ --- }
+%   \hangcaption
+\renewcommand{\figurename}{FIGURA}
+\renewcommand{\tablename}{TABELA}
 
 
 

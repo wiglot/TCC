@@ -12,16 +12,14 @@ muito grandes, o uso de heurísticas traz soluções muito boas, algumas
 vezes muito próximas aos métodos exatos. Serão apresentadas algumas
 heurísticas construtivas para o CCP:
 \begin{description}
-\item [{CCP}]~
-\begin{description}
 \item [{Farthest:}] Proposta por Osman e Christofides em \cite{osman1994capacitated},
 tem como base escolher os pontos mais afastados para serem os primeiros
 centros
 \item [{Density:}] Proposta por Ahmadi e Osman em \cite{ahmadi2004density},
 visa construir uma solução inicial usando a densidade de pontos para
 construir a solução inicial.
-\item [{J-Means:}] Proposta pos Hansen e Mladenovi\'{c}\cite{Hansen_j-means:a}, usa a noção de pontos ocupados e não ocupados (a uma certa distância do agrupamento).
 \item [{H-Means:}] O método de Forgy ((também conhecido, e tratado aqui, como H-Means) foi inicialmente proposto por \cite{forgy1965cluster} e iterativamentem procura os melhores centros para os agrupamentos realocando os pontos a cada troca.
+\item [{J-Means:}] Proposta pos Hansen e Mladenovi\'{c}\cite{Hansen_j-means:a}, usa a noção de pontos ocupados e não ocupados (a uma certa distância do agrupamento).
 \end{description}
 % \item [{CCCP}]~
 %
@@ -32,7 +30,6 @@ construir a solução inicial.
 % alterando-a até conseguir uma solução factível. Ambos métodos para
 % CCCP apresentados em \cite{negreiros2006capacitated};
 % \end{description}
-\end{description}
 
 \section{CCP}
 
@@ -130,7 +127,7 @@ pontos e C o conjunto de centros. Essa função tenta associar os pontos
 em A com os agrupamentos em C e está descrita em \ref{alg:;EncontreOsMelhoresAgrupamentos}.
 \end{itemize}
 %
-\begin{algorithm}[ht]
+\begin{algorithm}
 \caption{\label{alg:;EncontreOsMelhoresAgrupamentos}EncontreOsMelhoresAgrupamentos(C,A)} %\protect \\}
 
 
@@ -188,10 +185,9 @@ De modo iterativo, esse método vai construindo um agrupamento por
 vez e recalculando a densidade ($D)$ e arrependimento ($R$) do conjunto.
 
 %
-\begin{algorithm}[ht]
+\begin{algorithm}
 \caption{{ProcedimentoPrincipal}\label{alg:ProcedimentoDensidade}}
-
-
+% \begin{algorithmic}
 I: conjunto de $n$ pontos
 
 C: conjunto de centros
@@ -228,8 +224,41 @@ Se $k\geq2$ então chame $EncontreOsMelhoresAgrupamentos(C,Y)$;
 Se $k<p$ então volte ao passo 2;
 
 $EncontreOsMelhoresAgrupamentos(C,A)$
+
+% \end{algorithmic}
 \end{algorithm}
 
+\subsection{H-Means}
+Explicar, indicando que o algoritmo utilizado foi o H-Means alterado (H-Means+) e o algoritmo.
+
+Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximos. O algoritmo pode ser visto em \ref{alg:HMeans}
+
+\begin{algorithm}
+\caption{{H-Means}\label{alg:HMeans}}
+
+Selecione P pontos como centros iniciais;
+
+Aloque cada ponto restante ao centro mais próximo;
+
+Caso não tenha ocorrido alteração de associações Pare.
+
+Encontre o melhor centro para cada agrupamento e volte ao passo 2;
+
+\end{algorithm}
+
+\subsection{J-Means}
+Essa heurística proposta por \cite{Hansen_j-means:a} utiliza a idéia de indivíduos não ocupados (indivíduos que se encontram afastadas da mediana do agrupamento por uma certa tolerância), para criar um novo agrupamento em alguma desses indivíduos que substitua algum dos agrupamentos existentes, de modo a diminuir o valor da função objetivo.
+
+\begin{algorithm}[ht]
+\caption{{J-Means}\label{alg:JMeans}}
+Selecione P partições dos pontos que serão os agrupamentos (C)
+
+Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
+
+Para cada ponto não ocupado, tente substituir um centro existente por ele. Mantenha o que apresentar maior redução na função objetivo
+
+Se valor da função objetivo da solução nova (C')é menor que C, C=C'e volte ao passo 2. Caso contrario Pare.
+\end{algorithm}
 
 Uma comparação entre as soluções geradas pelas heurísticas pode ser
 visto na figura \ref{fig:CCP-compara=0000E7=0000E3o}. A Instância
@@ -255,15 +284,6 @@ Density \subref{a} possui os agrupamentos bem mais compactos que na
 solução pela heurística Farthest \subref{b}.}
 
 \end{figure}
-
-\subsection{J-Means}
-Move o agrupamento para um nova mediana
-Explicar e colocar os algoritmos.
-
-\subsection{H-Means}
-Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximospdf
-
-Explicar, indicando que o algoritmo utilizado foi o H-Means alterado (H-Means+) e o algoritmo.
 
 \section{Busca Local}
 Apartir dos resultados obtidos anteriormente, como é e o que um método de busca local pode fazer.
