@@ -229,6 +229,8 @@ $EncontreOsMelhoresAgrupamentos(C,A)$
 \end{algorithm}
 
 \subsection{H-Means}
+A idéia básica desse algoritmo é partindo de um conjunto de medianas, escolhidas de maneira aleatória, alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento encontrar o ponto $i$ de modo que
+$$ \sum$$
 Explicar, indicando que o algoritmo utilizado foi o H-Means alterado (H-Means+) e o algoritmo.
 
 Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximos. O algoritmo pode ser visto em \ref{alg:HMeans}
@@ -236,29 +238,32 @@ Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os
 \begin{algorithm}
 \caption{{H-Means}\label{alg:HMeans}}
 
-Selecione P pontos como centros iniciais;
+Selecione P pontos como medianas iniciais;
 
-Aloque cada ponto restante ao centro mais próximo;
+Aloque cada indivíduo ao agrupamento com mediana mais próxima a ele;
 
 Caso não tenha ocorrido alteração de associações Pare.
 
 Encontre o melhor centro para cada agrupamento e volte ao passo 2;
-
 \end{algorithm}
+
 
 \subsection{J-Means}
 Essa heurística proposta por \cite{Hansen_j-means:a} utiliza a idéia de indivíduos não ocupados (indivíduos que se encontram afastadas da mediana do agrupamento por uma certa tolerância), para criar um novo agrupamento em alguma desses indivíduos que substitua algum dos agrupamentos existentes, de modo a diminuir o valor da função objetivo.
 
 \begin{algorithm}[ht]
 \caption{{J-Means}\label{alg:JMeans}}
-Selecione P partições dos pontos que serão os agrupamentos (C)
+Selecione $P$ partições dos pontos que serão os agrupamentos. Armazene essa solução em $S*$.
 
 Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
 
-Para cada ponto não ocupado, tente substituir um centro existente por ele. Mantenha o que apresentar maior redução na função objetivo
+Para cada ponto não ocupado, tente substituir um centro existente por ele e reatribua os pontos aos agrupamentos de medianas mais próximas. Mantenha o que apresentar maior redução na função objetivo armazenando-a em $S'$
 
-Se valor da função objetivo da solução nova (C')é menor que C, C=C'e volte ao passo 2. Caso contrario Pare.
+Se valor da função objetivo da solução nova $S'$ é menor que a de $S*$ $faça S*=S'$'e volte ao passo 2. Caso contrario Pare.
 \end{algorithm}
+
+A escolha das partições inicias é feita de forma aleatória, selecionando as medianas e para todos indivíduos, atribua-os ao agrupamenta mais próximo com capacidade disponível para atender a demanda do indivíduo.
+
 
 Uma comparação entre as soluções geradas pelas heurísticas pode ser
 visto na figura \ref{fig:CCP-compara=0000E7=0000E3o}. A Instância
