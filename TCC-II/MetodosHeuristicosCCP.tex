@@ -18,7 +18,7 @@ centros
 \item [{Density:}] Proposta por Ahmadi e Osman em \cite{ahmadi2004density},
 visa construir uma solução inicial usando a densidade de pontos para
 construir a solução inicial.
-\item [{H-Means:}] O método de Forgy ((também conhecido, e tratado aqui, como H-Means) foi inicialmente proposto por \cite{forgy1965cluster} e iterativamentem procura os melhores centros para os agrupamentos realocando os pontos a cada troca.
+\item [{H-Means:}] O método de Forgy ((também conhecido, e tratado aqui, como H-Means) foi inicialmente proposto por \cite{forgy1965cluster} e tem como principio  a procura iterativa dos melhores centros para os agrupamentos realocando os pontos a cada troca.
 \item [{J-Means:}] Proposta pos Hansen e Mladenovi\'{c}\cite{Hansen_j-means:a}, usa a noção de pontos ocupados e não ocupados (a uma certa distância do agrupamento).
 \end{description}
 % \item [{CCCP}]~
@@ -74,7 +74,7 @@ as distância entre os pontos e o novo centro.
 Essa heuristica tem como objetivo a construção rápida de uma solução
 e para se obter melhores soluções deve-se empregar heuristicas de
 busca na visinhança da solução obtida com essa heuristica construtiva.
-Em \cite{osman1994capacitated} é apresentado um metodo hibido que
+Em \cite{osman1994capacitated} é apresentado um método híbrido que
 combina Busca tabu e simulated annealing.
 
 
@@ -229,22 +229,22 @@ $EncontreOsMelhoresAgrupamentos(C,A)$
 \end{algorithm}
 
 \subsection{H-Means}
-A idéia básica desse algoritmo é partindo de um conjunto de medianas, escolhidas de maneira aleatória, alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento encontrar o ponto $i$ de modo que
-$$ \sum$$
-Explicar, indicando que o algoritmo utilizado foi o H-Means alterado (H-Means+) e o algoritmo.
+A idéia básica desse algoritmo é partindo de um conjunto de medianas, escolhidas de maneira aleatória, alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento $j = {1,..,p}$ encontrar um ponto $k$ para ser a nova mediana do agrupamento $j$ de modo que
+$$ \sum_{i\in P_{j}} c_{i,k} = \text{MIN}_{i\in P_{j}} \sum_{i\in P_{j}} c_{i,k}$$
 
 Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximos. O algoritmo pode ser visto em \ref{alg:HMeans}
 
 \begin{algorithm}
 \caption{{H-Means}\label{alg:HMeans}}
+\begin{enumerate}
+ \item Selecione $p$ pontos como medianas iniciais;
 
-Selecione P pontos como medianas iniciais;
+ \item Aloque cada indivíduo ao agrupamento com mediana mais próxima a ele;
 
-Aloque cada indivíduo ao agrupamento com mediana mais próxima a ele;
+\item Caso não tenha ocorrido alteração de associações Pare.
 
-Caso não tenha ocorrido alteração de associações Pare.
-
-Encontre o melhor centro para cada agrupamento e volte ao passo 2;
+\item Encontre o melhor centro para cada agrupamento e volte ao passo 2;
+\end{enumerate}
 \end{algorithm}
 
 
@@ -253,16 +253,19 @@ Essa heurística proposta por \cite{Hansen_j-means:a} utiliza a idéia de indivídu
 
 \begin{algorithm}[ht]
 \caption{{J-Means}\label{alg:JMeans}}
-Selecione $P$ partições dos pontos que serão os agrupamentos. Armazene essa solução em $S*$.
+\begin{enumerate}
+ \item Selecione $p$ partições dos pontos que serão os agrupamentos. Armazene essa solução em $S*$.
 
-Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
+ \item Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
 
-Para cada ponto não ocupado, tente substituir um centro existente por ele e reatribua os pontos aos agrupamentos de medianas mais próximas. Mantenha o que apresentar maior redução na função objetivo armazenando-a em $S'$
+ \item Para cada ponto não ocupado, tente substituir um centro existente por ele e reatribua os pontos aos agrupamentos de medianas mais próximas. Mantenha o que apresentar maior redução na função objetivo armazenando-a em $S'$
 
-Se valor da função objetivo da solução nova $S'$ é menor que a de $S*$ $faça S*=S'$'e volte ao passo 2. Caso contrario Pare.
+ \item Se valor da função objetivo da solução nova $S'$ é menor que a de $S*$ faça $S*=S'$'e volte ao passo 2. Caso contrario Pare.
+
+\end{enumerate}
 \end{algorithm}
 
-A escolha das partições inicias é feita de forma aleatória, selecionando as medianas e para todos indivíduos, atribua-os ao agrupamenta mais próximo com capacidade disponível para atender a demanda do indivíduo.
+A escolha das partições inicias é feita de forma aleatória, selecionando as medianas e para todos indivíduos, atribua-os ao agrupamento mais próximo com capacidade disponível para atender a demanda do indivíduo.
 
 
 Uma comparação entre as soluções geradas pelas heurísticas pode ser
@@ -275,22 +278,100 @@ ser muito alto pela complexidade do algoritmo.
 \begin{figure}[ht]
 \begin{centering}
 \subfloat[]{
-\includegraphics[scale=0.4]{../TCC-I/imagens/cluster_Density_SJC4a.png}\label{a}
+% \begin{center}
+ \includegraphics[scale=0.4,keepaspectratio=true]{../TCC-I/imagens/cluster_Density_SJC4a.png}\label{a}
+ % cluster_Density_SJC4a.png: 523x527 pixel, 83dpi, 16.00x16.13 cm, bb=0 0 454 457
+% \end{center}
+
 }
 \subfloat[]{
-\includegraphics[scale=0.4]
-{../TCC-I/imagens/cluster_Farthest_SJC4a.png}\label{b}
+% \begin{center}
+ \includegraphics[scale=0.4,keepaspectratio=true]{../TCC-I/imagens/cluster_Farthest_SJC4a.png}\label{b}
+ % cluster_Farthest_SJC4a.png: 510x508 pixel, 83dpi, 15.61x15.54 cm, bb=0 0 442 441
+% \end{center}
+
+% \includegraphics[scale=0.4]{../TCC-I/imagens/cluster_Farthest_SJC4a.png}\label{b}
 }
 \par
-\end{centering}
 
 \caption[Comparação heurísticas Density-Farthest]{\label{fig:CCP-compara=0000E7=0000E3o}A solução gerada pela heurística
 Density \subref{a} possui os agrupamentos bem mais compactos que na
 solução pela heurística Farthest \subref{b}.}
-
+\end{centering}
 \end{figure}
 
 \section{Busca Local}
 Apartir dos resultados obtidos anteriormente, como é e o que um método de busca local pode fazer.
-Usando os movimentos descritos por \cite{osman1994capacitated} de interchange (intercâmbio) e shift (mudança) temos os mecanismos de geração das soluções vizinhas à atual.
+Usando os movimentos descritos por \cite{osman1994capacitated} de interchange (intercâmbio) e shift (mudança) temos os mecanismos de geração das soluções vizinhas à atual. Ambos movimento devem respeitar a capacidade cada agrupamento, não inserindo um indivíduo que ultrapasse tal capacidade.
 
+O movimento shift é uma troca simples onde apenas é removido um indivíduo $i$ de um agrupamento $C$ e o mesmo indivíduo é inserido em um outro agrupamento $C'$, sendo $C \neq C'$ e $C'$ possui capacidade suficiente para atender a demanda de $i$. Esse movimento não permite grande exploração da vizinhança, uma vez que para executar-lo é necessário que exista uma capacidade ociosa nos agrupamentos para receber novos pontos. Na figura \ref{shiftExample} é apresentado um exemplo de movimento shift executado em uma solução válida do problema.
+
+\begin{figure}[ht]
+\begin{centering}
+\subfloat[]{
+ \includegraphics[scale=0.6]{../apresentacao_andamento/before_shift.png}% \label{a}
+ % before_shift.png: 414x232 pixel, 96dpi, 10.95x6.14 cm, bb=0 0 310 174
+
+}
+\subfloat[]{
+ \includegraphics[scale=0.6]{../apresentacao_andamento/after_shift.png}% \label{b}
+ % after_shift.png: 414x232 pixel, 96dpi, 10.95x6.14 cm, bb=0 0 310 174
+}
+\par
+\caption[Exemplo movimento Shift]{Em \ref{a} temos uma solução com 2 agrupamentos e em \ref{b} uma solução vizinha após movimento de shift.}\label{shiftExample}
+\end{centering}
+\end{figure}
+
+
+O movimento de interchange, visa trocar um indivíduo $i'$ de um agrupamento $C'$ por um outro indivíduo $i$ de um outro agrupamento $C$, sendo $i \neq i'$ e $C \neq C'$.
+Esse movimento permite que sejam encontradas novas soluções vizinhas a atual mesmo quando os agrupamentos se encontram com demanda alta (pouca capacidade disponível), pois a troca é feita em um único momento sem que necessariamente um agrupamento deva ter capacidade suficiente para receber um ponto extra. Nas figuras em \ref{interchangeExample}, pode ser visto o movimento interchange, sendo em (a) os agrupamentos existentes e que permitem a troca dos pontos entre si pelo movimento interchange e em (b) a solução obtida pelo movimento.
+\begin{figure}[ht]
+\begin{centering}
+\subfloat[]{
+ \includegraphics[scale=0.6]{../apresentacao_andamento/before_interchange.png}% \label{a}
+ % before_shift.png: 414x232 pixel, 96dpi, 10.95x6.14 cm, bb=0 0 310 174
+
+}
+\subfloat[]{
+ \includegraphics[scale=0.6]{../apresentacao_andamento/after_interchange.png}% \label{b}
+ % after_shift.png: 414x232 pixel, 96dpi, 10.95x6.14 cm, bb=0 0 310 174
+}
+\par
+\caption[Exemplo movimento interchange]{Em \ref{a} temos uma solução com 2 agrupamentos e em \ref{b} uma solução vizinha após movimento de interchange.} \label{interchangeExample}
+\end{centering}
+\end{figure}
+
+Ao final de cada movimento, as medianas são recalculadas de modo a minimizar a função objetivo do problema.
+
+
+Para busca local, foram implemetados 2 algoritmos, ambos usando uma busca gulosa na vizinhança por soluções com valores da função objetivo menores e cada um deles usando um dos movimentos acima descritos.
+
+Para o algoritmo com o movimento shift, chamdo internamente na ferramenta computacional ShiftHillClimb, ele faz uma busca completa de todas possibilidades de mudança do indivíduo do agrupamento atual para os demais, efetuando a troca do indivíduo que dê um maior ganho para a função objetivo. Ele segue o algoritmo apresentado em \ref{alg:ShiftHillClimb}. Esse algoritmo é executatod iterativamente até que não existam soluções vizinha com uma função objetivo menor (um mínimo local) e tem  complexidade de $O(n\cdot p)$ para cada iteração.
+\begin{algorithm}
+\caption{{ShiftHillClimb}\label{alg:ShiftHillClimb}}
+\begin{algorithmic}[1]
+\STATE $MelhorSol \leftarrow AtualSol $
+\REPEAT
+\STATE $NovaSol \leftarrow MelhorSol$
+\FORALL {$i \in I$}
+\STATE Procura a melhor troca de i para um dos demais p-1 agrupamentos
+\ENDFOR
+\STATE $NovaSol \leftarrow melhor movimento de Shift$
+\UNTIL{NovaSol $<$ MelhorSol }
+\end{algorithmic}
+\end{algorithm}
+
+O algoritmo de busca local implementado usando o movimento de interchange, originalmente tentava executar a troca de um ponto com todos os pontos dos demais agrupamentos que não o seu. Isso o deixava com uma complexidade $O(n \cdot (p-1) \cdot \frac{n}{p})$, algo muito próximo a $O(n^{2})$ para cada iteração.Para reduzir o espaço de busca do algoritmo, uma vez que muitos dos intercâmbios não geram soluções melhores, implementamos o algoritmo \ref{alg:InterchangeHillClimb}.
+\begin{algorithm}
+\caption{{InterchangeHillClimb}\label{alg:InterchangeHillClimb}}
+\begin{algorithmic}[1]
+\STATE $MelhorSol \leftarrow AtualSol $
+\REPEAT
+\STATE $NovaSol \leftarrow MelhorSol$
+\FORALL {$i \in I$}
+\STATE A R R U M A R    I S S O ! ! !
+\ENDFOR
+\STATE $NovaSol \leftarrow melhor movimento de Shift$
+\UNTIL{NovaSol $<$ MelhorSol }
+\end{algorithmic}
+\end{algorithm}
