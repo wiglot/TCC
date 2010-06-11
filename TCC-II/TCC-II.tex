@@ -4,7 +4,8 @@
 \documentclass{abnt}			% [pnumromarab,normaltoc] Numeração de acordo com UFPR
 
 % Utilize a opção normalfigtabnum para numerar as figuras e tabelas por capítulo
-
+\usepackage{hyperref}
+\usepackage{bookmark}
 % \usepackage{ccaption}
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc}
@@ -37,17 +38,17 @@
 
 \floatstyle{boxed} \restylefloat{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF % % % % % % % % % % % % % % % % %
-% \usepackage{hyperref}
+%
 % \usepackage{bookmark}
 %
-% \pdfinfo{
-%    /Author (Wagner de Melo Reck)
-%    /Title  (Algoritmos de agrupamento capacitado aplicado ao Problema de
-% Despacho de Ordens de Serviço)
-%    /CreationDate (D:20100621095600)
-%    /Subject (TCC UNIPAMPA-ALegrete)
-%    /Keywords (PO, CCP)
-% }
+\pdfinfo{
+   /Author (Wagner de Melo Reck)
+   /Title  (Algoritmos de agrupamento capacitado aplicado ao Problema de
+Despacho de Ordens de Serviço)
+   /CreationDate (D:20100621095600)
+   /Subject (TCC UNIPAMPA-ALegrete)
+   /Keywords (PO, CCP)
+}
 
 % % % % % % % % % % % % % % Renomeia
 \renewcommand{\ALG@name}{ALGORITMO}
