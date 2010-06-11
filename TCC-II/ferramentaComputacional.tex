@@ -1,14 +1,47 @@
 \chapter{Ferramenta Computacional}
-Para melhor executar os estudos do problema, foi desenvolvida uma ferramenta computacional que contém
+Para melhor executar os estudos do problema, foi desenvolvida uma ferramenta computacional que prove a visualização dos resultados, permite programar execuções de algoritmos para arquivos abertos com a opção de aplicar ou não os algoritmos de busca local além de permitir rodar arquivos em lote.
+Os resultados são aprentado em uma saida de texto e salvos em um arquivo o que permite manter um histórico das execuções para cada arquivo.
 
-Falar também do plugin desenvolvido para o Rocs \cite{Rocs2010}
+\begin{figure}[ht]
+ \centering
+ \includegraphics[viewport=0 0 496 563, scale=0.5]{./images/CCPFerramentaNumerada.png}
+ % CCPFerramentaNumerada.png: 662x751 pixel, 96dpi, 17.51x19.87 cm, bb=0 0 496 563
+ \caption{Tela principal da ferramenta desenvolvida\label{fig:FerramentaNossa}}
+\end{figure}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere congue lacinia. Maecenas placerat posuere vehicula. Mauris sit amet libero mi, non molestie dui. Aliquam auctor dictum vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla at neque ante. Proin scelerisque placerat dapibus. Etiam viverra erat at sem lacinia non pharetra felis hendrerit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla nec velit nec arcu scelerisque euismod. Vestibulum suscipit ornare ante. Aliquam tellus sem, pulvinar at aliquam ut, vestibulum ut erat. Pellentesque sed erat vitae purus hendrerit adipiscing feugiat non turpis.
+Os processamentos de algoritmos contrutivo e de busca local solicitados pelo utilizador, são armazenados em um fila sendo que o processamento deles ocorre em uma thread separada, permitindo a interface do utilizador não fique bloqueada enquanto o dados são processados.
 
-Maecenas vulputate, urna et tristique suscipit, augue nunc mattis nisi, ut tincidunt ipsum velit at lacus. Vestibulum pharetra magna et massa dignissim cursus. Mauris tristique nibh enim. In a velit non nibh mattis dapibus. Suspendisse potenti. Quisque vel lectus eu augue pulvinar volutpat. Quisque ut purus eget purus consectetur interdum. Maecenas ut libero risus, id lobortis sapien. Aenean placerat sodales ante non tempus. Fusce id diam a leo ornare varius ut nec ipsum. Phasellus mauris sapien, ultrices vitae pharetra a, consectetur ac tellus. Phasellus turpis leo, dignissim in laoreet sed, rutrum sollicitudin nisl. Maecenas risus diam, consectetur vel commodo ac, suscipit vel tellus. Proin luctus, mi id mattis adipiscing, ipsum dui feugiat enim, vel blandit elit mauris at nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer porttitor dapibus mauris ut euismod.
+Como os algoritmos de busca local podem ser aplicados nas soluções geradas por eles, foi implementada uma organização dos resultados derivados em formato de árvore. Essa árvore permite a navegação nela, mostrando na janela de visualização de resultados (canvas) os resultados nela selecionados.
 
-Donec a mi vehicula quam luctus semper non a nisi. Phasellus aliquam est vel urna cursus sit amet commodo odio iaculis. Etiam quis dui odio, sed ultricies felis. Nulla elit urna, fermentum eu sagittis vel, sollicitudin quis nisl. Ut faucibus lacus eu purus pretium a molestie dolor adipiscing. Aenean vel est nibh, ac dapibus turpis. Aliquam varius laoreet mauris, luctus lacinia ligula fermentum a. Phasellus pulvinar, tortor sit amet posuere cursus, mauris nisi scelerisque ipsum, consequat sodales est est et tellus. Mauris et nibh nulla, nec semper justo. Donec placerat augue id justo sagittis viverra. Pellentesque vehicula, elit quis tincidunt mollis, metus metus accumsan arcu, ac condimentum nisl velit in nibh. Quisque sit amet porttitor mauris. Phasellus a lorem elit, sit amet vehicula mi.
+Como alguns algoritmos tem a escolha das medianas iniciais de forma aleatória, é possível indicar quantas vezes os algoritmos com essa propriedade sejam executados.
 
-Quisque ornare, massa id pulvinar dignissim, augue justo ultrices tortor, ac convallis lectus odio vel diam. Pellentesque volutpat diam et sem eleifend porta. Aenean egestas, neque rutrum luctus scelerisque, turpis ante sagittis leo, ut hendrerit libero libero at purus. Vestibulum mauris metus, tincidunt eu posuere volutpat, ullamcorper vitae augue. Praesent et ligula tellus, ac iaculis lacus. Nullam nisl ante, ullamcorper ut consequat quis, interdum vel turpis. Suspendisse at laoreet neque. Nullam ut pretium sem. Nam non magna ligula, vel interdum quam. Cras fermentum consectetur ligula. Nam consectetur mi non nibh cursus volutpat at eu lectus. Suspendisse dictum dictum felis ac rhoncus. Vivamus nisi massa, accumsan ut accumsan vitae, hendrerit nec erat. Nulla facilisi. Nam ut tellus ipsum.
+Para o desenvolvimento foi escolhida a linguagem de programção C++ fazendo uso do paradigma orientado a objetos e utilizado como compilador o GCC\sigla{GCC}{Coleção de Compiladores GNU - GNU Compiler Collection} da GNU\sigla{GNU}{GNU Não é Unix - GNU is Not Unix}. A interface foi construida utilizando o framework Qt da Nokia, o qual serviu não apenas de base da interface, mas também para os casos de teste, comunicação entre objetos, processamento de arquivos e concorrência (threads). Para o gerenciamento de versões do projeto foi utilizado o git, tendo os códigos disponibilizados no repositório http://github.com/wiglot/CCP.
 
-Aenean elementum neque vel velit aliquam mollis. Aenean vel venenatis quam. Nulla quis eros erat, ut euismod nunc. Morbi lorem risus, lacinia accumsan sodales in, hendrerit non odio. Praesent eu turpis nisl, sed fermentum sem. Nam malesuada dui sit amet mauris hendrerit hendrerit iaculis erat ultricies. Maecenas ligula neque, aliquam eget imperdiet eget, pulvinar et ipsum. In at lectus ipsum, sit amet porta lectus. Nulla tincidunt ipsum vitae massa convallis eget porta augue cursus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer interdum placerat auctor. Sed auctor adipiscing risus, vitae mollis orci fermentum sit amet. Suspendisse non pellentesque metus. Quisque eget libero quis eros ullamcorper aliquet sed vel nulla. Vestibulum consequat, sem vel aliquam gravida, ante justo facilisis dui, ac feugiat velit nunc nec massa. Aliquam elit magna, posuere ut dapibus eu, imperdiet vitae erat. Cras felis sapien, sagittis eu tempus eget, vehicula et ante. Aenean rhoncus, elit sed tristique hendrerit, metus augue elementum velit, at vulputate sem sapien id justo. Vestibulum velit nisi, aliquam a tempor sed, convallis non nisi.
+Para efetuar a geração dos arquivos makefiles, utilizados para executar a compilação da ferramenta, foi utilizado o gerador de makefiles CMake pela facilidade de uso, poder no controle de decisões e por possibilitar a execução dos casos de teste de forma automatizada pelo pacote CTest, o qual faz parte do próprio CMake.
+
+Como contribuição, também foi desenvolvido uma primeira versão de um plugin (biblioteca dinâmica) para o Rocs \cite{Rocs2010} do KDE-EDU (conjunto de softwares educacionais do KDE), permitindo uma possível interação com a soluções geradas pelos algoritmos aqui trartados através de comandos na linguagem java script e também a criação de algoritmos para análise de tais soluções. Essa primeira versão do plugin permite a abertura de arquivos do problema CCP e a execução de algum dos algoritmos desenvolvidos aqui. Na figura \ref{fig:DuasFerramentas} temos um exemplo das duas ferramentas com a mesma instância e o mesmo algoritmo rodado (density).
+
+\begin{figure}[ht]
+\begin{center}
+\subfloat[]{
+ \includegraphics[scale=0.36]{./images/CCPFerramenta.png} \label{fig:ccpferramenta}
+ % CCPFerramenta.png: 662x749 pixel, 96dpi, 17.51x19.81 cm, bb=0 0 496 562
+}
+\subfloat[]{
+ \includegraphics[scale=0.36]{./images/RocsCCP.png} \label{fig:rocsCCP}
+ % RocsCCP.png: 865x739 pixel, 96dpi, 22.88x19.55 cm, bb=0 0 649 554
+}
+\par
+\caption{Rocs e a ferramenta desenvolvida}{Duas ferramentas, a desenvolvida nesse trabalho \subref{fig:ccpferramenta} e o Rocs \subref{fig:rocsCCP} ambos com os mesmos algoritmos rodados sobre a mesma instância \label{fig:DuasFerramentas}}
+\end{center}
+\end{figure}
+
+Tanto o plugin para o Rocs quanto a ferramenta desenvolvida como um todo, estão licenciados pela GPL, o que permite a futuros estudantes e pesquisadores utilizarem e modificarem a ferramenta conforme suas necessidades, não necessitando recriar todo um sistema do zero.
+
+Nos anexos estão apresentados os diagramas UML da ferramenta. A ferramenta está dividida nas seguintes bibliotecas:
+\begin{description}
+\item {CCPAlgorithms:} Algoritmos construtivos. Não inclui busca local nem o controle da execução dos algoritmos (concorrência)
+\item {CCPClusterView:} Define as janelas e itens gráficos.
+\item {CCPIOlib:} Tratam da entrada de dados dos arquivos.
+\item {CCPModel:} Representa o problema com todas estruturas básicas para representar uma instância a solução. Cuida também do enfileiramento dos pedidos de execução dos algoritmos e buscas locais.
+\end{description}

@@ -366,12 +366,20 @@ O algoritmo de busca local implementado usando o movimento de interchange, origi
 \caption{{InterchangeHillClimb}\label{alg:InterchangeHillClimb}}
 \begin{algorithmic}[1]
 \STATE $MelhorSol \leftarrow AtualSol $
+\STATE $Q \leftarrow \lceil p * 0.3 \rceil$
+\STATE $K \leftarrow \lfloor \frac{n}{p}\cdot 0.5 \rfloor$
 \REPEAT
 \STATE $NovaSol \leftarrow MelhorSol$
-\FORALL {$i \in I$}
-\STATE A R R U M A R    I S S O ! ! !
+\FORALL {$ i \in I $ }
+\FORALL {$ j \in K \text{ agrupamentos mais próximos de } i $}
+\STATE $Procura de i com Q \text{indiv\'{i}duos} \in j mais \text{próximos}$
 \ENDFOR
-\STATE $NovaSol \leftarrow melhor movimento de Shift$
+\ENDFOR
+\STATE $NovaSol \leftarrow melhor movimento de interchange$
 \UNTIL{NovaSol $<$ MelhorSol }
 \end{algorithmic}
 \end{algorithm}
+
+Com essa metodologia, conseguimos reduzir o espaço de busca pela elimininação das soluções que não apresentariam reduções no valor da função objetivo. Uma rápida analise na complexidade $O(n \cdot Q \cdot K)$, onde Q = 30\% dos agrupamentos ($p\cdot 0.3$) e K é 50\% da média de pontos por agrupamento ficando uma complexidade muito próxima de $O(n)$ para cada iteração.
+
+O número de iterações para cada um desses algoritmos é inversamente proporcional a qualidade da solução, uma vez que uma solução boa tem poucas, ou até mesmo nenhuma, soluções com valor da função objetivo melhor que a sua, o que demanda menos passos no algoritmo para chegar em mínimo loca.

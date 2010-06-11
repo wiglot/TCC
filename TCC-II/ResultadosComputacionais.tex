@@ -1,2 +1,60 @@
 \chapter{Resultados Computacionais}
 Apresentação e análise dos resultados obtidos
+
+Na tabela \ref{tab:valoresInstancias} apresentamos os valores obtidos para os 5 algoritmos implementados. Para os algoritmos que utilizam de aleatoriedade na seleção dos pontos, eles foram executados 10 vezes cada um e foi tirada a média das 10 execuções. Mais a frente mostraremos a variância dos resultados obtidos.
+\begin{table}[htp]
+\begin{center}
+\caption {\\Valores da obtidos das instâncias pelos algorithmos construtivos.\label{tab:valoresInstancias}}
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+Instância & \multicolumn{2}{c}{Density} & \multicolumn{2}{c}{Farthest} & \multicolumn{2}{c}{H-Means}
+          & \multicolumn{2}{c}{J-Means}  & \multicolumn{2}{c}{Random Density} \\
+&\multicolumn{1}{c}{Valor}&\multicolumn{1}{c}{T(s)}
+&\multicolumn{1}{c}{Valor}&\multicolumn{1}{c}{T(s)}
+&\multicolumn{1}{c}{Valor}&\multicolumn{1}{c}{T(s)}
+&\multicolumn{1}{c}{Valor}&\multicolumn{1}{c}{T(s)}
+&\multicolumn{1}{c}{Valor}&\multicolumn{1}{c}{T(s)} \\
+\midrule
+%%%%%%%Valores
+SJC1  &18.193,2 &0,085& 25.905,0 & 0,009 &19.169,4 &0,002&20.247,9 &0,177 &99999 &0,1\\
+SJC2  & 34.520,4  &0,393&52.121,3 &0,030&35.179,5&0,003&34.591,2&3,002&99999 &0,1\\
+SJC3a & 47.976,7  &1,678&76.345,3&0,036&49.231,8&0,013&48.140,4& 28,983 &99999 &0,1\\
+SJC3b & 42.501,7  &1,839&69.956,2& 0,050& 42.607,4&0,010&42.329,0&50,773 &99999 &0,1\\
+SJC4a & 65.655,4  &6,396&103.171,0 &0,056&66.763,9&0,021&67.595,4&74,550 &99999 &0,1\\
+SJC4b & 54.077,1  &6,254&92.948,9 &0,054& 57.092,1&2,981&55.412,2&199,51 &99999 &0,1\\
+SJC5 & 97.681,6  &5,110&134.798,0 &0,050& 99.502,9 &0,026&100.117,0&49,322 &99999 &0,1\\
+AESM\_10 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AECS\_10 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AENH\_10 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AESL\_10 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AESM\_20 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AECS\_20 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AENH\_20 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AESL\_20 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AESM\_30 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AECS\_30 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AENH\_30 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+AESL\_30 & 99999 &0,1&99999 &0,1&99999 &0,1&99999 &0,1 &99999 &0,1\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{table}[ht]
+\begin{center}
+\caption {\\Comparação dos resultados com a literatura.}
+\begin{tabular}{lccccc} \hline
+Instância & Valor & Algoritmo & LO & NE & Diferença   \\ \hline
+SJC1  & 99999 &Density &99999 &99999 & \\
+SJC2  & 99999 &Density &99999 &99999 & \\
+SJC3a & 99999 &J-Means &99999 &99999 & \\
+SJC3b & 99999 &Density &99999 &99999 & \\
+SJC4a & 99999 &Density &99999 &99999 & \\
+SJC4b & 99999 &Density &99999 &99999 & \\
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
