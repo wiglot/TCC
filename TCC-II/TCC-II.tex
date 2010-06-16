@@ -15,6 +15,7 @@
 \usepackage{algorithmic}
 
 
+
 %Package para figuras
 % \usepackage{graphicx}
 \usepackage{subfig}
@@ -35,13 +36,16 @@
 
 % % % % % % % % % % Linhas de tablelas
 \usepackage{booktabs}
+\usepackage{threeparttable}
 
 \floatstyle{boxed} \restylefloat{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% PDF % % % % % % % % % % % % % % % % %
 %
 % \usepackage{bookmark}
 %
+\hypersetup{  pdfborder={0 0 0} }
 \pdfinfo{
+
    /Author (Wagner de Melo Reck)
    /Title  (Algoritmos de agrupamento capacitado aplicado ao Problema de
 Despacho de Ordens de Serviço)
@@ -53,7 +57,9 @@ Despacho de Ordens de Serviço)
 % % % % % % % % % % % % % % Renomeia
 \renewcommand{\ALG@name}{ALGORITMO}
 \renewcommand{\listalgorithmname}{Lista de Algoritmos}
-% % %  Deveria funcionar ¬¬
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+
+\renewcommand{\resumoname}{\normalsize{RESUMO}}
 
 
 
