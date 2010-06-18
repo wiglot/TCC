@@ -1,4 +1,21 @@
 \chapter{Estudo das Características das Instâncias}
+chamamos de folga a diferença entre a soma das demanda e a capacidade total oferecida. Para comparar entre as diferentes instâncias, utilizamos a formula \ref{folga}:
+% \begin{equation}
+\begin{align}
+ F &= \frac{\sum_{p\in P} p_{cap} }{\sum_{i \in I} i_{dem}} \label{folga}
+\end{align}
+
+Onde $i_{dem}$ é a demanda do indivíduo $i$ e $p_{cap}$ a capacidade do agrupamento $p$. $F$ é maior que 1 se a demanda total é menor que a capacidade total. Para valores de $F$ muito próximos a 1, mas maiores que 1, as heurísticas tendem a não conseguir nem mesmo uma solução factível, principalmente heurísticas que utilizam de procedimentos gulosos para alocação de indivíduos, como por exemplo a escolha do agrupamento com mediana mais próxima do indivíduo a ser alocado. Para valores menores que 1 não existe uma solução válida para a instância, uma vez que existe maior demanda que oferta (capacidade).
+
+Para o caso de $ \sum_{i \in I} i_{dem} \geq p_{cap},\forall p \in P $ podemos dizer que o problema é equivalente ao problemas das P-medianas não capacitado, uma vez que a capacidade não chega a ser uma restrição no problema e todos os indivíduos podem ser associados a apenas uma agrupamento.
+
+Essa ultima colocação mostra o quanto o valor de folga pode interferir na geração de soluções das instâncias.
+Nas instâncias inéditas apresentadas aqui, modificamos a
+%  F =
+% \end{equation}
+
+
 Mostrar do estudo da folga, diferença de demanda entre os pontos (min, máx)
 
 Apresentar também estudo de dispersão dos pontos usando centro de massa com variância da capacidade dos pontos criados, e distância entre os pontos e o centro de massa (será que vai dar tempo??).
+
