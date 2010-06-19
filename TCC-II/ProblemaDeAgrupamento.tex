@@ -1,17 +1,17 @@
-\chapter{Problema de agrupamento}
+\chapter{Problema de Agrupamento}
 
 Agrupamento não apenas expressa o ato de separar dados em grupos, mas separa-los de modo que os elementos dos grupos resultantes tenham alguma, ou mais de uma, característica em comum entre si.
  Segundo Lorena e Furtado \cite{lorena2001constructive} ``problemas de
  agrupamento
  geralmente aparecem em classificação de dados para algum propósito como armazenar e
- recuperar ou análisar dados. Todo algoritmo de agrupamento tentará determinar algum
+ recuperar ou analisar dados. Todo algoritmo de agrupamento tentará determinar algum
  agrupamento inerente ou natural nos dados, usando medidas de distância ou similaridade entre os dados.''.
 
 Um exemplo bem simples de agrupamento seria o ato de separar poucas frutas de aparência boa das de
  aparência não tão boa dado uma medida de aparência.
  Para esse exemplo, um ser humano conseguiria executar a tarefa de forma
-competitiva com um algoritmo, mas quando incluimos um grande de dados de entrada
-e desejamos que sejam levadas em consideração outras medidas ou outrras
+competitiva com um algoritmo, mas quando incluímos um grande de dados de entrada
+e desejamos que sejam levadas em consideração outras medidas ou outras
 restrições (ex. dividir em 10 grupos sendo 5 de frutas melhores além dos objetos
 de cada grupo sejam de cores e tamanhos semelhantes), os algoritmos de
 agrupamento podem chegar a uma solução muito melhor em menor tempo.
@@ -60,7 +60,7 @@ definida por \cite{liu1968cl}:
  N(p,n) = \frac{1}{p!}\sum_{i=0}^{p}(-1)^{p-1}\binom{p}{i}i^{n}
 \end{equation}
 
-Ahmadi e Osmam apresentam em \cite{ahmadi2004density} um exemplo do resultado da
+Ahmadi e Osman apresentam em \cite{ahmadi2004density} um exemplo do resultado da
 computação dessa expressão para uma instância com 50 pontos, o resultado pode
 ser visto na imagem \ref{ahmadiCalc}.
 \begin{figure}
@@ -79,22 +79,22 @@ pontos, o espaço de busca cresce ainda mais. O uso de métodos exatos é
 proibitivo pelo tempo computacional que seria necessário para essas instâncias
 maiores, e sendo esses problema da classe NP-Completo \cite{garey1979computers}
 não existe um algoritmo que resolva de forma exata em tempo polinomial, o que
-resta é o uso de métodos heurísticos e hybridos.
+resta é o uso de métodos heurísticos e híbridos.
 Outro fato sobre esses dados é que a ocorrência de mais agrupamentos possíveis,
 ocorra com $p=16$, o que vem a mostrar que o problema é assimétrico em relação
 a p.
 
 Os problemas de agrupamentos por particionamento estão, do ponto de vista de
-complexidade, entre os problemas combinatoriais mais difícies de serem
+complexidade, entre os problemas combinatoriais mais difíceis de serem
 resolvidos \cite{ahmadi2004density}
 
-Quando temos um conjunto de pontos no espaco ($\Re^{2}$ por exemplo) e
+Quando temos um conjunto de pontos no espaço ($\Re^{2}$ por exemplo) e
 desejamos agrupar os pontos pela sua  localização, podemos utilizar como
-medida de dispersão dos grupos a distância dos pontos em relação ao centróide
+medida de dispersão dos grupos a distância dos pontos em relação ao centroide
 calculado pelos pontos do agrupamento. Esse é também conhecido como Problema das
 K-Médias (K-Means) apresentado por \cite{macqueen1966some}
 
-O problema das P-Medianas é uma variação do problema das K-Médias, com a difereça de utilizar uma mediana (um dos indivíduos) como referência para medição das similaridades dos pontos de cada um dos agrupamentos.
+O problema das P-Medianas é uma variação do problema das K-Médias, com a diferença de utilizar uma mediana (um dos indivíduos) como referência para medição das similaridades dos pontos de cada um dos agrupamentos.
 
 Acrescentando a restrição de capacidade aos agrupamentos, temos o problemas das P-Medianas Capacitado ou também tratado na literatura por CCP.
 
@@ -114,7 +114,7 @@ $I$ de $n$ indivíduos com suas respectivas demandas $d_{i}\: i\in I$,
 das demandas em cada agrupamento deve ser menor que a capacidade total
 do agrupamento, $Q_{j},\:\forall j\in P$, sendo $P$ o conjunto de
 agrupamentos, e é desejado minimizar as dissimilaridades entre uma mediana do
-agrupamento, para isso possuimos uma matriz $c_{IxI}$ com as distâncias entre todos os pontos. O problema pode ser representado pela seguinte formulação matemática \cite{ahmadi2004density}:
+agrupamento, para isso possuímos uma matriz $c_{IxI}$ com as distâncias entre todos os pontos. O problema pode ser representado pela seguinte formulação matemática \cite{ahmadi2004density}:
 
 \begin{equation}
 Min\;\sum_{i\in P}\sum_{j\in I}c_{ij}x_{ij}\label{eq:obj_CCP}\end{equation}
@@ -140,7 +140,7 @@ dizer que esse é um problema das $p-medianas$ capacitado.
 
 \subsection{CCCP}\sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem}
 Um outro problema de agrupamento foi proposto por Negreiro e Palhano\cite{negreiros2006capacitated}
-é o CCCP (Capacitated Centred Clustrering Problem - Problema de agrupamento
+é o CCCP (Capacitated Centred Clustering Problem - Problema de agrupamento
 centrado capacitado) onde os agrupamentos passam a ter seu centro
 não necessariamente em um ponto (mediana), mas no centroide calculado
 entre os pontos pertencentes a cada agrupamento.
@@ -232,9 +232,9 @@ de decisão.
 
 
 \section{Métodos de resolução}
-Devido a características como o tamanho de espaço de busca, a resolução de problemas de particionamento utilizando métodos exatos ou de otimização como \emph{branch and bound} são inefetivos em intâncias maiores \cite{osman1994capacitated}.
+Devido a características como o tamanho de espaço de busca, a resolução de problemas de particionamento utilizando métodos exatos ou de otimização como \emph{branch and bound} são inefetivos em instâncias maiores \cite{osman1994capacitated}.
 
-Para obter soluções em tempos computacionais viáveis (por exemplo no caso do PDSO, uma solução não poderia levar mais que 8 horas para ser processada), é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
+Para obter soluções em tempos computacionais viáveis (por exemplo no caso do PDOS, uma solução não poderia levar mais que 8 horas para ser processada), é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
 
 Podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
 \begin{itemize}

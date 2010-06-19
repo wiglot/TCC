@@ -1,6 +1,6 @@
 \chapter{Ferramenta Computacional}
 Para melhor executar os estudos do problema, foi desenvolvida uma ferramenta computacional que prove a visualização dos resultados, permite programar execuções de algoritmos para arquivos abertos, oferecendo com a opção de aplicar ou não os algoritmos de busca local na solução final, além de permitir rodar arquivos em lote.
-Os resultados são aprentado em uma saida de texto e salvos em um arquivo o que permite manter um histórico das execuções para cada arquivo.
+Os resultados são apresentado em uma saída de texto e salvos em um arquivo o que permite manter um histórico das execuções para cada arquivo.
 
 \begin{figure}[ht]
  \centering
@@ -9,17 +9,17 @@ Os resultados são aprentado em uma saida de texto e salvos em um arquivo o que p
  \caption{Tela principal da ferramenta desenvolvida\label{fig:FerramentaNossa}}
 \end{figure}
 
-Os processamentos de algoritmos contrutivo e de busca local solicitados pelo utilizador, são armazenados em um fila sendo que o processamento deles ocorre em uma thread separada, permitindo a interface do utilizador não fique bloqueada enquanto o dados são processados.
+Os processamentos de algoritmos construtivo e de busca local solicitados pelo utilizador, são armazenados em um fila sendo que o processamento deles ocorre em uma thread (processo leve) separada, permitindo a interface do utilizador não fique bloqueada enquanto o dados são processados.
 
 Como os algoritmos de busca local podem ser aplicados nas soluções geradas por eles, foi implementada uma organização dos resultados derivados em formato de árvore. Essa árvore permite a navegação nela, mostrando na janela de visualização de resultados (canvas) os resultados nela selecionados.
 
 Como alguns algoritmos tem a escolha das medianas iniciais de forma aleatória, é possível indicar quantas vezes os algoritmos com essa propriedade sejam executados.
 
-Para o desenvolvimento foi escolhida a linguagem de programção C++ fazendo uso do paradigma orientado a objetos e utilizado como compilador o GCC\sigla{GCC}{Coleção de Compiladores GNU - GNU Compiler Collection} da GNU\sigla{GNU}{GNU Não é Unix - GNU is Not Unix}. A interface foi construida utilizando o framework Qt da Nokia, o qual serviu não apenas de base da interface, mas também para os casos de teste, comunicação entre objetos, processamento de arquivos e concorrência (threads). Para o gerenciamento de versões do projeto foi utilizado o git, tendo os códigos disponibilizados no repositório http://github.com/wiglot/CCP.
+Para o desenvolvimento foi escolhida a linguagem de programação C++ fazendo uso do paradigma orientado a objetos e utilizado como compilador o GCC\sigla{GCC}{Coleção de Compiladores GNU - GNU Compiler Collection} da GNU\sigla{GNU}{GNU Não é Unix - GNU is Not Unix}. A interface foi construída utilizando o framework Qt da Nokia, o qual serviu não apenas de base da interface, mas também para os casos de teste, comunicação entre objetos, processamento de arquivos e concorrência (threads). Para o gerenciamento de versões do projeto foi utilizado o git pelas características descentralizadas e poder de processamento dessa ferramenta , tendo os códigos da nossa ferramenta disponibilizados no repositório http://github.com/wiglot/CCP.
 
 Para efetuar a geração dos arquivos makefiles, utilizados para executar a compilação da ferramenta, foi utilizado o gerador de makefiles CMake pela facilidade de uso, poder no controle de decisões e por possibilitar a execução dos casos de teste de forma automatizada pelo pacote CTest, o qual faz parte do próprio CMake.
 
-Como contribuição, também foi desenvolvido uma primeira versão de um plugin (biblioteca dinâmica) para o Rocs \cite{Rocs2010} do KDE-EDU (conjunto de softwares educacionais do KDE), permitindo uma possível interação com a soluções geradas pelos algoritmos aqui trartados através de comandos na linguagem java script e também a criação de algoritmos para análise de tais soluções. Essa primeira versão do plugin permite a abertura de arquivos do problema CCP e a execução de algum dos algoritmos desenvolvidos aqui. Na figura \ref{fig:DuasFerramentas} temos um exemplo das duas ferramentas com a mesma instância e o mesmo algoritmo rodado (density).
+Como contribuição, também foi desenvolvido uma primeira versão de um plugin (biblioteca dinâmica) para o Rocs \cite{Rocs2010} do KDE-EDU (conjunto de softwares educacionais do KDE), permitindo uma possível interação com a soluções geradas pelos algoritmos aqui tratados através de comandos na linguagem java script e também a criação de algoritmos para análise de tais soluções. Essa primeira versão do plugin permite a abertura de arquivos do problema CCP e a execução de algum dos algoritmos desenvolvidos aqui. Na figura \ref{fig:DuasFerramentas} temos um exemplo das duas ferramentas com a mesma instância e o mesmo algoritmo rodado (density).
 
 \begin{figure}[ht]
 \begin{center}
