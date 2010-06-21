@@ -1,24 +1,34 @@
 \chapter{Resultados Computacionais}
-Apresentação e análise dos resultados obtidos
 
-Na tabela \ref{tab:valoresInstancias} apresentamos os valores obtidos para os 5 algoritmos implementados. Para os algoritmos que utilizam de aleatoriedade na seleção dos pontos, eles foram executados 10 vezes cada um e foi tirada a média das 10 execuções. Mais a frente mostraremos a variância dos resultados obtidos.
+Todos os testes foram executados em uma máquina AMD X4 de 3GHz com 2 Gigabytes de memória principal rodando o sistema operacional Linux 2.6.
+Para a execução dos testes foi definido que seriam executados 10 vezes os algoritmos que fazem uso de aleatoriedade para a escolha dos pontos iniciais, sendo utilizada a solução com menor valor de função objetivo para comparação com as demais heísticas. Para mostrar a varição dos valores da solução, também é apresentado a média das soluções bem como o desvio padrão das execuções.
+
+Foram escolhidas 2 conjuntos de instâncias para executar os testes. O primeiro é as instâncias disponibilizadas em http://www.lac.inpe.br/~lorena/instancias.html criadas pelo própio Lorena através de dados coletados da cidade de São José dos Campos. As instâncias desse primeiro conjunto possuem o prefixo SJC e são utilizadas para comparação dos valores obtidos por nós com valores apresentados na literatura.
+
+O segundo conjunto de 5 instâncias inéditas obtidos de coleta de dados de atendimentos agendados para um certo dia, sendo cada instância em uma determinada cidades. Desses dados possuiamos apenas o tempo de atendimento de cada atendimento e a localização de cada um deles, bem como o número de equipes que podem atende-los. Apesar de equipes de trabalho possuirem uma jornada fixa de trabalho por dia, foi preciso relaxar essa restrição pois a demanda dos atendimento era maior que a capacidade das equipes. Isso ocorre devido a atendimentos de dias anteriores que são re-agendados para um novo dia por não terem sidos atendidos.
+
+A definição das capacidades das equipes foi definida da por a fórmula
+$$ Cap = \frac{F \cdot \sum_{i\in I} i_{dem} }{|P|}$$
+onde $F$ é a folga desejada e $i_{dem}$ a demanda do indivíduo $i$. $Cap$ será a capacidade de cada um dos agrupamentos. Temos com isso o mesmo valor de capacidade para todas equipes. Para mostrar o que influencia uma maior folga da capacidade total, esse último conjunto de instâncias teve as capacidades totais alteradas para 10\%, 20\% e 30\% além da demanda total deles.
+
+Na tabela \ref{tab:valoresInstancias} apresenta os valores obtidos para os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos) e p (número de agrupamentos). Os valores apresentados são os mínimos para as heurísticas que utilizam aleatoriedade.
 \begin{table}[htp]
 \begin{center}
-\caption {\\Valores da obtidos das instâncias pelos algoritmos construtivos.\label{tab:valoresInstancias}}
+\caption [Valores obtidos pelos algoritmos]{\\Valores da obtidos das instâncias pelos algoritmos construtivos.\label{tab:valoresInstancias}}
 \begin{tabular}{lrrrrrrr}
 \toprule
-Instância &\multicolumn{1}{c}{n}&\multicolumn{1}{c}{p}& \multicolumn{1}{c}{Density}
-          & \multicolumn{1}{c}{Farthest} & \multicolumn{1}{c}{H-Means}
+Instância &\multicolumn{1}{c}{n}&\multicolumn{1}{c}{p}& \multicolumn{1}{c}{Farthest}
+          & \multicolumn{1}{c}{Density} & \multicolumn{1}{c}{H-Means}
           & \multicolumn{1}{c}{J-Means}  & \multicolumn{1}{c}{Random Density} \\
 \midrule
 
-SJC1  &  100&  10&18.193,2 & 25.905,0 &19.169,4 &20.247,9 &17.693,9 \\
-SJC2  &  200&  15& 34.520,4  &52.121,3 &35.179,5 &34.591,2&34.147,2 \\
-SJC3a &  300&  25& 47.976,7  &76.345,3 &49.231,8 &48.140,4  &45.907,9 \\
-SJC3b &  300&  30& 42.501,7  &69.956,2 & 42.607,4 &42.329,0  &42.151,3 \\
-SJC4a &  402&  30& 65.655,4 &103.171,0 &66.763,9  &67.595,4 &63.602,9 \\
-SJC4b &  402&  40& 54.077,1  &92.948,9 & 57.092,1 &55.412,2 &54.438,2 \\
-SJC5  &  402&  20& 97.681,6  &134.798,0 & 99.502,9  &100.117,0  &86.325,5 \\
+SJC1  &  100&  10& 25.905,0&18.193,2 &19.169,4 &20.247,9 &17.693,9 \\
+SJC2  &  200&  15&52.121,3 & 34.520,4&35.179,5 &34.591,2&34.147,2 \\
+SJC3a &  300&  25&76.345,3 & 47.976,7&49.231,8 &48.140,4  &45.907,9 \\
+SJC3b &  300&  30&69.956,2 & 42.501,7& 42.607,4 &42.329,0  &42.151,3 \\
+SJC4a &  402&  30&103.171,0& 65.655,4&66.763,9  &67.595,4 &63.602,9 \\
+SJC4b &  402&  40&92.948,9 & 54.077,1& 57.092,1 &55.412,2 &54.438,2 \\
+SJC5  &  402&  20&134.798,0& 97.681,6& 99.502,9  &100.117,0  &86.325,5 \\
 AESM\_10 &  1142& 21& 96.738,2 & 20.519,8     &  15.482,0 & 16.409,9 &  15.251,7 \\
 AESM\_20 &  & & 97.798,8 & 16.466,2  &  16.472,7 & 13.753,0   &  11.665,8 \\
 AESM\_30 &  & & 69.541,8 & 16.582,9   &  13.504,5 &  12.859,9&  11.626,2\\
@@ -38,6 +48,8 @@ AEAL\_30 &  && 26.814,7 & 10.752,1  &8.837,1 & 9.026,4 & 8.818,8\\
 \end{tabular}
 \end{center}
 \end{table}
+
+A heurística Random Density foi a que obteve os menores valores na maioria das instâncias, seguida da Heurística Density.
 
 As soluções com aleatoriedade tem os desvios padrão apresentados na tabela \ref{tab:stdDev}.
 
@@ -128,8 +140,7 @@ AEAL\_30 &  0,03    &4,40    &0,03  &19,47  &15,70\\
 
 
 
-Tomando como base os resultados apresentados por Lorena e por negreiros para as instâncias SJC, escolhemos os melhores resultados, que foram os apresentados por Lorena (CITE LORENA), apresentamos a tabela \ref{tab:CompResultados} onde temos os melhores resultado obtidos pelos trabalhos e por os implementados por nós. Como pode ser visto, Lorena possui os melhores resultados, por isso servirão de base para calcular a porcentagem que as demais soluções se encontram acima de suas soluções.
-
+\sloppy Tomando como base os resultados apresentados por Lorena e por negreiros para as instâncias SJC, escolhemos os melhores resultados, que foram os apresentados por Lorena (CITE LORENA), apresentamos a tabela \ref{tab:CompResultados} onde temos os melhores resultado obtidos pelos trabalhos e por os implementados por nós. Como pode ser visto, Lorena possui os melhores resultados, por isso servirão de base para calcular a porcentagem que as demais soluções se encontram acima de suas soluções.
 
 \begin{threeparttable}[ht]
 \begin{center}
@@ -160,9 +171,9 @@ SJC4b   &0         &       0 &  52396,5   &  4649,47 &54077,1  &6,25   &       |
 
 \end{threeparttable}
 
-AS buscas locais, apesar de utilizar-se de métodos gulosos, ainda assim conseguiram melhorar várias soluções obtidas com os algorithmos construtivos implementados.
+AS buscas locais, apesar de utilizarem de métodos gulosos, ainda assim conseguiram melhorar várias soluções obtidas com os algoritmos construtivos implementados.
 
-A tabela \ref{tab:RedInterchange} apresenta os percentuais médios de redução nos valores das soluções, bem como os tempos médios também para execuçãos das buscas utilizando o movimento interchange.
+\sloppy A tabela \ref{tab:RedInterchange} apresenta os percentuais médios de redução nos valores das soluções, bem como os tempos médios também para execuçãos das buscas utilizando o movimento interchange.
 
 \begin{threeparttable}[htp]
 \begin{center}

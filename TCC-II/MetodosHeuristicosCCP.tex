@@ -278,7 +278,7 @@ Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os
 
 
 \subsection{J-Means}
-Essa heurística proposta por \cite{Hansen_j-means:a} utiliza a ideia de indivíduos não ocupados (indivíduos que se encontram afastadas da mediana do agrupamento por uma certa tolerância), para criar um novo agrupamento em alguma desses indivíduos que substitua algum dos agrupamentos existentes, de modo a diminuir o valor da função objetivo.
+\sloppy Essa heurística proposta por \cite{Hansen_j-means:a} utiliza a ideia de indivíduos não ocupados (indivíduos que se encontram afastadas da mediana do agrupamento por uma certa tolerância), para criar um novo agrupamento em alguma desses indivíduos que substitua algum dos agrupamentos existentes, de modo a diminuir o valor da função objetivo.
 
 \begin{algorithm}[ht]
 \caption{{J-Means}\label{alg:JMeans}}
@@ -323,7 +323,7 @@ solução pela heurística Farthest \subref{b}.}
 \end{figure}
 
 \subsection{Random Density}
-A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas que na grande maioria das vezes cai em um minimo local,ta tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela movimentação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado as funções objetivo levando em consideração o posicionamento original dos indivíduos. A ideia de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Usando dessa ideia e da técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o seguinte algoritmo\ref{alg:RandomDensity}:
+\sloppy A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas que na grande maioria das vezes cai em um minimo local,ta tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela movimentação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado as funções objetivo levando em consideração o posicionamento original dos indivíduos. A ideia de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Usando dessa ideia e da técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o seguinte algoritmo\ref{alg:RandomDensity}:
 
 \begin{algorithm}
 \caption{{RandomDensity}\label{alg:RandomDensity}}
@@ -449,6 +449,6 @@ O algoritmo de busca local implementado usando o movimento de interchange, origi
 \end{algorithmic}
 \end{algorithm}
 
-Com essa metodologia, conseguimos reduzir o espaço de busca pela eliminação das soluções que não apresentariam reduções no valor da função objetivo. Uma rápida analise na complexidade $O(n \cdot Q \cdot K)$, onde Q = 30\% dos agrupamentos ($p\cdot 0.3$) e K é 50\% da média de pontos por agrupamento ficando uma complexidade muito próxima de $O(n)$ para cada iteração.
+\sloppy Com essa metodologia, conseguimos reduzir o espaço de busca pela eliminação das soluções que não apresentariam reduções no valor da função objetivo. Uma rápida analise na complexidade $O(n \cdot Q \cdot K)$, onde Q = 30\% dos agrupamentos ($p\cdot 0.3$) e K é 50\% da média de pontos por agrupamento ficando uma complexidade muito próxima de $O(n)$ para cada iteração.
 
 O número de iterações para cada um desses algoritmos é inversamente proporcional a qualidade da solução, uma vez que uma solução boa tem poucas, ou até mesmo nenhuma, soluções com valor da função objetivo melhor que a sua, o que demanda menos passos no algoritmo para chegar em mínimo loca.
