@@ -1,12 +1,9 @@
 \chapter*{Conclusões}
 
-Apresentamos aqui neste trabalho uma visão do PDOS como um CCP, fazendo uso de métodos já existentes para um problema relativamente novo.
+Apresentamos aqui neste trabalho uma visão do PDOS como um CCP, fazendo uso de métodos já existentes em um problema relativamente novo. Dos métodos tratados, procuramos abordar os métodos heurísticos mais tratados da literatura e compara-los quando aplicados aos dados do PDOS.
 
-Apresentamos uma visão dos principais métodos heurísticos da literatura para resolver o CCP e uma comparação de tais métodos com valores apresentados na literatura.
+Dentre os métodos que apresentarem melhores soluções foi o Random density, uma variação do método Density proposto por Ahmadi mas que insere elementos de aleatoriedade para escolha dos centros, não desconsiderando o cálculo de densidade que nos dá um bom indicativo de onde devem ser inseridos os centros. Mas, apesar de os valores obtidos serem menores que os demais métodos, o seu tempo de computação é cerca de 3 vezes mais alto que o levado pelo método density, que para instâncias com grande número de indivíduos e de centros (por exemplo algumas instâncias com mais de 3.000 pontos e 600 agrupamentos), tem um tempo de computação bastante alto. Esse tempo elevado não disqualifica o uso do método para essa classe de problemas, visto que os atendimentos são processados por cidades como apresentado nas instâncias AE e possuem grande número de atendimentos e poucas equipes.
 
+Dos demais métodos, Farthest é uma heurística construtiva que gera soluções de baixa qualidade mas rapidamente. HMeans gera soluções de qualidade de maneira até mais rápida que o ultimo. JMeans gera soluções de qualidade também, mas com a desvantagem de ser extremamente lento na fase de busca de novos centros e reassociação dos indivíduos. Essa etapa dessa heurística pode sofrer melhorias para acelerar como um todo o algoritmo, visto que essa é a etapa mais repetida durante as iterações. Como exemplo de melhoria seria a diminuição do número de centros removidos para a inserção de um novo centro para apenas os centros mais próximos a esse novo centro, evitando que se insira um centro onde já exista um grande número de centros.
 
-Com uma pequena alteração no método de heurístico density, conseguimos melhorar as soluções e também aplicar algoritmos de busca local nas soluções por ele geradas que apresentam ganhos no vaolor da função objetivo.
-
-
-Além de apresentar um breve
-O que contribuimos com esse trabalho?
+Não chegou a ser tratado, aqui mas que deve ser comentado , para uma aplicação na vida real, deve se levar em consideração o deslocamento entre ordens de serviço, o que iria contribuir para o aumento do valor da demanada para a equipe que está atendendo, bem como a carga horária poder ser váriável de uma equipe para outra. Nesse caso teríamos um problema heterogêneo quanto a capacidade teríamos também o problema roteirização dos pontos sendo que ao calcular uma rota pode acontecer de aumentar a demanda além do valor de capacidade da equipe.

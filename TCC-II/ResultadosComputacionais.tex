@@ -11,7 +11,7 @@ A definição das capacidades das equipes foi definida da por a fórmula
 $$ Cap = \frac{F \cdot \sum_{i\in I} i_{dem} }{|P|}$$
 onde $F$ é a folga desejada e $i_{dem}$ a demanda do indivíduo $i$. $Cap$ será a capacidade de cada um dos agrupamentos. Temos com isso o mesmo valor de capacidade para todas equipes. Para mostrar o que influencia uma maior folga da capacidade total, esse último conjunto de instâncias teve as capacidades totais alteradas para 10\%, 20\% e 30\% além da demanda total deles.
 
-Na tabela \ref{tab:valoresInstancias} apresenta os valores obtidos para os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos) e p (número de agrupamentos). Os valores apresentados são os mínimos para as heurísticas que utilizam aleatoriedade. Logo após, na tabela \ref{tab:TemposInstancias}, apresentamos os tempos tomados para executar o processamento das soluções apresentadas como mínimas.
+Na tabela \ref{tab:valoresInstancias} apresenta os valores obtidos para os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos) e p (número de agrupamentos). Os valores apresentados são os mínimos para as heurísticas que utilizam aleatoriedade. Para melhor visualização os dados foram representados pelos gráficos \ref{fig:graphicSJC} e \ref{fig:graphicAE}. Logo após, na tabela \ref{tab:TemposInstancias}, apresentamos os tempos tomados para executar o processamento das soluções apresentadas como mínimas.
 \begin{table}[htp]
 \begin{center}
 \caption [Valores obtidos pelos algoritmos]{\\Valores da obtidos das instâncias pelos algoritmos construtivos.\label{tab:valoresInstancias}}
@@ -48,6 +48,22 @@ AEAL\_30 &  && 26.814,7 & 10.752,1  &8.837,1 & 9.026,4 & 8.818,8\\
 \end{tabular}
 \end{center}
 \end{table}
+
+\begin{figure}[hp]
+ \centering
+ \includegraphics[bb=0 0 555 430, scale=0.8]{./images/GraphicSJC_Value.png}
+ % GraphicSJC_Value.png: 740x573 pixel, 96dpi, 19.58x15.16 cm, bb=0 0 555 430
+ \caption{Gráfico com os valores obtidos para as instâncias SJC}
+ \label{fig:graphicSJC}
+\end{figure}
+
+\begin{figure}[hp]
+ \centering
+ \includegraphics[bb=0 0 555 430, scale=0.8]{./images/GraphicAE_Value.png}
+ % GraphicSJC_Value.png: 740x573 pixel, 96dpi, 19.58x15.16 cm, bb=0 0 555 430
+ \caption{Gráfico com os valores obtidos para as instâncias AE}
+ \label{fig:graphicSJC}
+\end{figure}
 
 
 Os tempos computacionais tomados por cada algoritmo para gerar as soluções apresentadas anteriormente, é apresentado na tabela
@@ -93,11 +109,31 @@ AEAL\_30 &  0,03    &4,40    &0,03  &19,47  &15,70\\
 
 A heurística Random Density foi a que obteve os menores valores na maioria das instâncias, seguida da Heurística Density, seguida das heurísticas HMeans e JMeans que apresentaram soluções semelhantes. a Heurística farthest apresentou resultados nada bons em comparação com as demais, mas os tempos de processamento são bastante baixos, sendo uma heurística 'barata' caso se deseje apenas trabalhar com a busca local, usando de técnicas mais pesadas como Simulated Anneling e Busca Tabu, como aplicado por Osman e Christofides fazem em \cite{osman1994capacitated}. Isso se deve em parte pela escolha gulosa levando em consideração apenas a distância dos pontos para a seleção dos pontos iniciais e por executar apenas uma vez a alocação dos pontos e escolha dos melhores centros.
 
-As heurísticas HMeans e JMeans apesar de escolherem aleatoriamente os indivíduos para serem os centros iniciais, o que pode gerar centros iniciais com localização pior que os escolhidos por outras heurísticas, e iterativamente vão melhorando a solução, escolhendo melhores centros e reassociando os pontos nos melhores centros até não encontrar uma solução melhor.
+As heurísticas HMeans e JMeans apesar de escolherem aleatoriamente os indivíduos para serem os centros iniciais, o que pode gerar centros iniciais com localização pior que os escolhidos por outras heurísticas, e iterativamente vão melhorando a solução, escolhendo melhores centros e reassociando os pontos nos melhores centros até não encontrar uma solução melhor. Isso torna os métodos rápidos, no caso o HMeans, e com boas soluções sendo ainda possível uma pequena melhora no valor da função objetivo com uma busca local.
 
+A Heurística Density, bem como sua derivada Random Density, utilizam do conceito de densidade, tentado localizar os melhores centros inicias e utilizam de métodos construtivos/desconstrutivos para a escolha das melhores associações dos indivíduos e dos indivíduos escolhidos como medianas. Apesar das melhores soluções serem dessas 2 heurísticas, os seus tempos de computação são na média maiores que os apresentados pelas heurísticas HMeans e Farthest. JMeans é um método que normalmente foi o meais lento, o que se deve pelo fato de testar todos os indivíduos que se encontram afastados das medianas como possíveis novos centros.
 
+As soluções com aleatoriedade tem os desvios padrão apresentados na tabela \ref{tab:stdDev}. A Heurística Random density apresentou um menor desvio padrão para as instâncias AE, onde os pontos possuem uma distribuição agrupadada, ou seja ou pontos estão localizados em grupos e estes se encontram afastados uns dos outros. A figura \ref{fig:AECPInstance} mostra a distribuição dos pontos da instância (\ref{fig:AECP}) e uma parte de uma solução do Random Density \ref{fig:ASCPZoom}, que mostra que as concentrações de pontos existentes nem sempre representam que ali estará apenas um agrupamento. Para as demais instâncias (SJC) os algoritmos Density A mesma heurística apresentou devios padrões abaixo dos outros métodos na maioria das instâncias. Em relação a média dos valores obtidos, a mesma heurística, Random Density, apresentou os menores valores para todos os casos.
 
-As soluções com aleatoriedade tem os desvios padrão apresentados na tabela \ref{tab:stdDev}.
+\begin{figure}[hp]
+ \begin{center}
+\subfloat[]{
+ \includegraphics[bb=0 0 229 482,scale=0.9]{./images/AECP.png}
+ % AECP.png: 305x643 pixel, 96dpi, 8.07x17.01 cm, bb=0 0 229 482
+  \label{fig:AECP}
+}
+\subfloat[]{
+ \includegraphics[bb=0 0 228 261,scale=0.9]{./images/AECPZoom.png}
+ % AECPZoom.png: 304x348 pixel, 96dpi, 8.04x9.21 cm, bb=0 0 228 261
+ \label{fig:ASCPZoom}
+
+}
+ \caption[Distribuição dos pontos na instância AECP e uma parte de uma solução]{Distribuição dos pontos na instância AECP \ref{fig:AECP} e uma parte de uma solução gerada pelo Random Density\ref{fig:ASCPZoom}}
+ \label{fig:AECPInstance}
+\end{center}
+
+\end{figure}
+
 
 \begin{threeparttable}[htp]
 \begin{center}
@@ -144,9 +180,7 @@ AEAL\_30    &11.998,70  &3.951,95   &10.980,83  &2.566,85   &9.297,77   &648,16 
 \end{threeparttable}
 
 
-
-
-\sloppy Tomando como base os resultados apresentados por Lorena e por negreiros para as instâncias SJC, escolhemos os melhores resultados, que foram os apresentados por Lorena (CITE LORENA), apresentamos a tabela \ref{tab:CompResultados} onde temos os melhores resultado obtidos pelos trabalhos e por os implementados por nós. Como pode ser visto, Lorena possui os melhores resultados, por isso servirão de base para calcular a porcentagem que as demais soluções se encontram acima de suas soluções.
+\sloppy Tomando como base os resultados apresentados por Lorena e por negreiros para as instâncias SJC, escolhemos os melhores resultados, que foram os apresentados por Lorena (CITE LORENA), apresentamos a tabela \ref{tab:CompResultados} onde temos os melhores resultado obtidos pelos trabalhos e por os implementados por nós. Como pode ser visto, Lorena possui os melhores resultados, por isso servirão de base para calcular a porcentagem que as demais soluções se encontram acima de suas soluções. É apresentado o gráfico \ref{fig:comparativoResultados} de quanto as soluções por nós obtidas está acima das apresentadas na literatura.
 
 \begin{threeparttable}[ht]
 \begin{center}
@@ -177,9 +211,21 @@ SJC4b   &0         &       0 &  52396,5   &  4649,47 &54077,1  &6,25   &       |
 
 \end{threeparttable}
 
+\begin{figure}[hp]
+ \centering
+ \includegraphics[bb=0 0 629 391,scale=0.5]{./images/comparativeGraphic.png}
+ % comparativeGraphic.png: 839x521 pixel, 96dpi, 22.20x13.78 cm, bb=0 0 629 391
+ \caption{Diferença dos valores obtidos em relação a literatura}
+\label{fig:comparativoResultados}
+\end{figure}
+
+
 AS buscas locais, apesar de utilizarem de métodos gulosos, ainda assim conseguiram melhorar várias soluções obtidas com os algoritmos construtivos implementados.
 
-\sloppy A tabela \ref{tab:RedInterchange} apresenta os percentuais médios de redução nos valores das soluções, bem como os tempos médios também para execuçãos das buscas utilizando o movimento interchange.
+\sloppy A tabela \ref{tab:RedInterchange} apresenta os percentuais médios de redução nos valores das soluções, bem como os tempos médios também para execuçãos das buscas utilizando o movimento interchange e na tabela \ref{tab:RedShift} é apresentado os valores utilizando o movimento shift.
+
+O movimento shift mostra algum resultado sgnificante normalmente quando aplicado a instâncias com maior folga. Para instância com folga menor não existe muita capacidade ociosa nos agrupamentos para receber novos indivíduos.
+
 
 \begin{threeparttable}[htp]
 \begin{center}
@@ -189,13 +235,13 @@ AS buscas locais, apesar de utilizarem de métodos gulosos, ainda assim conseguir
 Instância& \multicolumn{2}{c}{Farthest}   &     \multicolumn{2}{c}{Density} &    \multicolumn{2}{c}{Hmeans}  &    \multicolumn{2}{c}{Jmeans}  &    \multicolumn{2}{c}{R. Density}\\
     &RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2} \\
 \midrule
-SJC1    &13,99&  0,066&   0,00&   0,014&   2,53&   0,031&   2,70&   0,047&   -0,46&  0,015 \\
-SJC2    &11,03&  1,092&   0,00&   0,039&   2,25&   0,225&   0,89&   0,186&   -0,01&  0,041 \\
-SJC3a   &16,40&  5,877&   0,00&   0,206&   1,60&   0,661&   0,15&   0,326&   0,00&   0,099 \\
-SJC3b   &10,11&  3,381&   0,00&   0,207&   0,76&   0,391&   0,03&   0,172&   0,00&   0,113 \\
-SJC4a   &14,14&  12,820&  0,37&   0,834&   2,52&   2,094&   0,73&   1,281&   -0,50&  0,511 \\
-SJC4b   &13,95&  11,802&  0,00&   0,359&   0,58&   0,787&   0,25&   0,540&   -0,09&  0,298 \\
-SJC5    &15,66&  12,534&  4,42&   3,029&   6,65&   6,094&   16,90&  11,216&  -2,22&  2,594 \\
+SJC1    &-13,99&  0,066&   0,00&   0,014&   -2,53&   0,031&   -2,70&   0,047&   -0,46&  0,015 \\
+SJC2    &-11,03&  1,092&   0,00&   0,039&   -2,25&   0,225&   -0,89&   0,186&   -0,01&  0,041 \\
+SJC3a   &-16,40&  5,877&   0,00&   0,206&   -1,60&   0,661&   -0,15&   0,326&   0,00&   0,099 \\
+SJC3b   &-10,11&  3,381&   0,00&   0,207&   -0,76&   0,391&   -0,03&   0,172&   0,00&   0,113 \\
+SJC4a   &-14,14&  12,820&  -0,37&   0,834&   -2,52&   2,094&   -0,73&   1,281&   -0,50&  0,511 \\
+SJC4b   &-13,95&  11,802&  0,00&   0,359&   -0,58&   0,787&   -0,25&   0,540&   -0,09&  0,298 \\
+SJC5    &-15,66&  12,534&  -4,42&   3,029&   -6,65&   6,094&   -16,90&  11,216&  -2,22&  2,594 \\
 AECP\_10 &-21,65 &16,765  &-1,04  &0,425   &-2,63  &3,647    &-6,55  &12,444  &-3,00  &1,699 \\
 AECP\_20 &-29,06 &19,599  &-0,03  &0,439   &-2,79  &4,528    &-3,31  &7,897   &-0,19  &1,086 \\
 AECP\_30 &-14,46 &18,828  &-0,11  &1,998   &-4,27  &5,160    &-3,96  &8,459   &-0,31  &1,029 \\
@@ -219,7 +265,6 @@ AEAL\_30 &-22,84 &27,531  & 0,00  & 0,357  & -5,19 & 139,095 &-5,07  &123,328 &-
 
 \end{threeparttable}
 
-Na tabela \ref{tab:RedShift} é apresentado os percentuais médios de redução nos valores das soluções com a busca local utilizando o movimento shift, bem como os tempos médios para execuçãos das mesmas.
 
 \begin{threeparttable}[htp]
 \begin{center}
@@ -229,13 +274,13 @@ Na tabela \ref{tab:RedShift} é apresentado os percentuais médios de redução nos 
 Instância& \multicolumn{2}{c}{Farthest}   &     \multicolumn{2}{c}{Density} &    \multicolumn{2}{c}{Hmeans}  &    \multicolumn{2}{c}{Jmeans}  &    \multicolumn{2}{c}{R. Density}\\
     &RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2}&RD\tnote{1} &T(s)\tnote{2} \\
 \midrule
-SJC1    &0,35&   0,091&   0,00&   0,056&   0,07&   0,058&   0,99&   0,118&   0,00&   0,040 \\
+SJC1    &-0,35&   0,091&   0,00&   0,056&   -0,07&   0,058&   0,99&   0,118&   0,00&   0,040 \\
 SJC2    &0,00&   0,257&   0,00&   0,248&   0,00&   0,306&   0,00&   0,292&   0,00&   0,204 \\
-SJC3a   &0,00&   0,705&   0,01&   1,482&   1,60&   0,661&   0,10&   1,065&   -0,01&  0,603 \\
+SJC3a   &0,00&   0,705&   -0,01&   1,482&   -1,60&   0,661&   0,10&   1,065&   -0,01&  0,603 \\
 SJC3b   &0,00&   0,675&   0,00&   0,692&   0,00&   0,810&   0,00&   0,736&   0,00&   0,517 \\
 SJC4a   &0,00&   1,735&   0,00&   1,397&   0,00&   1,408&   0,08&   1,565&   0,00&   0,955 \\
 SJC4b   &0,00&   1,584&   0,00&   1,232&   0,00&   1,364&   0,00&   1,238&   0,00&   0,893 \\
-SJC5    &0,00&   0,706&   0,00&   0,885&   0,22&   1,481&   2,01&   1,907&   -0,01&  0,790 \\
+SJC5    &0,00&   0,706&   0,00&   0,885&   -0,22&   1,481&   2,01&   1,907&   -0,01&  0,790 \\
 AECP\_10 &0,00&   0,200&   -0,03&  1,997&   -0,05&  0,560&   -0,76&  0,710&   -0,04&  0,654 \\
 AECP\_20 &0,00&   0,259&   0,00&   0,791&   -0,03&  0,725&   -1,35&  0,854&   -0,01&  0,797 \\
 AECP\_30 &0,00&   0,363&   0,00&   0,763&    0,00&   0,676&   -0,03&  0,657&   -0,02&  0,845 \\
