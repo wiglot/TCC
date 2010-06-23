@@ -10,7 +10,49 @@ Onde $i_{dem}$ é a demanda do indivíduo $i$ e $p_{cap}$ a capacidade do agrupame
 Para o caso de $ \sum_{i \in I} i_{dem} \geq p_{cap},\forall p \in P $ podemos dizer que o problema é equivalente ao problemas das P-medianas não capacitado, uma vez que a capacidade não chega a ser uma restrição no problema e todos os indivíduos podem ser associados a apenas uma agrupamento.
 
 Essa ultima colocação mostra o quanto o valor de folga pode interferir na geração de soluções das instâncias.
-Nas instâncias inéditas apresentadas aqui, modificamos a folga de modo a ser possível analisar e registrar o comportamento dos algoritmos e os valores da função objetivo das soluções obtidas.
+Nas instâncias inéditas apresentadas aqui, modificamos a folga de modo a ser possível analisar e registrar o comportamento dos algoritmos e os valores da função objetivo das soluções obtidas. A tabela \ref{tab:varDemandas} mostra as demandas médias, bem com os valores mínimos e máximos, e a folga de cada uma das instâmcias.
+
+\begin{threeparttable}[htp]
+\begin{center}
+\caption {\\variação das demandas dos indivíduos das instâncias.\label{tab:varDemandas}}
+\begin{tabular}{lrrrr} \hline
+
+Instância&   Folga &   $D_{Med}$\tnote{1}  &   $D_{Min}$\tnote{2} &   $D_{Max}$\tnote{3} \\
+SJC1    &1,23988    &58,07  &1  &654 \\
+SJC2    &1,35937    &46,345 &1  &654 \\
+SJC3a   &1,64371    &37,5167    &1  &654 \\
+SJC3b   &1,97246    &37,5167    &1  &654 \\
+SJC4a   &1,57658    &39,7612    &1  &654 \\
+SJC4b   &2,1021 &39,7612    &1  &654 \\
+SJC5    &1,05105    &39,7612    &1  &654 \\
+AEAL\_10 &1,1    &22,7321    &3  &52 \\
+AEAL\_20 &1,2    &22,7321    &3  &52 \\
+AEAL\_30 &1,3    &22,7321    &3  &52 \\
+AECP\_10 &1,1    &22,2222    &3  &52 \\
+AECP\_20 &1,2    &22,2222    &3  &52 \\
+AECP\_30 &1,3    &22,2222    &3  &52 \\
+AELJ\_10 &1,1    &22,6192    &3  &122 \\
+AELJ\_20 &1,2    &22,6192    &3  &122 \\
+AELJ\_30 &1,3    &22,6192    &3  &122 \\
+AENH\_10 &1,1    &23,2514    &3  &122 \\
+AENH\_20 &1,2    &23,2514    &3  &122 \\
+AENH\_30 &1,3    &23,2514    &3  &122 \\
+AESM\_10 &1,1    &25,0175    &3  &52 \\
+AESM\_20 &1,2    &25,0175    &3  &52 \\
+AESM\_30 &1,3    &25,0175    &3  &52 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+ \item[1]Demanda média dos indivíduos
+ \item[2]Demanda mínima dos indivíduos
+ \item[3]Demanda máxima dos indivíduos
+\end{tablenotes}
+\end{center}
+
+\end{threeparttable}
+
+Para medir a dispersão dos indivíduos no espaço, Desenvolvemos um método que mede a distãncia dos pontos de centros de massa calculados usando como peso para cada ponto sua própria demanda. O algoritmo \ref{algMedia}
+
 
 %  F =
 % \end{equation}
