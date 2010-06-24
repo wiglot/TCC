@@ -113,25 +113,25 @@ As heurísticas HMeans e JMeans apesar de escolherem aleatoriamente os indivíduos
 
 A Heurística Density, bem como sua derivada Random Density, utilizam do conceito de densidade, tentado localizar os melhores centros inicias e utilizam de métodos construtivos/desconstrutivos para a escolha das melhores associações dos indivíduos e dos indivíduos escolhidos como medianas. Apesar das melhores soluções serem dessas 2 heurísticas, os seus tempos de computação são na média maiores que os apresentados pelas heurísticas HMeans e Farthest. JMeans é um método que normalmente foi o meais lento, o que se deve pelo fato de testar todos os indivíduos que se encontram afastados das medianas como possíveis novos centros.
 
-As soluções com aleatoriedade tem os desvios padrão apresentados na tabela \ref{tab:stdDev}. A Heurística Random density apresentou um menor desvio padrão para as instâncias AE, onde os pontos possuem uma distribuição agrupadada, ou seja ou pontos estão localizados em grupos e estes se encontram afastados uns dos outros. A figura \ref{fig:AECPInstance} mostra a distribuição dos pontos da instância (\ref{fig:AECP}) e uma parte de uma solução do Random Density \ref{fig:ASCPZoom}, que mostra que as concentrações de pontos existentes nem sempre representam que ali estará apenas um agrupamento. Para as demais instâncias (SJC) os algoritmos Density A mesma heurística apresentou devios padrões abaixo dos outros métodos na maioria das instâncias. Em relação a média dos valores obtidos, a mesma heurística, Random Density, apresentou os menores valores para todos os casos.
+As soluções com aleatoriedade tem os desvios padrão apresentados na tabela \ref{tab:stdDev}. A Heurística Random density apresentou um menor desvio padrão para as instâncias AE, onde os pontos possuem uma distribuição agrupadada, ou seja ou pontos estão localizados em grupos e estes se encontram afastados uns dos outros.
+
+A figura \ref{fig:AECPInstance} mostra a distribuição dos pontos da instância (\ref{fig:AECP}) e uma parte de uma solução do Random Density \ref{fig:ASCPZoom}, que mostra que as concentrações de pontos existentes nem sempre representam que ali estará apenas um agrupamento. Para as demais instâncias (SJC) os algoritmos Density A mesma heurística apresentou devios padrões abaixo dos outros métodos na maioria das instâncias. Em relação a média dos valores obtidos, a mesma heurística, Random Density, apresentou os menores valores para todos os casos.
 
 \begin{figure}[hp]
  \begin{center}
 \subfloat[]{
- \includegraphics[bb=0 0 229 482,scale=0.9]{./images/AECP.png}
+ \includegraphics[bb=0 0 229 482,scale=0.6]{./images/AECP.png}
  % AECP.png: 305x643 pixel, 96dpi, 8.07x17.01 cm, bb=0 0 229 482
   \label{fig:AECP}
 }
 \subfloat[]{
- \includegraphics[bb=0 0 228 261,scale=0.9]{./images/AECPZoom.png}
+ \includegraphics[bb=0 0 228 261,scale=0.6]{./images/AECPZoom.png}
  % AECPZoom.png: 304x348 pixel, 96dpi, 8.04x9.21 cm, bb=0 0 228 261
  \label{fig:ASCPZoom}
-
 }
  \caption[Distribuição dos pontos na instância AECP e uma parte de uma solução]{Distribuição dos pontos na instância AECP \ref{fig:AECP} e uma parte de uma solução gerada pelo Random Density\ref{fig:ASCPZoom}}
  \label{fig:AECPInstance}
 \end{center}
-
 \end{figure}
 
 
@@ -147,8 +147,6 @@ Instância & \multicolumn{2}{c}{H-Means}
  & \multicolumn{1}{c}{Média}& \multicolumn{1}{c}{DP}
  & \multicolumn{1}{c}{Média}& \multicolumn{1}{c}{DP} \\
 \midrule
-
-
 SJC1     &20.066,6 &619,3  &21.214,0   &966,1  &18.430,9   &653,4  \\
 SJC2     &36.767,7  &1.205,0    &36.109,6   &1.269,5    &34.700,3   &355,3  \\
 SJC3a    &50.651,7  &1.019,7    &50.041,5   &1.631,5    &47.394,5   &954,9  \\
@@ -199,7 +197,7 @@ SJC4b   &0         &       0 &  52396,5   &  4649,47 &54077,1  &6,25   &       |
 \end{tabular}
 \begin{tablenotes}
  \item[1]Negreiros \cite{negreiros2006capacitated}
- \item[2]Lorena \cite{negreiros2006capacitated}
+ \item[2]Lorena \cite{lorena2003local}
  \item[3]Algoritmos implementados
 \end{tablenotes}
 \begin{tablenotes}[para]
@@ -223,8 +221,6 @@ SJC4b   &0         &       0 &  52396,5   &  4649,47 &54077,1  &6,25   &       |
 AS buscas locais, apesar de utilizarem de métodos gulosos, ainda assim conseguiram melhorar várias soluções obtidas com os algoritmos construtivos implementados.
 
 \sloppy A tabela \ref{tab:RedInterchange} apresenta os percentuais médios de redução nos valores das soluções, bem como os tempos médios também para execuçãos das buscas utilizando o movimento interchange e na tabela \ref{tab:RedShift} é apresentado os valores utilizando o movimento shift.
-
-O movimento shift mostra algum resultado sgnificante normalmente quando aplicado a instâncias com maior folga. Para instância com folga menor não existe muita capacidade ociosa nos agrupamentos para receber novos indivíduos.
 
 
 \begin{threeparttable}[htp]
@@ -266,6 +262,7 @@ AEAL\_30 &-22,84 &27,531  & 0,00  & 0,357  & -5,19 & 139,095 &-5,07  &123,328 &-
 \end{threeparttable}
 
 
+O movimento shift mostra algum resultado sgnificante normalmente quando aplicado a instâncias com maior folga. Para instância com folga menor não existe muita capacidade ociosa nos agrupamentos para receber novos indivíduos.
 
 
 \begin{threeparttable}[htp]

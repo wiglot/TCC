@@ -105,13 +105,13 @@ Para encontrar o centro de massa, as coordenadas (x e y) dos pontos pertencentes
  \begin{algorithmic}
   \STATE $X \leftarrow 0 $
   \STATE $Y \leftarrow 0 $
+  \STATE $dem \leftarrow 0$
   \FORALL {$i \in S$}
   \STATE $X \leftarrow X + i.x \cdot i.demanda$
   \STATE $Y \leftarrow Y + i.y \cdot i.demanda$
+  \STATE $dem \leftarrow dem + i.demanda $
   \ENDFOR
-  \STATE $X \leftarrow X/\mid S \mid$
-  \STATE $Y \leftarrow Y/\mid S \mid$
-  \RETURN Ponto(X,Y)
+  \RETURN Ponto($\frac{X}{dem},\frac{Y}{dem}$)
  \end{algorithmic}
 \end{algorithm}
 
@@ -192,13 +192,4 @@ Na figura \ref{fig:instances} é apresentado algumas instâncias onde é possível p
 \caption{Localização dos pontos de algumas instâncias}\label{fig:instances}
 \end{figure}
 
-
-
-%  F =
-% \end{equation}
-
-%
-% Mostrar do estudo da folga, diferença de demanda entre os pontos (min, máx)
-%
-% Apresentar também estudo de dispersão dos pontos usando centro de massa com variância da capacidade dos pontos criados, e distância entre os pontos e o centro de massa (será que vai dar tempo??).
 
