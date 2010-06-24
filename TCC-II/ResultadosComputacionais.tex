@@ -11,7 +11,7 @@ A definição das capacidades das equipes foi definida da por a fórmula
 $$ Cap = \frac{F \cdot \sum_{i\in I} i_{dem} }{|P|}$$
 onde $F$ é a folga desejada e $i_{dem}$ a demanda do indivíduo $i$. $Cap$ será a capacidade de cada um dos agrupamentos. Temos com isso o mesmo valor de capacidade para todas equipes. Para mostrar o que influencia uma maior folga da capacidade total, esse último conjunto de instâncias teve as capacidades totais alteradas para 10\%, 20\% e 30\% além da demanda total deles.
 
-Na tabela \ref{tab:valoresInstancias} apresenta os valores obtidos para os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos) e p (número de agrupamentos). Os valores apresentados são os mínimos para as heurísticas que utilizam aleatoriedade. Para melhor visualização os dados foram representados pelos gráficos \ref{fig:graphicSJC} e \ref{fig:graphicAE}. Logo após, na tabela \ref{tab:TemposInstancias}, apresentamos os tempos tomados para executar o processamento das soluções apresentadas como mínimas.
+Na tabela \ref{tab:valoresInstancias} apresenta os valores obtidos para os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos) e p (número de agrupamentos). Os valores apresentados são os mínimos para as heurísticas que utilizam aleatoriedade. Como comparação, os gráficos \ref{fig:graphicSJC} e \ref{fig:graphicAE} apresentam os valores percentuais que as soluções se encontram acima das melhores soluções encontradas para a instância. Para as instâncias AE, o gráfico foi cortado em 100\% uma vez que as soluçõos da heurística Farthest apresentaram valores que ficaram até 734\% acima da melhor solução encontrada. Logo após, na tabela \ref{tab:TemposInstancias}, apresentamos os tempos tomados para executar o processamento das soluções apresentadas como mínimas.
 \begin{table}[htp]
 \begin{center}
 \caption [Valores obtidos pelos algoritmos]{\\Valores da obtidos das instâncias pelos algoritmos construtivos.\label{tab:valoresInstancias}}
@@ -53,7 +53,7 @@ AEAL\_30 &  && 26.814,7 & 10.752,1  &8.837,1 & 9.026,4 & 8.818,8\\
  \centering
  \includegraphics[bb=0 0 555 430, scale=0.8]{./images/GraphicSJC_Value.png}
  % GraphicSJC_Value.png: 740x573 pixel, 96dpi, 19.58x15.16 cm, bb=0 0 555 430
- \caption{Gráfico com os valores obtidos para as instâncias SJC}
+ \caption[Comparação de valores com melhor solução encontrada para instâncias SJC]{Percentual do valor acima da melhor solução encontrada para as instâncias SJC}
  \label{fig:graphicSJC}
 \end{figure}
 
@@ -61,7 +61,7 @@ AEAL\_30 &  && 26.814,7 & 10.752,1  &8.837,1 & 9.026,4 & 8.818,8\\
  \centering
  \includegraphics[bb=0 0 555 430, scale=0.8]{./images/GraphicAE_Value.png}
  % GraphicSJC_Value.png: 740x573 pixel, 96dpi, 19.58x15.16 cm, bb=0 0 555 430
- \caption{Gráfico com os valores obtidos para as instâncias AE}
+ \caption[Comparação de valores com melhor solução encontrada para instâncias AE]{Percentual do valor acima da melhor solução encontrada para as instâncias AE}
  \label{fig:graphicAE}
 \end{figure}
 
@@ -107,7 +107,7 @@ AEAL\_30 &  0,03    &4,40    &0,03  &19,47  &15,70\\
 \end{table}
 
 
-A heurística Random Density foi a que obteve os menores valores na maioria das instâncias, seguida da Heurística Density, seguida das heurísticas HMeans e JMeans que apresentaram soluções semelhantes. a Heurística farthest apresentou resultados nada bons em comparação com as demais, mas os tempos de processamento são bastante baixos, sendo uma heurística 'barata' caso se deseje apenas trabalhar com a busca local, usando de técnicas mais pesadas como Simulated Anneling e Busca Tabu, como aplicado por Osman e Christofides fazem em \cite{osman1994capacitated}. Isso se deve em parte pela escolha gulosa levando em consideração apenas a distância dos pontos para a seleção dos pontos iniciais e por executar apenas uma vez a alocação dos pontos e escolha dos melhores centros.
+A heurística Random Density foi a que obteve os menores valores na maioria das instâncias, seguida da Heurística Density, seguida das heurísticas HMeans e JMeans que apresentaram soluções semelhantes. a Heurística farthest apresentou resultados nada bons em comparação com as demais, mas os tempos de processamento são bastante baixos, sendo uma heurística 'barata' caso se deseje apenas gerar uma solução inicialmente factível e trabalhar com a busca local, usando de técnicas como Simulated Anneling e Busca Tabu, como aplicado por Osman e Christofides fazem em \cite{osman1994capacitated} ou mesmo algoritmos genéticos. Esses valores altos se devem em parte pela escolha gulosa levando em consideração apenas a distância dos pontos para a seleção dos pontos iniciais e por executar apenas uma vez a alocação dos pontos e escolha dos melhores centros.
 
 As heurísticas HMeans e JMeans apesar de escolherem aleatoriamente os indivíduos para serem os centros iniciais, o que pode gerar centros iniciais com localização pior que os escolhidos por outras heurísticas, e iterativamente vão melhorando a solução, escolhendo melhores centros e reassociando os pontos nos melhores centros até não encontrar uma solução melhor. Isso torna os métodos rápidos, no caso o HMeans, e com boas soluções sendo ainda possível uma pequena melhora no valor da função objetivo com uma busca local.
 
