@@ -2,13 +2,15 @@
 % ##################Falar sobre todos os métodos estudados
 
 O CCP, é descrito na literatura como um problema $\mathcal{NP}-completo$\cite{garey1979computers},
-não existindo algoritmos em tempo polinomial para resolver o problema de forma ótima.
+não existindo algoritmos que resolvam o problema de forma ótima em tempo polinomial.
 Para os métodos exatos, que apresentam melhores soluções, eles somente
-podem ser utilizados para instância pequenas (menos de 100 indivíduos), uma
-vez que é um problema de programação inteira e o número de variáveis de decisão é da ordem de $n^{2}+n$\cite{RePEc:eee:ejores:v:18:y:1984:i:3:p:339-348},
+podem ser utilizados para instância pequenas (cerca de 100 indivíduos ou menos), uma
+vez que é um problema de programação inteira e o número de variáveis de decisão é da ordem de $n^{2}+n$ \cite{RePEc:eee:ejores:v:18:y:1984:i:3:p:339-348},
 onde $n$ é o número pontos de demanda do problema. Para instâncias
 muito grandes, o uso de heurísticas traz soluções muito boas, algumas
-vezes muito próximas aos métodos exatos. Serão apresentadas algumas
+vezes muito próximas aos métodos exatos, por isso a sua escolha nesse trabalho.
+
+Serão apresentadas algumas
 heurísticas construtivas para o CCP:
 \begin{description}
 \item [{Farthest:}] Proposta por Osman e Christofides em \cite{osman1994capacitated},
@@ -17,12 +19,12 @@ centros
 \item [{Density:}] Proposta por Ahmadi e Osman em \cite{ahmadi2004density},
 visa construir uma solução inicial usando a densidade de pontos para
 construir a solução inicial.
-\item [{H-Means:}] O método de Forgy ((também conhecido, e tratado aqui, como H-Means) foi inicialmente proposto por \cite{forgy1965cluster} e tem como principio  a procura iterativa dos melhores centros para os agrupamentos realocando os pontos a cada troca.
+\item [{H-Means:}] O método de Forgy ((também conhecido, e tratado aqui, como H-Means) foi inicialmente proposto por \cite{forgy1965cluster} como melhoria ao método K-Means e tem como principio  a procura iterativa dos melhores centros para os agrupamentos realocando os pontos a cada troca.
 \item [{J-Means:}] Proposta por Hansen e Mladenovi\'{c}\cite{Hansen_j-means:a}, usa a noção de pontos ocupados e não ocupados (a uma certa distância do agrupamento).
 \item [{Randon Density:}] Uma alteração na heurística de Density que faz uso da seleção de indivíduos aleatórios para escapar de mínimos locais.
 \end{description}
 
-Em todos os métodos apresentados, é necessário recalcular o centro dos agrupamentos, ou seja, procurar dentre os indivíduos de cada agrupamento qual é o que minimiza a soma das distâncias de si até os demais indivíduos do seu agrupamento. Testar todos os indivíduos de um agrupamento com $\frac{n}{p}$ objetos, seria necessário medir a distância de cada um dos $\frac{n}{p}$ indivíduos até os demais $\frac{n}{p} - 1$. Como esse método é muito referenciado nos métodos, foi foi desenvolvido o algoritmo \ref{findBestCenter} que calcula o centroide do agrupamento e mede a distância de todos os pontos com o centroide calculado. Após isso são testados os $k$ pontos mais próximos do centroide como prováveis centros. O valor de $k$ foi de 30\% dos pontos existentes no agrupamento.
+Em todos os métodos apresentados, é necessário recalcular o centro dos agrupamentos, ou seja, procurar dentre os indivíduos de cada agrupamento qual é o que minimiza a soma das distâncias de todos indivíduos do seu agrupamento até si mesmo. Testar todos os indivíduos de um agrupamento com $\frac{n}{p}$ objetos, seria necessário medir a distância de cada um dos $\frac{n}{p}$ indivíduos até os demais $\frac{n}{p} - 1$. Como esse esse recálculo dos centros é muito método é muito referenciado nos métodos, foi foi desenvolvido o algoritmo \ref{findBestCenter} que calcula o centroide do agrupamento e mede a distância de todos os pontos com o centroide calculado. Após isso são testados os $k$ pontos mais próximos do centroide como prováveis centros. O valor de $k$ foi de 30\% dos pontos existentes no agrupamento.
 \begin{algorithm}[htp]
 \caption{{FindBestCenterOfCluster(Cluster)}\label{findBestCenter}}
 \begin{algorithmic}[1]
@@ -50,15 +52,6 @@ Em todos os métodos apresentados, é necessário recalcular o centro dos agrupamen
 
 A estrutura $Map$ utilizada no algoritmo é tem o funcionamento semelhante a uma tabela hash com o diferencial de manter as chaves  ordenadas e permitir inserir chaves duplicadas. Essa estrutura facilita a obtenção dos indivíduos mais próximos ao centroide calculado.
 
-% \item [{CCCP}]~
-%
-% \begin{description}
-% \item [{Balanced}] q-trees: que utiliza de arvores q-trees e métodos como
-% k-means, Forgy, entre outros
-% \item [{Unconstrained}] to Constrained: inicia como uma solução infactível
-% alterando-a até conseguir uma solução factível. Ambos métodos para
-% CCCP apresentados em \cite{negreiros2006capacitated};
-% \end{description}
 
 \section{CCP}
 
@@ -67,10 +60,10 @@ Para o problema de agrupamento capacitado (CCP), apresentamos 5 heurísticas:
 
 \subsection{Farthest}
 
-Osman e Christofides apresentaram a heurística construtiva com base
+Osman e Christofides em \cite{osman1994capacitated} apresentaram essa heurística construtiva com base
 no afastamento inicial dos primeiros centros (mais afastados entre
 si) e após um recálculo dos centros de cada agrupamento. Essa é uma
-heurística muito rápida mas que pode não encontrar soluções factíveis
+heurística muito rápida mas que, segundo os autores, pode não encontrar soluções factíveis
 para o caso de a soma de todas demandas seja muito próxima das capacidades
 de todos agrupamentos. A heurística pode ser apresentada da seguinte
 forma:
@@ -79,9 +72,9 @@ forma:
 $C={i,j}$
 
 \begin{itemize}
-\item Se número desejado de agrupamentos (p) = 2, vá para o passo 3.
+\item Se número desejado de agrupamentos $p = 2$, vá para o passo 3.
 \end{itemize}
-\item Passo 2 - enquanto |C| < número desejado de agrupamento, faça
+\item Passo 2 - enquanto $\mid C \mid < p $, faça
 
 \begin{itemize}
 \item Encontre um cento $k\in O-C$, de modo que:
@@ -95,11 +88,11 @@ $C={i,j}$
 \item Passo 3 - Para cada consumidor, encontre a distância até o centro
 mais próximo. Organize estas distâncias em ordem crescente. Atribua
 os consumidores na ordem dessas distâncias aos centros correspondentes,
-se a capacidade permitir, caso contrário, atribua para o centro mais
-próximo disponível.
+se a capacidade permitir, caso contrário, atribua para o próximo centro com capacidade disponível.
 \item Passo 4 - Recalcule os centros dos agrupamentos de modo a minimizar
 as distância entre os pontos e o novo centro.
 \end{itemize}
+
 Essa heurística tem como objetivo a construção rápida de uma solução
 e para se obter melhores soluções deve-se empregar heurísticas de
 busca na vizinhança da solução obtida com essa heurística construtiva.
@@ -115,12 +108,10 @@ maior densidade de pontos, assim a distância entre esse centro candidato
 e os possíveis pontos componentes será minimizada. Essa abordagem
 tem caráter guloso e é míope por escolher os pontos candidatos a centros
 vendo apenas sua densidade sem prever o rumo que essa solução está
-tomando. Para corrigir isso, é apresentado um método baseado na ideia
+tomando. Para corrigir isso, é apresentado por \cite{ahmadi2004density} um método baseado na ideia
 de densidade dos pontos, mas que utiliza de aspectos computação adaptativa
 com uma construção-desconstrução periódica. Essa meta-heurística construtiva
-apresenta soluções muito boas em uma iteração, sendo as melhoras
-sobre a solução dada por uma procura no espaço do problema através
-de alterações nas distâncias e e geração de novas soluções.
+apresenta soluções muito boas em uma iteração.
 
 Para a etapa construtiva da solução, existem os seguintes métodos:
 \begin{itemize}
@@ -143,7 +134,7 @@ do ponto $a_{i}$ até todos os pontos de $Y_{k}$.
 agrupamentos. Para essa inserção, é utilizada essa função para calcular
 o arrependimento de associar um nó com um centro que não seja o mais
 próximo. Para um ponto $i$, tendo os pontos $j_{1}\; e\; j_{2}$
-como o centro mais próximo a $i$ e segundo mais próximo, respectivamente,
+como o centro mais próximo a $i$ e segundo mais próximo, respectivamente, com capacidade disponível para atender a demanda de $i$,
 calculamos o arrependimento de associar $i$ com um centro que não
 seja $j_{1}$ como sendo:
 \end{itemize}
@@ -258,7 +249,7 @@ $EncontreOsMelhoresAgrupamentos(C,A)$
 \end{algorithm}
 
 \subsection{H-Means}
-A ideia básica desse algoritmo é partindo de um conjunto de medianas, escolhidas de maneira aleatória, alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento $j = {1,..,p}$ encontrar um ponto $k$ para ser a nova mediana do agrupamento $j$ de modo que
+A ideia básica desse algoritmo é partindo de um conjunto de medianas, escolhidas de maneira aleatória, alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento $j = {1,\cdots,p}$ encontrar um ponto $k$ para ser a nova mediana do agrupamento $j$ de modo que
 $$ \sum_{i\in P_{j}} c_{i,k} = \text{MIN}_{i\in P_{j}} \sum_{i\in P_{j}} c_{i,k}$$
 
 Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximos. O algoritmo pode ser visto em \ref{alg:HMeans}
@@ -323,7 +314,7 @@ solução pela heurística Farthest \subref{b}.}
 \end{figure}
 
 \subsection{Random Density}
-\sloppy A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas que na grande maioria das vezes cai em um minimo local,ta tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela movimentação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado as funções objetivo levando em consideração o posicionamento original dos indivíduos. A ideia de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Usando dessa ideia e da técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o seguinte algoritmo\ref{alg:RandomDensity}:
+\sloppy A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas que na grande maioria das vezes cai em um minimo local, tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela movimentação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado as funções objetivo levando em consideração o posicionamento original dos indivíduos. A ideia de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Usando dessa ideia e da técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o seguinte algoritmo\ref{alg:RandomDensity}:
 
 \begin{algorithm}
 \caption{{RandomDensity}\label{alg:RandomDensity}}

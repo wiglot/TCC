@@ -15,7 +15,7 @@ Como os algoritmos de busca local podem ser aplicados nas soluções geradas por e
 
 Como alguns algoritmos tem a escolha das medianas iniciais de forma aleatória, é possível indicar quantas vezes os algoritmos com essa propriedade sejam executados.
 
-Para o desenvolvimento foi escolhida a linguagem de programação C++ fazendo uso do paradigma orientado a objetos e utilizado como compilador o GCC\sigla{GCC}{Coleção de Compiladores GNU - GNU Compiler Collection} da GNU\sigla{GNU}{GNU Não é Unix - GNU is Not Unix}. A interface foi construída utilizando o framework Qt da Nokia, o qual serviu não apenas de base da interface, mas também para os casos de teste, comunicação entre objetos, processamento de arquivos e concorrência (threads). Para o gerenciamento de versões do projeto foi utilizado o git pelas características descentralizadas e poder de processamento dessa ferramenta , tendo os códigos da nossa ferramenta disponibilizados no repositório http://github.com/wiglot/CCP.
+Para o desenvolvimento foi escolhida a linguagem de programação C++ fazendo uso do paradigma orientado a objetos e utilizado como compilador o GCC\sigla{GCC}{Coleção de Compiladores GNU - GNU Compiler Collection} da GNU\sigla{GNU}{GNU Não é Unix - GNU is Not Unix}. A interface foi construída utilizando o framework Qt da Nokia, o qual serviu não apenas de base da interface, mas também para codificação dos casos de teste, comunicação entre objetos, processamento de arquivos e concorrência (threads). Para o gerenciamento de versões do projeto foi utilizado o git pelas características descentralizadas e facilidade de uso dessa ferramenta , tendo os códigos da nossa ferramenta disponibilizados no repositório http://github.com/wiglot/CCP.
 
 Para efetuar a geração dos arquivos makefiles, utilizados para executar a compilação da ferramenta, foi utilizado o gerador de makefiles CMake pela facilidade de uso, poder no controle de decisões e por possibilitar a execução dos casos de teste de forma automatizada pelo pacote CTest, o qual faz parte do próprio CMake.
 
@@ -38,10 +38,42 @@ Como contribuição, também foi desenvolvido uma primeira versão de um plugin (bib
 
 Tanto o plugin para o Rocs quanto a ferramenta desenvolvida como um todo, estão licenciados pela GPL, o que permite a futuros estudantes e pesquisadores utilizarem e modificarem a ferramenta conforme suas necessidades, não necessitando recriar todo um sistema do zero.
 
-Nos anexos estão apresentados os diagramas UML da ferramenta. A ferramenta está dividida nas seguintes bibliotecas:
+A ferramenta está dividida nas seguintes bibliotecas:
+
 \begin{description}
 \item {CCPAlgorithms:} Algoritmos construtivos. Não inclui busca local nem o controle da execução dos algoritmos (concorrência)
 \item {CCPClusterView:} Define as janelas e itens gráficos.
 \item {CCPIOlib:} Tratam da entrada de dados dos arquivos.
 \sloppy \item {CCPModel:} Representa o problema com todas estruturas básicas para representar uma instância a solução. Cuida também do enfileiramento dos pedidos de execução dos algoritmos e buscas locais.
 \end{description}
+
+A imagem \ref{fig:modules} apresenta os modulos (bibliotecas) do sistema e a ligação entre eles e as imagens \ref{fig:Instances} e \ref{fig:Algorithms}
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[bb=0 0 341 135]{./images/Modules.png}
+ % Modules.png: 455x180 pixel, 96dpi, 12.04x4.76 cm, bb=0 0 341 135
+\caption{\label{fig:modules}Bibliotecas que fazem parte do sistema.}
+
+\end{figure}
+
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[bb=0 0 751 678,width=.8\textwidth]{../TCC-I/imagens/Instance.png}
+ % Instance.png: 1001x904 pixel, 96dpi, 26.48x23.92 cm, bb=0 0 751 678
+
+\caption{\label{fig:Instances}Classes que representam uma Instância e as soluções }
+\end{figure}
+
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[bb=0 0 701 418, scale=0.6]{../TCC-I/imagens/Algorthms.png}
+ % Algorthms.png: 808x482 pixel, 83dpi, 24.72x14.75 cm, bb=0 0 701 418
+\caption{\label{fig:Algorithms}Classes dos algoritmos das heurísticas de construção}
+
+\end{figure}
+
+
+

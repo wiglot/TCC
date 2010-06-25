@@ -61,28 +61,61 @@
 
 % % % % % % % % % % % % % % Renomeia
 \renewcommand{\ALG@name}{ALGORITMO}
-\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+% \renewcommand{\listalgorithmname}{Lista de Algoritmos}
 \renewcommand{\thefigure}{\thechapter.\arabic{figure}}
 
-\renewcommand{\resumoname}{\normalsize{RESUMO}}
+% \renewcommand{\resumoname}{\normalsize{RESUMO}}
 
 
 
 
 \begin{document}
+
+\renewcommand{\resumoname}{\textnormal{\textbf{\normalsize{RESUMO}}}}
+
+\renewcommand{\ABNTabstractname}{\textnormal{\textbf{\normalsize{ABSTRACT}}}}
+
+% altera o título da lista de figuras
+\renewcommand{\listfigurename}
+{\begin{center} {\textnormal{\textbf{\normalsize{LISTA DE FIGURAS}}}} \end{center}}
+
+% altera o título da lista de tabelas
+\renewcommand{\listtablename}
+{\begin{center} {\textnormal{\textbf{\normalsize{LISTA DE TABELAS}}}} \end{center}}
+
+%
+\renewcommand{\listofabreviationsname}
+{\begin{center} {\textnormal{\textbf{\normalsize{LISTA DE ABREVIATURAS E SIGLAS}}}} \end{center}}
+
+% altera o título do Sumário
+\renewcommand{\contentsname}{\textnormal{\textbf{\normalsize{SUMÁRIO}}}}
+
+% altera o tmanho do título dos capítulos
+\renewcommand{\ABNTchaptersize}{\LARGE}
+
 \renewcommand{\figurename}{FIGURA}
 \renewcommand{\tablename}{TABELA}
 \autor{Wagner de Melo Reck}
 
-\titulo{Algoritmos de agrupamento capacitado aplicado ao Problema de Despacho de Ordens de Serviço}
+%Alterar o título para:
+\titulo{\textnormal{\textbf{\large{Algoritmos de agrupamento capacitado aplicado ao Problema de Despacho de Ordens de Serviço}}}}
 
-\orientador{Vinícius Jacques Garcia}
+%Alterar orientador para:
+\orientador{\normalsize{Vinícius Jacques Garcia}}
+
+% Alterar local e data para:
+\local{\textbf{Alegrete - RS}}
+\data{\textbf{2010}}
+
+% \titulo{Algoritmos de agrupamento capacitado aplicado ao Problema de Despacho de Ordens de Serviço}
+
+% \orientador{Vinícius Jacques Garcia}
 
 \comentario{Monografia apresentada para obtenção do Grau de Bacharel em Ciência da Computação pela Universidade Federal do Pampa.}
 
-\local{Alegrete}
+% \local{Alegrete}
 
-\data{Junho 2010}
+% \data{Junho 2010}
 
 
 % ELEMENTOS PRÉ-TEXTUAIS

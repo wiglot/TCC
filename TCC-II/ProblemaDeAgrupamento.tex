@@ -1,32 +1,29 @@
 \chapter{Problema de Agrupamento}
 
-Agrupamento não apenas expressa o ato de separar dados em grupos, mas separa-los de modo que os elementos dos grupos resultantes tenham alguma, ou mais de uma, característica em comum entre si.
+Agrupamento não apenas expressa o ato de separar dados em grupos, mas separa-los de modo que os elementos dos grupos resultantes tenham algumas características comuns entre si.
  Segundo Lorena e Furtado \cite{lorena2001constructive} ``problemas de
- agrupamento
- geralmente aparecem em classificação de dados para algum propósito como armazenar e
+ agrupamento geralmente aparecem em classificação de dados para algum propósito como armazenar e
  recuperar ou analisar dados. Todo algoritmo de agrupamento tentará determinar algum
  agrupamento inerente ou natural nos dados, usando medidas de distância ou similaridade entre os dados.''.
 
 Um exemplo bem simples de agrupamento seria o ato de separar poucas frutas de aparência boa das de
  aparência não tão boa dado uma medida de aparência.
  Para esse exemplo, um ser humano conseguiria executar a tarefa de forma
-competitiva com um algoritmo, mas quando incluímos um grande de dados de entrada
+competitiva com um algoritmo executado por um computador, mas quando incluímos um grande de dados de entrada
 e desejamos que sejam levadas em consideração outras medidas ou outras
-restrições (ex. dividir em 10 grupos sendo 5 de frutas melhores além dos objetos
-de cada grupo sejam de cores e tamanhos semelhantes), os algoritmos de
+restrições (ex. dividir as mesmas frutas em 10 grupos, sendo 5 de frutas de melhor aparência , e os objetos
+de cada grupo devem ser de cores e tamanhos semelhantes), os algoritmos de
 agrupamento podem chegar a uma solução muito melhor em menor tempo.
 
 Dentre as aplicações práticas podemos destacar o uso de agrupamentos para data
-mining,
- processamento de imagens, procura por padrões,
-Redução de cores de imagens, localização de facilidades, reconhecimento de
-padrões, alocação de tarefas a máquinas
+mining, processamento de imagens, procura por padrões, redução de cores de imagens, localização de facilidades, reconhecimento de
+padrões, alocação de tarefas a máquinas, definição de áreas de coleta de lixo entre muitas outras aplicações.
 
 Os problemas de particionamento podem ser organizados segundo a taxonomia
 mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
 \begin{figure}
  \begin{center}
-\begin{tikzpicture}[mindmap, scale=0.85]
+\begin{tikzpicture}[mindmap, scale=0.9]
 \begin{scope}[mindmap, concept color=orange, text=white]
 \node [concept] {Agrupamentos} [clockwise from=-45]
   child{node [concept]{Hierárquico} [clockwise from=0]
@@ -50,7 +47,10 @@ mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
    {\label{clusterTaxonomy}Taxonomia para os problemas de agrupamento}
 \end{center}
 \end{figure}
-Os problemas de particionamento, que serão aprofundados nesse trabalho, são
+
+O problema de agrupamento capacitado está na classe de problemas de particionamento, mais exatamente na classe \emph{k-Means}.
+
+Os problemas de particionamento, que serão estudados nesse trabalho, são
 problemas onde é desejado descobrir partições nos conjuntos de dados de modo que
 cada partição contenha apenas elementos similares entre si.
 
@@ -99,7 +99,7 @@ O problema das P-Medianas é uma variação do problema das K-Médias, com a diferen
 Acrescentando a restrição de capacidade aos agrupamentos, temos o problemas das P-Medianas Capacitado ou também tratado na literatura por CCP.
 
 \section{CCP - Problema de Agrupamento Capacitado}
-Como já apresentado anteriormente, o CCP tem por objectivo agrupar indivíduos de modo a maximizar as similaridades entre entre todos indivíduos de um agrupamento e a mediana do próprio agrupamento. Para o caso dos indivíduos serem representados por pontos no $\Re^{2}$, temos como similaridade o posicionamento dos mesmos no plano, a qual é medida pela distância entre eles. Na Fig. \ref{fig:Exemplo-CCP} é apresentado um exemplo de uma possível solução do CCP dado um conjunto de pontos.
+Como já apresentado anteriormente, o CCP tem por objectivo agrupar indivíduos de modo a maximizar as similaridades, nesse caso a proximidade, entre entre todos indivíduos de um agrupamento e a mediana do próprio agrupamento. Para o caso dos indivíduos serem representados por pontos no $\Re^{2}$, temos como similaridade o posicionamento dos mesmos no plano, a qual é medida pela distância entre eles. Na Fig. \ref{fig:Exemplo-CCP} é apresentado um exemplo de uma possível solução do CCP dado um conjunto de pontos.
 
 \begin{figure}
 \begin{centering}
@@ -138,24 +138,9 @@ Quando temos o valor de capacidade dos agrupamentos homogêneo, ou
 seja, o valor de $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$, podemos
 dizer que esse é um problema das $p-medianas$ capacitado.
 
-\subsection{CCCP}\sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem}
-Um outro problema de agrupamento foi proposto por Negreiro e Palhano\cite{negreiros2006capacitated}
-é o CCCP (Capacitated Centred Clustering Problem - Problema de agrupamento
-centrado capacitado) onde os agrupamentos passam a ter seu centro
-não necessariamente em um ponto (mediana), mas no centroide calculado
-entre os pontos pertencentes a cada agrupamento.
+Um problema semelhande ao CCP foi proposto por Negreiros e Palhano em \cite{negreiros2006capacitated}. Ele é o CCCP \sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem} que consiste em agurupar os pontos levando em consideração a distância não para um dos pontos (mediana) mas para o centroide calculados com os pontos de cada agrupamento como apresentado na figura \ref{fig:CCCP}. São propostas 2 variações deste problema: uma onde o número de agrupamentos ($p$)é previamente conhecido ($p-CCCP$) e outra onde desejamos minimizar o número total de agrupamentos ($g-CCCP$). Após analisarmos esse problemas, decidimos permanecer trabalhando apenas com o problema CCP por melhor representar o PDOS.
 
-são propostas 2 variações do problema, $p-CCCP$, onde é dado o número
-de agrupamentos que se deseja encontrar, e $g-CCCP$ (generic - CCCP)
-que se deseja encontrar o menor número de agrupamentos para atender
-a todas demandas, sendo a função objetivo em ambas a minimização das
-dissimilaridades entre os componentes de cada agrupamento.
-
-Na figura \ref{fig:CCCP} é apresentada a visualização de uma solução
-para o problema $CCCP$.
-
-%
-\begin{figure}
+\begin{figure}[hb]
 \begin{centering}
 \includegraphics{../TCC-I/imagens/CCCP}
 \par\end{centering}
@@ -164,77 +149,97 @@ para o problema $CCCP$.
 \end{figure}
 
 
-A primeira, $p-CCCP$, possui o número fixo de agrupamentos que se
-deseja encontrar e a segunda variação, $g-CCCP$, assume que para
-cada novo agrupamento adicionado, é acrescentado um valor de penalização
-na função objetivo, levando a minimização de agrupamentos. A definição
-para o $p-CCCP$ é:
+% \subsection{CCCP}\sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem}
+% Este é um outro tipo de problema de agrupamento proposto por Negreiro e Palhano\cite{negreiros2006capacitated},
+%  onde os agrupamentos passam a ter seu centro
+% não necessariamente em um ponto (mediana), mas no centroide calculado
+% entre os pontos pertencentes a cada agrupamento.
+%
+% são propostas 2 variações do problema, $p-CCCP$, onde é dado o número
+% de agrupamentos que se deseja encontrar, e $g-CCCP$ (generic - CCCP)
+% que se deseja encontrar o menor número de agrupamentos para atender
+% a todas demandas, sendo a função objetivo em ambas a minimização das
+% dissimilaridades entre os componentes de cada agrupamento.
+%
+% Na figura \ref{fig:CCCP} é apresentada a visualização de uma solução
+% para o problema $CCCP$.
+%
+% %
 
-\begin{equation}
-min\sum_{i\in I}\sum_{j\in P}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\label{eq:obj_CCCP}\end{equation}
-Sujeito à,
 
-\begin{equation}
-\sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_CCCP}\end{equation}
-\begin{equation}
-\sum_{i\in I}x_{ij}=n_{j},\;\forall j\in P,\label{eq:nPerCluster_CCCP}\end{equation}
-\begin{equation}
-\sum_{i\in I}a_{i}x_{ij}=n_{j}\overline{g_{j}},\;\forall j\in P,\label{eq:centroid_CCCP}\end{equation}
-\begin{equation}
-\sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P,\label{eq:capacity_CCCP}\end{equation}
-\begin{equation}
-a_{i}\in\Re^{l},\;\overline{g_{j}}\in\Re^{l},\; n_{j}\in N,\; x_{ij}\in\{0,1\},\;\;\forall i\in I,\;\forall j\in P,\label{eq:sets_CCCP}\end{equation}
-
-onde, $\overline{g_{j}}$ é o centroide do agrupamento $j$, $n_{j}$o
-número de indivíduos associados ao agrupamento $j$, $a_{i}$a posição
-do indivíduo $i$ no espaço $\Re^{l}$, $q_{i}$a demanda do indivíduo
-$i$, $Q_{j}$ a capacidade de cada agrupamento, $I$ o conjunto de
-indivíduos e $P$ o conjunto de agrupamentos.
-
-A função objetivo (\ref{eq:obj_CCCP}) tem como diferencial em relação
-ao problema clássico $CCP$, o fato das similaridades serem medidas
-em relação a todos pontos do agrupamento até seu centroide, o qual
-não é necessariamente um indivíduo. A eq. (\ref{eq:1Cluster_CCCP})
-indica que um indivíduo somente pode estar associado a um agrupamento,
-e a restrição (\ref{eq:nPerCluster_CCCP}) associa a $n_{j}$o número
-de indivíduos no agrupamento $j$. Em (\ref{eq:centroid_CCCP}) é
-definido todos os centroides dos respectivos agrupamentos e em (\ref{eq:capacity_CCCP})
-é colocado que cada agrupamento não pode maior demanda dos indivíduos
-que sua própria capacidade. A ultima restrição (\ref{eq:sets_CCCP})
-indica o domínio das variáveis do problema.
-
-No $g-CCCP$ o número de agrupamentos não é definido a priori, mas
-tem um limitante inferior dado por $\lceil\sum_{i\in I}q_{i}/\sum_{j\in P}Q_{j}\rceil$.
-Esse problema a seguinte formulação:
-% \begin{singlespace}
-\begin{eqnarray}
-Min &\;& \left(F\sum_{j\in P}z_{j}\right)+\sum_{j\in P}\left(\sum_{i\in I}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\right)\label{eq:obj_g-CCCP} \\
-Sujeito\;A,&& \\
-\sum_{j\in P}x_{ij} &=& 1,\;\forall i\in I,\label{eq:1Cluster_g-CCCP} \\
-\sum_{i\in I}a_{i}x_{ij} &=&  \overline{g_{j}}\left(\sum_{i\in I}x_{ij}\right),\;\forall j\in P,\label{eq:centroid_g-CCCP} \\
-\sum_{i\in I}q_{i}x_{ij} &\leq& Q_{j}z_{j},\;\forall j\in P,\label{eq:capacity_g-CCCP}  \\
-\overline{g_{j}}&\in&\Re^{l},\: z_{j},\: x_{ij}\in\{0,1\},\;\forall i\in I,\forall j\in P,\label{eq:sets_g-CCCP}
-\end{eqnarray}
-% \end{singlespace}
-onde, $z_{j}=1$ se o agrupamento $j$ está aberto (em uso), $0$
-caso contrário, $Q_{j}$ a capacidade do agrupamento $j$, $q_{i}$a
-demanda o indivíduo $i$, $\overline{g_{j}}$ o centroide do agrupamento
-$j$. $F$ é o custo fixo para abrir um novo agrupamento.
-
-A função objetivo (\ref{eq:obj_g-CCCP}) minimiza as dissimilaridades
-entre os integrantes de um mesmo agrupamento além do número total
-de agrupamentos abertos. A eq. (\ref{eq:1Cluster_g-CCCP}) define
-que um indivíduo somente pode estar associado a um agrupamento, (\ref{eq:centroid_g-CCCP})
-encontra o centroide de cada agrupamento e (\ref{eq:capacity_g-CCCP})
-garante que a capacidade dos agrupamentos não sejam ultrapassados.
-As ultimas restrições (\ref{eq:sets_g-CCCP}) especificam as variáveis
-de decisão.
+%
+%
+% A primeira, $p-CCCP$, possui o número fixo de agrupamentos que se
+% deseja encontrar e a segunda variação, $g-CCCP$, assume que para
+% cada novo agrupamento adicionado, é acrescentado um valor de penalização
+% na função objetivo, levando a minimização de agrupamentos. A definição
+% para o $p-CCCP$ é:
+%
+% \begin{equation}
+% min\sum_{i\in I}\sum_{j\in P}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\label{eq:obj_CCCP}\end{equation}
+% Sujeito à,
+%
+% \begin{equation}
+% \sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_CCCP}\end{equation}
+% \begin{equation}
+% \sum_{i\in I}x_{ij}=n_{j},\;\forall j\in P,\label{eq:nPerCluster_CCCP}\end{equation}
+% \begin{equation}
+% \sum_{i\in I}a_{i}x_{ij}=n_{j}\overline{g_{j}},\;\forall j\in P,\label{eq:centroid_CCCP}\end{equation}
+% \begin{equation}
+% \sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P,\label{eq:capacity_CCCP}\end{equation}
+% \begin{equation}
+% a_{i}\in\Re^{l},\;\overline{g_{j}}\in\Re^{l},\; n_{j}\in N,\; x_{ij}\in\{0,1\},\;\;\forall i\in I,\;\forall j\in P,\label{eq:sets_CCCP}\end{equation}
+%
+% onde, $\overline{g_{j}}$ é o centroide do agrupamento $j$, $n_{j}$o
+% número de indivíduos associados ao agrupamento $j$, $a_{i}$a posição
+% do indivíduo $i$ no espaço $\Re^{l}$, $q_{i}$a demanda do indivíduo
+% $i$, $Q_{j}$ a capacidade de cada agrupamento, $I$ o conjunto de
+% indivíduos e $P$ o conjunto de agrupamentos.
+%
+% A função objetivo (\ref{eq:obj_CCCP}) tem como diferencial em relação
+% ao problema clássico $CCP$, o fato das similaridades serem medidas
+% em relação a todos pontos do agrupamento até seu centroide, o qual
+% não é necessariamente um indivíduo. A eq. (\ref{eq:1Cluster_CCCP})
+% indica que um indivíduo somente pode estar associado a um agrupamento,
+% e a restrição (\ref{eq:nPerCluster_CCCP}) associa a $n_{j}$o número
+% de indivíduos no agrupamento $j$. Em (\ref{eq:centroid_CCCP}) é
+% definido todos os centroides dos respectivos agrupamentos e em (\ref{eq:capacity_CCCP})
+% é colocado que cada agrupamento não pode maior demanda dos indivíduos
+% que sua própria capacidade. A ultima restrição (\ref{eq:sets_CCCP})
+% indica o domínio das variáveis do problema.
+%
+% No $g-CCCP$ o número de agrupamentos não é definido a priori, mas
+% tem um limitante inferior dado por $\lceil\sum_{i\in I}q_{i}/\sum_{j\in P}Q_{j}\rceil$.
+% Esse problema a seguinte formulação:
+% % \begin{singlespace}
+% \begin{eqnarray}
+% Min &\;& \left(F\sum_{j\in P}z_{j}\right)+\sum_{j\in P}\left(\sum_{i\in I}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\right)\label{eq:obj_g-CCCP} \\
+% Sujeito\;A,&& \\
+% \sum_{j\in P}x_{ij} &=& 1,\;\forall i\in I,\label{eq:1Cluster_g-CCCP} \\
+% \sum_{i\in I}a_{i}x_{ij} &=&  \overline{g_{j}}\left(\sum_{i\in I}x_{ij}\right),\;\forall j\in P,\label{eq:centroid_g-CCCP} \\
+% \sum_{i\in I}q_{i}x_{ij} &\leq& Q_{j}z_{j},\;\forall j\in P,\label{eq:capacity_g-CCCP}  \\
+% \overline{g_{j}}&\in&\Re^{l},\: z_{j},\: x_{ij}\in\{0,1\},\;\forall i\in I,\forall j\in P,\label{eq:sets_g-CCCP}
+% \end{eqnarray}
+% % \end{singlespace}
+% onde, $z_{j}=1$ se o agrupamento $j$ está aberto (em uso), $0$
+% caso contrário, $Q_{j}$ a capacidade do agrupamento $j$, $q_{i}$a
+% demanda o indivíduo $i$, $\overline{g_{j}}$ o centroide do agrupamento
+% $j$. $F$ é o custo fixo para abrir um novo agrupamento.
+%
+% A função objetivo (\ref{eq:obj_g-CCCP}) minimiza as dissimilaridades
+% entre os integrantes de um mesmo agrupamento além do número total
+% de agrupamentos abertos. A eq. (\ref{eq:1Cluster_g-CCCP}) define
+% que um indivíduo somente pode estar associado a um agrupamento, (\ref{eq:centroid_g-CCCP})
+% encontra o centroide de cada agrupamento e (\ref{eq:capacity_g-CCCP})
+% garante que a capacidade dos agrupamentos não sejam ultrapassados.
+% As ultimas restrições (\ref{eq:sets_g-CCCP}) especificam as variáveis
+% de decisão.
 
 
 \section{Métodos de resolução}
 Devido a características como o tamanho de espaço de busca, a resolução de problemas de particionamento utilizando métodos exatos ou de otimização como \emph{branch and bound} são inefetivos em instâncias maiores \cite{osman1994capacitated}.
 
-Para obter soluções em tempos computacionais viáveis (por exemplo no caso do PDOS, uma solução não poderia levar mais que 8 horas para ser processada), é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
+Para obter soluções em tempos computacionais viáveis, é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
 
 Podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
 \begin{itemize}

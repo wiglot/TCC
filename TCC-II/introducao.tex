@@ -13,11 +13,11 @@ Esses tipos de atendimentos aos clientes são chamados de ordens de serviço (OS)\
  podendo ter outros nomes conforme a área de atuação da empresa, mas sempre com
  o intuito de registrar que a empresa deve fazer um atendimento a um determinado
 cliente.
-Cada OS contem alguns dados básicos como localização do atendimento e tempo
+Cada OS contem alguns dados básicos como a localização do atendimento e tempo
 previsto de atendimento. Trataremos aqui a localização como um ponto no espaço
 $\Re^{2}$ e o tempo como a demanda de tempo que a OS levará para ser atendida.
 
-Como medida de deslocamento apenas consideraremos apenas a distância euclidiana
+Como medida de deslocamento apenas consideraremos a distância euclidiana
 entre os pontos, pois algumas instâncias reais se fossem representadas com a
 distância real que a equipe percorreria, iria demandar um mapa completo da
 localidade e mãos das ruas, o que nem sempre é disponível.
@@ -34,13 +34,12 @@ Nesse cenário de estudo tomamos algumas premissas como válidas:
 \end{itemize}
 
 Essas premissas definem o PDOS \sigla{PDOS} {Problema de Despacho de Ordens de Serviço}, onde
-devemos associar todas OS as equipes de modo que uma OS seja atendida por uma, e não mais que uma, equipe.
-Minimizar o deslocamento entre os atendimentos é algo desejável para as empresas, pois diminui os custos e o tempo de deslocamento entre os atendimentos pela menor distância percorrida.
+devemos associar todas OS as equipes de modo que uma OS seja atendida por uma, e não mais que uma, equipe e é desejado minimizar o deslocamento entre os atendimentos, uma vez que isso diminui os custos e o tempo de deslocamento entre os atendimentos devido a menor distância percorrida, o que é algo desejável para as empresas.
 
-Ao designar um conjunto de OS a uma equipe, deve-se levar em consideração a  carga horária de cada mesma e a demanda de tempo que cada OS do conjunto.
- Isso por si só pode ser visto como um Problema da Mochila, o que já não é um problema de solução trivial.
+Ao designar um conjunto de OS a uma equipe, deve-se levar em consideração a  carga horária de cada mesma e a demanda de tempo que cada OS do conjunto de OS associado com a equipe.
+Isso por si só pode ser visto como um Problema da Mochila, visto que temos vários atendimentos, cada um com seu tempo indivídual, e cada equipe possuí uma capacidade.
 
-Ao atribuir as OS levando em consideração apenas a carga horária da equipe e o tempo demandado pelas OS pode nos levar a soluções como as apresentadas na figura \ref{FigDemandaCapacidade}, onde temos 3 equipes atendendo um total de 15 atendimentos.
+Ao atribuir as OS levando em consideração apenas a carga horária da equipe e o tempo demandado pelas OS, pode nos levar a soluções como as apresentadas na figura \ref{FigDemandaCapacidade}, onde temos 3 equipes atendendo um total de 15 atendimentos.
 \begin{figure}
  \begin{center}
   \includegraphics[scale=0.5]{./images/DemandasCapacidade.png}
@@ -55,7 +54,7 @@ dispersos, necessitando um maior deslocamento das equipes de um atendimento a
 outro do que se os atendimentos estivessem agrupados mais próximos.
 
 Um problema que engloba essas características apresentadas é o  CCP \sigla{CCP} {Problema de Agrupamento Capacitado - Capacitated Clustering Problem}, clássico na literatura e também conhecido como (CPMP) \sigla {CPMP}{Problema das P-Medianas Capacitado - Capacitated P-Medians Problem}.
- Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderiam estar associadas às equipes.
+Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderiam estar associadas às equipes se associadasutilizando de métodos de agrupamento capacitado.
 
 É possível perceber que ainda assim não foi possível atribuir as OS de modo que todas OS de de uma equipe fique próximas de uma OS escolhida como centro.
  Isso é devido as restrições de capacidade das equipes e demandas das OS.
@@ -65,14 +64,13 @@ Um problema que engloba essas características apresentadas é o  CCP \sigla{CCP} 
   \includegraphics[scale=0.5]{./images/CCPIntro.png}
  % DemandasCapacidade.png: 455x299 pixel, 96dpi, 12.04x7.91 cm, bb=0 0 341 224
   \end{center}
-\caption{\label{FigCCPIntro} Possível atribuição das Mesmas OS segundo CCP }
+\caption{\label{FigCCPIntro} Possível atribuição das Mesmas OS por uma agrupamento capacitado }
 \end{figure}
 
 As instâncias inéditas desse problema foram retiradas de ordens de atendimento
-de um concessionária de distribuição de energia elétrica e tiveram que ter a
-capacidade de atendimento normalizadas para ser possível gerar soluções válidas
-do problema. Esse fato ocorre pelo fato de encontrar uma solução é necessário
-existir uma folga entre das demandas e a capacidade. À frente neste trabalho será
+de uma empresa e tiveram que ter a capacidade de atendimento normalizadas para ser possível gerar soluções válidas
+do problema. Esse fato ocorre pelo fato de que para encontrar uma solução factível é necessário
+existir uma folga entre das demandas e a capacidade. A frente neste trabalho será
 apresentado um estudo sobre essas folgas.
 
 Nesse trabalho não trataremos da geração de rotas entre os atendimentos, mas
