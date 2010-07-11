@@ -595,86 +595,7 @@ Tempo previsto de atendimento é a demanda;
 \end_layout
 
 \begin_layout Section
-Ferramenta de Visualização
-\end_layout
-
-\begin_layout BeginFrame
-Ferramenta desenvolvida.
- 
-\end_layout
-
-\begin_layout Itemize
-Visualizar as soluções geradas pelos algoritmos;
-\end_layout
-
-\begin_layout Itemize
-Apresentar valores da função objetivo, tempos e número de iterações;
-\end_layout
-
-\begin_layout Itemize
-Comparar diferentes soluções;
-\end_layout
-
-\begin_layout Itemize
-Permite navegação na história da construção da solução;
-\end_layout
-
-\begin_layout ColumnsCenterAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
-7cm
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/TelaFerramenta.png
-	scale 40
-	clip
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout BeginFrame
-Ferramenta em Uso
-\end_layout
-
-\begin_layout Block
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
-Ferramenta
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\begin_inset Formula $Demonstração$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Algoritmos Implementados
+Heurísticas para CCP
 \end_layout
 
 \begin_layout Subsection
@@ -895,8 +816,18 @@ Baixo tempo de processamento;
 \end_layout
 
 \end_deeper
-\begin_layout Block
-Complexidade: 
+\begin_layout AlertBlock
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Complexidade}
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $O\left(n^{2}\right)$
 \end_inset
 
@@ -1039,7 +970,7 @@ Tempo aumenta para
 \begin_inset Formula $p$
 \end_inset
 
- muito grandes
+ muito grandes;
 \end_layout
 
 \begin_layout Column
@@ -1064,15 +995,25 @@ status open
 Soluções muito boas;
 \end_layout
 
-\begin_layout Block
-Tempo de processamento baixo (para 
-\begin_inset Formula $p$
-\end_inset
+\end_deeper
+\begin_layout AlertBlock
+\begin_inset ERT
+status open
 
- pequeno)
+\begin_layout Plain Layout
+
+{Complexidade}
 \end_layout
 
-\end_deeper
+\end_inset
+
+
+\begin_inset Formula $O\left(p\cdot(n^{2}\cdot p)\right)$
+\end_inset
+
+
+\end_layout
+
 \begin_layout BeginFrame
 HMeans
 \end_layout
@@ -1276,8 +1217,18 @@ Baixo tempo de processamento.
 \end_layout
 
 \end_deeper
-\begin_layout Block
-Complexidade: 
+\begin_layout AlertBlock
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Complexidade}
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $O\,\left((n-p-1)\cdot p\right)$
 \end_inset
 
@@ -1314,7 +1265,7 @@ selecione
 \begin_inset Formula $C$
 \end_inset
 
-)
+ )
 \end_layout
 
 \begin_layout Standard
@@ -1547,82 +1498,42 @@ Soluções de qualidade média;
 \end_layout
 
 \end_deeper
-\begin_layout Block
-Complexidade: 
+\begin_layout AlertBlock
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Complexidade}
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula $O\,\left(\left(\frac{n}{2}\right)^{2}\cdot p\right)$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-Comparativo entre os resultados
-\end_layout
-
 \begin_layout BeginFrame
-SJC4a
+Random Density
 \end_layout
 
 \begin_layout Standard
-Instância SJC4a
+Heurística identica a Density, com uma única diferença na escolha das medianas:
 \end_layout
 
-\begin_layout Itemize
-Folga: 57,66%
-\end_layout
-
-\begin_layout Itemize
-Menor / Maior Demandas: 1 / 654
-\end_layout
-
-\begin_layout Itemize
-Capacidade / Nº de Agrupamentos: 840 / 30
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/ResultadosSJC4a.png
-	width 65page%
-	height 50pheight%
-
+\begin_layout Definition
+A escolha da próxima mediana é feita aleatoriamente entre os 
+\begin_inset Formula $p$
 \end_inset
 
-
+ pontos com maior densidade.
 \end_layout
 
 \begin_layout BeginFrame
-SJC1
-\end_layout
-
-\begin_layout Standard
-Instância SJC1
-\end_layout
-
-\begin_layout Itemize
-Folga: 23,99%
-\end_layout
-
-\begin_layout Itemize
-Menor / Maior Demandas: 1 / 654
-\end_layout
-
-\begin_layout Itemize
-Capacidade / Nº de Agrupamentos: 720 / 10
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/ResultadosSJC1.png
-	width 65page%
-	height 60pheight%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout BeginFrame
-Instâncias SJC
+Vantagens/Desvantagens
 \end_layout
 
 \begin_layout ColumnsCenterAligned
@@ -1631,103 +1542,58 @@ Instâncias SJC
 
 \begin_deeper
 \begin_layout Column
-6cm 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/ResultadosComparadadosDensity.png
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Column
-6cm 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/TemposComparadadosDensity1.png
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Subsection
-Resultados da Literaturas
-\end_layout
-
-\begin_layout BeginFrame
-Comparação com Resultados da Literatura
-\end_layout
-
-\begin_layout ColumnsTopAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
 5cm
 \end_layout
 
-\end_deeper
-\begin_layout ColumnsTopAligned
-Valores da função objetivo
-\end_layout
+\begin_layout Block
+\begin_inset ERT
+status open
 
-\begin_deeper
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/ComparacaoResultados.png
-	lyxscale 30
-	width 60pheight%
-	height 50page%
+\begin_layout Plain Layout
+
+{Desvantagens}
+\end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Block
+Maior número de iterações;
+\end_layout
+
+\begin_layout Block
+Tempo mais alto que Density
+\end_layout
+
+\begin_layout Block
+Soluções variam.
 \end_layout
 
 \begin_layout Column
 5cm
 \end_layout
 
-\end_deeper
-\begin_layout ColumnsTopAligned
-Tempo de processamento
-\end_layout
+\begin_layout Block
+\begin_inset ERT
+status open
 
-\begin_deeper
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/ComparacaoResultados_Tempos.png
-	lyxscale 30
-	width 60pheight%
-	height 50page%
+\begin_layout Plain Layout
+
+{Vantagens}
+\end_layout
 
 \end_inset
 
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-Usando como base resultados de Lorena e Senne 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "lorena2003local"
-
-\end_inset
-
-
+\begin_layout Block
+Soluções de melhor qualidade que as do Density (na média);
 \end_layout
 
+\end_deeper
 \begin_layout Subsection
 Algoritmos de melhoramento
 \end_layout
@@ -1738,7 +1604,11 @@ Algoritmos de Melhoramento
 
 \begin_layout Itemize
 Visam melhorar soluções existentes através de movimentos dos pontos entre
- agrupamentos e troca dos centros dos mesmos.
+ agrupamentos e troca dos centros dos mesmos;
+\end_layout
+
+\begin_layout Itemize
+Implementada busca Hill climb;
 \end_layout
 
 \begin_layout Itemize
@@ -1754,14 +1624,18 @@ key "osman1994capacitated"
 
 \begin_deeper
 \begin_layout Itemize
-Shift
+Shift;
 \end_layout
 
 \begin_layout Itemize
-Interchange 
+Interchange.
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+A cada movimento a mediana é recalculada
+\end_layout
+
 \begin_layout BeginFrame
 Shift
 \end_layout
@@ -1891,22 +1765,6 @@ Para dois pontos,
 \end_layout
 
 \end_deeper
-\begin_layout BeginFrame
-COmo é feita a busca local?
-\end_layout
-
-\begin_layout Standard
-Hill climb
-\end_layout
-
-\begin_layout Standard
-Redução nos movimentos do interchange.
-\end_layout
-
-\begin_layout Standard
-mostrar algorithmo
-\end_layout
-
 \begin_layout BeginFrame
 Aplicações sobre soluções - SJC1
 \end_layout
@@ -2057,68 +1915,10 @@ Interchange:
 \end_layout
 
 \end_deeper
-\begin_layout BeginFrame
-Aplicações sobre soluções - SJC4a
-\end_layout
-
-\begin_layout ColumnsCenterAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
-4cm
-\end_layout
-
 \begin_layout Standard
-HMeans:
-\begin_inset Newline newline
-\end_inset
+\begin_inset Note Note
+status open
 
-69156,6 (100%)
-\begin_inset Newline newline
-\end_inset
-
-2,832s
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/HMeans_beforeBetter-SJC4a.png
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Column
-4cm
-\end_layout
-
-\begin_layout Standard
-Interchange:
-\begin_inset Newline newline
-\end_inset
-
-68455,9 (98,9%)
-\begin_inset Newline newline
-\end_inset
-
-1,131s
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../apresentacao_andamento/HMeans_afterInterchange-SJC4a.png
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
 \begin_layout BeginFrame
 Comparativo instâncias SJC
 \end_layout
@@ -2132,7 +1932,7 @@ Comparativo instâncias SJC
 6cm
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../apresentacao_andamento/GanhosMelhoramento.png
 	width 100col%
@@ -2146,7 +1946,7 @@ Comparativo instâncias SJC
 6cm
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../apresentacao_andamento/TemposMelhoramento.png
 	width 100col%
@@ -2157,6 +1957,11 @@ Comparativo instâncias SJC
 \end_layout
 
 \end_deeper
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Dados Sobre as Instâncias
 \end_layout
@@ -2168,6 +1973,114 @@ Dados de dispersão
 \begin_layout BeginFrame
 Dados de dispersão
 \end_layout
+
+\begin_layout ExampleBlock
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Calcula Dispersão}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{itemize} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+item 
+\backslash
+alert{X} <- I 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+item Enquanto 
+\backslash
+alert{X} $
+\backslash
+neq
+\backslash
+emptyset$
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+begin{itemize} 
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+item Calcula Centro de massa 
+\backslash
+alert{C} de 
+\backslash
+alert{X}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+item Atribua os pontos mais próximos de 
+\backslash
+alert{C} dentro da capacidade e calcule a distância entre eles e 
+\backslash
+alert{C};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+item Remova os pontos atribuido a 
+\backslash
+alert{C} de 
+\backslash
+alert{X}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+end{itemize}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+item calcule a média das distâncias dos pontos e centros de massa;
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{itemize}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
 
 \begin_layout Itemize
 \begin_inset Flex CharStyle:Alert
@@ -2264,6 +2177,341 @@ X
 \end_layout
 
 \end_deeper
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Valores Calculados
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/graphicdispersion.png
+	width 100theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Instâncias
+\end_layout
+
+\begin_layout Columns
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/AESM.png
+	height 70theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/AECP.png
+	height 70theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Folga da Capacidade
+\end_layout
+
+\begin_layout Itemize
+Folga é a capacidade além da demanda total
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+F=\frac{{\displaystyle \sum_{p\in P}}p_{cap}}{{\displaystyle \sum_{i\in I}}i_{dem}}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Valores Abaixo de 1.0.
+ não existe nenhuma solução factível;
+\end_layout
+
+\begin_layout Itemize
+Valores muito próximos a 1.0 dificultam entrar soluções
+\end_layout
+
+\begin_layout Itemize
+Para casos onde 
+\begin_inset Formula $\sum_{p\in P}p_{cap}\geq i_{dem},\forall i\in I$
+\end_inset
+
+, a capacidade deixa de ser uma restrição
+\end_layout
+
+\begin_layout Section
+Ferramenta de Visualização
+\end_layout
+
+\begin_layout BeginFrame
+Ferramenta Desenvolvida.
+ 
+\end_layout
+
+\begin_layout Itemize
+Visualizar as soluções geradas pelos algoritmos;
+\end_layout
+
+\begin_layout Itemize
+Apresentar valores da função objetivo, tempos e número de iterações;
+\end_layout
+
+\begin_layout Itemize
+Comparar diferentes soluções;
+\end_layout
+
+\begin_layout Itemize
+Permite navegação na história da construção da solução;
+\end_layout
+
+\begin_layout Itemize
+Também foi escrito um plugin para o Rocs, facilitando futuros estudos; 
+\end_layout
+
+\begin_layout BeginFrame
+Ferramenta em Uso
+\end_layout
+
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Ferramenta
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Demonstração$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/CCPFerramentaNumerada.png
+	height 65theight%
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Resultados
+\end_layout
+
+\begin_layout Subsection
+Comparativo entre os resultados
+\end_layout
+
+\begin_layout BeginFrame
+Instâncias SJC
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/GraphicSJC_Value.png
+	width 115theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Instâncias AE
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/GraphicAE_Value.png
+	width 120theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+SJC4a
+\end_layout
+
+\begin_layout Standard
+Instância SJC4a
+\end_layout
+
+\begin_layout Itemize
+Folga: 57,66%
+\end_layout
+
+\begin_layout Itemize
+Menor / Maior Demandas: 1 / 654
+\end_layout
+
+\begin_layout Itemize
+Capacidade / Nº de Agrupamentos: 840 / 30
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../apresentacao_andamento/ResultadosSJC4a.png
+	width 65page%
+	height 50pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+SJC1
+\end_layout
+
+\begin_layout Standard
+Instância SJC1
+\end_layout
+
+\begin_layout Itemize
+Folga: 23,99%
+\end_layout
+
+\begin_layout Itemize
+Menor / Maior Demandas: 1 / 654
+\end_layout
+
+\begin_layout Itemize
+Capacidade / Nº de Agrupamentos: 720 / 10
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../apresentacao_andamento/ResultadosSJC1.png
+	width 65page%
+	height 60pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Resultados da Literaturas
+\end_layout
+
+\begin_layout BeginFrame
+Comparação com Resultados da Literatura
+\end_layout
+
+\begin_layout ColumnsTopAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout ColumnsTopAligned
+Valores da função objetivo
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/comparativeGraphic.png
+	lyxscale 30
+	width 60pheight%
+	height 50page%
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout ColumnsTopAligned
+Tempo de processamento
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/TimeComparation.png
+	lyxscale 30
+	width 60pheight%
+	height 50page%
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Usando como base resultados de Lorena e Senne 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lorena2003local"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Considerações Finais
 \end_layout
@@ -2345,7 +2593,7 @@ beamertemplatebookbibitems
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "/home/wagner/Documentos/TCC/bibitex/bibliography_CCP"
+bibfiles "/home/wagner/src/TCC/bibitex/bibliography_CCP"
 options "plain"
 
 \end_inset
