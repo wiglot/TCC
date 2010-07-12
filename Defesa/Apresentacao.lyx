@@ -14,7 +14,7 @@
 \usepackage{algorithm}
 \end_preamble
 \use_default_options false
-\language english
+\language brazilian
 \inputencoding auto
 \font_roman times
 \font_sans default
@@ -315,23 +315,59 @@ Uma alocação que distribua as ordens de modo a não sobrecarregar equipes
 
 \begin_layout Itemize
 Dado um conjunto de ordens de serviço 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $I$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 , cada qual com um tempo 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $D_{i},i\in I$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  necessário para serem resolvidas, deve-se associar todas essas 
-\begin_inset Formula $I$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+I
+\end_layout
+
 \end_inset
 
  tarefas para 
-\begin_inset Formula $P$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+P
+\end_layout
+
 \end_inset
 
  equipes respeitando a carga horária 
-\begin_inset Formula $q$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+q
+\end_layout
+
 \end_inset
 
  das equipes, minimizando as distâncias entre as ordens de cada equipe
@@ -341,16 +377,42 @@ Dado um conjunto de ordens de serviço
 Uma forma de diminuir o custo/tempo de atendimento, reduzir deslocamento
 \end_layout
 
-\begin_layout Itemize
-FALAR MAIS SOBRE O PROBLEMA...
+\begin_layout BeginFrame
+PDOS
 \end_layout
 
-\begin_layout Subsection
-CCP - Capacitated Clustering Problem
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/DemandasCapacidade.png
+	width 100col%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout BeginFrame
-Problemas de agrupamento
+PDOS
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /home/wagner/src/TCC/TCC-II/images/CCPIntro.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Problemas de Agrupamento
+\end_layout
+
+\begin_layout BeginFrame
+Problemas de Agrupamento
 \end_layout
 
 \begin_layout Itemize
@@ -359,16 +421,22 @@ Agrupamento
 
 \begin_deeper
 \begin_layout Itemize
-Separar dados em partições
-\end_layout
-
-\begin_layout Itemize
-Partições possuem características semelhantes.
+Separar/classificar dados; 
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Medida de similaridade
+em partições;
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Partições possuem características semelhantes;
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Medida de similaridade;
 \end_layout
 
 \end_deeper
@@ -409,11 +477,23 @@ Problemas de Agrupamento
 
 \begin_layout Itemize
 Número de partições 
-\begin_inset Formula $p$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+p
+\end_layout
+
 \end_inset
 
  em 
-\begin_inset Formula $n$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+n
+\end_layout
+
 \end_inset
 
  elementos é dado por:
@@ -456,19 +536,56 @@ status open
 \end_inset
 
 Agrupar 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $I$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  pontos com demandas 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $D_{i},\, i\in I$
 \end_inset
 
- em 
+ 
+\end_layout
+
+\end_inset
+
+em 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $P$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
  agrupamentos com capacidade 
 \begin_inset Formula $q$
+\end_inset
+
+
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 , maximizando as similaridades (proximidade) entre os pontos e a mediana
@@ -625,7 +742,7 @@ status open
 
 \end_inset
 
-Farthest - Osman and Christofides
+Farthest - Osman e Christofides
 \begin_inset CommandInset citation
 LatexCommand citep
 key "osman1994capacitated"
@@ -646,7 +763,7 @@ status open
 
 \end_inset
 
-Density - Ahmadi and Osman
+Density - Ahmadi e Osman
 \begin_inset CommandInset citation
 LatexCommand citet
 key "ahmadi2004density"
@@ -688,7 +805,7 @@ status open
 
 \end_inset
 
-JMeans - Hansen and Mladenovic.
+JMeans - Hansen e Mladenovic.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hansen_j-means:a,negreiros2006capacitated"
@@ -703,7 +820,7 @@ key "Hansen_j-means:a,negreiros2006capacitated"
 \end_layout
 
 \begin_layout Standard
-+1 variação desenvolvida por nós
+variação do density desenvolvida por nós
 \end_layout
 
 \begin_layout Itemize
@@ -715,13 +832,31 @@ Farthest
 \end_layout
 
 \begin_layout Itemize
-Escolha os dois pontos mais afastados(
+Escolha os dois pontos mais afastados( 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $i\, e\, j\in I$
 \end_inset
 
-).
+
+\end_layout
+
+\end_inset
+
+ ).
  Aloque-os como primeiros centros (
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C=\{i,j\}$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 );
@@ -729,7 +864,16 @@ Escolha os dois pontos mais afastados(
 
 \begin_layout Itemize
 Escolha um ponto 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $k\in I$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
  de modo que: 
@@ -739,12 +883,30 @@ Escolha um ponto
 \end_inset
 
 e aloque como novo centro ( 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C=C\cup k$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
  ).
  Repita até 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $|C|=P$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 ;
@@ -850,34 +1012,75 @@ D_{k}=\frac{|Y_{k}|}{d(I_{k},Y_{k})},\, k\in(I-C)\]
 
 \begin_deeper
 \begin_layout Itemize
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $Y_{k}$
 \end_inset
 
- é o conjunto dos pontos vizinhos ao ponto 
+ 
+\end_layout
+
+\end_inset
+
+é o conjunto dos pontos vizinhos ao ponto 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $I_{k}$
 \end_inset
 
-, respeitando 
-\begin_inset Formula \[
-\sum_{s\in Y_{k}}Dem_{s}\leq Cap,\;|Y_{k}|<\frac{n}{p},\; s\in(I-C)\]
 
+\end_layout
+
+\end_inset
+
+, respeitando a capacidade 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $Cap$
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Não utrapasse a capacidade nem a um certo número de pontos;
+\end_inset
+
+ e não possuindo mais que 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{n}{p}$
+\end_inset
+
+
 \end_layout
 
-\end_deeper
+\end_inset
+
+ indivíduos;
+\end_layout
+
 \begin_layout Itemize
 e 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C$
 \end_inset
 
- o conjunto dos agrupamentos
+
+\end_layout
+
+\end_inset
+
+ o conjunto dos agrupamentos;
 \end_layout
 
 \end_deeper
@@ -887,14 +1090,32 @@ e
 
 \begin_layout Itemize
 Remova os pontos em 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $Y_{k}$
 \end_inset
 
- de futuras seleções (
-\begin_inset Formula $C_{k}=I_{k}+Y_{k}$
+
+\end_layout
+
 \end_inset
 
- e )
+ de futuras seleções (
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $C=C\bigcup Y_{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ )
 \end_layout
 
 \begin_layout Pause
@@ -905,35 +1126,88 @@ Remova os pontos em
 Usa de construção-desconstrução periódica.
 \end_layout
 
-\begin_layout Pause
-
-\end_layout
-
+\begin_deeper
 \begin_layout Itemize
 Iterativamente, aloca pontos com maior valor de arrependimento primeiro,
  calculado por 
-\begin_inset Formula $R(I_{k})=d(I_{k},C_{n2})-d(I_{k},C_{n1})$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $R(k)=d(k,C_{n2})-d(k,C_{n1})$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 , sendo 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $n1$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  e 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $n2$
 \end_inset
 
- as medianas mais próximas de 
-\begin_inset Formula $I_{k}$
+
+\end_layout
+
 \end_inset
 
-, recalculado os centros para cada agrupamento de 
+ as medianas mais próximas de 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+k
+\end_layout
+
+\end_inset
+
+, e 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $k\in C$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, recalculando os centros para cada agrupamento de 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C$
 \end_inset
 
-.
+
 \end_layout
 
+\end_inset
+
+ a cada iteração.
+\end_layout
+
+\end_deeper
 \begin_layout BeginFrame
 Vantagens/Desvantagens - Density
 \end_layout
@@ -967,10 +1241,19 @@ Algoritmo complexo;
 
 \begin_layout Block
 Tempo aumenta para 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $p$
 \end_inset
 
- muito grandes;
+ 
+\end_layout
+
+\end_inset
+
+muito grandes;
 \end_layout
 
 \begin_layout Column
@@ -1037,7 +1320,16 @@ begin{block}
 \end_inset
 
 Selecione 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $P$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
  partições iniciais com suas medianas;
@@ -1258,11 +1550,29 @@ begin{block}
 \end_inset
 
 selecione 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $P$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  partições dos pontos que serão os agrupamentos (
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
  )
@@ -1299,7 +1609,16 @@ begin{block}
 \begin_layout Standard
 Encontre os pontos não ocupados (afastados do centro do agrupamento por
  um 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $\varepsilon$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 )
@@ -1368,18 +1687,45 @@ begin{block}
 
 \begin_layout Standard
 Se valor da função objetivo da solução nova (
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C'$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
 )é menor que 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
 , 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $C=C'$
 \end_inset
 
-e volte ao passo 2.
+
+\end_layout
+
+\end_inset
+
+ e volte ao passo 2.
  Caso contrario Pare.
 \end_layout
 
@@ -1521,12 +1867,21 @@ Random Density
 \end_layout
 
 \begin_layout Standard
-Heurística identica a Density, com uma única diferença na escolha das medianas:
+Heurística idêntica a Density, com uma única diferença na escolha das medianas:
 \end_layout
 
 \begin_layout Definition
 A escolha da próxima mediana é feita aleatoriamente entre os 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $p$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
  pontos com maior densidade.
@@ -1564,7 +1919,7 @@ Maior número de iterações;
 \end_layout
 
 \begin_layout Block
-Tempo mais alto que Density
+Tempo mais alto que Density;
 \end_layout
 
 \begin_layout Block
@@ -1590,7 +1945,7 @@ status open
 \end_layout
 
 \begin_layout Block
-Soluções de melhor qualidade que as do Density (na média);
+Soluções de melhor qualidade que as do Density (na média).
 \end_layout
 
 \end_deeper
@@ -1642,22 +1997,84 @@ Shift
 
 \begin_layout Definition
 Um dado ponto 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $i$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  que pertence a um agrupamento 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $j$
 \end_inset
 
-, é movido para um outro agrupamento
-\begin_inset Formula $j',\, j'\neq j$
+
+\end_layout
+
 \end_inset
 
-, se 
+, é movido para um outro agrupamento 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $j'$
 \end_inset
 
- suportar a capacidade do ponto i.
+
+\end_layout
+
+\end_inset
+
+, onde 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $j'\neq j$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, se 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $j'$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ suportar a demanda do ponto 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout ColumnsCenterAligned
@@ -1704,28 +2121,102 @@ Interchange
 
 \begin_layout Definition
 Para dois pontos, 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $i$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  e 
-\begin_inset Formula $i',\, sendo\; i\neq i'$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $i'$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, sendo 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $i\neq i'$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 , pertencentes aos agrupamentos 
-\begin_inset Formula $j$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+j
+\end_layout
+
 \end_inset
 
  e 
-\begin_inset Formula $j',\, j\neq j'$
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+j'
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $j\neq j'$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 , respectivamente, são trocados de agrupamentos em um único movimento, ficando
  ao final 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $i'\in j$
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  e 
+\begin_inset Flex CharStyle:Alert
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Formula $i\in j'$
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 .
@@ -1917,7 +2408,7 @@ Interchange:
 \end_deeper
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout BeginFrame
 Comparativo instâncias SJC
@@ -2078,110 +2569,6 @@ end{itemize}
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Itemize
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-X
-\end_layout
-
-\end_inset
-
- <- I
-\end_layout
-
-\begin_layout Itemize
-Enquanto 
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-X
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula $\neq\emptyset$
-\end_inset
-
- Vazio
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Calcula Centro de massa 
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-C
-\end_layout
-
-\end_inset
-
- de 
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-X
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Atribua os pontos mais próximos de 
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-C
-\end_layout
-
-\end_inset
-
- dentro da capacidade
-\end_layout
-
-\begin_layout Itemize
-Remova os pontos atribuido a 
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-C
-\end_layout
-
-\end_inset
-
- de 
-\begin_inset Flex CharStyle:Alert
-status collapsed
-
-\begin_layout Plain Layout
-X
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\end_inset
-
-
-\end_layout
-
 \begin_layout BeginFrame
 Valores Calculados
 \end_layout
@@ -2300,6 +2687,10 @@ Permite navegação na história da construção da solução;
 Também foi escrito um plugin para o Rocs, facilitando futuros estudos; 
 \end_layout
 
+\begin_layout Itemize
+Código licenciado sobre GPL disponível em github.com/wiglot/CCP
+\end_layout
+
 \begin_layout BeginFrame
 Ferramenta em Uso
 \end_layout
@@ -2405,8 +2796,8 @@ Capacidade / Nº de Agrupamentos: 840 / 30
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ../apresentacao_andamento/ResultadosSJC4a.png
-	width 65page%
+	filename images/SJC4a.png
+	lyxscale 40
 	height 50pheight%
 
 \end_inset
@@ -2436,9 +2827,11 @@ Capacidade / Nº de Agrupamentos: 720 / 10
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ../apresentacao_andamento/ResultadosSJC1.png
+	filename images/SJC1.png
+	lyxscale 50
 	width 65page%
 	height 60pheight%
+	keepAspectRatio
 
 \end_inset
 
@@ -2520,8 +2913,36 @@ Considerações Finais
 Considerações Finais
 \end_layout
 
+\begin_layout Itemize
+PDOS vai alem do CCP
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mas ainda assim é melhor que distribuir aleatoriamente as OS
+\end_layout
+
+\begin_layout Itemize
+Modelo do PDOS ainda incompleto
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Heurísticas estudadas geram soluções boas
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+é preciso melhorar a busca local
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Soluções de instâncias reais mostraram-se boas 
+\end_layout
+
 \begin_layout BeginFrame
-Idéias para trabalhos futuros
+Ideias para trabalhos futuros
 \end_layout
 
 \begin_layout Itemize
@@ -2540,20 +2961,30 @@ Usar dados de soluções passadas para gerar as próximas;
 \end_layout
 
 \begin_layout Itemize
-Levar em consideração o desclocamento entre os atendimentos;
+Levar em consideração o deslocamento entre os atendimentos;
 \end_layout
 
 \begin_layout Itemize
 Passo extra de ajuste de carga para equipes;
 \end_layout
 
+\begin_layout Itemize
+Geração das rotas;
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Considerar tempo de deslocamento entre atendimentos;
+\end_layout
+
+\end_deeper
 \begin_layout EndFrame
 
 \end_layout
 
 \begin_layout Section*
 \start_of_appendix
-Appendix
+Apêndice
 \end_layout
 
 \begin_layout Subsection*
