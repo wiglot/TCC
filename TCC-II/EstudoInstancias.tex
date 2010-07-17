@@ -5,7 +5,7 @@ Chamamos de razão da soma das demanda por a capacidade total oferecida. Para com
  F &= \frac{\sum_{p\in P} p_{cap} }{\sum_{i \in I} i_{dem}} \label{folga}
 \end{align}
 
-Onde $i_{dem}$ é a demanda do indivíduo $i$ e $p_{cap}$ a capacidade do agrupamento $p$. $F$ é maior que 1 se a demanda total é menor que a capacidade total. Para valores de $F$ muito próximos a 1, mas maiores que 1, as heurísticas tendem a não conseguir nem mesmo uma solução factível, principalmente heurísticas que utilizam de procedimentos gulosos para alocação de indivíduos, como por exemplo a escolha do agrupamento com mediana mais próxima do indivíduo a ser alocado. Para valores menores que 1 não existe uma solução válida para a instância, uma vez que existe maior demanda que oferta (capacidade).
+Onde $i_{dem}$ é a demanda do indivíduo $i$ e $p_{cap}$ a capacidade do agrupamento $p$. $F$ é maior que 1 se a demanda total é menor que a capacidade total. Para valores de $F$ muito próximos a 1, mas maiores que 1, as heurísticas tendem a não conseguir uma solução factível, principalmente heurísticas que utilizam de procedimentos gulosos para alocação de indivíduos, como por exemplo a escolha do agrupamento com mediana mais próxima do indivíduo a ser alocado. Essa dificulade se dá uma vez que pode não ser possível associar todas demanda (OS) aos agrupamentos (equipes) uma vez que as demandas não podem ser fracionadas entre várias equipes. Para valores menores que 1 não existe uma solução válida para a instância, uma vez que existe maior demanda que oferta (capacidade).
 
 Para o caso de $ \sum_{i \in I} i_{dem} \geq p_{cap},\forall p \in P $ podemos dizer que o problema é equivalente ao problemas das P-medianas não capacitado, uma vez que a capacidade não chega a ser uma restrição no problema e todos os indivíduos podem ser associados a apenas uma agrupamento.
 
@@ -51,7 +51,7 @@ AESM\_30 &1,3    &25,0175    &3  &52 \\
 \end{tablenotes}
 \end{threeparttable}
 
-Para medir a dispersão dos indivíduos no espaço, Desenvolvemos um método que mede a distância dos pontos de centros de massa calculados usando como peso para cada ponto sua própria demanda. O algoritmo \ref{algMedia} produz como resultado a média das distâncias dos pontos aos centroides e as distâncias mínima e máxima. Para o primeiro centro de massa todos os pontos são considerados. Já para os demais centros de massa, os pontos mais próximos ao último  centro de massa calculado que possuam a soma de suas demandas inferior ou igual a capacidade $Cap$, são removidos do cálculo do próximo centro de massa.
+Para medir a dispersão dos indivíduos no espaço, Desenvolvemos um método que mede a distância dos pontos de centros de massa calculados usando como peso para cada ponto sua própria demanda. O algoritmo \ref{algMedia} produz como resultado a média das distâncias dos pontos aos centroides e as distâncias mínima e máxima. Para o primeiro centro de massa, todos os pontos são considerados. Já para os demais centros de massa, os pontos mais próximos ao último  centro de massa calculado que possuam a soma de suas demandas inferior ou igual a capacidade $Cap$, são removidos do cálculo do próximo centro de massa.
 
 \begin{algorithm}
 \caption{CalculaDispersão(I, Cap)}\label{algMedia}
@@ -70,8 +70,8 @@ Para medir a dispersão dos indivíduos no espaço, Desenvolvemos um método que med
       \STATE $MaxD \leftarrow Max(MaxD, d(v,C))$
       \STATE $MedD \leftarrow MedD + d(v,C)$
       \ENDFOR
-      $NumC \leftarrow NumC + 1$
-      $S \leftarrow S - V$
+      \STATE $NumC \leftarrow NumC + 1$
+      \STATE $S \leftarrow S - V$
 \ENDWHILE
 \STATE $MedD \leftarrow MedD/NumC $
 \end{algorithmic}
@@ -116,7 +116,7 @@ Para encontrar o centro de massa, as coordenadas (x e y) dos pontos pertencentes
 \end{algorithm}
 
 
-Aplicando o algoritmo sobre as instâncias, obtivemos os dados apresentados na tabela \ref{tab:dispersao}. Colocamos também o gráfico \ref{fig:dispersao} dos dados para melhor visualização. Para comparar as dispersão entre as diferentes instâncias, os valores foram normalizados por $Max(d(i,k)),\;i,k\in I$, sendo 1 a maior distâncias entre 2 pontos de uma instância. O que nós tomamos como medida de dispersão é a medida média de distâncias, apesar da medida mínima e máxima indicar algumas peculiaridades das instâncias, como por exemplo a distância máxima muito alta e a distância média e distância mínima muito baixa pode indicar o que os pontos se encontram agrupados bem próximos, mas que exitem pontos isolados (afastados) dessas concentrações.
+Aplicando o algoritmo sobre as instâncias, obtivemos os dados apresentados na tabela \ref{tab:dispersao}. Colocamos também o gráfico \ref{fig:dispersao} dos dados para melhor visualização. Para comparar as dispersão entre as diferentes instâncias, os valores foram normalizados por $Max(d(i,k)),\;i,k\in I$, sendo 1 a maior distâncias entre 2 pontos de uma instância. O que nós tomamos como medida de dispersão é a medida média de distâncias, apesar da medida mínima e máxima indicar algumas peculiaridades das instâncias, como por exemplo a distância máxima muito alta e a distância média e distância mínima muito baixa pode indicar que os pontos se encontram agrupados bem próximos, mas que exitem pontos isolados (afastados) dessas concentrações.
 
 \begin{figure}[hp]
  \centering
@@ -165,7 +165,7 @@ AESM\_30    &0,00409  &0,8907   &0,0352  &17 \\
 \end{tablenotes}
 \end{threeparttable}
 
-Na figura \ref{fig:instances} é apresentado algumas instâncias onde é possível perceber que o cálculo de dispersão se encontra bastante coerente com a localização dos indivíduos. A instância SJC4a é umas das que apresentou maior média de distância dos centros de massa para os indivíduos e como pode ser visto na figura \ref{fig:sjc4} os indivíduos são distribuídos quase que uniformemente no espaço. Já a instância AECP, apesar de apresentar focos de concentração de pontos, existem vários desses focos o que leva os centros de massa serem calculados entre esses focos afastados das concentrações, e assim ter uma maior distância entre os pontos e os centros de massa. As duas instâncias com menores médias de distâncias foram AENH(\ref{fig:aenh}) e AESM(\ref{fig:aesm}) possuem apenas um grande foco de concentração dos pontos, sendo nesse caso onde se concentrará a maioria dos centros de massa calculados.
+Na figura \ref{fig:instances} são apresentadas algumas instâncias onde é possível perceber que o cálculo de dispersão se encontra bastante coerente com a localização dos indivíduos. A instância SJC4a é umas das que apresentou maior média de distância dos centros de massa para os indivíduos e como pode ser visto na figura \ref{fig:sjc4} os indivíduos são distribuídos quase que uniformemente no espaço. Já a instância AECP, apesar de apresentar focos de concentração de pontos, existem vários desses focos o que leva os centros de massa serem calculados entre esses focos afastados das concentrações, e assim ter uma maior distância entre os pontos e os centros de massa. As duas instâncias com menores médias de distâncias foram AENH(\ref{fig:aenh}) e AESM(\ref{fig:aesm}) possuem apenas um grande foco de concentração dos pontos, sendo nesse caso onde se concentrará a maioria dos centros de massa calculados.
 
 \begin{figure}[hp]
  \centering

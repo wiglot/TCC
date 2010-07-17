@@ -81,6 +81,37 @@ status open
 \end_inset
 
  
+\lang english
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+and
+\end_layout
+
+\end_inset
+
+
+\lang brazilian
+ 
+\begin_inset Newline newline
+\end_inset
+
+Vinícius Jacques Garcia
+\begin_inset Flex InstituteMark
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+
 \begin_inset OptArg
 status open
 
@@ -1870,7 +1901,17 @@ Random Density
 Heurística idêntica a Density, com uma única diferença na escolha das medianas:
 \end_layout
 
-\begin_layout Definition
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
 A escolha da próxima mediana é feita aleatoriamente entre os 
 \begin_inset Flex CharStyle:Alert
 status collapsed
@@ -1995,7 +2036,17 @@ A cada movimento a mediana é recalculada
 Shift
 \end_layout
 
-\begin_layout Definition
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
 Um dado ponto 
 \begin_inset Flex CharStyle:Alert
 status collapsed
@@ -2119,7 +2170,17 @@ status collapsed
 Interchange
 \end_layout
 
-\begin_layout Definition
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
 Para dois pontos, 
 \begin_inset Flex CharStyle:Alert
 status collapsed
@@ -2656,6 +2717,21 @@ Para casos onde
 \end_inset
 
 , a capacidade deixa de ser uma restrição
+\end_layout
+
+\begin_layout BeginFrame
+Folga da Capacidade
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/demands.png
+	height 90theight%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

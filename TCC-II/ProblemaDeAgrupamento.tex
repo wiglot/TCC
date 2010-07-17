@@ -11,9 +11,8 @@ Um exemplo bem simples de agrupamento seria o ato de separar poucas frutas de ap
  Para esse exemplo, um ser humano conseguiria executar a tarefa de forma
 competitiva com um algoritmo executado por um computador, mas quando incluímos um grande de dados de entrada
 e desejamos que sejam levadas em consideração outras medidas ou outras
-restrições (ex. dividir as mesmas frutas em 10 grupos, sendo 5 de frutas de melhor aparência , e os objetos
-de cada grupo devem ser de cores e tamanhos semelhantes), os algoritmos de
-agrupamento podem chegar a uma solução muito melhor em menor tempo.
+restrições (ex. dividir as mesmas frutas em 10 grupos, sendo 5 de frutas de melhor aparência e 5 de piores, alem de que os objetos
+de cada grupo devem ser de cores e tamanhos semelhantes), os algoritmos de agrupamento podem chegar a uma solução muito melhor em menor tempo.
 
 Dentre as aplicações práticas podemos destacar o uso de agrupamentos para data
 mining, processamento de imagens, procura por padrões, redução de cores de imagens, localização de facilidades, reconhecimento de
@@ -54,7 +53,7 @@ Os problemas de particionamento, que serão estudados nesse trabalho, são
 problemas onde é desejado descobrir partições nos conjuntos de dados de modo que
 cada partição contenha apenas elementos similares entre si.
 
-A escala de dificuldade de resolver do problema de particionamento, ser vista pela expressão de distintas partições $p$ existente em $n$ pontos,$N(n,p)$,
+A escala de dificuldade de resolver do problema de particionamento, pode ser vista pela expressão de distintas partições $p$ existente em $n$ pontos,$N(n,p)$,
 definida por \cite{liu1968cl}:
 \begin{equation}
  N(p,n) = \frac{1}{p!}\sum_{i=0}^{p}(-1)^{p-1}\binom{p}{i}i^{n}
@@ -78,7 +77,7 @@ por Taillard \cite{taillard2003heuristic}, onde são tratados 2863
 pontos, o espaço de busca cresce ainda mais. O uso de métodos exatos é
 proibitivo pelo tempo computacional que seria necessário para essas instâncias
 maiores, e sendo esses problema da classe NP-Completo \cite{garey1979computers}
-não existe um algoritmo que resolva de forma exata em tempo polinomial, o que
+não existe um algoritmo que resolva de forma exata em tempo polinomial, assim o que
 resta é o uso de métodos heurísticos e híbridos.
 Outro fato sobre esses dados é que a ocorrência de mais agrupamentos possíveis,
 ocorra com $p=16$, o que vem a mostrar que o problema é assimétrico em relação
@@ -90,7 +89,7 @@ resolvidos \cite{ahmadi2004density}
 
 Quando temos um conjunto de pontos no espaço ($\Re^{2}$ por exemplo) e
 desejamos agrupar os pontos pela sua  localização, podemos utilizar como
-medida de dispersão dos grupos a distância dos pontos em relação ao centroide
+medida de dispersão dos grupos a distância euclidiana dos pontos em relação ao centroide
 calculado pelos pontos do agrupamento. Esse é também conhecido como Problema das
 K-Médias (K-Means) apresentado por \cite{macqueen1966some}
 
@@ -138,7 +137,7 @@ Quando temos o valor de capacidade dos agrupamentos homogêneo, ou
 seja, o valor de $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$, podemos
 dizer que esse é um problema das $p-medianas$ capacitado.
 
-Um problema semelhande ao CCP foi proposto por Negreiros e Palhano em \cite{negreiros2006capacitated}. Ele é o CCCP \sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem} que consiste em agurupar os pontos levando em consideração a distância não para um dos pontos (mediana) mas para o centroide calculados com os pontos de cada agrupamento como apresentado na figura \ref{fig:CCCP}. São propostas 2 variações deste problema: uma onde o número de agrupamentos ($p$)é previamente conhecido ($p-CCCP$) e outra onde desejamos minimizar o número total de agrupamentos ($g-CCCP$). Após analisarmos esse problemas, decidimos permanecer trabalhando apenas com o problema CCP por melhor representar o PDOS.
+Um problema semelhante ao CCP foi proposto por Negreiros e Palhano em \cite{negreiros2006capacitated}. Ele é o CCCP \sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem} que consiste em agrupar os pontos levando em consideração a distância não para um dos pontos (mediana) mas para o centroide calculados com os pontos de cada agrupamento como apresentado na figura \ref{fig:CCCP}. São propostas 2 variações deste problema: uma onde o número de agrupamentos ($p$)é previamente conhecido ($p-CCCP$) e outra onde desejamos minimizar o número total de agrupamentos ($g-CCCP$). Após analisarmos esse problemas, decidimos permanecer trabalhando apenas com o problema CCP por melhor representar o PDOS.
 
 \begin{figure}[hb]
 \begin{centering}
@@ -147,93 +146,6 @@ Um problema semelhande ao CCP foi proposto por Negreiros e Palhano em \cite{negr
 
 \caption{\label{fig:CCCP}Uma solução para CCCP \cite{negreiros2006capacitated}}
 \end{figure}
-
-
-% \subsection{CCCP}\sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem}
-% Este é um outro tipo de problema de agrupamento proposto por Negreiro e Palhano\cite{negreiros2006capacitated},
-%  onde os agrupamentos passam a ter seu centro
-% não necessariamente em um ponto (mediana), mas no centroide calculado
-% entre os pontos pertencentes a cada agrupamento.
-%
-% são propostas 2 variações do problema, $p-CCCP$, onde é dado o número
-% de agrupamentos que se deseja encontrar, e $g-CCCP$ (generic - CCCP)
-% que se deseja encontrar o menor número de agrupamentos para atender
-% a todas demandas, sendo a função objetivo em ambas a minimização das
-% dissimilaridades entre os componentes de cada agrupamento.
-%
-% Na figura \ref{fig:CCCP} é apresentada a visualização de uma solução
-% para o problema $CCCP$.
-%
-% %
-
-
-%
-%
-% A primeira, $p-CCCP$, possui o número fixo de agrupamentos que se
-% deseja encontrar e a segunda variação, $g-CCCP$, assume que para
-% cada novo agrupamento adicionado, é acrescentado um valor de penalização
-% na função objetivo, levando a minimização de agrupamentos. A definição
-% para o $p-CCCP$ é:
-%
-% \begin{equation}
-% min\sum_{i\in I}\sum_{j\in P}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\label{eq:obj_CCCP}\end{equation}
-% Sujeito à,
-%
-% \begin{equation}
-% \sum_{j\in P}x_{ij}=1,\;\forall i\in I,\label{eq:1Cluster_CCCP}\end{equation}
-% \begin{equation}
-% \sum_{i\in I}x_{ij}=n_{j},\;\forall j\in P,\label{eq:nPerCluster_CCCP}\end{equation}
-% \begin{equation}
-% \sum_{i\in I}a_{i}x_{ij}=n_{j}\overline{g_{j}},\;\forall j\in P,\label{eq:centroid_CCCP}\end{equation}
-% \begin{equation}
-% \sum_{i\in I}q_{i}x_{ij}\leq Q_{j},\;\forall j\in P,\label{eq:capacity_CCCP}\end{equation}
-% \begin{equation}
-% a_{i}\in\Re^{l},\;\overline{g_{j}}\in\Re^{l},\; n_{j}\in N,\; x_{ij}\in\{0,1\},\;\;\forall i\in I,\;\forall j\in P,\label{eq:sets_CCCP}\end{equation}
-%
-% onde, $\overline{g_{j}}$ é o centroide do agrupamento $j$, $n_{j}$o
-% número de indivíduos associados ao agrupamento $j$, $a_{i}$a posição
-% do indivíduo $i$ no espaço $\Re^{l}$, $q_{i}$a demanda do indivíduo
-% $i$, $Q_{j}$ a capacidade de cada agrupamento, $I$ o conjunto de
-% indivíduos e $P$ o conjunto de agrupamentos.
-%
-% A função objetivo (\ref{eq:obj_CCCP}) tem como diferencial em relação
-% ao problema clássico $CCP$, o fato das similaridades serem medidas
-% em relação a todos pontos do agrupamento até seu centroide, o qual
-% não é necessariamente um indivíduo. A eq. (\ref{eq:1Cluster_CCCP})
-% indica que um indivíduo somente pode estar associado a um agrupamento,
-% e a restrição (\ref{eq:nPerCluster_CCCP}) associa a $n_{j}$o número
-% de indivíduos no agrupamento $j$. Em (\ref{eq:centroid_CCCP}) é
-% definido todos os centroides dos respectivos agrupamentos e em (\ref{eq:capacity_CCCP})
-% é colocado que cada agrupamento não pode maior demanda dos indivíduos
-% que sua própria capacidade. A ultima restrição (\ref{eq:sets_CCCP})
-% indica o domínio das variáveis do problema.
-%
-% No $g-CCCP$ o número de agrupamentos não é definido a priori, mas
-% tem um limitante inferior dado por $\lceil\sum_{i\in I}q_{i}/\sum_{j\in P}Q_{j}\rceil$.
-% Esse problema a seguinte formulação:
-% % \begin{singlespace}
-% \begin{eqnarray}
-% Min &\;& \left(F\sum_{j\in P}z_{j}\right)+\sum_{j\in P}\left(\sum_{i\in I}\parallel a_{i}-\overline{g_{j}}\parallel^{2}x_{ij}\right)\label{eq:obj_g-CCCP} \\
-% Sujeito\;A,&& \\
-% \sum_{j\in P}x_{ij} &=& 1,\;\forall i\in I,\label{eq:1Cluster_g-CCCP} \\
-% \sum_{i\in I}a_{i}x_{ij} &=&  \overline{g_{j}}\left(\sum_{i\in I}x_{ij}\right),\;\forall j\in P,\label{eq:centroid_g-CCCP} \\
-% \sum_{i\in I}q_{i}x_{ij} &\leq& Q_{j}z_{j},\;\forall j\in P,\label{eq:capacity_g-CCCP}  \\
-% \overline{g_{j}}&\in&\Re^{l},\: z_{j},\: x_{ij}\in\{0,1\},\;\forall i\in I,\forall j\in P,\label{eq:sets_g-CCCP}
-% \end{eqnarray}
-% % \end{singlespace}
-% onde, $z_{j}=1$ se o agrupamento $j$ está aberto (em uso), $0$
-% caso contrário, $Q_{j}$ a capacidade do agrupamento $j$, $q_{i}$a
-% demanda o indivíduo $i$, $\overline{g_{j}}$ o centroide do agrupamento
-% $j$. $F$ é o custo fixo para abrir um novo agrupamento.
-%
-% A função objetivo (\ref{eq:obj_g-CCCP}) minimiza as dissimilaridades
-% entre os integrantes de um mesmo agrupamento além do número total
-% de agrupamentos abertos. A eq. (\ref{eq:1Cluster_g-CCCP}) define
-% que um indivíduo somente pode estar associado a um agrupamento, (\ref{eq:centroid_g-CCCP})
-% encontra o centroide de cada agrupamento e (\ref{eq:capacity_g-CCCP})
-% garante que a capacidade dos agrupamentos não sejam ultrapassados.
-% As ultimas restrições (\ref{eq:sets_g-CCCP}) especificam as variáveis
-% de decisão.
 
 
 \section{Métodos de resolução}
@@ -246,3 +158,4 @@ Podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
  \item Construtivas: Algoritmos desenvolvidos especificamente para uma determinada classe de problemas. Normalmente as soluções estão em um ótimo local ou muito próximo de um;
  \item Iterativas: A partir de uma solução inicial válida, e busca na vizinhança iterativamente por outras soluções melhores. A busca na vizinha normalmente conduz a um vale/pico, chegando a um ótimo local ao final das iterações.
 \end{itemize}
+No p?oximo capitulo apresentamos as heurísticas escolhidas para essetrabalho (uma construtiva e 4 iterativas) e sobre a busca local utilizada para melhorar as soluções geradas por as heurísticas.
