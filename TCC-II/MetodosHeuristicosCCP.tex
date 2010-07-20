@@ -33,20 +33,23 @@ Em todos os métodos apresentados, é necessário recalcular o centro dos agrupamen
 \STATE $k \leftarrow np * 0.3$
 \STATE $x \leftarrow 0$
 \STATE $y \leftarrow 0$
+\STATE $foundBetter \leftarrow False$
 \FORALL {$o \in CLuster.Objects$}
-\STATE    $x \leftarrow x + o.x$
-\STATE    $y \leftarrow y + o.y$
+  \STATE    $x \leftarrow x + o.x$
+  \STATE    $y \leftarrow y + o.y$
 \ENDFOR
 \STATE $c \leftarrow Centroid( \frac{x}{np} , \frac{y}{np} )$ \COMMENT {Constrói o centroide.}
 \FORALL {$o \in CLuster.Objects$}
-\STATE  Map.Insere(D(o,c), o) \COMMENT {D(o,c) é a distância de $o$ até $c$}
+  \STATE  Map.Insere(D(o,c), o) \COMMENT {D(o,c) é a distância de $o$ até $c$}
 \ENDFOR
 \FORALL {$j \in Map.first(k)$}
-\IF {D(j, {Cluster.Objects()-j}) < MinDist}
-\STATE MinDist = d(j, {Cluster.Objects()-j})
-\STATE Cluster.center = j
-\ENDIF
+  \IF {D(j, {Cluster.Objects()-j}) < MinDist}
+    \STATE MinDist = d(j, {Cluster.Objects()-j})
+    \STATE Cluster.center = j
+    \STATE $foundBetter \leftarrow True$
+  \ENDIF
 \ENDFOR
+\RETURN foundBetter
 \end{algorithmic}
 \end{algorithm}
 
@@ -65,39 +68,81 @@ no afastamento inicial dos primeiros centros (mais afastados entre
 si) e após um recálculo dos centros de cada agrupamento. Essa é uma
 heurística muito rápida mas que, segundo os autores, pode não encontrar soluções factíveis
 para o caso de a soma de todas demandas seja muito próxima das capacidades
-de todos agrupamentos. A heurística pode ser apresentada da seguinte
-forma:
-\begin{itemize}
-\item Passo 1 - encontre os pontos $(i,j)$ mais afastados entre si, então
-$C={i,j}$
+de todos agrupamentos. A heurística pode ser vista no algoritm \ref{alg:farthest}
 
-\begin{itemize}
-\item Se número desejado de agrupamentos $p = 2$, vá para o passo 3.
-\end{itemize}
-\item Passo 2 - enquanto $\mid C \mid < p $, faça
+\begin{algorithm}[htp]
+ \caption{Farthest}\label{alg:farthest}
+\begin{algorithmic}[1]
+\STATE $dist \leftarrow 0$
+\FORALL {$i \in I$}
+\FORALL {$j \in I$}
+\IF {$d(i,j) > dist$}
+\STATE $c1 \leftarrow i$
+\STATE $c2 \leftarrow j$
+\STATE $dist \leftarrow d(i,j)$
+\ENDIF
+\ENDFOR
+\ENDFOR
+\STATE $C \leftarrow {i,j} $
+\WHILE {$\mid C \mid < p$}
+\STATE $dist \leftarrow 0$
+\FORALL {$i \in \{I-C\}$}
+\STATE $tmpDist \leftarrow 1$
+\FORALL {$j \in {C}$}
+\STATE $tmpDist \leftarrow tmpDist \cdot d(i,j)$
+\ENDFOR
+\IF {$tmpDist > dist$}
+\STATE $ dist \leftarrow tmpDist$
+\STATE $nC \leftarrow i$
+\ENDIF
+\ENDFOR
+\ENDWHILE
+\FORALL {$i \in \{I-C\}$}
+  \STATE $tmpDist \leftarrow \infty$
+  \FORALL {$j \in {C}$}
+    \IF {$d(i,j) < tmpDist$ \AND $j.CapacidadeRestante \geq i.Demanda$}
+        \STATE $c \leftarrow j$
+        \STATE $tmpDist \leftarrow d(i,j)$
+    \ENDIF
+  \ENDFOR
+  \STATE $c.adiciona(i)$ \COMMENT {Associa i ao agrupamento mais próximo}
+\ENDFOR
+\end{algorithmic}
 
-\begin{itemize}
-\item Encontre um cento $k\in O-C$, de modo que:
-\end{itemize}
-\[
-\prod_{j\in C}d_{kj}=\max_{_{k\in O-C}}\;\;\prod_{j\in C}d_{kj}\]
+\end{algorithm}
 
-\begin{itemize}
-\item Então faça $C=C\cup k$;
-\end{itemize}
-\item Passo 3 - Para cada consumidor, encontre a distância até o centro
-mais próximo. Organize estas distâncias em ordem crescente. Atribua
-os consumidores na ordem dessas distâncias aos centros correspondentes,
-se a capacidade permitir, caso contrário, atribua para o próximo centro com capacidade disponível.
-\item Passo 4 - Recalcule os centros dos agrupamentos de modo a minimizar
-as distância entre os pontos e o novo centro.
-\end{itemize}
+% \begin{itemize}
+% \item Passo 1 - encontre os pontos $(i,j)$ mais afastados entre si, então
+% $C={i,j}$
+%
+% \begin{itemize}
+% \item Se número desejado de agrupamentos $p = 2$, vá para o passo 3.
+% \end{itemize}
+% \item Passo 2 - enquanto $\mid C \mid < p $, faça
+%
+% \begin{itemize}
+% \item Encontre um cento $k\in O-C$, de modo que:
+% \end{itemize}
+% \[
+% \prod_{j\in C}d_{kj}=\max_{_{k\in O-C}}\;\;\prod_{j\in C}d_{kj}\]
+%
+% \begin{itemize}
+% \item Então faça $C=C\cup k$;
+% \end{itemize}
+% \item Passo 3 - Para cada consumidor, encontre a distância até o centro
+% mais próximo. Organize estas distâncias em ordem crescente. Atribua
+% os consumidores na ordem dessas distâncias aos centros correspondentes,
+% se a capacidade permitir, caso contrário, atribua para o próximo centro com capacidade disponível.
+% \item Passo 4 - Recalcule os centros dos agrupamentos de modo a minimizar
+% as distância entre os pontos e o novo centro.
+% \end{itemize}
 
-Essa heurística tem como objetivo a construção rápida de uma solução, de forma gulosa,
-e para se obter melhores soluções deve-se empregar heurísticas de
+Essa heurística tem como objetivo a construção rápida de uma solução, sendo baseada em escolhas gulosas e não iterativas. Como as soluções geradas são de baixa qualidade, para se obter melhores soluções deve-se empregar heurísticas de
 busca na vizinhança da solução obtida com essa heurística construtiva.
 Em \cite{osman1994capacitated} é apresentado um método híbrido que
 combina Busca Tabu e Simulated Annealing.
+
+
 
 
 \subsection{Density}
@@ -111,140 +156,124 @@ vendo apenas sua densidade sem prever o rumo que essa solução está
 tomando. Para corrigir isso, é apresentado por \cite{ahmadi2004density} um método baseado na ideia
 de densidade dos pontos, mas que utiliza de aspectos computação adaptativa
 com uma construção-desconstrução periódica. Essa meta-heurística construtiva
-apresenta soluções muito boas em uma iteração.
+apresenta soluções muito boas.
 
-Para a etapa construtiva da solução, existem os seguintes métodos:
-\begin{itemize}
-\item EncontraVizinhos: Encontra os $m_{i}$vizinhos mais próximos de ponto
-$i$, sendo que $m_{i}\leq\frac{n}{p}$ e todos os pontos $Y_{i}$
-(conjunto de pontos vizinhos do centro $i$) tem a soma de suas demandas
-inferior ou igual a capacidade do agrupamento $i$.
-\item CalculaDensidade: Com o conjunto de pontos vizinhos do centro $i$,
+Para a etapa construtiva da solução, são utilizados os seguintes métodos, tendo o início pelo algoritmo ProcedimentoPrincipal \ref{alg:ProcedimentoDensidade}
+
+\begin{algorithm}
+ \caption{EncontraVizinhos(k)}\label{alg:encontraVizinhos}
+\begin{algorithmic}[1]
+ \STATE $maxV \leftarrow \frac{n}{p}$
+ \STATE $V \leftarrow \emptyset$
+ \STATE $demAcum \leftarrow 0$
+ \WHILE {$demAcum < k.Cap$ \AND $\mid V \mid \leq maxV$ }
+    \FORALL {$i \in I$}
+        \IF {$\neg i.estaAssociado()$ \AND $i \notin V$}
+            \IF {$i.Dem + demAcum \leq k.Cap$ }
+             \STATE  $V \leftarrow V \cup i$
+             \STATE  $demAcum \leftarrow demAcum + i.Dem$
+            \ENDIF
+        \ENDIF
+    \ENDFOR
+ \ENDWHILE
+\RETURN V
+\end{algorithmic}
+
+\end{algorithm}
+
+EncontraVizinhos(k) (algoritmo \ref{alg:encontraVizinhos}): Encontra os $m_{k}$vizinhos mais próximos de ponto
+$k$, sendo que $m_{k}\leq\frac{n}{p}$ e todos os pontos $Y_{k}$
+(conjunto de pontos vizinhos do centro $k$) tem a soma de suas demandas
+inferior ou igual a capacidade do agrupamento $k$.
+
+CalculaDensidade(k, Y): Com o conjunto de pontos vizinhos do centro $k$,
 conseguimos calcular a densidade do centro através de
-\end{itemize}
+
 \[
-D_{i}=\frac{m_{i}}{T(a_{i},Y_{i})}\]
+D_{k}=\frac{m_{k}}{T(a_{k},Y)}\]
 
 
-sendo $T(a_{i},Y_{k})$ a função que devolve a soma das distâncias entre o ponto $a_{i}$ até todos os pontos de $Y_{k}$.
-\begin{itemize}
-\item CalculaArrependimento: Após encontrados os pontos candidatos a centros,
-é necessário definir os pontos que serão atribuídos a cada um dos
-agrupamentos. Para essa inserção, é utilizada essa função para calcular
+sendo $T(a_{i},Y)$ a função que devolve a soma das distâncias entre o ponto $a_{i}$ até todos os pontos de $Y$.
+
+CalculaArrependimento(k, C): Após encontrados os pontos candidatos a centros ($C$),
+durante a fase iterativa é necessário definir os pontos que serão atribuídos a cada um dos
+agrupamentos. Para priorizar a inserção dos indivíduos é utilizada essa função para calcular
 o arrependimento de associar um nó com um centro que não seja o mais
 próximo. Para um ponto $i$, tendo os pontos $j_{1}\; e\; j_{2}$
 como o centro mais próximo a $i$ e segundo mais próximo, respectivamente, com capacidade disponível para atender a demanda de $i$,
 calculamos o arrependimento de associar $i$ com um centro que não
 seja $j_{1}$ como sendo:
-\end{itemize}
 \[
 R_{i}=d_{ij_{2}}-\; d_{ij_{1}}\]
 
-\begin{itemize}
-\item EncontreOsMelhoresAgrupamentos (C, A): tendo A como um conjunto de
-pontos e C o conjunto de centros. Essa função tenta associar os pontos
-em A com os agrupamentos em C e está descrita em \ref{alg:;EncontreOsMelhoresAgrupamentos}.
-\end{itemize}
+Ao final do método, o centro mais próximo a $i$ é retornado.
+
+EncontreOsMelhoresAgrupamentos (C, A): tendo A como um conjunto de
+pontos e C o conjunto de centros, essa função tenta associar os pontos
+em A com os agrupamentos em C e está descrita no algoritmo \ref{alg:;EncontreOsMelhoresAgrupamentos}. Esse método faz usso também do algoritmo \ref{findBestCenter} para recalcular as medianas.
 %
+
 \begin{algorithm}
 \caption{\label{alg:;EncontreOsMelhoresAgrupamentos}EncontreOsMelhoresAgrupamentos(C,A)} %\protect \\}
-
-
-$t=1$;
-
-Minor $\leftarrow$ Máximo de iterações;
-
-$alterado\leftarrow Verdadeiro$;
-
-Enquanto ($alterado=Verdadeiro$ E $t<Minor$)
-
-Faça:
-
-~~~~~~$alterado\leftarrow False$;
-
-~~~~~~1: Atribua todos os centros aos seus agrupamentos;
-
-~~~~~~2: Calcule o arrependimento de todos os pontos em $A$;
-
-~~~~~~3: Encontre o maior $R_{i}$ não atribuído;
-
-~~~~~~4: Atribua $i$ para o agrupamento mais próximo disponível;
-
-~~~~~~5: Atualiza $A$ com os pontos atribuídos;
-
-~~~~~~6: Se $A\neq\emptyset$, vá para 2;
-
-~~~~~~Para cada $C_{j}$ e seu centro $c_{j}$
-
-~~~~~~~~~~~para cada $a_{i}\in C_{j}$
-
-~~~~~~~~~~~~~~~~Se ($T(a_{i},C_{j})<T(c_{j},C_{j})$)
-
-~~~~~~~~~~~~~~~~~~~~Atualize o novo centro de
-$C_{j}$ como $a{}_{i}$;
-
-~~~~~~~~~~~~~~~~~~~~$alterado\leftarrow Verdadeiro$;
-
-~~~~~~~~~~~~~~~~FimSe;
-
-~~~~~~~~~~FimPara;
-
-~~~~~~FimPara;
-
-~~~~~~$t\leftarrow t+1$;
-
-FimFunção.
+\begin{algorithmic}
+ \STATE $t=1$;
+ \STATE $Minor \leftarrow MAX_Iter$
+ \STATE $changed \leftarrow True$
+ \WHILE {$changed = True$ \AND $t<Minor$}
+   \STATE $t\leftarrow t +1 $
+   \STATE $chaged \leftarrow False$
+    \WHILE {$A \neq \emptyset$}
+        \STATE $maxA \leftarrow 0$
+        \FORALL {$i \in A$}
+            \STATE $nC \leftarrow CalculaArrependimento(i, C)$
+            \IF {i.Arrependimento > maxA}
+                \STATE $maxA \leftarrow i.Arrependimento$
+                \STATE $greatA \leftarrow i$
+                \STATE $nearCenter \leftarrow nC$
+            \ENDIF
+        \ENDFOR
+        \STATE $nearCenter.associa(greatA)$
+    \ENDWHILE
+    \FORALL {$c \in C$}
+      \IF {FindBestCenterOfCluster(c)}
+        \STATE $changed \leftarrow True$
+      \ENDIF
+    \ENDFOR
+ \ENDWHILE
+\end{algorithmic}
 \end{algorithm}
 
 
 Com as funções definidas, um procedimento principal é chamado e apresenta
-ao final o conjunto dos agrupamentos $C$. Em \ref{alg:ProcedimentoDensidade}
+ao final o conjunto dos agrupamentos $C$. No algoritmo \ref{alg:ProcedimentoDensidade}
 é apresentado tal procedimento o qual implementa a computação adaptativa.
 De modo iterativo, esse método vai construindo um agrupamento por
-vez e recalculando a densidade ($D)$ e arrependimento ($R$) do conjunto.
+vez e recalculando a densidade $(D)$ do conjunto.
 
-%
+
 \begin{algorithm}
 \caption{{ProcedimentoPrincipal}\label{alg:ProcedimentoDensidade}}
-% \begin{algorithmic}
-I: conjunto de $n$ pontos
+\begin{algorithmic}
 
-C: conjunto de centros
-
-X: conjunto de pontos não atribuídos em A
-
-Z: conjunto de pontos atribuídos até iteração $k$
-
-$Y_{i}$: conjunto dos $m_{i}$ pontos próximos a $a_{i}$, dado pela
-função $EncontraVizinhos$
-
-Passo 1:
-
-$k=0;$
-
-$X=A,\, C=\emptyset,\, Z=\emptyset$
-
-Passo 2:
-
-$k\leftarrow k+1;$
-
-Para cada $a_{i}\in X$, encontre o conjunto $m_{i}$, $Y_{i}\subseteq X$;
-
-Calcule a densidade ($D_{i}$) para cada $a_{i}\in X$;
-
-Selecione o maior $D_{i}$ e atribua $a_{i}$ como centro do centro
-do $k$-ésimo agrupamento, $C_{k}=C_{k}\cup a_{i}$;
-
-Elimine os pontos selecionados das próximas seleções: $X=X\setminus Y_{i}$,
-$Y=Y\cup Y_{i}$;
-
-Se $k\geq2$ então chame $EncontreOsMelhoresAgrupamentos(C,Y)$;
-
-Se $k<p$ então volte ao passo 2;
-
-$EncontreOsMelhoresAgrupamentos(C,A)$
-
-% \end{algorithmic}
+\STATE $X \leftarrow I$
+\STATE $Y \leftarrow \emptyset$ \COMMENT {conjunto de pontos já atribuídos}
+\STATE $k=0;$
+\WHILE {$k < p$}
+  \STATE $k\leftarrow k+1$
+  \FORALL {$i \in X$}
+    \STATE $V \leftarrow EncontraVizinhos (i)$
+    \STATE CalculaDensidade(i, V)
+  \ENDFOR
+  \STATE $newC \leftarrow FindMaxDensity(X)$ \COMMENT {Encontra o ponto com maior densidade.}
+  \STATE $C_{k} \leftarrow newC$
+  \STATE $Y \leftarrow Y\cup EncontraVizinhos (newC)$
+  \STATE $X \leftarrow X\setminus Y$
+  \IF {$k \geq 2$}
+    \STATE $EncontreOsMelhoresAgrupamentos(C,Y)$
+  \ENDIF
+\ENDWHILE
+\STATE $EncontreOsMelhoresAgrupamentos(C,I)$
+\end{algorithmic}
 \end{algorithm}
 
 \subsection{H-Means}
