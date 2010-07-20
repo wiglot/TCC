@@ -284,15 +284,22 @@ Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os
 
 \begin{algorithm}
 \caption{{H-Means}\label{alg:HMeans}}
-\begin{enumerate}
- \item Selecione $p$ pontos como medianas iniciais;
+\begin{algorithmic}
+ \STATE $C \leftarrow RandonPick(p)$ \COMMENT {Seleciona p pontos aleatóriamente}
+ \STATE $changed \leftarrow True$
+ \WHILE {changed}
+    \STATE $changed \leftarrow False$
+    \FORALL {$i \in {I}$}
+      \STATE allocToNearst(i,C) \COMMENT {Associa i à mediana (C) mais próxima.}
+    \ENDFOR
+    \FORALL {$c \in C$}
+      \IF {FindBestCenterOfCluster(c)}
+        \STATE $chaged \leftarrow True$
+      \ENDIF
+    \ENDFOR
+ \ENDWHILE
+\end{algorithmic}
 
- \item Aloque cada indivíduo ao agrupamento com mediana mais próxima a ele;
-
-\item Caso não tenha ocorrido alteração de associações Pare.
-
-\item Encontre o melhor centro para cada agrupamento e volte ao passo 2;
-\end{enumerate}
 \end{algorithm}
 
 
@@ -301,8 +308,30 @@ Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os
 
 \begin{algorithm}[ht]
 \caption{{J-Means}\label{alg:JMeans}}
+\begin{algorithmic}
+  \STATE $C \leftarrow RandonPick(p)$
+  \FORALL {$i \in {I}$}
+     \STATE allocToNearst(i,C)
+  \ENDFOR
+  \REPEAT
+    \STATE $optC \leftarrow C$
+    \STATE $unocu \leftarrow \emptyset$
+    \FORALL {$i \in {I}$}
+      \IF {$FarFromMedian(i, \varepsilon)$}
+        \STATE $unocu \leftarrow unocu \cup i$
+      \ENDIF
+    \ENDFOR
+
+    \FORALL {$u \in unocu$}
+      \FORALL {$c \in C$} %\COMMENT{Tenta trocar um ponto não ocupado por uma mediana}
+        \STATE exchange itens
+      \ENDFOR
+    \ENDFOR
+  \UNTIL {f(C) < f(optC)}
+  \RETURN {optC}
+\end{algorithmic}
+
 \begin{enumerate}
- \item Selecione $p$ partições dos pontos que serão os agrupamentos. Armazene essa solução em $S*$.
 
  \item Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
 
@@ -334,11 +363,11 @@ ser muito alto pela complexidade do algoritmo.
  % cluster_Farthest_SJC4a.png: 510x508 pixel, 83dpi, 15.61x15.54 cm, bb=0 0 442 441
 }\\
 \subfloat[]{
- \includegraphics[scale=0.4, bb=0 0 423 427]{./images/HMeans_Example.png}
+ \includegraphics[scale=0.4, bb=0 0 423 427]{./images/HMeans_Example.png}\label{c}
  % HMeans_Example.png: 564x570 pixel, 96dpi, 14.92x15.08 cm, bb=0 0 423 427
 }
 \subfloat[]{
-\includegraphics[scale=0.4, bb=0 0 423 427]{./images/JMeans_Example.png}
+\includegraphics[scale=0.5, bb=0 0 423 427]{./images/JMeans_Example.png}\label{d}
 }
 \par
 
@@ -350,50 +379,33 @@ Density \subref{a}, Farthest \subref{b}, HMeans\subref{c} e JMeans\subref{d}. Pa
 \subsection{Random Density}
 \sloppy A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas na grande maioria das vezes cai em um mínimo local, tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela perturbação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado a funçõe objetivo levando em consideração o posicionamento original dos indivíduos. A ideia de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Usando dessa ideia e da técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o algoritmo \ref{alg:RandomDensity}:
 
-\begin{algorithm}
+\begin{algorithm}[hpt]
 \caption{{RandomDensity}\label{alg:RandomDensity}}
-% \begin{algorithmic}
-I: conjunto de $n$ pontos
+\begin{algorithmic}[1]
 
-C: conjunto de centros
+\STATE $X \leftarrow I$
+\STATE $Y \leftarrow \emptyset$ \COMMENT {conjunto de pontos já atribuídos}
+\STATE $k=0;$
+\WHILE {$k < p$}
+  \STATE $k\leftarrow k+1$
+  \FORALL {$i \in X$}
+    \STATE $V \leftarrow EncontraVizinhos (i)$
+    \STATE CalculaDensidade(i, V)
+  \ENDFOR
+  \STATE $newC \leftarrow GetRandonDensity(X)$ \COMMENT {Seleciona um dos $p$ pontos com maior densidade.}
+  \STATE $C_{k} \leftarrow newC$
+  \STATE $Y \leftarrow Y\cup EncontraVizinhos (newC)$
+  \STATE $X \leftarrow X\setminus Y$
+  \IF {$k \geq 2$}
+    \STATE $EncontreOsMelhoresAgrupamentos(C,Y)$
+  \ENDIF
+\ENDWHILE
+\STATE $EncontreOsMelhoresAgrupamentos(C,I)$
+\end{algorithmic}
 
-X: conjunto de pontos não atribuídos em A
-
-Z: conjunto de pontos atribuídos até iteração $k$
-
-$Y_{i}$: conjunto dos $m_{i}$ pontos próximos a $a_{i}$, dado pela
-função $EncontraVizinhos$
-
-Passo 1:
-
-$k=0;$
-
-$X=A,\, C=\emptyset,\, Z=\emptyset$
-
-Passo 2:
-
-$k\leftarrow k+1;$
-
-Para cada $a_{i}\in X$, encontre o conjunto $m_{i}$, $Y_{i}\subseteq X$;
-
-Calcule a densidade ($D_{i}$) para cada $a_{i}\in X$;
-
-Selecione aleatoriamente um ponto $i$ dos $p$ pontos com maior densidade $D$ e atribua $a_{i}$ como centro do centro
-do $k$-ésimo agrupamento, $C_{k}=C_{k}\cup a_{i}$;
-
-Elimine os pontos selecionados das próximas seleções: $X=X\setminus Y_{i}$,
-$Y=Y\cup Y_{i}$;
-
-Se $k\geq2$ então chame $EncontreOsMelhoresAgrupamentos(C,Y)$;
-
-Se $k<p$ então volte ao passo 2;
-
-$EncontreOsMelhoresAgrupamentos(C,A)$
-
-% \end{algorithmic}
 \end{algorithm}
 
-Note que agora no passo 2 do algoritmo \ref{alg:RandomDensity} não é mais selecionado o indivíduo com maior densidade, mas sim um dos pontos com maior densidade, retirando o movimento guloso do algoritmo original que acabava por conduzir sempre a uma mesma solução. Com essa pequena alteração conseguímos soluções muito boas e também que permitem uma aplicação de busca local para melhorar o resultado obtido. Conseguimos, com essa pequena alteração, obter soluções médias melhores que os demais métodos na maioria das instâncias. Em contrapartida, o tempo de processamento computacional aumentou. Isso se deve pela necessidade de maior número de iterações no procedimento $EncontreOsMelhoresAgrupamentos(C,Y)$ (\ref{alg:;EncontreOsMelhoresAgrupamentos}), agora que as escolhas de indivíduos como centros pode gerar uma maior necessidade de movimentação dos indivíduos entre os agrupamentos na fase de construção/desconstrução.
+Note que agora na linha 10 do algoritmo \ref{alg:RandomDensity} não é mais selecionado o indivíduo com maior densidade, mas sim um dos pontos com maior densidade, retirando o movimento guloso do algoritmo original que acabava por conduzir sempre a uma mesma solução. Com essa pequena alteração conseguímos soluções muito boas e também que permitem uma aplicação de busca local para melhorar o resultado obtido. Conseguimos, com essa pequena alteração, obter soluções médias melhores que os demais métodos na maioria das instâncias. Em contrapartida, o tempo de processamento computacional aumentou. Isso se deve pela necessidade de maior número de iterações no procedimento $EncontreOsMelhoresAgrupamentos(C,Y)$ (\ref{alg:;EncontreOsMelhoresAgrupamentos}), agora que as escolhas de indivíduos como centros pode gerar uma maior necessidade de movimentação dos indivíduos entre os agrupamentos na fase de construção/desconstrução.
 
 Uma forma de obter soluções boas é após gera-las com alguma heurística, aplicar algum método de busca local, procurando na solução obtida uma solução melhor na vizinhança da solução atual.
 
