@@ -306,9 +306,9 @@ Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os
 \subsection{J-Means}
 \sloppy Essa heurística proposta por \cite{Hansen_j-means:a} utiliza a ideia de indivíduos não ocupados (indivíduos que se encontram afastadas da mediana do agrupamento por uma certa tolerância), para criar um novo agrupamento em alguma desses indivíduos que substitua algum dos agrupamentos existentes, de modo a diminuir o valor da função objetivo.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[htp]
 \caption{{J-Means}\label{alg:JMeans}}
-\begin{algorithmic}
+\begin{algorithmic}[1]
   \STATE $C \leftarrow RandonPick(p)$
   \FORALL {$i \in {I}$}
      \STATE allocToNearst(i,C)
@@ -321,25 +321,43 @@ Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os
         \STATE $unocu \leftarrow unocu \cup i$
       \ENDIF
     \ENDFOR
-
+    \STATE $rmC \leftarrow 0$
+    \STATE $newC \leftarrow 0$
+    \STATE $reduction \leftarrow 0;$
     \FORALL {$u \in unocu$}
       \FORALL {$c \in C$} %\COMMENT{Tenta trocar um ponto não ocupado por uma mediana}
-        \STATE exchange itens
+        \STATE $C \leftarrow C \setminus c$
+        \STATE $C \leftarrow C \cup u$
+        \FORALL {$i \in {I}$}
+            \STATE allocToNearst(i,C)
+        \ENDFOR
+        \IF {(f(optC) - f(C)) > reduction }
+          \STATE $reduction \leftarrow  f(optC) - f(C))$
+          \STATE $rmC \leftarrow c$
+          \STATE $newC \leftarrow u$
+        \ENDIF
       \ENDFOR
     \ENDFOR
+    \IF {$newC \neq 0$} %\COMMENT {Aplica a melhor troca.}
+        \STATE $C \leftarrow C \setminus rmC$
+        \STATE $C \leftarrow C \cup newC$
+        \FORALL {$i \in {I}$}
+            \STATE allocToNearst(i,C)
+        \ENDFOR
+    \ENDIF
   \UNTIL {f(C) < f(optC)}
   \RETURN {optC}
 \end{algorithmic}
 
-\begin{enumerate}
-
- \item Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
-
- \item Para cada ponto não ocupado, tente substituir um centro existente por ele e atribua os pontos aos agrupamentos de medianas mais próximas. Mantenha o que apresentar maior redução na função objetivo armazenando-a em $S'$
-
- \item Se valor da função objetivo da solução nova $S'$ é menor que a de $S*$ faça $S*=S'$'e volte ao passo 2. Caso contrario Pare.
-
-\end{enumerate}
+% \begin{enumerate}
+%
+%  \item Encontre os pontos não ocupados (afastados do centro do agrupamento por uma tolerância)
+%
+%  \item Para cada ponto não ocupado, tente substituir um centro existente por ele e atribua os pontos aos agrupamentos de medianas mais próximas. Mantenha o que apresentar maior redução na função objetivo armazenando-a em $S'$
+%
+%  \item Se valor da função objetivo da solução nova $S'$ é menor que a de $S*$ faça $S*=S'$'e volte ao passo 2. Caso contrario Pare.
+%
+% \end{enumerate}
 \end{algorithm}
 
 A escolha das partições inicias é feita de forma aleatória, selecionando as medianas e para todos indivíduos, atribua-os ao agrupamento mais próximo com capacidade disponível para atender a demanda do indivíduo.

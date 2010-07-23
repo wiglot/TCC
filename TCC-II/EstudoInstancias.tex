@@ -12,13 +12,13 @@ Para o caso de $ \sum_{i \in I} i_{dem} \geq p_{cap},\forall p \in P $ podemos d
 Essa ultima colocação mostra o quanto o valor de folga pode interferir na geração de soluções das instâncias.
 Nas instâncias inéditas apresentadas aqui, modificamos a folga de modo a ser possível analisar e registrar o comportamento dos algoritmos e os valores da função objetivo das soluções obtidas. A tabela \ref{tab:varDemandas} mostra as demandas médias, bem com os valores mínimos e máximos, e a folga de cada uma das instâncias.
 
+\begin{center}
 
 \begin{threeparttable}
-\centering
 \caption {\\variação das demandas dos indivíduos das instâncias.\label{tab:varDemandas}}
 \begin{tabular}{lrrrr} \hline
 
-Instância&   Folga &   $D_{Med}$\tnote{1}  &   $D_{Min}$\tnote{2} &   $D_{Max}$\tnote{3} \\
+Instância~~~&   Folga ~~~ &   $D_{Med}$\tnote{1} ~~~ &   $D_{Min}$\tnote{2} ~~~&   $D_{Max}$\tnote{3} ~~~\\
 \midrule
 SJC1    &1,23988    &58,07  &1  &654 \\
 SJC2    &1,35937    &46,345 &1  &654 \\
@@ -50,6 +50,8 @@ AESM\_30 &1,3    &25,0175    &3  &52 \\
  \item[3]Demanda máxima dos indivíduos
 \end{tablenotes}
 \end{threeparttable}
+
+\end{center}
 
 Para medir a dispersão dos indivíduos no espaço, Desenvolvemos um método que mede a distância dos pontos de centros de massa calculados usando como peso para cada ponto sua própria demanda. O algoritmo \ref{algMedia} produz como resultado a média das distâncias dos pontos aos centroides e as distâncias mínima e máxima. Para o primeiro centro de massa, todos os pontos são considerados. Já para os demais centros de massa, os pontos mais próximos ao último  centro de massa calculado que possuam a soma de suas demandas inferior ou igual a capacidade $Cap$, são removidos do cálculo do próximo centro de massa.
 
@@ -126,12 +128,11 @@ Aplicando o algoritmo sobre as instâncias, obtivemos os dados apresentados na ta
  \label{fig:dispersao}
 \end{figure}
 
-
+\begin{center}
 \begin{threeparttable}[htp]
-\centering
 \caption {\\Dispersão dos indivíduos nas instâncias.\label{tab:dispersao}}
 \begin{tabular}{lrrrr} \hline
-Instância   &\multicolumn{1}{c}{$D_{min}$\tnote{1}}     &\multicolumn{1}{c}{$D_{max}$\tnote{2}}    &\multicolumn{1}{c}{$D_{med}$\tnote{3} }   &\multicolumn{1}{c}{CM\tnote{4}} \\
+Instância~~~   &\multicolumn{1}{c}{$D_{min}$\tnote{1}}~~~     &\multicolumn{1}{c}{$D_{max}$\tnote{2}}~~~    &\multicolumn{1}{c}{$D_{med}$\tnote{3} }~~~   &\multicolumn{1}{c}{CM\tnote{4}} \\
 \midrule
 SJC1         &0,01348  &0,5895   &0,1937   &10 \\
 SJC2         &0,02145  &0,7027   &0,2725   &12 \\
@@ -140,7 +141,7 @@ SJC3b        &0,00402 &0,7217   &0,2576   &17 \\
 SJC4a        &0,02442  &0,6849   &0,2844   &21 \\
 SJC4b        &0,02442  &0,6849   &0,2844   &21 \\
 SJC5         &0,02442  &0,6849   &0,2844   &21 \\
-AEAL\_10     &0,00627 &0,5366   &0,2048   &14 \\
+AEAL\_10~~~     &~~~0,00627 &~~~0,5366   &~~~0,2048   &~~~14 \\
 AEAL\_20      &0,00620 &0,5337   &0,2004   &13 \\
 AEAL\_30      &0,00621 &0,6475   &0,1945   &12 \\
 AECP\_10      &0,04394   &0,4484   &0,2864   &10 \\
@@ -164,6 +165,7 @@ AESM\_30    &0,00409  &0,8907   &0,0352  &17 \\
  \item[4]Número de centros de massa calculados
 \end{tablenotes}
 \end{threeparttable}
+\end {center}
 
 Na figura \ref{fig:instances} são apresentadas algumas instâncias onde é possível perceber que o cálculo de dispersão se encontra bastante coerente com a localização dos indivíduos. A instância SJC4a é umas das que apresentou maior média de distância dos centros de massa para os indivíduos e como pode ser visto na figura \ref{fig:sjc4} os indivíduos são distribuídos quase que uniformemente no espaço. Já a instância AECP, apesar de apresentar focos de concentração de pontos, existem vários desses focos o que leva os centros de massa serem calculados entre esses focos afastados das concentrações, e assim ter uma maior distância entre os pontos e os centros de massa. As duas instâncias com menores médias de distâncias foram AENH(\ref{fig:aenh}) e AESM(\ref{fig:aesm}) possuem apenas um grande foco de concentração dos pontos, sendo nesse caso onde se concentrará a maioria dos centros de massa calculados.
 
