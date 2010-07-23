@@ -31,6 +31,7 @@ Nesse cenário de estudo tomamos algumas premissas como válidas:
  \item O tempo de atendimento de todas as ordens atribuídas a uma equipe não deve ultrapassarem sua jornada de trabalho que é préviamente estipulada;
  \item As ordens são as de apenas um dia. As que entrarem durante o atendimento ficam agendadas o próximo dia.
  \item Não será considerado o tempo de deslocamento entre os atendimentos das OS.
+ \item Será tentado inserir ao menos um atendimento para cada equipe, mesmo que eles execute apenas tal atendimento.
 \end{itemize}
 
 Essas premissas definem o PDOS \sigla{PDOS} {Problema de Despacho de Ordens de Serviço}, onde
@@ -56,7 +57,7 @@ outro do que se os atendimentos estivessem agrupados mais próximos.
 Um problema que engloba essas características apresentadas é o  CCP \sigla{CCP} {Problema de Agrupamento Capacitado - Capacitated Clustering Problem}, clássico na literatura e também conhecido como (CPMP) \sigla {CPMP}{Problema das P-Medianas Capacitado - Capacitated P-Medians Problem}.
 Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderiam estar associadas às equipes se associadasutilizando de métodos de agrupamento capacitado.
 
-É possível perceber que ainda assim não foi possível atribuir as OS de modo que todas OS de de uma equipe fique próximas de uma OS escolhida como centro.
+Mesmo com tal cuidado ao executar o despacho das ordens de serviço para as equipes, é possível notar que ainda assim não foi possível atribuir as OS de modo que todas OS de de uma equipe fique próximas de uma OS escolhida como centro.
  Isso é devido as restrições de capacidade das equipes e demandas das OS.
 
 \begin{figure}
@@ -67,11 +68,9 @@ Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderi
 \caption{\label{FigCCPIntro} Possível atribuição das Mesmas OS por uma agrupamento capacitado }
 \end{figure}
 
-As instâncias inéditas desse problema foram retiradas de ordens de atendimento
+As instâncias inéditas desse problema foram retiradas de agendamentos reias de ordens de atendimento
 de uma empresa e tiveram que ter a capacidade de atendimento normalizadas para ser possível gerar soluções válidas
-do problema. Esse fato ocorre pelo fato de que para encontrar uma solução factível é necessário
-existir uma folga entre das demandas e a capacidade. A frente neste trabalho será
-apresentado um estudo sobre essas folgas.
+do problema. Essa normalização foi necessária uma vez que a demanda dos atendimentos é maior que a capacidade de todas equipes. Esse fato ocorre por existirem demandas adicionais de dias anteriores e possíveis eventos especiais (por exemplo um temporal em uma cidade que tenha causado avarias na rede  elétrica). A frente neste trabalho será apresentado um estudo sobre essas folgas e ajustes executados nas mesmas.
 
 Não será tratado a geração de rotas entre os atendimentos, mas
 esse problema já foi tratado na literatura como o CTSP \sigla{CTSP} {Problema do Caixeiro Viajante
