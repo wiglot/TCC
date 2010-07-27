@@ -117,6 +117,32 @@ Para encontrar o centro de massa, as coordenadas (x e y) dos pontos pertencentes
  \end{algorithmic}
 \end{algorithm}
 
+Antes de apresentar os resultados, separamos na figura \ref{fig:instances} algumas instâncias onde é possível ver a localização dos pontos. Adiantando um pouco os resultados obtidos, temos a instância SJC4a como uma das que apresentou maior média de distância dos centros de massa para os indivíduos e como pode ser visto na figura \ref{fig:sjc4} os indivíduos são distribuídos quase que uniformemente no espaço. Já a instância AECP, apesar de apresentar focos de concentração de pontos, existem vários desses focos o que leva os centros de massa serem calculados entre esses focos afastados das concentrações, e assim ter uma maior distância entre os pontos e os centros de massa. As duas instâncias com menores médias de distâncias foram AENH(\ref{fig:aenh}) e AESM(\ref{fig:aesm}) possuem apenas um grande foco de concentração dos pontos, sendo nesse caso onde se concentrará a maioria dos centros de massa calculados.
+
+\begin{figure}[hp]
+ \centering
+\subfloat[Instância AECP]{
+ \includegraphics[bb=0 0 229 482,scale=0.5]{./images/AECP.png}
+ % AECP.png: 305x643 pixel, 96dpi, 8.07x17.01 cm, bb=0 0 229 482
+ \label{fig:ascp}
+}
+\subfloat[Instância AENH]{
+ \includegraphics[bb=0 0 378 367,scale=0.5]{./images/AENH.png}
+ % AENH.png: 504x490 pixel, 96dpi, 13.33x12.96 cm, bb=0 0 378 367
+ \label{fig:aenh}
+}\\
+\subfloat[Instância AESM]{
+ \includegraphics[bb=0 0 359 367, scale=0.5]{./images/AESM.png}
+ % AESM.png: 479x489 pixel, 96dpi, 12.67x12.94 cm, bb=0 0 359 367
+ \label{fig:aesm}
+}
+\subfloat[Instância SJC4a]{
+ \includegraphics[bb=0 0 375 351,scale=0.5]{./images/SJC4a.png}
+ % SJC4a.png: 500x468 pixel, 96dpi, 13.23x12.38 cm, bb=0 0 375 351
+ \label{fig:sjc4}
+}
+\caption{Localização dos pontos de algumas instâncias}\label{fig:instances}
+\end{figure}
 
 Aplicando o algoritmo sobre as instâncias, obtivemos os dados apresentados na tabela \ref{tab:dispersao}. Colocamos também o gráfico \ref{fig:dispersao} dos dados para melhor visualização. Para comparar as dispersão entre as diferentes instâncias, os valores foram normalizados por $Max(d(i,k)),\;i,k\in I$, sendo 1 a maior distâncias entre 2 pontos de uma instância. O que nós tomamos como medida de dispersão é a medida média de distâncias, apesar da medida mínima e máxima indicar algumas peculiaridades das instâncias, como por exemplo a distância máxima muito alta e a distância média e distância mínima muito baixa pode indicar que os pontos se encontram agrupados bem próximos, mas que exitem pontos isolados (afastados) dessas concentrações.
 
@@ -167,31 +193,6 @@ AESM\_30    &0,00409  &0,8907   &0,0352  &17 \\
 \end{threeparttable}
 \end {center}
 
-Na figura \ref{fig:instances} são apresentadas algumas instâncias onde é possível perceber que o cálculo de dispersão se encontra bastante coerente com a localização dos indivíduos. A instância SJC4a é umas das que apresentou maior média de distância dos centros de massa para os indivíduos e como pode ser visto na figura \ref{fig:sjc4} os indivíduos são distribuídos quase que uniformemente no espaço. Já a instância AECP, apesar de apresentar focos de concentração de pontos, existem vários desses focos o que leva os centros de massa serem calculados entre esses focos afastados das concentrações, e assim ter uma maior distância entre os pontos e os centros de massa. As duas instâncias com menores médias de distâncias foram AENH(\ref{fig:aenh}) e AESM(\ref{fig:aesm}) possuem apenas um grande foco de concentração dos pontos, sendo nesse caso onde se concentrará a maioria dos centros de massa calculados.
 
-\begin{figure}[hp]
- \centering
-\subfloat[Instância AECP]{
- \includegraphics[bb=0 0 229 482,scale=0.5]{./images/AECP.png}
- % AECP.png: 305x643 pixel, 96dpi, 8.07x17.01 cm, bb=0 0 229 482
- \label{fig:ascp}
-}
-\subfloat[Instância AENH]{
- \includegraphics[bb=0 0 378 367,scale=0.5]{./images/AENH.png}
- % AENH.png: 504x490 pixel, 96dpi, 13.33x12.96 cm, bb=0 0 378 367
- \label{fig:aenh}
-}\\
-\subfloat[Instância AESM]{
- \includegraphics[bb=0 0 359 367, scale=0.5]{./images/AESM.png}
- % AESM.png: 479x489 pixel, 96dpi, 12.67x12.94 cm, bb=0 0 359 367
- \label{fig:aesm}
-}
-\subfloat[Instância SJC4a]{
- \includegraphics[bb=0 0 375 351,scale=0.5]{./images/SJC4a.png}
- % SJC4a.png: 500x468 pixel, 96dpi, 13.23x12.38 cm, bb=0 0 375 351
- \label{fig:sjc4}
-}
-\caption{Localização dos pontos de algumas instâncias}\label{fig:instances}
-\end{figure}
 
 

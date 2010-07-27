@@ -11,7 +11,7 @@ A definição das capacidades das equipes foi definida por a fórmula
 $$ Cap = \frac{F \cdot \sum_{i\in I} i_{dem} }{|P|}$$
 onde $F$ é a folga desejada e $i_{dem}$ a demanda do indivíduo $i$. $Cap$ será a capacidade de cada um dos agrupamentos. Temos com isso o mesmo valor de capacidade para todas equipes. Para mostrar o que influencia uma maior folga da capacidade total, esse último conjunto de instâncias teve as capacidades totais alteradas para 10\%, 20\% e 30\% além da demanda total deles.
 
-A tabela \ref{tab:valoresInstancias} apresenta os valores da função objetivo das soluções obtidas com os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos/OS) e p (número de agrupamentos/equipes). Os valores apresentados são os mínimos para as heurísticas que utilizam aleatoriedade. Como comparação, os gráficos \ref{fig:graphicSJC} e \ref{fig:graphicAE} apresentam os valores percentuais que as soluções se encontram acima das melhores soluções encontradas para a instância. Para as instâncias AE, o gráfico foi cortado em 100\% uma vez que as soluçõos da heurística Farthest apresentaram valores que ficaram até 734\% acima da melhor solução encontrada. Logo após, na tabela \ref{tab:TemposInstancias}, apresentamos os tempos tomados para executar o processamento das soluções apresentadas como mínimas.
+A tabela \ref{tab:valoresInstancias} apresenta os valores da função objetivo das soluções obtidas com os 5 algoritmos implementados. Foi colocado também os valores para n (número de indivíduos/OS) e p (número de agrupamentos/equipes). Os valores apresentados são os valores mínimos das funções objetivo para as heurísticas que utilizam aleatoriedade. Como comparação, os gráficos \ref{fig:graphicSJC} e \ref{fig:graphicAE} apresentam os valores percentuais que as soluções se encontram acima das melhores soluções encontradas para a instância. Para as instâncias AE, o gráfico foi cortado em 100\% uma vez que as soluçõos da heurística Farthest apresentaram valores que ficaram até 734\% acima da melhor solução encontrada. Logo após, na tabela \ref{tab:TemposInstancias}, apresentamos os tempos tomados para executar o processamento das soluções apresentadas como mínimas.
 \begin{table}[htp]
 \begin{center}
 \caption [Valores obtidos pelos algoritmos]{\\Valores da obtidos das instâncias pelos algoritmos construtivos.\label{tab:valoresInstancias}}
@@ -107,7 +107,7 @@ AEAL\_30 &  0,03    &4,40    &0,03  &19,47  &15,70\\
 \end{table}
 
 
-A heurística Random Density foi a que obteve os menores valores na maioria das instâncias, seguida da Heurística Density, seguida das heurísticas HMeans e JMeans que apresentaram soluções semelhantes. a Heurística farthest apresentou resultados nada bons em comparação com as demais, mas os tempos de processamento são bastante baixos, sendo uma heurística 'barata' caso se deseje apenas gerar uma solução inicialmente factível e trabalhar com a busca local, usando de técnicas como Simulated Anneling e Busca Tabu, como aplicado por Osman e Christofides fazem em \cite{osman1994capacitated} ou mesmo algoritmos genéticos. Esses valores altos se devem em parte pela escolha gulosa levando em consideração apenas a distância dos pontos para a seleção dos pontos iniciais e por executar apenas uma vez a alocação dos pontos e escolha dos melhores centros.
+A heurística Random Density foi a que obteve os menores valores na maioria das instâncias, seguida da Heurística Density, seguida das heurísticas HMeans e JMeans que apresentaram soluções semelhantes. a Heurística farthest apresentou resultados nada bons em comparação com as demais, mas os tempos de processamento são bastante baixos, sendo uma heurística 'barata' caso se deseje apenas gerar uma solução inicialmente factível e trabalhar com a busca local, como Simulated Anneling e/ou Busca Tabu ou mesmo algoritmos genéticos. Esses valores altos se devem em parte pela escolha gulosa levando em consideração apenas a distância dos pontos para a seleção dos pontos iniciais e por executar apenas uma vez a alocação dos pontos e escolha dos melhores centros.
 
 As heurísticas HMeans e JMeans apesar de escolherem aleatoriamente os indivíduos para serem os centros iniciais, o que pode gerar centros iniciais com localização pior que os escolhidos por outras heurísticas, e iterativamente vão melhorando a solução, escolhendo melhores centros e reassociando os pontos nos melhores centros até não encontrar uma solução melhor. Isso torna os métodos rápidos, no caso o HMeans, e com boas soluções sendo ainda possível uma pequena melhora no valor da função objetivo com uma busca local.
 
@@ -115,7 +115,7 @@ A Heurística Density, bem como sua derivada Random Density, utilizam do conceito
 
 As soluções com aleatoriedade tem os desvios padrão apresentados na tabela \ref{tab:stdDev}. A Heurística Random density apresentou um menor desvio padrão para as instâncias AE, onde os pontos possuem uma distribuição agrupadada, ou seja ou pontos estão localizados em grupos e estes se encontram afastados uns dos outros.
 
-A figura \ref{fig:AECPInstance} mostra a distribuição dos pontos da instância (\ref{fig:AECP}) e uma parte de uma solução do Random Density \ref{fig:ASCPZoom}, que mostra que as concentrações de pontos existentes nem sempre representam que ali estará apenas um agrupamento. Para as demais instâncias (SJC) os algoritmos Density A mesma heurística apresentou devios padrões abaixo dos outros métodos na maioria das instâncias. Em relação a média dos valores obtidos, a mesma heurística, Random Density, apresentou os menores valores para todos os casos.
+A figura \ref{fig:AECPInstance} mostra a distribuição dos pontos da instância (\ref{fig:AECP}) e uma parte de uma solução do Random Density \ref{fig:ASCPZoom}, que mostra que as concentrações de pontos existentes nem sempre representam que ali estará apenas um agrupamento. Para as demais instâncias (SJC), a heurística Random Density apresentou devios padrões abaixo dos outros métodos que fazem uso de aleatoriedade, na maioria das instâncias. Na média os valores obtidos com essa mesma heurística, Random Density, apresentou os menores valores para todos os casos se comparados com os demais métodos que usam de aleatoriedade.
 
 \begin{figure}[hp]
  \begin{center}
@@ -178,7 +178,7 @@ AEAL\_30    &11.998,70  &3.951,95   &10.980,83  &2.566,85   &9.297,77   &648,16 
 \end{threeparttable}
 
 
-\sloppy Tomando como base os resultados apresentados por Lorena e por negreiros para as instâncias SJC, escolhemos os melhores resultados, que foram os apresentados por Lorena \cite{lorena2003local}, apresentamos a tabela \ref{tab:CompResultados} onde temos os melhores resultado obtidos pelos trabalhos e por os implementados por nós. Como pode ser visto, Lorena possui os melhores resultados, por isso servirão de base para calcular a porcentagem que as demais soluções se encontram acima de suas soluções. É apresentado o gráfico \ref{fig:comparativoResultados} de quanto as soluções por nós obtidas está acima das apresentadas na literatura.
+\sloppy Tomando como base os resultados apresentados por Lorena e por negreiros para as instâncias SJC, apresentamos a tabela \ref{tab:CompResultados} onde temos os melhores resultado obtidos pelos trabalhos e por os métodos por nós implementados. Como pode ser visto, Lorena possui os melhores resultados, por causa disso, seus dados servirão de base para calcular a porcentagem que as demais soluções se encontram acima de suas soluções. É apresentado o gráfico \ref{fig:comparativoResultados} de quanto as nossas soluções por estão acima das apresentadas na literatura.
 
 \begin{threeparttable}[ht]
 \begin{center}
@@ -218,7 +218,7 @@ SJC4b   &0         &       0 &  52396,5   &  4649,47 &54077,1  &6,25   &       |
 \end{figure}
 
 
-AS buscas locais, apesar de utilizarem de métodos gulosos, ainda assim conseguiram melhorar várias soluções obtidas com os algoritmos construtivos implementados.
+As buscas locais, apesar de utilizarem de métodos gulosos, ainda assim conseguiram melhorar várias soluções obtidas com os algoritmos construtivos implementados.
 
 \sloppy A tabela \ref{tab:RedInterchange} apresenta os percentuais médios de redução nos valores das soluções, bem como os tempos médios também para execuçãos das buscas utilizando o movimento interchange e na tabela \ref{tab:RedShift} é apresentado os valores utilizando o movimento shift.
 
@@ -262,7 +262,7 @@ AEAL\_30 &-22,84 &27,531  & 0,00  & 0,357  & -5,19 & 139,095 &-5,07  &123,328 &-
 \end{threeparttable}
 
 
-O movimento shift mostra algum resultado sgnificante normalmente quando aplicado a instâncias com maior folga. Para instância com folga menor não existe muita capacidade ociosa nos agrupamentos para receber novos indivíduos.
+O movimento shift mostra algum resultado sgnificante normalmente quando aplicado a instâncias com maior folga. Para as instâncias com menor folga, não existe muita capacidade ociosa nos agrupamentos para receber novos indivíduos, por isso sua redução é sempre menor nesses casos.
 
 
 \begin{threeparttable}[htp]
