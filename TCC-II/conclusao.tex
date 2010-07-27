@@ -1,5 +1,7 @@
 \chapter*{Considerações Finais}
 
+% Neste trabalho apresentamos a aplicação de heurísticas e métodos de otimização para o problema de agrupamento capacitado. O problema de agrupamento capacitado é um problema que representa em parte o problema de despacho de ordens de serviço, por isso ele foi estudado nesse trabalho, sendo o PDOS o nosso cenário de aplicação. 
+
 Apresentamos aqui neste trabalho uma visão do PDOS como um CCP, fazendo uso de métodos já existentes em um problema relativamente novo. Dos métodos tratados, procuramos abordar os métodos heurísticos mais tratados da literatura e compara-los quando aplicados aos dados do PDOS.
 
 Dentre os métodos trabalhados, os que apresentaram melhores soluções foram o Random density e o Density, sendo o primeiro uma variação do segundo, com a diferença de inserir elementos de aleatoriedade para escolha dos centros, não desconsiderando o cálculo de densidade o qual nos dá um bom indicativo de onde devem ser inseridos os centros. Mas, apesar de os valores obtidos serem menores que os demais métodos, o seu tempo de computação é cerca de 3 vezes mais alto que o levado pelo método density, que para instâncias com grande número de indivíduos e de centros (por exemplo algumas instâncias com mais de 3.000 pontos e 600 agrupamentos), tem um tempo de computação bastante alto. Esse tempo elevado não desqualifica o uso do método para essa classe de problemas, visto que os atendimentos são processados por cidades como apresentado nas instâncias AE e possuem grande número de atendimentos e poucas equipes.
