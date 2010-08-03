@@ -1,4 +1,4 @@
-\chapter*{Introdução}
+\chapter{Introdução}
 Em alguns setores de empresas, para efetuar o atendimento a um cliente, elas
 devem deslocar um funcionário (ou uma equipe deles) da sua base de operações até
 a casa do cliente para executar o serviço.
@@ -37,10 +37,12 @@ Nesse cenário de estudo tomamos algumas premissas como válidas:
 Essas premissas definem o PDOS \sigla{PDOS} {Problema de Despacho de Ordens de Serviço}, onde
 devemos associar todas OS as equipes de modo que uma OS seja atendida por uma, e não mais que uma, equipe e é desejado minimizar o deslocamento entre os atendimentos, uma vez que isso diminui os custos e o tempo de deslocamento entre os atendimentos devido a menor distância percorrida, o que é algo desejável para as empresas.
 
-Ao designar um conjunto de OS a uma equipe, deve-se levar em consideração a  carga horária de cada mesma e a demanda de tempo que cada OS do conjunto de OS associado com a equipe.
+Ao designar um conjunto de OS a uma equipe, deve-se levar em consideração a  carga horária de cada uma delas e as demandas de tempo que estão relacionadas com o conjunto de OS atribuído a equipe.
 Isso por si só pode ser visto como um Problema da Mochila, visto que temos vários atendimentos, cada um com seu tempo indivídual, e cada equipe possuí uma capacidade.
 
-Ao atribuir as OS levando em consideração apenas a carga horária da equipe e o tempo demandado pelas OS, pode nos levar a soluções como as apresentadas na figura \ref{FigDemandaCapacidade}, onde temos 3 equipes atendendo um total de 15 atendimentos.
+Um exemplo hipotético de atribuição de OS a equipes é ilustrado na FIGURA \ref{FigDemandaCapacidade}, constando 3 equipes para realizar 15 atendimentos.
+É possível perceber que os atendimentos de cada equipe encontram-se dispersos, requisitando um maior deslocamento das equipes de um atendimento a outro quando se vislumbra um agrupamento em que os pontos de atendimento estivessem mais próximos.
+
 \begin{figure}
  \begin{center}
   \includegraphics[scale=0.5]{./images/DemandasCapacidade.png}
@@ -50,12 +52,10 @@ Ao atribuir as OS levando em consideração apenas a carga horária da equipe e o t
 Capacidades }
 \end{figure}
 
-É possível perceber que os atendimentos de cada equipe encontram-se
-dispersos, necessitando um maior deslocamento das equipes de um atendimento a
-outro do que se os atendimentos estivessem agrupados mais próximos.
 
-Um problema que engloba essas características apresentadas é o  CCP \sigla{CCP} {Problema de Agrupamento Capacitado - Capacitated Clustering Problem}, clássico na literatura e também conhecido como (CPMP) \sigla {CPMP}{Problema das P-Medianas Capacitado - Capacitated P-Medians Problem}.
-Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderiam estar associadas às equipes se associadasutilizando de métodos de agrupamento capacitado.
+
+Um problema que engloba essas características apresentadas é o  CCP \cite{osman1994capacitated} \sigla{CCP} {Problema de Agrupamento Capacitado - Capacitated Clustering Problem}, clássico na literatura e também conhecido como (CPMP) \sigla {CPMP}{Problema das P-Medianas Capacitado - Capacitated P-Medians Problem}.
+Na figura \ref{FigCCPIntro} temos um exemplo de como as ordens de serviço poderiam estar associadas às equipes se associadas utilizando de métodos de agrupamento capacitado.
 
 Mesmo com tal cuidado ao executar o despacho das ordens de serviço para as equipes, é possível notar que ainda assim não foi possível atribuir as OS de modo que todas OS de de uma equipe fique próximas de uma OS escolhida como centro.
  Isso é devido as restrições de capacidade das equipes e demandas das OS.
@@ -69,14 +69,13 @@ Mesmo com tal cuidado ao executar o despacho das ordens de serviço para as equip
 \end{figure}
 
 As instâncias inéditas desse problema foram retiradas de agendamentos reais de ordens de atendimento
-de uma empresa e tiveram que ter a capacidade de atendimento normalizadas para ser possível gerar soluções válidas
-do problema. Essa normalização foi necessária uma vez que a demanda dos atendimentos é maior que a capacidade de todas equipes. Esse fato ocorre por existirem demandas adicionais de dias anteriores e possíveis eventos especiais (por exemplo um temporal em uma cidade que tenha causado avarias na rede  elétrica). A frente neste trabalho será apresentado um estudo sobre essas folgas e ajustes executados nas mesmas.
+de uma empresa e tiveram que ter a capacidade de atendimento normalizadas para tornar o problema factível. Essa normalização foi necessária uma vez que a demanda dos atendimentos é maior que a capacidade de todas equipes. Esse fato ocorre por existirem demandas adicionais de dias anteriores e possíveis eventos especiais (por exemplo um temporal em uma cidade que tenha causado avarias na rede  elétrica). A frente neste trabalho será apresentado um estudo sobre essas folgas e ajustes executados nas mesmas.
 
 Não será tratado a geração de rotas entre os atendimentos, mas
 esse problema já foi tratado na literatura como o CTSP \sigla{CTSP} {Problema do Caixeiro Viajante
 Agrupado - Clustered Travel Salesman Problem}, onde desejamos entrar os menor ciclo Hamiltoniano nos pontos, sendo que os pontos
 dos agrupamentos devem ser visitados em sequência \cite{jeanCTSP-Genetic}.
 
-Esse trabalho foi dividido em 5 partes: na primeira é apresentado uma breve visão do problema de agurpamentos, citando sua complexidade e variações, e no final uma abordagem ao problema de agrupamento e de como o PDOS pode ser visto como um problema de agrupamento capacitado. Na segunda parte apresentamos e explicamos cada uma das heurísticas estudadas, bem como um as técnicas de busca local utilizadas.
-Na terceira parte apresentamos as ferramentas computacionais desenvolvidas. Na quarta parte é mostrado um estudo sobre as características de agrupamento e demanda das instâncias. Na quinta parte foi colocado os resultados obtidos pelos algoritmos implementados e comparações com resultados apresentados na literatura.
+Esse trabalho foi dividido em 5 partes: na primeira é apresentado uma breve visão do problema de agurpamentos, citando sua complexidade e variações, e no final uma abordagem ao problema de agrupamento e de como o PDOS pode ser visto como um problema de agrupamento capacitado. Na segunda parte são apresentadas cada uma das heurísticas estudadas, bem como um as técnicas de busca local utilizadas.
+Na terceira parte apresentamos as ferramentas computacionais desenvolvidas. Na quarta parte é mostrado um estudo sobre as características de agrupamento e demanda das instâncias. Na quinta parte constam os resultados obtidos pelos algoritmos implementados e as comparações com resultados apresentados na literatura.
 

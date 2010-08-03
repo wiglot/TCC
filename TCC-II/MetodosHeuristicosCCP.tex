@@ -24,7 +24,8 @@ construir a solução inicial.
 \item [{Randon Density:}] Uma alteração na heurística de Density que faz uso da seleção de indivíduos aleatórios para escapar de mínimos locais.
 \end{description}
 
-Em todos os métodos apresentados, é necessário recalcular o centro dos agrupamentos, ou seja, procurar dentre os indivíduos de cada agrupamento qual é o que minimiza a soma das distâncias de todos indivíduos do seu agrupamento até si mesmo. Testar todos os indivíduos de um agrupamento com $\frac{n}{p}$ objetos, seria necessário medir a distância de cada um dos $\frac{n}{p}$ indivíduos até os demais $\frac{n}{p} - 1$. Como esse esse recálculo dos centros é muito método é muito referenciado nos métodos, foi foi desenvolvido o algoritmo \ref{findBestCenter} que calcula o centroide do agrupamento e mede a distância de todos os pontos com o centroide calculado. Após isso são testados os $k$ pontos mais próximos do centroide como prováveis centros. O valor de $k$ foi de 30\% dos pontos existentes no agrupamento. Esse valor de $k$ foi escolhido por serem os pontos mais próximos do centroide, usar mais pontos começa a se afastar de mais do centroide e acabam sendo apenas testes extras.
+Em todos os métodos apresentados, é necessário recalcular o centro dos agrupamentos, ou seja, procurar dentre os indivíduos de cada agrupamento qual é o que minimiza a soma das distâncias de todos indivíduos do seu agrupamento até si mesmo. Testar todos os indivíduos de um agrupamento com $\frac{n}{p}$ objetos, seria necessário medir a distância de cada um dos $\frac{n}{p}$ indivíduos até os demais $\frac{n}{p} - 1$. Como esse recálculo dos centros é muito referenciado nos métodos, foi desenvolvido o algoritmo \ref{findBestCenter} que calcula o centroide do agrupamento e mede a distância de todos os pontos com o centroide calculado. Após isso, são testados os $k$ pontos mais próximos do centroide como prováveis centros. O valor de $k$ foi de 30\% dos pontos existentes no agrupamento. Esta escolha foi baseada num compromisso entre diversidade de pontos e complexidade do procedimento associado.
+
 \begin{algorithm}[htp]
 \caption{{FindBestCenterOfCluster(Cluster)}\label{findBestCenter}}
 \begin{algorithmic}[1]
@@ -147,14 +148,12 @@ combina Busca Tabu e Simulated Annealing.
 
 \subsection{Density}
 
-Para resolver um problema de agrupamento uma abordagem possível para
-escolha dos centros iniciais é a escolha dos centros que possuam uma
-maior densidade de pontos, assim a distância entre esse centro candidato
+Para resolver um problema de agrupamento, uma abordagem possível pode ser aquela que relaciona a densidade dos pontos para a escolha dos centros, assim a distância entre esse centro candidato
 e os possíveis pontos componentes será minimizada. Essa abordagem
 tem caráter guloso e é míope por escolher os pontos candidatos a centros
-vendo apenas sua densidade sem prever o rumo que essa solução está
+analisando apenas sua densidade sem prever o rumo que essa solução está
 tomando. Para corrigir isso, é apresentado por \cite{ahmadi2004density} um método baseado na ideia
-de densidade dos pontos, mas que utiliza de aspectos computação adaptativa
+de densidade dos pontos, mas que utiliza de aspectos de computação adaptativa
 com uma construção-desconstrução periódica. Essa meta-heurística construtiva
 apresenta soluções muito boas.
 
@@ -195,12 +194,12 @@ D_{k}=\frac{m_{k}}{T(a_{k},Y)}\]
 
 sendo $T(a_{i},Y)$ a função que devolve a soma das distâncias entre o ponto $a_{i}$ até todos os pontos de $Y$.
 
-CalculaArrependimento(k, C): Após encontrados os pontos candidatos a centros ($C$),
+CalculaArrependimento(k, C): Após definir os pontos candidatos a centros ($C$),
 durante a fase iterativa é necessário definir os pontos que serão atribuídos a cada um dos
 agrupamentos. Para priorizar a inserção dos indivíduos é utilizada essa função para calcular
 o arrependimento de associar um nó com um centro que não seja o mais
 próximo. Para um ponto $i$, tendo os pontos $j_{1}\; e\; j_{2}$
-como o centro mais próximo a $i$ e segundo mais próximo, respectivamente, com capacidade disponível para atender a demanda de $i$,
+como o centro mais próximo a $i$ e segundo mais próximo, respectivamente com capacidade disponível para atender a demanda de $i$,
 calculamos o arrependimento de associar $i$ com um centro que não
 seja $j_{1}$ como sendo:
 \[
@@ -210,7 +209,7 @@ Ao final do método, o centro mais próximo a $i$ é retornado.
 
 EncontreOsMelhoresAgrupamentos (C, A): tendo A como um conjunto de
 pontos e C o conjunto de centros, essa função tenta associar os pontos
-em A com os agrupamentos em C e está descrita no algoritmo \ref{alg:;EncontreOsMelhoresAgrupamentos}. Esse método faz usso também do algoritmo \ref{findBestCenter} para recalcular as medianas.
+em A com os agrupamentos em C e está descrita no algoritmo \ref{alg:;EncontreOsMelhoresAgrupamentos}. Esse método faz uso também do algoritmo \ref{findBestCenter} para recalcular as medianas.
 %
 
 \begin{algorithm}
@@ -244,10 +243,8 @@ em A com os agrupamentos em C e está descrita no algoritmo \ref{alg:;EncontreOsM
 \end{algorithm}
 
 
-Com as funções definidas, um procedimento principal é chamado e apresenta
-ao final o conjunto dos agrupamentos $C$. No algoritmo \ref{alg:ProcedimentoDensidade}
-é apresentado tal procedimento o qual implementa a computação adaptativa.
-De modo iterativo, esse método vai construindo um agrupamento por
+Com as funções definidas, um procedimento principal definido no algoritmo \ref{alg:ProcedimentoDensidade} é chamado e apresenta
+ao final o conjunto dos agrupamentos $C$. De modo iterativo, esse método vai construindo um agrupamento por
 vez e recalculando a densidade $(D)$ do conjunto.
 
 
@@ -277,10 +274,10 @@ vez e recalculando a densidade $(D)$ do conjunto.
 \end{algorithm}
 
 \subsection{H-Means}
-A ideia básica desse algoritmo é partindo de um conjunto de medianas, escolhidas de maneira aleatória, alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento $j = {1,\cdots,p}$ encontrar um ponto $k$ para ser a nova mediana do agrupamento $j$ de modo que
+A ideia básica desse algoritmo é partir de um conjunto de medianas, escolhidas de maneira aleatória e alocar cada um dos pontos ao agrupamento de mediana mais próxima a ele e, ao final dessa etapa, para cada agrupamento $j = {1,\cdots,p}$ encontrar um ponto $k$ para ser a nova mediana do agrupamento $j$ de modo que
 $$ \sum_{i\in P_{j}} c_{i,k} = \text{MIN}_{i\in P_{j}} \sum_{i\in P_{j}} c_{i,k}$$
 
-Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximos. O algoritmo pode ser visto em \ref{alg:HMeans}
+Move pontos para agrupamentos, depois escolhe os melhores centros. Desassocia os pontos dos agrupamento e associa para os centros mais próximos. O método pode ser visto no algoritmo \ref{alg:HMeans}
 
 \begin{algorithm}
 \caption{{H-Means}\label{alg:HMeans}}
@@ -395,7 +392,7 @@ Density \subref{a}, Farthest \subref{b}, HMeans\subref{c} e JMeans\subref{d}. Pa
 \end{figure}
 
 \subsection{Random Density}
-\sloppy A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas na grande maioria das vezes cai em um mínimo local, tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela perturbação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado a funçõe objetivo levando em consideração o posicionamento original dos indivíduos. A ideia de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Usando dessa ideia e da técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o algoritmo \ref{alg:RandomDensity}:
+\sloppy A heurística proposta por \cite{ahmadi2004density} produz soluções muito boas, mas na grande maioria das vezes cai em um mínimo local, tanto que o refinamento da solução obtida apresentado no mesmo artigo é através da alteração dos dados de entrada, pela perturbação de alguns indivíduos e recalculando os novos agrupamentos. Com esses novos agrupamentos é recalculado a função objetivo levando em consideração o posicionamento original dos indivíduos. A noção de densidade utilizada por Ahmadi dá uma boa ideia da provável localização dos indivíduos candidatos a centros de agrupamentos. Com essa concepção e a técnica construtiva/desconstrutiva também representado no mesmo trabalho, criamos o algoritmo \ref{alg:RandomDensity}:
 
 \begin{algorithm}[hpt]
 \caption{{RandomDensity}\label{alg:RandomDensity}}
@@ -427,9 +424,9 @@ Note que agora na linha 10 do algoritmo \ref{alg:RandomDensity} não é mais selec
 Uma forma de obter soluções boas é após gera-las com alguma heurística, aplicar algum método de busca local, procurando na solução obtida uma solução melhor na vizinhança da solução atual.
 
 \section{Busca Local}
-Usando os movimentos descritos por \cite{osman1994capacitated} de interchange (intercâmbio) e shift (mudança) temos os mecanismos de geração de soluções vizinhas à solução atual. Ambos movimentos respeitam a capacidade de cada agrupamento, não inserindo um indivíduo em um agrupamento que ultrapasse sua capacidade.
+Usando os movimentos descritos por \cite{osman1994capacitated} de \emph{interchange} (intercâmbio) e \emph{shift} (mudança) temos os mecanismos de geração de soluções vizinhas à solução atual. Ambos movimentos respeitam a capacidade de cada agrupamento, não inserindo um indivíduo em um agrupamento que ultrapasse sua capacidade.
 
-O movimento shift é uma troca simples onde apenas é removido um indivíduo $i$ de um agrupamento $C$ e o mesmo indivíduo é inserido em um outro agrupamento $C'$, sendo $C \neq C'$ e $C'$ possui capacidade suficiente para atender a demanda de $i$. Esse movimento não permite grande exploração da vizinhança, uma vez que para executá-lo é necessário que exista uma capacidade ociosa nos agrupamentos para receber novos pontos. Na figura \ref{shiftExample} é apresentado um exemplo de movimento shift executado em uma solução válida do problema.
+O movimento \emph{shift} é uma troca simples onde apenas é removido um indivíduo $i$ de um agrupamento $C$ e o mesmo indivíduo é inserido em um outro agrupamento $C'$, sendo $C \neq C'$ e $C'$ possui capacidade suficiente para atender a demanda de $i$. Esse movimento não permite grande exploração da vizinhança, uma vez que para executá-lo é necessário que exista uma capacidade ociosa nos agrupamentos para receber novos pontos. Na figura \ref{shiftExample} é apresentado um exemplo de movimento \emph{shift} executado em uma solução válida do problema.
 
 \begin{figure}[ht]
 \begin{centering}
@@ -443,13 +440,13 @@ O movimento shift é uma troca simples onde apenas é removido um indivíduo $i$ de
  % after_shift.png: 414x232 pixel, 96dpi, 10.95x6.14 cm, bb=0 0 310 174
 }
 \par
-\caption[Exemplo movimento Shift]{Em \ref{a} temos uma solução com 2 agrupamentos e em \ref{b} uma solução vizinha após movimento de shift.}\label{shiftExample}
+\caption[Exemplo movimento Shift]{Em \ref{a} temos uma solução com 2 agrupamentos e em \ref{b} uma solução vizinha após movimento de \emph{shift}.}\label{shiftExample}
 \end{centering}
 \end{figure}
 
 
-O movimento de interchange, visa trocar um indivíduo $i'$ de um agrupamento $C'$ por um outro indivíduo $i$ de um outro agrupamento $C$, sendo $i \neq i'$ e $C \neq C'$.
-Esse movimento permite que sejam encontradas novas soluções vizinhas a atual mesmo quando os agrupamentos se encontram com demanda alta (pouca capacidade disponível), pois a troca é feita em um único momento sem que necessariamente um agrupamento deva ter capacidade suficiente para receber um ponto extra. Nas figuras em \ref{interchangeExample}, pode ser visto o movimento interchange, sendo em (a) os agrupamentos existentes e que permitem a troca dos pontos entre si pelo movimento interchange e em (b) a solução obtida pelo movimento.
+O movimento de \emph{interchange}, visa trocar um indivíduo $i'$ de um agrupamento $C'$ por um outro indivíduo $i$ de um outro agrupamento $C$, sendo $i \neq i'$ e $C \neq C'$.
+Esse movimento permite que sejam encontradas novas soluções vizinhas a atual mesmo quando os agrupamentos se encontram com demanda alta (pouca capacidade disponível), pois a troca é feita em um único momento sem que necessariamente um agrupamento deva ter capacidade suficiente para receber um ponto extra. Nas figuras em \ref{interchangeExample}, pode ser visto o movimento \emph{interchange}, sendo em (a) os agrupamentos existentes e que permitem a troca dos pontos entre si pelo movimento \emph{interchange} e em (b) a solução obtida pelo movimento.
 \begin{figure}[ht]
 \begin{centering}
 \subfloat[]{
@@ -461,7 +458,7 @@ Esse movimento permite que sejam encontradas novas soluções vizinhas a atual mes
  % after_shift.png: 414x232 pixel, 96dpi, 10.95x6.14 cm, bb=0 0 310 174
 }
 \par
-\caption[Exemplo movimento interchange]{Em \ref{a} temos uma solução com 2 agrupamentos e em \ref{b} uma solução vizinha após movimento de interchange.} \label{interchangeExample}
+\caption[Exemplo movimento \emph{interchange}]{Em \ref{a} temos uma solução com 2 agrupamentos e em \ref{b} uma solução vizinha após movimento de \emph{interchange}.} \label{interchangeExample}
 \end{centering}
 \end{figure}
 
@@ -470,7 +467,7 @@ Ao final de cada movimento, as medianas são recalculadas de modo a minimizar a f
 
 Para busca local, foram implementados 2 algoritmos, ambos usando uma busca gulosa na vizinhança por soluções com valores da função objetivo menores e cada um deles usando um dos movimentos acima descritos.
 
-Para o algoritmo com o movimento shift, chamado internamente na ferramenta computacional ShiftHillClimb, ele faz uma busca completa de todas possibilidades de mudança do indivíduo do agrupamento atual para os demais, efetuando a troca do indivíduo que dê um maior ganho para a função objetivo. Ele segue o algoritmo apresentado em \ref{alg:ShiftHillClimb}. Esse algoritmo é executados iterativamente até que não existam soluções vizinha com uma função objetivo menor (um mínimo local) e tem  complexidade de $O(n\cdot p)$ para cada iteração.
+Para o algoritmo com o movimento \emph{shift}, chamado internamente na ferramenta computacional ShiftHillClimb, ele faz uma busca completa de todas possibilidades de mudança do indivíduo do agrupamento atual para os demais, efetuando a troca do indivíduo que dê um maior ganho para a função objetivo. Ele segue o algoritmo apresentado em \ref{alg:ShiftHillClimb}. Esse algoritmo é executados iterativamente até que não existam soluções vizinha com uma função objetivo menor (um mínimo local) e tem  complexidade de $O(n\cdot p)$ para cada iteração.
 \begin{algorithm}
 \caption{{ShiftHillClimb}\label{alg:ShiftHillClimb}}
 \begin{algorithmic}[1]
@@ -485,7 +482,7 @@ Para o algoritmo com o movimento shift, chamado internamente na ferramenta compu
 \end{algorithmic}
 \end{algorithm}
 
-O algoritmo de busca local implementado usando o movimento de interchange, originalmente tentava executar a troca de um ponto com todos os pontos dos demais agrupamentos que não o seu. Isso o deixava com uma complexidade $O(n \cdot (p-1) \cdot \frac{n}{p})$, algo muito próximo a $O(n^{2})$ para cada iteração.Para reduzir o espaço de busca do algoritmo, uma vez que muitos dos intercâmbios não geram soluções melhores, implementamos o algoritmo \ref{alg:InterchangeHillClimb}.
+O algoritmo de busca local implementado usando o movimento de \emph{interchange}, originalmente tentava executar a troca de um ponto com todos os pontos dos demais agrupamentos que não o seu. Isso o deixava com uma complexidade $O(n \cdot (p-1) \cdot \frac{n}{p})$, algo muito próximo a $O(n^{2})$ para cada iteração.Para reduzir o espaço de busca do algoritmo, uma vez que muitos dos intercâmbios não geram soluções melhores, implementamos o algoritmo \ref{alg:InterchangeHillClimb}.
 \begin{algorithm}
 \caption{{InterchangeHillClimb}\label{alg:InterchangeHillClimb}}
 \begin{algorithmic}[1]

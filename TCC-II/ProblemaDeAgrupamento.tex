@@ -1,14 +1,12 @@
 \chapter{Problema de Agrupamento}
 
-Agrupamento não apenas expressa o ato de separar dados em grupos, mas separa-los de modo que os elementos dos grupos resultantes tenham algumas características comuns entre si.
- Segundo Lorena e Furtado \cite{lorena2001constructive} ``problemas de
+Agrupamento não apenas expressa o ato de separar dados em grupos, mas separá-los de modo que os elementos dos grupos resultantes tenham algumas características comuns entre si.
+ Segundo Lorena e Furtado \cite{lorena2001constructive}, ``problemas de
  agrupamento geralmente aparecem em classificação de dados para algum propósito como armazenar e
  recuperar ou analisar dados. Todo algoritmo de agrupamento tentará determinar algum
- agrupamento inerente ou natural nos dados, usando medidas de distância ou similaridade entre os dados.''.
+ agrupamento inerente ou natural nos dados, usando medidas de distância ou similaridade entre os dados''.
 
-Um exemplo bem simples de agrupamento seria o ato de separar poucas frutas de aparência boa das de
- aparência não tão boa dado uma medida de aparência.
- Para esse exemplo, um ser humano conseguiria executar a tarefa de forma
+Um exemplo bem simples de agrupamento seria o ato de separar poucas frutas com boa aparência boa dasquelas que apresentam algum sinal de degradação aparente. Para esse exemplo, um ser humano conseguiria executar a tarefa de forma
 competitiva com um algoritmo executado por um computador, mas quando incluímos um grande de dados de entrada
 e desejamos que sejam levadas em consideração outras medidas ou outras
 restrições (ex. dividir as mesmas frutas em 10 grupos, sendo 5 de frutas de melhor aparência e 5 de piores, alem de que os objetos
@@ -47,14 +45,13 @@ mostrada por \cite{jain1999data} reproduzida na figura \ref{clusterTaxonomy}.
 \end{center}
 \end{figure}
 
-O problema de agrupamento capacitado está na classe de problemas de particionamento, mais exatamente na classe \emph{k-Means}.
+O problema de agrupamento está relacionado a classe de problemas de clustering, tendo o método \emph{k-means} como um dos mais conhecidos exemplos de resolução.
 
 Os problemas de particionamento, que serão estudados nesse trabalho, são
 problemas onde é desejado descobrir partições nos conjuntos de dados de modo que
 cada partição contenha apenas elementos similares entre si.
 
-A escala de dificuldade de resolver do problema de particionamento, pode ser vista pela expressão de distintas partições $p$ existente em $n$ pontos,$N(n,p)$,
-definida por \cite{liu1968cl}:
+A escala de dificuldade para resolver o problema de particionamento pode ser vista pela expressão de p partições distintas existentes em $n$ pontos,$N(n,p)$, definida por \cite{liu1968cl}:
 \begin{equation}
  N(p,n) = \frac{1}{p!}\sum_{i=0}^{p}(-1)^{p-1}\binom{p}{i}i^{n}
 \end{equation}
@@ -79,7 +76,7 @@ proibitivo pelo tempo computacional que seria necessário para essas instâncias
 maiores, e sendo esses problema da classe NP-Completo \cite{garey1979computers}
 não existe um algoritmo que resolva de forma exata em tempo polinomial, assim o que
 resta é o uso de métodos heurísticos e híbridos.
-Outro fato sobre esses dados é que a ocorrência de mais agrupamentos possíveis,
+Outro fato sobre esses dados é que a ocorrência de mais agrupamentos possíveis
 ocorra com $p=16$, o que vem a mostrar que o problema é assimétrico em relação
 a p.
 
@@ -89,7 +86,7 @@ resolvidos \cite{ahmadi2004density}
 
 Quando temos um conjunto de pontos no espaço ($\Re^{2}$ por exemplo) e
 desejamos agrupar os pontos pela sua  localização, podemos utilizar como
-medida de dispersão dos grupos a distância euclidiana dos pontos em relação ao centroide
+medida de dispersão dos grupos a distância euclidiana dos pontos em relação ao centróide
 calculado pelos pontos do agrupamento. Esse é também conhecido como Problema das
 K-Médias (K-Means) apresentado por \cite{macqueen1966some}
 
@@ -137,7 +134,7 @@ Quando temos o valor de capacidade dos agrupamentos homogêneo, ou
 seja, o valor de $Q_{j}=Q_{i}\:,\forall j\: e\:\forall i\in P$, podemos
 dizer que esse é um problema das $p-medianas$ capacitado.
 
-Um problema semelhante ao CCP foi proposto por Negreiros e Palhano em \cite{negreiros2006capacitated}. Ele é o CCCP \sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem} que consiste em agrupar os pontos levando em consideração a distância não para um dos pontos (mediana) mas para o centroide calculados com os pontos de cada agrupamento como apresentado na figura \ref{fig:CCCP}. São propostas 2 variações deste problema: uma onde o número de agrupamentos ($p$)é previamente conhecido ($p-CCCP$) e outra onde desejamos minimizar o número total de agrupamentos ($g-CCCP$). Após analisarmos esse problemas, decidimos permanecer trabalhando apenas com o problema CCP por melhor representar o PDOS.
+Um problema semelhante ao CCP foi proposto por Negreiros e Palhano em \cite{negreiros2006capacitated}. Ele é o CCCP \sigla{CCCP}{Problema de Agrupamento Centrado Capacitado - Capacitated Centred Clustering Problem} que consiste em agrupar os pontos levando em consideração a distância não para um dos pontos (mediana) mas para o centróide calculados com os pontos de cada agrupamento como apresentado na figura \ref{fig:CCCP}. São propostas 2 variações deste problema: uma onde o número de agrupamentos ($p$)é previamente conhecido ($p-CCCP$) e outra onde desejamos minimizar o número total de agrupamentos ($g-CCCP$). Após analisarmos esse problemas, decidimos permanecer trabalhando apenas com o problema CCP por melhor representar o PDOS.
 
 \begin{figure}[hb]
 \begin{centering}
@@ -149,13 +146,13 @@ Um problema semelhante ao CCP foi proposto por Negreiros e Palhano em \cite{negr
 
 
 \section{Métodos de resolução}
-A utilização de métodos exatos ou mesmo de \emph{branch and bound}, não são eficientes para instâncias com maior número de pontos (indivíduos) \cite{osman1994capacitated}, pelo grande tempo de processamento exigido.
+A utilização de métodos exatos ou mesmo de \emph{branch and bound} não são eficientes para instâncias com maior número de pontos (indivíduos) \cite{osman1994capacitated}, pelo grande tempo de processamento exigido.
 
 Para obter soluções em tempos computacionais viáveis, é necessário a utilização de heurísticas. Métodos heurísticos podem não gerar uma solução ótima, ou mesmo próxima dela, mas conseguem gerar soluções muito boas em um tempo computacional polinomial.
 
 Podemos distinguir 2 tipos de heurísticas\cite{osman1994capacitated}:
 \begin{itemize}
  \item Construtivas: Algoritmos desenvolvidos especificamente para uma determinada classe de problemas. Normalmente as soluções estão em um ótimo local ou muito próximo de um;
- \item Iterativas: A partir de uma solução inicial válida, e busca na vizinhança iterativamente por outras soluções melhores. A busca na vizinha normalmente conduz a um vale/pico, chegando a um ótimo local ao final das iterações.
+ \item Melhoramento: A partir de uma solução inicial válida, e busca na vizinhança iterativamente por outras soluções melhores. A busca na vizinha normalmente conduz a um vale/pico, chegando a um ótimo local ao final das iterações.
 \end{itemize}
-No p?oximo capitulo apresentamos as heurísticas escolhidas para essetrabalho (uma construtiva e 4 iterativas) e sobre a busca local utilizada para melhorar as soluções geradas por as heurísticas.
+No próximo capitulo apresentamos as heurísticas escolhidas para essetrabalho (uma construtiva e 4 iterativas) e sobre a busca local utilizada para melhorar as soluções geradas por as heurísticas.
